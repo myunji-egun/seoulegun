@@ -47,7 +47,7 @@ export default function SedationSection() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.5 }
+      { threshold: 0.1 }
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -57,10 +57,10 @@ export default function SedationSection() {
     <section ref={sectionRef} className="h-screen w-full relative overflow-hidden bg-black">
       {/* 유튜브 영상 배경 - 즉시 마운트 */}
       <iframe
-        src="https://www.youtube.com/embed/SOI5QjYwCMM?autoplay=1&mute=1&loop=1&playlist=SOI5QjYwCMM&controls=0&showinfo=0&modestbranding=1"
+        src="https://www.youtube.com/embed/SOI5QjYwCMM?autoplay=1&mute=1&loop=1&playlist=SOI5QjYwCMM&controls=0&showinfo=0&modestbranding=1&playsinline=1"
         className="absolute inset-0 w-full h-full"
         style={{ transform: 'scale(1.2)' }}
-        allow="autoplay; encrypted-media"
+        allow="autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
         title="의식하진정법 소개 영상"
       />

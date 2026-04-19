@@ -105,6 +105,26 @@
   }
 }
 
+/* 배경 이미지 좌우 패닝 */
+@keyframes bg-pan-slide {
+  from { background-position: 0% center; }
+  to   { background-position: 100% center; }
+}
+
+/* 모바일 히어로 이미지 패닝 */
+@keyframes hero-pan-ltr {
+  from { object-position: 50% 50%; }
+  to   { object-position: 80% 50%; }
+}
+@keyframes hero-pan-rtc {
+  from { object-position: 80% 50%; }
+  to   { object-position: 50% 50%; }
+}
+@keyframes hero-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* 이미지 마퀴 */
 @keyframes marquee-x {
   from { transform: translateX(0); }

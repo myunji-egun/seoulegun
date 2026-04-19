@@ -20,8 +20,8 @@ export default function DoctorGroup() {
       <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
         style={{ background: 'linear-gradient(to top, rgba(43,45,66,0.45) 0%, transparent 100%)' }} />
 
-      <div ref={ref} className="relative z-10 h-full flex flex-col items-center pt-[70px] md:pt-20 lg:pt-28 px-4">
-        <h2 className={`text-[23px] sm:text-[27px] md:text-[33px] lg:text-[39px] font-black text-gray-900 text-center leading-[1.3] mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+      <div ref={ref} className="relative z-10 h-full flex flex-col items-center pt-[100px] md:pt-20 lg:pt-28 px-4">
+        <h2 className={`text-[25px] sm:text-[27px] md:text-[33px] lg:text-[39px] font-black text-gray-900 text-center leading-[1.3] mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           한자리에서 <span style={{ color: 'var(--e-primary)' }}>변하지 않는 마음</span>
         </h2>
 

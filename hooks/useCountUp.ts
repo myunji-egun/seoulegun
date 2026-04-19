@@ -25,7 +25,7 @@ export function useCountUp({ target, duration = 2000 }: UseCountUpOptions) {
           }
         })
       },
-      { threshold: 0.3 }
+      { threshold: 0.05 }
     )
 
     observer.observe(element)

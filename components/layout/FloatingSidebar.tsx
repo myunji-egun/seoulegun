@@ -86,13 +86,13 @@ export default function FloatingSidebar() {
   return (
     <>
     <aside
-      className="hidden lg:flex fixed right-5 top-1/2 -translate-y-1/2 z-50 flex-col rounded-2xl overflow-hidden bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl"
+      className="flex fixed right-3 top-1/2 -translate-y-1/2 z-50 flex-col rounded-2xl overflow-hidden bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl"
       aria-label="빠른 링크"
     >
       {items.map((item, index) => {
         const isLast = index === items.length - 1
         const commonClass = `
-          group relative w-12 h-12 flex flex-col items-center justify-center
+          group relative w-10 h-10 lg:w-12 lg:h-12 flex flex-col items-center justify-center
           text-white/60 hover:text-[#D4C4A8] hover:bg-white/10
           transition-all duration-200
           ${!isLast ? 'border-b border-white/10' : ''}
@@ -154,7 +154,7 @@ export default function FloatingSidebar() {
     {/* TOP 버튼 - 사이드바 아래 */}
     <button
       onClick={scrollToTop}
-      className="hidden lg:flex fixed right-5 bottom-24 z-50 flex-col items-center justify-center w-12 h-14 rounded-2xl bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl text-white/60 hover:text-[#92DCE5] hover:bg-white/10 transition-all duration-200"
+      className="flex fixed right-3 bottom-24 z-50 flex-col items-center justify-center w-10 h-12 rounded-2xl bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl text-white/60 hover:text-[#92DCE5] hover:bg-white/10 transition-all duration-200 lg:w-12 lg:h-14 lg:right-5 lg:bottom-24"
       aria-label="맨 위로"
     >
       <ChevronUp size={18} />

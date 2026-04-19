@@ -52,7 +52,7 @@ export default function PhilosophyBanner() {
       className="h-screen w-full flex items-center overflow-hidden"
       style={{ backgroundColor: 'var(--e-bg)' }}
     >
-      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pr-12 sm:pr-16 lg:pr-20 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-20 items-start h-full md:py-16 pt-5 md:pt-0">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pr-12 sm:pr-16 lg:pr-20 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-20 items-start h-full md:py-16 pt-10 md:pt-0">
         {/* 좌측: 고정 타이틀 */}
         <div className="flex flex-col justify-center h-full">
           <h2

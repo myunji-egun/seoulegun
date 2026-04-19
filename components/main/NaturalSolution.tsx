@@ -32,9 +32,17 @@ export default function NaturalSolution() {
   const { ref, isVisible } = useScrollReveal(0.2)
 
   return (
-    <section className="h-screen w-full flex flex-col items-center justify-center px-4 py-12 overflow-hidden"
-      style={{ backgroundColor: 'var(--e-dark)' }}>
-      <div ref={ref} className="text-center mb-8 md:mb-12">
+    <section className="h-screen w-full flex flex-col items-center justify-center px-4 py-12 overflow-hidden relative"
+      style={{
+        backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
+        backgroundSize: '180% auto',
+        backgroundPosition: 'center center',
+        animation: 'bg-pan-slide 12s ease-in-out infinite alternate',
+      }}>
+      {/* 다크 오버레이 */}
+      <div className="absolute inset-0 bg-black/75 pointer-events-none" />
+
+      <div ref={ref} className="relative z-10 text-center mb-8 md:mb-12">
         <p className={`text-xs tracking-[0.35em] uppercase mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={{ color: 'var(--e-accent)' }}>
           Natural Tooth Solution
@@ -52,7 +60,7 @@ export default function NaturalSolution() {
       </div>
 
       {/* 카드 - 원본 비율 유지, 호버 시 확대 + 내용 표시 */}
-      <div className="flex flex-row gap-3 md:gap-6 w-full max-w-5xl items-center justify-center">
+      <div className="relative z-10 flex flex-row gap-3 md:gap-6 w-full max-w-5xl items-center justify-center">
         {CARDS.map((card, i) => {
           const isHovered = hovered === card.id
           return (
@@ -86,7 +94,7 @@ export default function NaturalSolution() {
       </div>
 
       <button onClick={() => router.push('/natural-tooth')}
-        className={`mt-8 md:mt-10 inline-flex items-center gap-2 text-sm font-medium group transition-colors duration-200 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+        className={`relative z-10 mt-8 md:mt-10 inline-flex items-center gap-2 text-sm font-medium group transition-colors duration-200 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
         style={{ color: 'var(--e-accent)', ...(isVisible ? { animationDelay: '0.7s' } : {}) }}>
         자연치 보존치료 전체 보기
         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />

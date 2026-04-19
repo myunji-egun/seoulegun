@@ -113,12 +113,26 @@ export default function HeroSlider() {
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
-      {/* ── WebGL 배경 (displacement + slide crossfade) ─────────── */}
-      <WebGLHero
-        images={imageUrls}
-        fromIndex={prevIdx}
-        toIndex={current}
-        transitionProgress={tProg}
+      {/* ── WebGL 배경 (desktop only) ───────────────────────────── */}
+      <div className="hidden md:block absolute inset-0">
+        <WebGLHero
+          images={imageUrls}
+          fromIndex={prevIdx}
+          toIndex={current}
+          transitionProgress={tProg}
+        />
+      </div>
+
+      {/* ── 모바일 이미지 패닝 레이어 ───────────────────────────── */}
+      <img
+        key={current}
+        src={slide.image}
+        alt=""
+        aria-hidden="true"
+        className="md:hidden absolute inset-0 w-full h-full object-cover"
+        style={{
+          animation: `hero-fadein 0.5s ease both, ${current === 0 ? 'hero-pan-ltr' : 'hero-pan-rtc'} ${INTERVAL}ms ease-in-out both`,
+        }}
       />
 
       {/* ── 반투명 그라데이션 오버레이 ──────────────────────────── */}
