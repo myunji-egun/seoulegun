@@ -10,7 +10,7 @@ export default function NaturalToothPhilosophy() {
       ref={ref}
       className="py-20 sm:py-28 bg-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:pl-8 lg:pr-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* 좌측: 메인 카피 */}
           <div className="flex flex-col justify-center">
