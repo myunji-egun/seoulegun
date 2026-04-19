@@ -7,6 +7,7 @@ import PhilosophyBanner from '@/components/main/PhilosophyBanner'
 import NaturalSolution from '@/components/main/NaturalSolution'
 import ImplantSection from '@/components/main/ImplantSection'
 import SedationSection from '@/components/main/SedationSection'
+import CleanSection from '@/components/main/CleanSection'
 import MediaSection from '@/components/main/MediaSection'
 import MapSection from '@/components/main/MapSection'
 // TreatmentCarousel 비활성 (파일은 유지)
@@ -34,6 +35,7 @@ export default function Home() {
             NaturalSolution,
             ImplantSection,
             SedationSection,
+            CleanSection,
             MediaSection,
             MapSection,
           ] as React.ComponentType[]
@@ -63,6 +65,7 @@ export default function Home() {
             NaturalSolution,
             ImplantSection,
             SedationSection,
+            CleanSection,
             MediaSection,
             MapSection,
           ] as React.ComponentType[]

@@ -156,10 +156,11 @@ export default function HeroSlider() {
       <div className="absolute inset-0 flex items-center justify-center px-6 md:justify-start md:pl-20 lg:pl-32">
         <div className="text-white text-center md:text-left">
           <p
-            className="text-[15px] md:text-[17px] tracking-[0.3em] uppercase mb-3 opacity-80"
+            className="text-[15px] md:text-[17px] tracking-[0.3em] uppercase mb-3"
             style={{ color: slide.accent }}
           >
-            서울이건치과 <span className="text-[13px] md:text-[15px] opacity-60">수원</span>
+            <span className="text-white font-bold">서울이건치과</span>{' '}
+            <span className="text-[13px] md:text-[15px] opacity-60">수원</span>
           </p>
           <h1
             key={`headline-${current}`}
