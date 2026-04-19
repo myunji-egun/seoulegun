@@ -197,8 +197,8 @@ export default function AccessSection() {
               ))}
             </ul>
             <div className="grid grid-cols-2 gap-3">
-              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl object-cover" />
-              <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl object-cover" />
+              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl" />
+              <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl" />
             </div>
           </div>
 
@@ -231,8 +231,8 @@ export default function AccessSection() {
               ))}
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <img src="/images/clinic/bus.png" alt="버스 정류장 안내 1" className="w-full h-auto rounded-xl object-cover" />
-              <img src="/images/clinic/bus-2.png" alt="버스 정류장 안내 2" className="w-full h-auto rounded-xl object-cover" />
+              <img src="/images/clinic/bus.png" alt="버스 정류장 안내 1" className="w-full h-auto rounded-xl" />
+              <img src="/images/clinic/bus-2.png" alt="버스 정류장 안내 2" className="w-full h-auto rounded-xl" />
             </div>
           </div>
         </div>
