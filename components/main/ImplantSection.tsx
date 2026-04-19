@@ -13,37 +13,18 @@ export default function ImplantSection() {
       className="h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
       style={{ backgroundColor: '#000' }}
     >
-      {/* ── 배경 이미지 2장 — 하단에 크게 깔림 ─────────────────── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <img
-          src="/images/allon/all-on%20(1).jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute bottom-0 left-0 w-[55%] h-[68%] object-cover opacity-60"
-          style={{ maskImage: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)' }}
-        />
-        <img
-          src="/images/allon/all-on%20(2).jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute bottom-0 right-0 w-[55%] h-[68%] object-cover opacity-60"
-          style={{ maskImage: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)' }}
-        />
-        {/* 중앙 이미지 겹침 블렌드 */}
-        <div className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 100%, transparent 0%, #000 70%)' }} />
-      </div>
-
-      {/* ── 글씨 뒷면 블러 레이어 ─────────────────────────────── */}
+      {/* ── all-on-slide.jpg 풀스크린 슬라이딩 배경 ─────────────── */}
       <div
-        className="absolute inset-x-0 top-0 bottom-[32%] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backdropFilter: 'blur(2px)',
-          WebkitBackdropFilter: 'blur(2px)',
-          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, transparent 100%)',
+          backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
+          backgroundSize: '300% auto',
+          backgroundPosition: 'center center',
+          animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
         }}
       />
+      {/* 다크 오버레이 — 텍스트 가독성 */}
+      <div className="absolute inset-0 bg-black/70 pointer-events-none" />
 
       {/* ── 콘텐츠 ───────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-col items-center text-center">
@@ -108,15 +89,6 @@ export default function ImplantSection() {
           자세히 보기
           <Plus size={14} className="group-hover:rotate-90 transition-transform duration-300" aria-hidden="true" />
         </Link>
-      </div>
-
-      {/* ── 마퀴 이미지 스트립 ──────────────────────────────── */}
-      <div className="absolute bottom-16 left-0 right-0 overflow-hidden pointer-events-none"
-        style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)' }}>
-        <div className="flex animate-marquee" style={{ width: 'max-content' }}>
-          <img src="/images/allon/all-on-side.jpg" alt="" aria-hidden="true" className="h-20 w-auto object-cover shrink-0" />
-          <img src="/images/allon/all-on-side.jpg" alt="" aria-hidden="true" className="h-20 w-auto object-cover shrink-0" />
-        </div>
       </div>
 
       {/* Scroll Down */}
