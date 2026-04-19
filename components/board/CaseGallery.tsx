@@ -55,23 +55,7 @@ export default function CaseGallery({
     )
   }
 
-  if (cases.length === 0) {
-    return (
-      <div
-        className="border border-gray-200 rounded-2xl p-8 sm:p-12 text-center bg-gray-50"
-        aria-label={`${treatmentType} 증례 사진 영역`}
-      >
-        <ImageOff
-          className="mx-auto mb-4 text-gray-300"
-          size={40}
-          aria-hidden="true"
-        />
-        <p className="text-gray-400 text-sm font-medium">
-          증례 사진 준비 중입니다
-        </p>
-      </div>
-    )
-  }
+  if (cases.length === 0) return null
 
   // 모든 증례에서 블로그 링크 수집
   const allBlogs = cases.flatMap((c) => c.case_blogs)

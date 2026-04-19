@@ -20,10 +20,7 @@ export default function BoardAnchorNav({ items }: BoardAnchorNavProps) {
       e.preventDefault()
       const el = document.getElementById(id)
       if (!el) return
-      // 헤더(80px) + 앵커바(48px) 높이 오프셋
-      const offset = 136
-      const top = el.getBoundingClientRect().top + window.scrollY - offset
-      window.scrollTo({ top, behavior: 'smooth' })
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
       setActiveId(id)
     },
     [],
