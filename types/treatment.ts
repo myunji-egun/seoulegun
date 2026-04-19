@@ -9,6 +9,7 @@ export interface TreatmentContent {
   title: string
   subtitle: string
   description: string
+  richContent?: string   // 마크다운 형식 본문 (###, >, ---, - 지원)
   benefits: string[]
   faq: FAQ[]
   image?: string

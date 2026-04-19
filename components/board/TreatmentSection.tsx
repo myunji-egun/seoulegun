@@ -9,35 +9,110 @@ interface TreatmentSectionProps {
   index: number
 }
 
-/** 설명 텍스트: **볼드** 마크업을 민트색 강조로 변환, 마침표 뒤 줄넘김 */
-function HighlightedDescription({ text }: { text: string }) {
-  // 마침표 뒤 줄넘김으로 문단 분리
-  const paragraphs = text.split(/(?<=\.)\s+/)
+/** **볼드** → 민트 강조 인라인 파서 */
+function inlineParse(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <span key={i} className="font-semibold" style={{ color: '#92DCE5' }}>{part.slice(2, -2)}</span>
+    }
+    return <span key={i}>{part}</span>
+  })
+}
 
+/** 단순 **볼드** 강조만 처리하는 기본 description 렌더러 */
+function HighlightedDescription({ text }: { text: string }) {
+  const paragraphs = text.split(/(?<=\.)\s+/)
   return (
     <p className="text-gray-600 leading-[1.9] text-base">
-      {paragraphs.map((para, i) => {
-        // **볼드** 마크업을 민트색 강조 span으로 변환
-        const parts = para.split(/(\*\*[^*]+\*\*)/)
-
-        return (
-          <span key={i}>
-            {parts.map((part, j) => {
-              if (part.startsWith('**') && part.endsWith('**')) {
-                return (
-                  <span key={j} className="font-semibold text-[18px]" style={{ color: '#92DCE5' }}>
-                    {part.slice(2, -2)}
-                  </span>
-                )
-              }
-              return <span key={j}>{part}</span>
-            })}
-            {i < paragraphs.length - 1 && <><br /><br /></>}
-          </span>
-        )
-      })}
+      {paragraphs.map((para, i) => (
+        <span key={i}>
+          {inlineParse(para)}
+          {i < paragraphs.length - 1 && <><br /><br /></>}
+        </span>
+      ))}
     </p>
   )
+}
+
+/** richContent 마크다운 렌더러 (###, >, ---, - 지원) */
+function RichDescription({ content }: { content: string }) {
+  const lines = content.split('\n')
+  const elements: React.ReactNode[] = []
+  let listItems: string[] = []
+  let key = 0
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      elements.push(
+        <ul key={key++} className="space-y-1.5 pl-1 my-2">
+          {listItems.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-gray-600 text-[15px] leading-relaxed">
+              <span className="shrink-0">{item.replace(/^-\s*/, '').split(' ')[0]}</span>
+              <span>{inlineParse(item.replace(/^-\s*[\S]*\s*/, ''))}</span>
+            </li>
+          ))}
+        </ul>
+      )
+      listItems = []
+    }
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+
+    // ### heading
+    if (line.startsWith('### ')) {
+      flushList()
+      elements.push(
+        <h3 key={key++} className="text-base font-bold text-gray-900 mt-6 mb-2 flex items-center gap-1.5">
+          {inlineParse(line.replace(/^### /, ''))}
+        </h3>
+      )
+      continue
+    }
+
+    // --- divider
+    if (line.trim() === '---') {
+      flushList()
+      elements.push(<hr key={key++} className="border-gray-100 my-4" />)
+      continue
+    }
+
+    // > blockquote
+    if (line.startsWith('> ')) {
+      flushList()
+      const quoteText = line.replace(/^> /, '')
+      elements.push(
+        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[14px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#92DCE5' }}>
+          {inlineParse(quoteText)}
+        </blockquote>
+      )
+      continue
+    }
+
+    // - list item
+    if (line.startsWith('- ')) {
+      listItems.push(line)
+      continue
+    }
+
+    // empty line
+    if (line.trim() === '') {
+      flushList()
+      continue
+    }
+
+    // plain text
+    flushList()
+    elements.push(
+      <p key={key++} className="text-gray-600 text-[15px] leading-[1.85] my-1">
+        {inlineParse(line)}
+      </p>
+    )
+  }
+
+  flushList()
+  return <div className="space-y-0.5">{elements}</div>
 }
 
 export default function TreatmentSection({
@@ -71,7 +146,10 @@ export default function TreatmentSection({
           </p>
           <div className={`${textVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.3s' } : undefined}>
-            <HighlightedDescription text={treatment.description} />
+            {treatment.richContent
+              ? <RichDescription content={treatment.richContent} />
+              : <HighlightedDescription text={treatment.description} />
+            }
           </div>
         </div>
 
