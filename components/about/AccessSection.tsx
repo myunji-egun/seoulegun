@@ -3,17 +3,34 @@ import { MapPin, Phone, Clock, ExternalLink } from 'lucide-react'
 
 const TRANSIT_INFO = [
   {
-    type: '버스',
-    icon: '🚌',
+    type: '위치 안내',
+    icon: '📍',
     lines: [
-      { name: '수원 55번', stop: '인계동 미산빌딩 정류장 하차' },
-      { name: '수원 62번', stop: '인계동 미산빌딩 정류장 하차' },
+      {
+        name: '저희 서울이건치과는 위브하늘채 후문에 위치하고 있습니다.',
+        stop: '',
+      },
     ],
   },
   {
-    type: '지하철',
-    icon: '🚇',
-    lines: [{ name: '수인분당선 수원시청역', stop: '2번 출구 도보 약 10분' }],
+    type: '도보',
+    icon: '🚶',
+    lines: [
+      {
+        name: '피자스쿨 매탄점에서 왼쪽 방향으로 이동',
+        stop: '두산부동산공인중개사 사무소에서 오른쪽으로 돌면 파리바게트 빌딩 2층 서울이건치과 입구가 있습니다.',
+      },
+    ],
+  },
+  {
+    type: '버스',
+    icon: '🚌',
+    lines: [
+      {
+        name: '매탄위브하늘채, 매탄삼성1차아파트 정류장 하차',
+        stop: '도보 안내 참고',
+      },
+    ],
   },
 ]
 
@@ -188,26 +205,34 @@ export default function AccessSection() {
           {/* 대중교통 안내 */}
           <div className="rounded-2xl bg-stone-50 border border-stone-200 p-6">
             <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="text-xl" aria-hidden="true">🚇</span>
+              <span className="text-xl" aria-hidden="true">🚌</span>
               대중교통
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-4 mb-4">
               {TRANSIT_INFO.map((transit) => (
                 <div key={transit.type}>
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                  <p className="text-xs font-semibold text-[#0080C8] uppercase tracking-wider mb-1.5">
                     {transit.icon} {transit.type}
                   </p>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-1">
                     {transit.lines.map((line, i) => (
-                      <li key={i} className="text-sm text-gray-700">
-                        <span className="font-medium">{line.name}</span>
-                        <br />
-                        <span className="text-gray-500 text-xs">{line.stop}</span>
+                      <li key={i} className="text-sm text-gray-700 leading-relaxed">
+                        {line.name && <span className="font-medium">{line.name}</span>}
+                        {line.stop && (
+                          <>
+                            {line.name && <br />}
+                            <span className="text-gray-500 text-xs">{line.stop}</span>
+                          </>
+                        )}
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <img src="/images/clinic/bus.png" alt="버스 정류장 안내 1" className="w-full h-auto rounded-xl object-cover" />
+              <img src="/images/clinic/bus-2.png" alt="버스 정류장 안내 2" className="w-full h-auto rounded-xl object-cover" />
             </div>
           </div>
         </div>
