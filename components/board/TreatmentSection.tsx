@@ -25,7 +25,7 @@ function HighlightedDescription({ text }: { text: string }) {
             {parts.map((part, j) => {
               if (part.startsWith('**') && part.endsWith('**')) {
                 return (
-                  <span key={j} className="font-semibold text-[18px]" style={{ color: 'var(--e-primary)' }}>
+                  <span key={j} className="font-semibold text-[18px]" style={{ color: '#92DCE5' }}>
                     {part.slice(2, -2)}
                   </span>
                 )
