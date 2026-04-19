@@ -11,61 +11,76 @@ export default function NaturalToothPhilosophy() {
       className="py-20 sm:py-28 bg-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:pl-8 lg:pr-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* 좌측: 메인 카피 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+          {/* 좌측: 대형 타이틀 — 이미지 레이아웃 동일 */}
           <div className="flex flex-col justify-center">
             <h2
-              className={`text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-[1.3] ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.25] ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             >
-              가장 좋은 임플란트는
+              <span className="text-gray-900">가장 </span>
+              <span style={{ color: 'var(--e-primary)' }}>좋은 임플란트는</span>
               <br />
               <span style={{ color: 'var(--e-primary)' }}>내 몸이 가진</span>
               <br />
-              자연치아입니다.
+              <span className="text-gray-900">자연치아입니다.</span>
             </h2>
           </div>
 
           {/* 우측: 상세 본문 */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             <p
-              className={`text-sm sm:text-base text-gray-600 leading-[1.8] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
-              style={isVisible ? { animationDelay: '0.5s' } : undefined}
+              className={`text-sm sm:text-base text-gray-600 leading-[1.85] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+              style={isVisible ? { animationDelay: '0.2s' } : undefined}
             >
-              치아는 한 번 많이 삭제되면 되돌릴 수 없기 때문에, 처음 치료 방향이 굉장히 중요합니다.
-              그래서 저희는 단순히 충치를 제거하는 것을 넘어, "어디까지 살릴 수 있는지"를 먼저 고민합니다.
-              초기 단계라면 치아 삭제를 최소화한 레진 빌드업으로 진행할 수 있고, 조금 더 진행된 경우에는
-              인레이나 온레이를 통해 필요한 부분만 보강하는 치료를 선택하게 됩니다.
+              많은 이들이 빠르고 간편한 '대체'를 말할 때, 우리는 조금 더 느리고{' '}
+              <strong style={{ color: 'var(--e-primary)' }}>세밀한 '보존'</strong>에 집중합니다.
+              자연치아는 인공치아가 결코 흉내 낼 수 없는{' '}
+              <strong style={{ color: 'var(--e-primary)' }}>고유의 치주인대</strong>를 가지고 있어,
+              음식의 질감을 느끼게 하고 외부 충격을 완화하는 천연{' '}
+              <strong style={{ color: 'var(--e-primary)' }}>완충 작용</strong>을 합니다.
             </p>
 
             <p
-              className={`text-sm sm:text-base text-gray-600 leading-[1.8] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
-              style={isVisible ? { animationDelay: '0.7s' } : undefined}
+              className={`text-sm sm:text-base text-gray-600 leading-[1.85] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+              style={isVisible ? { animationDelay: '0.35s' } : undefined}
             >
-              손상이 큰 경우에는{' '}
-              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>치아 보호</strong>를 위해
-              크라운 치료가 필요할 수 있지만, 이 역시도{' '}
-              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>불필요한 삭제</strong>를
-              줄이는 방향으로 신중하게 결정합니다.
-              결국 중요한 것은 치료 방법 자체가 아니라, 환자분의 치아 상태에 맞는 적절한 선택입니다.{' '}
-              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>자연치아</strong>를
-              얼마나 오래, 건강하게 유지할 수 있는가 — 이 원칙을 바탕으로 기능과 형태를 함께 회복하는 치료를 진행합니다.
+              손상이 큰 경우에는 치아 보호를 위해 크라운 치료가 필요할 수 있지만,
+              이 역시도{' '}
+              <strong style={{ color: 'var(--e-primary)' }}>불필요한 삭제를 줄이는 방향</strong>으로
+              신중하게 결정합니다.
+              결국 중요한 것은 치료 방법 자체가 아니라, 환자분의 치아 상태에 맞는 적절한 선택입니다.
             </p>
 
-            <div
-              className={`border-l-2 pl-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            <p
+              className={`text-sm sm:text-base text-gray-600 leading-[1.85] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+              style={isVisible ? { animationDelay: '0.45s' } : undefined}
+            >
+              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>
+                자연치아를 얼마나 오래, 건강하게 유지할 수 있는가
+              </strong>
+              <br />
+              — 이 원칙을 바탕으로 기능과 형태를 함께 회복하는 치료를 진행합니다.
+            </p>
+
+            {/* Left Border Blockquote */}
+            <blockquote
+              className={`relative pl-5 py-4 mt-2 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
               style={{
-                borderColor: 'var(--e-primary)',
-                ...(isVisible ? { animationDelay: '0.9s' } : {}),
+                borderLeft: '4px solid var(--e-primary)',
+                backgroundColor: 'rgba(146, 220, 229, 0.06)',
+                borderRadius: '0 8px 8px 0',
+                ...(isVisible ? { animationDelay: '0.6s' } : {}),
               }}
             >
-              <p className="text-sm sm:text-base text-gray-800 font-semibold leading-[1.8]">
-                '뽑기 전 마지막으로 들르는 곳'
-                <br />
-                그 책임감이 우리의 진료 철학이며,
-                <br />
+              <p className="text-sm sm:text-base text-gray-800 font-semibold leading-[1.9]">
+                <span className="block text-base sm:text-lg font-black text-gray-900 mb-1">
+                  '뽑기 전 마지막으로 들르는 곳'
+                </span>
+                그 책임감이 우리의 진료 철학이며,<br />
                 타협하지 않는 정석 진료의 핵심입니다.
               </p>
-            </div>
+            </blockquote>
           </div>
         </div>
       </div>
