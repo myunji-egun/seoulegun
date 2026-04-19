@@ -7,7 +7,7 @@ interface BenefitListProps {
 
 export default function BenefitList({ benefits }: BenefitListProps) {
   return (
-    <div className="bg-[#F7F8F3] rounded-2xl p-6 sm:p-8">
+    <div className="bg-[#F8F7F9] rounded-2xl p-6 sm:p-8">
       <h3 className="text-lg font-semibold text-gray-800 mb-5">
         이런 점이 도움이 됩니다
       </h3>

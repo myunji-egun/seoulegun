@@ -38,7 +38,7 @@ const CTA_ITEMS = [
 export default function CtaSection() {
   return (
     <section
-      className="bg-[#F7F8F3] rounded-3xl p-8 sm:p-12"
+      className="bg-[#F8F7F9] rounded-3xl p-8 sm:p-12"
       aria-labelledby="cta-heading"
     >
       <div className="text-center mb-10">
