@@ -21,15 +21,9 @@ function inlineParse(text: string) {
 
 /** 단순 **볼드** 강조만 처리하는 기본 description 렌더러 */
 function HighlightedDescription({ text }: { text: string }) {
-  const paragraphs = text.split(/(?<=\.)\s+/)
   return (
-    <p className="text-gray-600 leading-[1.9] text-base">
-      {paragraphs.map((para, i) => (
-        <span key={i}>
-          {inlineParse(para)}
-          {i < paragraphs.length - 1 && <><br /><br /></>}
-        </span>
-      ))}
+    <p className="text-gray-600 leading-[1.9] text-[15px]">
+      {inlineParse(text)}
     </p>
   )
 }
@@ -130,13 +124,13 @@ export default function TreatmentSection({
           <img
             src="/images/logo/egun-logo%20(1).svg?v=2"
             alt="수원치과 서울이건치과"
-            className={`h-4 mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`h-8 mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           />
           <h2 className={`text-2xl sm:text-3xl font-bold text-gray-900 leading-tight ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.1s' } : undefined}>
             {treatment.title}
           </h2>
-          <p className={`text-lg text-[#0080C8] font-medium ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          <p className={`text-xl text-[#0080C8] font-bold ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.2s' } : undefined}>
             {treatment.subtitle}
           </p>
