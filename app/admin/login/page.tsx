@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                className="w-full h-11 px-4 rounded-lg border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#B8A080] focus:border-[#B8A080] transition"
+                className="w-full h-11 px-4 rounded-lg border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#0080C8] focus:border-[#0080C8] transition"
                 placeholder="비밀번호 입력"
               />
             </div>
@@ -72,7 +72,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-11 rounded-lg bg-[#B8A080] text-white font-semibold text-sm hover:bg-[#5A6A2F] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+              className="w-full h-11 rounded-lg bg-[#0080C8] text-white font-semibold text-sm hover:bg-[#006aaa] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? '로그인 중...' : '로그인'}
             </button>

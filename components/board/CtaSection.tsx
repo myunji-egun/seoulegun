@@ -19,7 +19,7 @@ const CTA_ITEMS = [
     description: '031-896-5512',
     href: 'tel:031-896-5512',
     external: false,
-    bg: 'bg-[#B8A080]',
+    bg: 'bg-[#0080C8]',
     text: 'text-white',
     iconColor: 'text-white',
   },
@@ -42,7 +42,7 @@ export default function CtaSection() {
       aria-labelledby="cta-heading"
     >
       <div className="text-center mb-10">
-        <p className="text-[#B8A080] text-sm font-semibold tracking-widest uppercase mb-2">
+        <p className="text-[#0080C8] text-sm font-semibold tracking-widest uppercase mb-2">
           Consulting
         </p>
         <h2
@@ -80,7 +80,7 @@ export default function CtaSection() {
       <div className="text-center">
         <Link
           href="/contact"
-          className="inline-block bg-[#B8A080] text-white font-semibold text-base px-10 py-4 rounded-full hover:bg-[#96775A] active:scale-[0.98] transition-all duration-200"
+          className="inline-block bg-[#0080C8] text-white font-semibold text-base px-10 py-4 rounded-full hover:bg-[#2B2D42] active:scale-[0.98] transition-all duration-200"
           aria-label="상담 예약 페이지로 이동"
         >
           상담 예약하기

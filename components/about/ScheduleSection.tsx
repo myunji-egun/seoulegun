@@ -14,7 +14,7 @@ export default function ScheduleSection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 섹션 헤더 */}
-        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[#B8A080] mb-4">
+        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4">
           Hours
         </p>
         <h2
@@ -29,7 +29,7 @@ export default function ScheduleSection() {
           {/* 시간표 */}
           <div>
             <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-              <div className="bg-[#B8A080] px-6 py-4 flex items-center gap-2">
+              <div className="bg-[#0080C8] px-6 py-4 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-white" aria-hidden="true" />
                 <h3 className="text-white font-semibold text-sm">
                   진료시간
@@ -63,7 +63,7 @@ export default function ScheduleSection() {
                           {row.hours}
                         </span>
                         {row.note && (
-                          <span className="ml-2 inline-block text-xs font-medium bg-[#B8A080]/10 text-[#B8A080] px-2 py-0.5 rounded-full">
+                          <span className="ml-2 inline-block text-xs font-medium bg-[#0080C8]/10 text-[#0080C8] px-2 py-0.5 rounded-full">
                             {row.note}
                           </span>
                         )}
@@ -78,9 +78,9 @@ export default function ScheduleSection() {
           {/* 예약 안내 */}
           <div className="flex flex-col gap-6">
             {mainTab.notice && mainTab.notice.length > 0 && (
-              <div className="bg-[#B8A080]/5 border border-[#B8A080]/20 rounded-2xl p-6">
-                <h4 className="text-sm font-semibold text-[#B8A080] mb-4 flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-[#B8A080] text-white flex items-center justify-center text-xs">
+              <div className="bg-[#0080C8]/5 border border-[#0080C8]/20 rounded-2xl p-6">
+                <h4 className="text-sm font-semibold text-[#0080C8] mb-4 flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-xs">
                     i
                   </span>
                   진료 안내
@@ -91,7 +91,7 @@ export default function ScheduleSection() {
                       key={i}
                       className="text-sm text-gray-700 flex items-start gap-2"
                     >
-                      <span className="text-[#B8A080] mt-0.5">·</span>
+                      <span className="text-[#0080C8] mt-0.5">·</span>
                       {note}
                     </li>
                   ))}
@@ -108,7 +108,7 @@ export default function ScheduleSection() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
                   href={`tel:${clinicInfo.phone.replace(/-/g, '')}`}
-                  className="flex-1 bg-[#B8A080] text-white text-center py-2.5 rounded-xl text-sm font-semibold hover:bg-[#A08968] transition-colors"
+                  className="flex-1 bg-[#0080C8] text-white text-center py-2.5 rounded-xl text-sm font-semibold hover:bg-[#A08968] transition-colors"
                 >
                   {clinicInfo.phone}
                 </a>

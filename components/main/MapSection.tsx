@@ -35,10 +35,10 @@ export default function MapSection() {
               alt="서울이건치과"
               className="h-5 mb-3"
             />
-            <div className="w-8 h-0.5 bg-[#B8A080] mb-3" />
+            <div className="w-8 h-0.5 bg-[var(--e-primary)] mb-3" />
             <a
               href={`tel:${clinicInfo.phone}`}
-              className="block text-xl md:text-2xl font-bold text-gray-900 tracking-wide mb-2 hover:text-[#B8A080] transition-colors"
+              className="block text-xl md:text-2xl font-bold text-gray-900 tracking-wide mb-2 hover:text-[var(--e-primary)] transition-colors"
             >
               {clinicInfo.phone}
             </a>
@@ -64,7 +64,7 @@ export default function MapSection() {
           <div className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.15s' } : undefined}>
             {/* 헤더 */}
-            <div className="bg-[#B8A080] px-4 py-2.5 flex items-center gap-2">
+            <div className="bg-[var(--e-primary)] px-4 py-2.5 flex items-center gap-2">
               <Clock className="w-3.5 h-3.5 text-white" aria-hidden="true" />
               <span className="text-white font-semibold text-xs">진료시간</span>
             </div>
@@ -80,7 +80,7 @@ export default function MapSection() {
                     {item.hours}
                   </span>
                   {item.note && (
-                    <span className="ml-2 text-[10px] font-medium text-[#B8A080] bg-[#B8A080]/10 px-2 py-0.5 rounded-full">
+                    <span className="ml-2 text-[10px] font-medium text-[var(--e-primary)] bg-[var(--e-primary)]/10 px-2 py-0.5 rounded-full">
                       {item.note}
                     </span>
                   )}

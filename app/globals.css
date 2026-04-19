@@ -43,6 +43,32 @@
   font-display: swap;
 }
 
+/* ── 이건치과 색상 팔레트 (4색 시스템) ── */
+:root {
+  --e-bg:      #F8F7F9;  /* 밝은 섹션 배경 */
+  --e-dark:    #2B2D42;  /* 어두운 섹션 배경 */
+  --e-primary: #0080C8;  /* 포인트 (버튼, 강조선, 하이라이트) */
+  --e-accent:  #92DCE5;  /* 소프트 액센트 (서브 하이라이트) */
+}
+[data-theme="navy"] {
+  --e-bg:      #2B2D42;
+  --e-dark:    #1a1c2e;
+  --e-primary: #92DCE5;
+  --e-accent:  #0080C8;
+}
+[data-theme="blue"] {
+  --e-bg:      #F8F7F9;
+  --e-dark:    #0080C8;
+  --e-primary: #2B2D42;
+  --e-accent:  #92DCE5;
+}
+[data-theme="teal"] {
+  --e-bg:      #F8F7F9;
+  --e-dark:    #2B2D42;
+  --e-primary: #92DCE5;
+  --e-accent:  #0080C8;
+}
+
 @layer base {
   html, body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -111,7 +137,7 @@
 }
 @keyframes blink-caret {
   from, to { border-color: transparent; }
-  50% { border-color: #B8A080; }
+  50% { border-color: var(--e-primary); }
 }
 
 /* 스크롤 애니메이션 유틸리티 - !important로 확실히 적용 */

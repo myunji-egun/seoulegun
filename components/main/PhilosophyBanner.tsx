@@ -50,7 +50,7 @@ export default function PhilosophyBanner() {
         else if (r) r.current = el as HTMLDivElement | null
       }}
       className="h-screen w-full flex items-center overflow-hidden"
-      style={{ backgroundColor: '#FAFAF8' }}
+      style={{ backgroundColor: 'var(--e-bg)' }}
     >
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pr-12 sm:pr-16 lg:pr-20 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-20 items-start h-full md:py-16">
         {/* 좌측: 고정 타이틀 */}
@@ -60,7 +60,7 @@ export default function PhilosophyBanner() {
           >
             우리는 기술보다
             <br />
-            <span style={{ color: '#99d9d9' }}>마음의 무게</span>를
+            <span style={{ color: 'var(--e-primary)' }}>마음의 무게</span>를
             <br />
             먼저 생각합니다.
           </h2>
@@ -74,7 +74,7 @@ export default function PhilosophyBanner() {
           </p>
           <div
             className={`w-14 h-1.5 mt-6 rounded-full ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-            style={{ backgroundColor: '#99d9d9', animationDelay: isVisible ? '0.4s' : undefined }}
+            style={{ backgroundColor: 'var(--e-primary)', animationDelay: isVisible ? '0.4s' : undefined }}
           />
         </div>
 
@@ -95,7 +95,7 @@ export default function PhilosophyBanner() {
               <br />
               그것은 저희에게 단순한 구호가 아닌
               <br />
-              지난 <span style={{ color: '#99d9d9' }}>8년간</span> 지켜온
+              지난 <span style={{ color: 'var(--e-primary)', fontWeight: 900 }}>8년간</span> 지켜온
               <br />
               <span className="text-gray-900 font-black">단 하나의 약속</span>입니다.
             </p>
@@ -103,7 +103,7 @@ export default function PhilosophyBanner() {
             <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-500">
               한 자리에서 8년이라는 시간 동안,
               <br />
-              <span style={{ color: '#99d9d9' }}>서울대학교 출신 대표원장 2인</span>이
+              <span style={{ color: 'var(--e-primary)', fontWeight: 900 }}>서울대학교 출신 대표원장 2인</span>이
               <br />
               바뀌지 않고 모든 환자분을
               <br />
@@ -119,7 +119,7 @@ export default function PhilosophyBanner() {
               <br />
               더 정확하고 깊이 있는
               <br />
-              <span style={{ color: '#99d9d9' }}>협진 시스템</span>을 고집합니다.
+              <span style={{ color: 'var(--e-primary)', fontWeight: 900 }}>협진 시스템</span>을 고집합니다.
             </p>
 
             <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-500">
@@ -127,7 +127,7 @@ export default function PhilosophyBanner() {
               <br />
               두려움을 줄여드리는
               <br />
-              <span style={{ color: '#99d9d9' }}>안전한 수면치료</span>까지,
+              <span style={{ color: 'var(--e-primary)', fontWeight: 900 }}>안전한 수면치료</span>까지,
               <br />
               보이지 않는 곳에서
               <br />
@@ -145,7 +145,7 @@ export default function PhilosophyBanner() {
               <br />
               당신의 곁을 지키는
               <br />
-              <span style={{ color: '#99d9d9' }}>평생 주치의</span>가 되겠습니다.
+              <span style={{ color: 'var(--e-primary)', fontWeight: 900 }}>평생 주치의</span>가 되겠습니다.
             </p>
 
             <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800">

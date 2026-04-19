@@ -92,22 +92,27 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
           ))}
         </div>
 
-        <button onClick={() => goTo(current - 1)}
-          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
-          aria-label="이전 사진">
-          <ChevronLeft size={22} />
-        </button>
-        <button onClick={() => goTo(current + 1)}
-          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
-          aria-label="다음 사진">
-          <ChevronRight size={22} />
-        </button>
+        {/* 화살표: 중앙 이미지 양쪽 가장자리에 고정 */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
+          <div className="relative w-[280px] sm:w-[380px] lg:w-[480px] h-full flex items-center">
+            <button onClick={() => goTo(current - 1)}
+              className="pointer-events-auto absolute -left-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="이전 사진">
+              <ChevronLeft size={22} />
+            </button>
+            <button onClick={() => goTo(current + 1)}
+              className="pointer-events-auto absolute -right-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="다음 사진">
+              <ChevronRight size={22} />
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="flex items-center justify-center gap-2 mt-6">
         {images.map((_, i) => (
           <button key={i} onClick={() => goTo(i)}
-            className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 bg-[#B8A080]' : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'}`}
+            className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 bg-[#0080C8]' : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'}`}
             aria-label={`사진 ${i + 1}번으로 이동`} />
         ))}
       </div>
@@ -122,7 +127,7 @@ export default function InteriorSection() {
   return (
     <section id="interior" className="py-20 sm:py-28 bg-stone-50 scroll-mt-32" aria-labelledby="interior-heading">
       <div ref={headerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#B8A080] mb-4 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+        <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           Interior
         </p>
         <h2 id="interior-heading"

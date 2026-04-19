@@ -15,7 +15,7 @@ export default function BenefitList({ benefits }: BenefitListProps) {
         {benefits.map((benefit, i) => (
           <li key={i} className="flex items-start gap-3">
             <CheckCircle2
-              className="shrink-0 mt-0.5 text-[#B8A080]"
+              className="shrink-0 mt-0.5 text-[#0080C8]"
               size={20}
               aria-hidden="true"
             />

@@ -3,6 +3,7 @@ import './globals.css'
 
 import SiteShell from '@/components/layout/SiteShell'
 import { LocalBusinessJsonLd } from '@/components/seo/JsonLd'
+import ThemeSwitcher from '@/components/ui/ThemeSwitcher'
 
 export const metadata: Metadata = {
   title: '수원 서울이건치과 | 서울대 출신 원장 2인 책임진료',
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body className="antialiased">
         <LocalBusinessJsonLd />
         <SiteShell>{children}</SiteShell>
+        <ThemeSwitcher />
       </body>
     </html>
   )

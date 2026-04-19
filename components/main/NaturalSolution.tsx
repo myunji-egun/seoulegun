@@ -33,21 +33,22 @@ export default function NaturalSolution() {
 
   return (
     <section className="h-screen w-full flex flex-col items-center justify-center px-4 py-12 overflow-hidden"
-      style={{ backgroundColor: '#F5F3EE' }}>
+      style={{ backgroundColor: 'var(--e-dark)' }}>
       <div ref={ref} className="text-center mb-8 md:mb-12">
-        <p className={`text-xs tracking-[0.35em] uppercase text-stone-400 mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+        <p className={`text-xs tracking-[0.35em] uppercase mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+          style={{ color: 'var(--e-accent)' }}>
           Natural Tooth Solution
         </p>
-        <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold text-stone-800 leading-tight mb-1 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
-          style={isVisible ? { animationDelay: '0.12s' } : undefined}>
+        <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold leading-tight mb-1 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+          style={{ color: '#F8F7F9', ...(isVisible ? { animationDelay: '0.12s' } : {}) }}>
           자연치 보존 솔루션
         </h2>
-        <p className={`text-sm md:text-base text-stone-500 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
-          style={isVisible ? { animationDelay: '0.24s' } : undefined}>
+        <p className={`text-sm md:text-base ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+          style={{ color: 'var(--e-accent)', ...(isVisible ? { animationDelay: '0.24s' } : {}) }}>
           최소 삭제, 최대 보존
         </p>
         <div className={`mt-4 w-10 h-0.5 mx-auto ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-          style={{ backgroundColor: '#B8A080', ...(isVisible ? { animationDelay: '0.3s' } : {}) }} />
+          style={{ backgroundColor: 'var(--e-primary)', ...(isVisible ? { animationDelay: '0.3s' } : {}) }} />
       </div>
 
       {/* 카드 - 원본 비율 유지, 호버 시 확대 + 내용 표시 */}
@@ -85,8 +86,8 @@ export default function NaturalSolution() {
       </div>
 
       <button onClick={() => router.push('/natural-tooth')}
-        className={`mt-8 md:mt-10 inline-flex items-center gap-2 text-sm font-medium text-stone-600 hover:text-stone-900 group transition-colors duration-200 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-        style={isVisible ? { animationDelay: '0.7s' } : undefined}>
+        className={`mt-8 md:mt-10 inline-flex items-center gap-2 text-sm font-medium group transition-colors duration-200 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+        style={{ color: 'var(--e-accent)', ...(isVisible ? { animationDelay: '0.7s' } : {}) }}>
         자연치 보존치료 전체 보기
         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
       </button>

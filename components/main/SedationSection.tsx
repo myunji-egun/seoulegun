@@ -55,24 +55,15 @@ export default function SedationSection() {
 
   return (
     <section ref={sectionRef} className="h-screen w-full relative overflow-hidden bg-black">
-      {/* 유튜브 영상 배경 - 보이면 자동재생, 안 보이면 정지 */}
-      {visible ? (
-        <iframe
-          src="https://www.youtube.com/embed/SOI5QjYwCMM?autoplay=1&mute=1&loop=1&playlist=SOI5QjYwCMM&controls=0&showinfo=0&modestbranding=1"
-          className="absolute inset-0 w-full h-full"
-          style={{ transform: 'scale(1.2)' }}
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          title="의식하진정법 소개 영상"
-        />
-      ) : (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(https://img.youtube.com/vi/SOI5QjYwCMM/maxresdefault.jpg)',
-          }}
-        />
-      )}
+      {/* 유튜브 영상 배경 - 즉시 마운트 */}
+      <iframe
+        src="https://www.youtube.com/embed/SOI5QjYwCMM?autoplay=1&mute=1&loop=1&playlist=SOI5QjYwCMM&controls=0&showinfo=0&modestbranding=1"
+        className="absolute inset-0 w-full h-full"
+        style={{ transform: 'scale(1.2)' }}
+        allow="autoplay; encrypted-media"
+        allowFullScreen
+        title="의식하진정법 소개 영상"
+      />
 
       {/* 어두운 오버레이 */}
       <div className="absolute inset-0 bg-black/50" />

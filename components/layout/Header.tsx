@@ -67,8 +67,8 @@ export default function Header() {
                     className={`relative px-3 xl:px-4 py-2 text-sm font-medium transition-colors duration-200 group ${
                       scrolled
                         ? isActive
-                          ? 'text-[#B8A080]'
-                          : 'text-gray-700 hover:text-[#B8A080]'
+                          ? 'text-[#0080C8]'
+                          : 'text-gray-700 hover:text-[#0080C8]'
                         : isActive
                           ? 'text-white'
                           : 'text-white/90 hover:text-white'
@@ -80,7 +80,7 @@ export default function Header() {
                       className={`absolute bottom-0 left-3 xl:left-4 right-3 xl:right-4 h-0.5 rounded-full transition-transform duration-200 origin-left ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
-                      style={{ backgroundColor: '#B8A080' }}
+                      style={{ backgroundColor: '#0080C8' }}
                     />
                   </Link>
                 )

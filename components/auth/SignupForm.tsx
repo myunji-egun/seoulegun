@@ -106,14 +106,14 @@ export default function SignupForm() {
   if (success) {
     return (
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
-        <div className="w-12 h-12 bg-[#B8A080]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6 text-[#B8A080]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-12 h-12 bg-[#0080C8]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-[#0080C8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <h2 className="text-lg font-bold text-gray-900 mb-2">회원가입 완료</h2>
         <p className="text-sm text-gray-500 mb-6">서울이건치과 회원이 되신 것을 환영합니다.</p>
-        <Link href="/" className="inline-block bg-[#B8A080] text-white font-semibold text-sm py-3 px-8 rounded-lg hover:bg-[#A08968] transition-colors">
+        <Link href="/" className="inline-block bg-[#0080C8] text-white font-semibold text-sm py-3 px-8 rounded-lg hover:bg-[#A08968] transition-colors">
           홈으로 이동
         </Link>
       </div>
@@ -133,7 +133,7 @@ export default function SignupForm() {
             value={form.password}
             onChange={e => handleChange('password', e.target.value)}
             placeholder="8자 이상 입력해 주세요"
-            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#B8A080] transition-colors"
+            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
           />
         </div>
         <div>
@@ -145,7 +145,7 @@ export default function SignupForm() {
             value={form.passwordConfirm}
             onChange={e => handleChange('passwordConfirm', e.target.value)}
             placeholder="비밀번호를 한 번 더 입력해 주세요."
-            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#B8A080] transition-colors"
+            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
           />
         </div>
       </fieldset>
@@ -161,7 +161,7 @@ export default function SignupForm() {
           type="text"
           value={form.name}
           onChange={e => handleChange('name', e.target.value)}
-          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#B8A080] transition-colors"
+          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
         />
       </div>
 
@@ -175,7 +175,7 @@ export default function SignupForm() {
           value={form.phone}
           onChange={e => handleChange('phone', e.target.value)}
           placeholder="ex)010-1234-5678"
-          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#B8A080] transition-colors"
+          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
         />
       </div>
 
@@ -191,7 +191,7 @@ export default function SignupForm() {
               name="smsAgreed"
               checked={form.smsAgreed}
               onChange={() => handleChange('smsAgreed', true)}
-              className="accent-[#B8A080]"
+              className="accent-[#0080C8]"
             />
             <span className="text-sm text-gray-700">Y</span>
           </label>
@@ -201,7 +201,7 @@ export default function SignupForm() {
               name="smsAgreed"
               checked={!form.smsAgreed}
               onChange={() => handleChange('smsAgreed', false)}
-              className="accent-[#B8A080]"
+              className="accent-[#0080C8]"
             />
             <span className="text-sm text-gray-700">N</span>
           </label>
@@ -220,7 +220,7 @@ export default function SignupForm() {
           type="email"
           value={form.email}
           onChange={e => handleChange('email', e.target.value)}
-          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#B8A080] transition-colors"
+          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
         />
       </div>
 
@@ -236,7 +236,7 @@ export default function SignupForm() {
               name="emailAgreed"
               checked={form.emailAgreed}
               onChange={() => handleChange('emailAgreed', true)}
-              className="accent-[#B8A080]"
+              className="accent-[#0080C8]"
             />
             <span className="text-sm text-gray-700">수신함</span>
           </label>
@@ -246,7 +246,7 @@ export default function SignupForm() {
               name="emailAgreed"
               checked={!form.emailAgreed}
               onChange={() => handleChange('emailAgreed', false)}
-              className="accent-[#B8A080]"
+              className="accent-[#0080C8]"
             />
             <span className="text-sm text-gray-700">수신안함</span>
           </label>
@@ -264,23 +264,23 @@ export default function SignupForm() {
               type="checkbox"
               checked={allAgreed}
               onChange={e => handleAllAgree(e.target.checked)}
-              className="w-4 h-4 accent-[#B8A080] rounded"
+              className="w-4 h-4 accent-[#0080C8] rounded"
             />
-            <span className="text-sm text-[#B8A080] font-medium">동의함</span>
+            <span className="text-sm text-[#0080C8] font-medium">동의함</span>
           </label>
         </div>
 
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-600">
             [필수] 이용약관 동의{' '}
-            <button type="button" className="text-[#B8A080] underline text-xs">약관 보기</button>
+            <button type="button" className="text-[#0080C8] underline text-xs">약관 보기</button>
           </span>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={form.termsAgreed}
               onChange={e => handleChange('termsAgreed', e.target.checked)}
-              className="w-4 h-4 accent-[#B8A080] rounded"
+              className="w-4 h-4 accent-[#0080C8] rounded"
             />
             <span className="text-sm text-gray-500">동의함</span>
           </label>
@@ -289,14 +289,14 @@ export default function SignupForm() {
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-600">
             [필수] 개인정보 수집 및 이용에 동의하십니까?{' '}
-            <button type="button" className="text-[#B8A080] underline text-xs">약관 보기</button>
+            <button type="button" className="text-[#0080C8] underline text-xs">약관 보기</button>
           </span>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={form.privacyAgreed}
               onChange={e => handleChange('privacyAgreed', e.target.checked)}
-              className="w-4 h-4 accent-[#B8A080] rounded"
+              className="w-4 h-4 accent-[#0080C8] rounded"
             />
             <span className="text-sm text-gray-500">동의함</span>
           </label>

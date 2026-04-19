@@ -95,7 +95,7 @@ export default function LabSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 섹션 헤더 */}
         <div ref={headerRef}>
-          <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#B8A080] mb-3 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+          <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-3 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
             In-house Lab
           </p>
           <h2
@@ -105,7 +105,7 @@ export default function LabSection() {
           >
             디지털 기공소
           </h2>
-          <p className={`text-base sm:text-lg text-[#B8A080] font-medium mb-3 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+          <p className={`text-base sm:text-lg text-[#0080C8] font-medium mb-3 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={headerVisible ? { animationDelay: '0.2s' } : undefined}
           >
             인하우스 기공소, 더욱 정교하게
@@ -146,11 +146,11 @@ export default function LabSection() {
             {LAB_FEATURES.map((feature, i) => (
               <div
                 key={feature.title}
-                className={`flex gap-4 p-4 rounded-2xl bg-gray-800 border border-gray-700 hover:border-[#B8A080]/50 transition-colors ${contentVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+                className={`flex gap-4 p-4 rounded-2xl bg-gray-800 border border-gray-700 hover:border-[#0080C8]/50 transition-colors ${contentVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
                 style={contentVisible ? { animationDelay: `${0.15 + i * 0.1}s` } : undefined}
               >
-                <div className="w-8 h-8 rounded-full bg-[#B8A080]/20 flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-[#B8A080]">
+                <div className="w-8 h-8 rounded-full bg-[#0080C8]/20 flex items-center justify-center shrink-0">
+                  <span className="text-xs font-bold text-[#0080C8]">
                     0{i + 1}
                   </span>
                 </div>
@@ -195,21 +195,25 @@ export default function LabSection() {
           })}
         </div>
 
-        {/* 좌우 화살표 - 오른쪽은 사이드바 피해 1cm 여백 */}
-        <button
-          onClick={() => goTo(current - 1)}
-          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
-          aria-label="이전 사진"
-        >
-          <ChevronLeft size={22} />
-        </button>
-        <button
-          onClick={() => goTo(current + 1)}
-          className="absolute right-12 sm:right-16 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
-          aria-label="다음 사진"
-        >
-          <ChevronRight size={22} />
-        </button>
+        {/* 화살표: 중앙 이미지 양쪽 가장자리에 고정 */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
+          <div className="relative w-[280px] sm:w-[380px] lg:w-[480px] h-full flex items-center">
+            <button
+              onClick={() => goTo(current - 1)}
+              className="pointer-events-auto absolute -left-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="이전 사진"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              onClick={() => goTo(current + 1)}
+              className="pointer-events-auto absolute -right-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="다음 사진"
+            >
+              <ChevronRight size={22} />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* 인디케이터 */}
@@ -218,7 +222,7 @@ export default function LabSection() {
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 bg-[#B8A080]' : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'}`}
+            className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 bg-[#0080C8]' : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'}`}
             aria-label={`사진 ${i + 1}번으로 이동`}
           />
         ))}

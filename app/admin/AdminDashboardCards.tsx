@@ -38,15 +38,15 @@ export default function AdminDashboardCards({ pendingCount }: Props) {
         <Link
           key={card.href}
           href={card.href}
-          className="relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md hover:border-[#B8A080]/30 transition-all group"
+          className="relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md hover:border-[#0080C8]/30 transition-all group"
         >
           {card.showBadge && pendingCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
               {pendingCount > 99 ? '99+' : pendingCount}
             </span>
           )}
-          <div className="w-12 h-12 rounded-lg bg-[#B8A080]/10 flex items-center justify-center mb-4 group-hover:bg-[#B8A080]/20 transition-colors">
-            <card.icon size={24} className="text-[#B8A080]" />
+          <div className="w-12 h-12 rounded-lg bg-[#0080C8]/10 flex items-center justify-center mb-4 group-hover:bg-[#0080C8]/20 transition-colors">
+            <card.icon size={24} className="text-[#0080C8]" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900">{card.label}</h3>
           <p className="text-sm text-gray-500 mt-1">{card.description}</p>

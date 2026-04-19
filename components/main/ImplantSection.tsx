@@ -10,9 +10,9 @@ export default function ImplantSection() {
   return (
     <section ref={ref}
       className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden px-4"
-      style={{ backgroundColor: '#111111' }}>
+      style={{ backgroundColor: 'var(--e-dark)' }}>
       <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" aria-hidden="true"
-        style={{ backgroundImage: 'radial-gradient(ellipse at 20% 40%, #B8A080 0%, transparent 60%), radial-gradient(ellipse at 80% 60%, #C4A87A 0%, transparent 60%)' }} />
+        style={{ backgroundImage: 'radial-gradient(ellipse at 20% 40%, var(--e-primary) 0%, transparent 60%), radial-gradient(ellipse at 80% 60%, var(--e-accent) 0%, transparent 60%)' }} />
 
       <p className={`text-xs tracking-[0.4em] uppercase text-stone-500 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
         Implant Solution
@@ -29,7 +29,7 @@ export default function ImplantSection() {
       <div className={`relative my-6 md:my-8 flex flex-col items-center ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}
         style={isVisible ? { animationDelay: '0.3s' } : undefined}>
         <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight select-none"
-          style={{ background: 'linear-gradient(135deg, #C4A87A 0%, #c8aa62 40%, #C4A87A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          style={{ background: 'linear-gradient(135deg, var(--e-primary) 0%, var(--e-accent) 50%, var(--e-primary) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           All on 4
         </span>
         <p className="text-stone-500 text-xs tracking-widest mt-1 uppercase">Full-Arch Rehabilitation</p>
@@ -55,8 +55,8 @@ export default function ImplantSection() {
         ].map((feat, i) => (
           <div key={feat.label} className={`flex flex-col items-center ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: `${0.55 + i * 0.1}s` } : undefined}>
-            <p className="text-xs font-semibold text-stone-300 mb-0.5">{feat.label}</p>
-            <p className="text-xs text-stone-600">{feat.desc}</p>
+            <p className="text-xs font-bold mb-0.5" style={{ color: 'var(--e-accent)' }}>{feat.label}</p>
+            <p className="text-xs text-stone-300">{feat.desc}</p>
           </div>
         ))}
       </div>

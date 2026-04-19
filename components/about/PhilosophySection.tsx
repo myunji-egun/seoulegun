@@ -36,7 +36,7 @@ export default function PhilosophySection() {
     >
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 섹션 레이블 */}
-        <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#B8A080] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+        <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
           Our Philosophy
         </p>
 
@@ -47,7 +47,7 @@ export default function PhilosophySection() {
           style={isVisible ? { animationDelay: '0.1s' } : undefined}
         >
           마음을 담아<br />
-          <span className="text-[#B8A080]">정성을 다하여</span>
+          <span className="text-[#0080C8]">정성을 다하여</span>
         </h2>
 
         {/* 인트로 문구 */}
@@ -66,7 +66,7 @@ export default function PhilosophySection() {
               style={isVisible ? { animationDelay: `${0.3 + i * 0.1}s` } : undefined}
             >
               <div className="flex items-start gap-3">
-                <div className="w-1 h-full min-h-12 bg-[#B8A080]/30 rounded-full group-hover:bg-[#B8A080] transition-colors mt-0.5" />
+                <div className="w-1 h-full min-h-12 bg-[#0080C8]/30 rounded-full group-hover:bg-[#0080C8] transition-colors mt-0.5" />
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1.5 text-sm sm:text-base">
                     {value.title}

@@ -16,20 +16,28 @@ export default function DoctorGroup() {
       />
 
       {/* 텍스트 오버레이 */}
-      <div ref={ref} className="relative z-10 h-full flex flex-col items-center pt-16 md:pt-24 lg:pt-28 px-4">
-        <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 text-center leading-[1.3] mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
-          한자리에서 <span style={{ color: '#99d9d9' }}>변하지 않는 마음</span>
+      {/* 하단 그라데이션 오버레이 */}
+      <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(43,45,66,0.45) 0%, transparent 100%)' }} />
+
+      <div ref={ref} className="relative z-10 h-full flex flex-col items-center pt-[70px] md:pt-20 lg:pt-28 px-4">
+        <h2 className={`text-[23px] sm:text-[27px] md:text-[33px] lg:text-[39px] font-black text-gray-900 text-center leading-[1.3] mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+          한자리에서 <span style={{ color: 'var(--e-primary)' }}>변하지 않는 마음</span>
         </h2>
 
-        <p className={`text-sm sm:text-base md:text-lg text-gray-600 text-center mb-6 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+        <p className={`text-[17px] sm:text-[19px] md:text-[21px] text-gray-700 text-center mb-6 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}>
-          <span style={{ color: '#99d9d9' }}>서울대학교</span> 출신 2인 대표원장
+          <span style={{ color: 'var(--e-primary)', fontWeight: 700 }}>서울대학교</span> 출신 2인 대표원장
         </p>
 
         <button
           onClick={() => router.push('/about#doctors')}
-          className={`text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 border border-gray-400 hover:border-gray-700 px-8 py-2.5 rounded-full ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-          style={isVisible ? { animationDelay: '0.4s' } : undefined}
+          className={`text-sm font-medium transition-all duration-200 px-8 py-2.5 rounded-full ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+          style={{
+            color: 'var(--e-primary)',
+            border: '1.5px solid var(--e-primary)',
+            ...(isVisible ? { animationDelay: '0.4s' } : {}),
+          }}
         >
           자세히보기 →
         </button>

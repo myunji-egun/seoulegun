@@ -50,7 +50,7 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
                 >
                   {/* Q 아이콘 */}
                   <span
-                    className="shrink-0 w-7 h-7 rounded-full bg-[#B8A080] flex items-center justify-center text-white text-xs font-bold"
+                    className="shrink-0 w-7 h-7 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-xs font-bold"
                     aria-hidden="true"
                   >
                     Q
@@ -80,7 +80,7 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
                     className="shrink-0 w-8 h-8 rounded-full object-cover mt-0.5"
                   />
                   <div>
-                    <span className="text-xs font-semibold text-[#B8A080] mb-1 block">원장 답변</span>
+                    <span className="text-xs font-semibold text-[#0080C8] mb-1 block">원장 답변</span>
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       {item.answer}
                     </p>

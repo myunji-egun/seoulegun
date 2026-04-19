@@ -108,7 +108,7 @@ export default function CaseGallery({
                         alt={`${item.title} After`}
                         className="w-full h-40 object-cover"
                       />
-                      <span className="absolute top-2 left-2 bg-[#B8A080] text-white text-[10px] px-1.5 py-0.5 rounded">
+                      <span className="absolute top-2 left-2 bg-[#0080C8] text-white text-[10px] px-1.5 py-0.5 rounded">
                         After
                       </span>
                     </div>
@@ -143,10 +143,10 @@ export default function CaseGallery({
                 href={blog.blog_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 p-3 rounded-xl border border-gray-200 hover:border-[#B8A080] hover:bg-stone-50 transition-colors group"
+                className="flex items-center gap-2 p-3 rounded-xl border border-gray-200 hover:border-[#0080C8] hover:bg-stone-50 transition-colors group"
               >
-                <ExternalLink size={14} className="text-[#B8A080] shrink-0" />
-                <span className="text-sm text-gray-700 group-hover:text-[#B8A080] truncate">
+                <ExternalLink size={14} className="text-[#0080C8] shrink-0" />
+                <span className="text-sm text-gray-700 group-hover:text-[#0080C8] truncate">
                   {blog.blog_title || blog.blog_url}
                 </span>
                 <span className="text-[10px] text-gray-400 shrink-0 ml-auto hidden sm:block truncate max-w-[200px]">
@@ -189,7 +189,7 @@ export default function CaseGallery({
                 {selected.after_image_url && (
                   <div className="relative">
                     <img src={selected.after_image_url} alt="After" className="w-full object-cover" />
-                    <span className="absolute top-3 left-3 bg-[#B8A080] text-white text-xs px-2 py-1 rounded">After</span>
+                    <span className="absolute top-3 left-3 bg-[#0080C8] text-white text-xs px-2 py-1 rounded">After</span>
                   </div>
                 )}
               </div>

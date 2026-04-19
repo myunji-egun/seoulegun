@@ -72,14 +72,14 @@ export default function AnchorNav() {
                 onClick={() => handleClick(item.id)}
                 className={`relative px-3 sm:px-5 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
                   activeId === item.id
-                    ? 'text-[#B8A080]'
+                    ? 'text-[#0080C8]'
                     : 'text-gray-500 hover:text-gray-800'
                 }`}
                 aria-current={activeId === item.id ? 'location' : undefined}
               >
                 {item.label}
                 {activeId === item.id && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B8A080]" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0080C8]" />
                 )}
               </button>
             </li>

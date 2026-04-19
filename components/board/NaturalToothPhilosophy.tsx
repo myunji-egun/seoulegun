@@ -19,7 +19,7 @@ export default function NaturalToothPhilosophy() {
             >
               가장 좋은 임플란트는
               <br />
-              <span className="text-[#5BB5A2]">내 몸이 가진</span>
+              <span style={{ color: 'var(--e-primary)' }}>내 몸이 가진</span>
               <br />
               자연치아입니다.
             </h2>
@@ -31,28 +31,32 @@ export default function NaturalToothPhilosophy() {
               className={`text-sm sm:text-base text-gray-600 leading-[1.8] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
               style={isVisible ? { animationDelay: '0.5s' } : undefined}
             >
-              많은 이들이 빠르고 간편한 '대체'를 말할 때,
-              우리는 조금 더 느리고 세밀한 '보존'에 집중합니다.
-              자연치아는 인공치아가 결코 흉내 낼 수 없는
-              고유의 <strong className="text-gray-900">치주인대</strong>를 가지고 있어,
-              음식의 질감을 느끼게 하고
-              외부 충격을 완화하는 천연 완충 작용을 합니다.
+              치아는 한 번 많이 삭제되면 되돌릴 수 없기 때문에, 처음 치료 방향이 굉장히 중요합니다.
+              그래서 저희는 단순히 충치를 제거하는 것을 넘어, "어디까지 살릴 수 있는지"를 먼저 고민합니다.
+              초기 단계라면 치아 삭제를 최소화한 레진 빌드업으로 진행할 수 있고, 조금 더 진행된 경우에는
+              인레이나 온레이를 통해 필요한 부분만 보강하는 치료를 선택하게 됩니다.
             </p>
 
             <p
               className={`text-sm sm:text-base text-gray-600 leading-[1.8] ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
               style={isVisible ? { animationDelay: '0.7s' } : undefined}
             >
-              우리는 단순히 아픈 곳을 뽑아내는 진료가 아니라,
-              현미경을 이용한 정밀 신경치료와 치근단 절제술 등
-              고난도의 <strong className="text-gray-900">보존 술식</strong>을 통해
-              단 <strong className="text-gray-900">1%의 가능성</strong>이라도 있다면
-              당신의 치아를 지켜내고자 합니다.
+              손상이 큰 경우에는{' '}
+              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>치아 보호</strong>를 위해
+              크라운 치료가 필요할 수 있지만, 이 역시도{' '}
+              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>불필요한 삭제</strong>를
+              줄이는 방향으로 신중하게 결정합니다.
+              결국 중요한 것은 치료 방법 자체가 아니라, 환자분의 치아 상태에 맞는 적절한 선택입니다.{' '}
+              <strong style={{ color: 'var(--e-primary)', fontWeight: 700 }}>자연치아</strong>를
+              얼마나 오래, 건강하게 유지할 수 있는가 — 이 원칙을 바탕으로 기능과 형태를 함께 회복하는 치료를 진행합니다.
             </p>
 
             <div
-              className={`border-l-2 border-[#5BB5A2] pl-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
-              style={isVisible ? { animationDelay: '0.9s' } : undefined}
+              className={`border-l-2 pl-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+              style={{
+                borderColor: 'var(--e-primary)',
+                ...(isVisible ? { animationDelay: '0.9s' } : {}),
+              }}
             >
               <p className="text-sm sm:text-base text-gray-800 font-semibold leading-[1.8]">
                 '뽑기 전 마지막으로 들르는 곳'

@@ -72,7 +72,7 @@ export default function MediaPage() {
       {/* 페이지 헤더 */}
       <section className="relative flex items-center justify-center min-h-[220px] sm:min-h-[280px] overflow-hidden">
         <div
-          className="absolute inset-0 bg-gradient-to-br from-[#96775A] via-[#B8A080] to-[#8A9B50]"
+          className="absolute inset-0 bg-gradient-to-br from-[#2B2D42] via-[#0080C8] to-[#92DCE5]"
           aria-hidden="true"
         />
         <div className="relative z-10 text-center px-4 py-12 sm:py-16">
@@ -115,7 +115,7 @@ export default function MediaPage() {
                     <p className="text-sm text-gray-600 leading-relaxed mb-4">
                       {description}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#B8A080] group-hover:text-[#96775A] transition-colors">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#0080C8] group-hover:text-[#2B2D42] transition-colors">
                       {linkText}
                       <ExternalLink size={14} />
                     </span>

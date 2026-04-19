@@ -61,7 +61,7 @@ export default function TreatmentSection({
             style={textVisible ? { animationDelay: '0.1s' } : undefined}>
             {treatment.title}
           </h2>
-          <p className={`text-lg text-[#B8A080] font-medium ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          <p className={`text-lg text-[#0080C8] font-medium ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.2s' } : undefined}>
             {treatment.subtitle}
           </p>
@@ -134,7 +134,7 @@ export default function TreatmentSection({
             <div key={i}
               className={`space-y-2 ${cardVisible ? anim : 'scroll-hidden'}`}
               style={cardVisible ? { animationDelay: `${0.1 + i * 0.08}s` } : undefined}>
-              <h3 className="text-[#B8A080] font-bold text-base">
+              <h3 className="text-[#0080C8] font-bold text-base">
                 #{benefit.split('.')[0].replace(/^[✓\s]+/, '').slice(0, 15)}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">

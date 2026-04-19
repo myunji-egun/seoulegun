@@ -39,7 +39,7 @@ function initMap(container: HTMLDivElement) {
         font-weight:700;
         color:#333;
         white-space:nowrap;
-        border:2px solid #B8A080;
+        border:2px solid #0080C8;
         transform:translateY(-12px);
       ">
         서울이건치과 수원점
@@ -51,7 +51,7 @@ function initMap(container: HTMLDivElement) {
           width:0;height:0;
           border-left:8px solid transparent;
           border-right:8px solid transparent;
-          border-top:8px solid #B8A080;
+          border-top:8px solid #0080C8;
         "></div>
       </div>
     `,

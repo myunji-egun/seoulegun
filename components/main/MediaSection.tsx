@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const MEDIA_ITEMS = [
-  { id: 'notice', label: '공지사항', image: '/images/media-image/notice.jpg?v=3', href: '/notice', hoverColor: '#ffffff' },
-  { id: 'blog', label: '원장님 칼럼', image: '/images/media-image/blog.jpg?v=3', href: '/media?tab=blog', hoverColor: '#64D515' },
-  { id: 'youtube', label: '이건TV', image: '/images/media-image/youtube.jpg?v=3', href: '/media?tab=youtube', hoverColor: '#FF0000' },
-  { id: 'review', label: '환자분 실제 후기', image: '/images/media-image/review.jpg?v=3', href: '/media?tab=review', hoverColor: '#64D515' },
+  { id: 'notice', label: '공지사항', image: '/images/media-image/notice.jpg?v=4', href: '/notice', hoverColor: '#0080C8' },
+  { id: 'blog', label: '원장님 칼럼', image: '/images/media-image/blog.jpg?v=4', href: '/media?tab=blog', hoverColor: '#92DCE5' },
+  { id: 'youtube', label: '이건TV', image: '/images/media-image/youtube.jpg?v=4', href: '/media?tab=youtube', hoverColor: '#FF0000' },
+  { id: 'review', label: '환자분 실제 후기', image: '/images/media-image/review.jpg?v=4', href: '/media?tab=review', hoverColor: '#92DCE5' },
 ] as const
 
 export default function MediaSection() {
@@ -18,7 +18,7 @@ export default function MediaSection() {
   return (
     <section ref={ref}
       className="h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
-      style={{ backgroundColor: '#F5F5F0' }}>
+      style={{ backgroundColor: 'var(--e-bg)' }}>
       <div className="text-center mb-8 md:mb-12">
         <p className={`text-xs tracking-[0.35em] uppercase text-stone-400 mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           Egun Media
@@ -47,7 +47,7 @@ export default function MediaSection() {
                   style={{ borderColor: isHov ? item.hoverColor : 'transparent' }}
                 />
               </div>
-              <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-stone-700 group-hover:text-[#B8A080] transition-colors duration-300">
+              <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-stone-700 transition-colors duration-300" style={isHov ? { color: item.hoverColor } : undefined}>
                 {item.label}
               </p>
             </Link>

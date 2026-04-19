@@ -60,7 +60,7 @@ export default function BoardHero({ title, subtitle, videoId, heroImage, heroFul
   // 기본 그라데이션 히어로
   return (
     <section className="relative flex items-center justify-center aspect-video sm:aspect-auto sm:min-h-[340px] overflow-hidden" aria-label={`${title} 소개`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#96775A] via-[#B8A080] to-[#8A9B50]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2B2D42] via-[#0080C8] to-[#92DCE5]" aria-hidden="true" />
       <div className="absolute inset-0 opacity-10" aria-hidden="true"
         style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, white 1px, transparent 1px), radial-gradient(circle at 75% 75%, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       <div className="relative z-10 text-center px-4 py-12 sm:py-20 max-w-3xl mx-auto">

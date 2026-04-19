@@ -92,8 +92,8 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   onClick={onClose}
                   className={`flex items-center gap-3 px-6 py-4 text-base font-medium transition-colors ${
                     isActive
-                      ? 'text-[#B8A080] bg-[#B8A080]/5 border-r-2 border-[#B8A080]'
-                      : 'text-gray-700 hover:text-[#B8A080] hover:bg-gray-50'
+                      ? 'text-[#0080C8] bg-[#0080C8]/5 border-r-2 border-[#0080C8]'
+                      : 'text-gray-700 hover:text-[#0080C8] hover:bg-gray-50'
                   }`}
                 >
                   {/* 번호 */}
@@ -112,7 +112,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           <p className="text-xs text-gray-500 mb-1">대표전화</p>
           <a
             href="tel:031-896-5512"
-            className="text-lg font-bold text-[#B8A080] tracking-wide"
+            className="text-lg font-bold text-[#0080C8] tracking-wide"
           >
             031-896-5512
           </a>

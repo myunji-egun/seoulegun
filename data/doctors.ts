@@ -8,6 +8,7 @@ export interface Doctor {
   specialtyDetail?: string
   careers: string[]
   letter?: string
+  documents?: string[]
 }
 
 export const doctors: Doctor[] = [
@@ -107,5 +108,9 @@ export const doctors: Doctor[] = [
     ],
     letter:
       '아이들에게 치과는 무서운 곳이 아니라\n친구 같은 곳이 되길 바랍니다.\n아이의 눈높이에서\n따뜻하게 돌보겠습니다.',
+    documents: [
+      '/images/doctors/baek-docu1.png',
+      '/images/doctors/baek-docu2.png',
+    ],
   },
 ]

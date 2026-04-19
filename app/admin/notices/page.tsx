@@ -167,7 +167,7 @@ export default function NoticesPage() {
         <h1 className="text-2xl font-bold text-gray-900">공지사항</h1>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 px-4 py-2 bg-[#B8A080] text-white text-sm font-medium rounded-lg hover:bg-[#5A6A2F] transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0080C8] text-white text-sm font-medium rounded-lg hover:bg-[#006aaa] transition-colors"
         >
           <Plus size={16} />
           공지 추가
@@ -288,7 +288,7 @@ export default function NoticesPage() {
                   onChange={(e) =>
                     setForm((p) => ({ ...p, title: e.target.value }))
                   }
-                  className="w-full h-10 px-3 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#B8A080] focus:border-[#B8A080]"
+                  className="w-full h-10 px-3 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#0080C8] focus:border-[#0080C8]"
                   placeholder="공지사항 제목"
                 />
               </div>
@@ -303,7 +303,7 @@ export default function NoticesPage() {
                     setForm((p) => ({ ...p, content: e.target.value }))
                   }
                   rows={5}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#B8A080] focus:border-[#B8A080] resize-none"
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#0080C8] focus:border-[#0080C8] resize-none"
                   placeholder="공지 내용을 입력하세요"
                 />
               </div>
@@ -327,7 +327,7 @@ export default function NoticesPage() {
                   <button
                     onClick={() => fileRef.current?.click()}
                     disabled={uploading}
-                    className="w-full h-24 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-[#B8A080] hover:text-[#B8A080] transition-colors"
+                    className="w-full h-24 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-[#0080C8] hover:text-[#0080C8] transition-colors"
                   >
                     <Upload size={20} />
                     <span className="text-xs mt-1">{uploading ? '업로드 중...' : '이미지 업로드'}</span>
@@ -353,7 +353,7 @@ export default function NoticesPage() {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, notice_date: e.target.value }))
                     }
-                    className="w-full h-10 px-3 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#B8A080]"
+                    className="w-full h-10 px-3 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#0080C8]"
                   />
                 </div>
                 <div className="flex items-end pb-1">
@@ -364,7 +364,7 @@ export default function NoticesPage() {
                       onChange={(e) =>
                         setForm((p) => ({ ...p, is_active: e.target.checked }))
                       }
-                      className="w-4 h-4 accent-[#B8A080]"
+                      className="w-4 h-4 accent-[#0080C8]"
                     />
                     <span className="text-sm text-gray-700">활성화</span>
                   </label>
@@ -382,7 +382,7 @@ export default function NoticesPage() {
               <button
                 onClick={handleSave}
                 disabled={saving || !form.title.trim()}
-                className="px-4 py-2 text-sm bg-[#B8A080] text-white rounded-lg hover:bg-[#5A6A2F] disabled:opacity-60 transition-colors"
+                className="px-4 py-2 text-sm bg-[#0080C8] text-white rounded-lg hover:bg-[#006aaa] disabled:opacity-60 transition-colors"
               >
                 {saving ? '저장 중...' : editingId ? '수정' : '추가'}
               </button>
