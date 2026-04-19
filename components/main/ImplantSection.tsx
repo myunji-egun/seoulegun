@@ -110,6 +110,15 @@ export default function ImplantSection() {
         </Link>
       </div>
 
+      {/* ── 마퀴 이미지 스트립 ──────────────────────────────── */}
+      <div className="absolute bottom-16 left-0 right-0 overflow-hidden pointer-events-none"
+        style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)' }}>
+        <div className="flex animate-marquee" style={{ width: 'max-content' }}>
+          <img src="/images/allon/all-on-side.jpg" alt="" aria-hidden="true" className="h-20 w-auto object-cover shrink-0" />
+          <img src="/images/allon/all-on-side.jpg" alt="" aria-hidden="true" className="h-20 w-auto object-cover shrink-0" />
+        </div>
+      </div>
+
       {/* Scroll Down */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-stone-600 text-xs tracking-widest">
         <span>SCROLL DOWN</span>

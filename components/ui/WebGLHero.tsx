@@ -36,11 +36,9 @@ void main() {
   vec2  dir     = normalize(delta + vec2(0.0001));
   vec2  warpUV  = uv + dir * ripple;
 
-  // ── slide wipe warp ──────────────────────────────────────
-  float swing  = u_t * (1.0 - u_t) * 4.0;
-  float warp   = sin(v_uv.y * 5.0 + u_time * 1.5) * 0.07 * swing;
-  vec2  fromUV = warpUV - vec2(warp, 0.0);
-  vec2  toUV   = warpUV + vec2(warp, 0.0);
+  // ── slide crossfade (no warp) ────────────────────────────
+  vec2  fromUV = warpUV;
+  vec2  toUV   = warpUV;
 
   vec4 c0 = texture2D(u_from, fromUV);
   vec4 c1 = texture2D(u_to,   toUV);

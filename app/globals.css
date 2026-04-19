@@ -105,6 +105,15 @@
   }
 }
 
+/* 이미지 마퀴 */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee-x 18s linear infinite;
+}
+
 /* 히어로 페이드인 */
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(16px); }
