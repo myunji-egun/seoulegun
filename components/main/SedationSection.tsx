@@ -58,8 +58,17 @@ export default function SedationSection() {
       {/* 유튜브 영상 배경 - 즉시 마운트 */}
       <iframe
         src="https://www.youtube.com/embed/SOI5QjYwCMM?autoplay=1&mute=1&loop=1&playlist=SOI5QjYwCMM&controls=0&showinfo=0&modestbranding=1&playsinline=1"
-        className="absolute inset-0 w-full h-full"
-        style={{ transform: 'scale(1.2)' }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '100vw',
+          height: '56.25vw',   /* 16:9 */
+          minHeight: '100vh',
+          minWidth: '177.78vh', /* 16:9 */
+          transform: 'translate(-50%, -50%)',
+          border: 'none',
+        }}
         allow="autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
         title="의식하진정법 소개 영상"
@@ -69,8 +78,8 @@ export default function SedationSection() {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* 콘텐츠 오버레이 */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
-        <div className="text-center mb-8">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 gap-12">
+        <div className="text-center">
           <p className={`text-xs tracking-[0.35em] uppercase text-white/50 mb-3 ${visible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
             Sedation Dentistry
           </p>
@@ -84,9 +93,7 @@ export default function SedationSection() {
           </p>
         </div>
 
-        <div className="mb-12" />
-
-        {/* 카운팅 숫자 (영상 위 오버랩) */}
+        {/* 카운팅 숫자 */}
         <div className="flex justify-center gap-6 sm:gap-10 md:gap-20 lg:gap-28 w-full max-w-4xl">
           {STATS.map((s) => (
             <StatItem key={s.label} {...s} />

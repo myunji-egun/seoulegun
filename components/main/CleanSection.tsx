@@ -45,7 +45,9 @@ export default function CleanSection() {
             그 과정의 안전함을 중요하게 생각합니다.
             <br className="hidden md:block" />
             모든 진료 기구는 개인별로 구분 사용 후{' '}
-            <span style={{ color: '#92DCE5', fontWeight: 600 }}>철저한 멸균 과정</span>을 거치며,
+            <span className="whitespace-nowrap">
+              <span style={{ color: '#92DCE5', fontWeight: 600 }}>철저한 멸균 과정</span>을 거치며,
+            </span>
             <br className="hidden md:block" />
             진료실과 장비 역시 매일{' '}
             <span style={{ color: '#92DCE5', fontWeight: 600 }}>위생 점검</span>과{' '}

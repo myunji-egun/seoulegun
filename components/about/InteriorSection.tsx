@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const MAIN_IMAGES = [
@@ -30,6 +30,7 @@ const AUTO_INTERVAL = 4000
 
 function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string }) {
   const [current, setCurrent] = useState(0)
+  const [lightbox, setLightbox] = useState<string | null>(null)
   const total = images.length
   const touchStart = useRef<number | null>(null)
 
@@ -56,35 +57,49 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
     touchStart.current = null
   }, [current, goTo])
 
-  const getCardStyle = (index: number) => {
+  const getCardStyle = (index: number): React.CSSProperties => {
     let diff = index - current
     if (diff > total / 2) diff -= total
     if (diff < -total / 2) diff += total
     const absD = Math.abs(diff)
 
     if (absD > 2) {
-      return { transform: 'translateX(0) scale(0.7)', opacity: 0, zIndex: 0, pointerEvents: 'none' as const }
+      return { transform: 'translateX(0) scale(0.7)', opacity: 0, zIndex: 0, pointerEvents: 'none' }
+    }
+
+    if (diff === 0) {
+      return {
+        transform: 'translateX(0) scale(1.12) translateZ(60px)',
+        opacity: 1,
+        zIndex: 20,
+        pointerEvents: 'auto',
+        boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
+      }
     }
 
     return {
-      transform: `translateX(${diff * 320}px) scale(${1 - absD * 0.12}) rotateY(${diff * -8}deg)`,
-      opacity: 1 - absD * 0.3,
+      transform: `translateX(${diff * 320}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
+      opacity: 1 - absD * 0.35,
       zIndex: 10 - absD,
-      pointerEvents: (absD === 0 ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
+      pointerEvents: 'none',
     }
   }
 
   return (
     <>
-      <div className="relative w-full overflow-hidden" style={{ perspective: '1200px', height: '420px' }}
+      <div
+        className="relative w-full overflow-hidden"
+        style={{ perspective: '1200px', height: '420px' }}
         onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}>
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="absolute inset-0 flex items-center justify-center">
           {images.map((src, i) => (
             <div
               key={i}
-              className="absolute w-[280px] sm:w-[380px] lg:w-[480px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out"
+              className={`absolute w-[280px] sm:w-[380px] lg:w-[480px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
               style={{ ...getCardStyle(i), transformStyle: 'preserve-3d' }}
+              onClick={() => i === current && setLightbox(src)}
             >
               <img src={src} alt={`${altPrefix} ${i + 1}`} className="w-full h-full object-cover" draggable={false} />
               {i !== current && <div className="absolute inset-0 bg-black/20 rounded-2xl" />}
@@ -116,6 +131,29 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
             aria-label={`사진 ${i + 1}번으로 이동`} />
         ))}
       </div>
+
+      {/* 라이트박스 모달 */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={() => setLightbox(null)}
+            aria-label="닫기"
+          >
+            <X size={28} />
+          </button>
+          <img
+            src={lightbox}
+            alt="확대 사진"
+            className="max-w-5xl max-h-[90vh] w-full object-contain rounded-xl"
+            onClick={(e) => e.stopPropagation()}
+            draggable={false}
+          />
+        </div>
+      )}
     </>
   )
 }
@@ -125,7 +163,7 @@ export default function InteriorSection() {
   const { ref: annexRef, isVisible: annexVisible } = useScrollReveal(0.15)
 
   return (
-    <section id="interior" className="py-20 sm:py-28 bg-stone-50 scroll-mt-32" aria-labelledby="interior-heading">
+    <section id="interior" className="py-20 sm:py-28 bg-stone-50 scroll-mt-36" aria-labelledby="interior-heading">
       <div ref={headerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           Interior

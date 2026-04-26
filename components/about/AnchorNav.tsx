@@ -52,7 +52,9 @@ export default function AnchorNav() {
   const handleClick = (id: string) => {
     const el = document.getElementById(id)
     if (!el) return
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const OFFSET = 144 // fixed header (80px) + AnchorNav (~52px) + buffer
+    const top = el.getBoundingClientRect().top + window.scrollY - OFFSET
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return (

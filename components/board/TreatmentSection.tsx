@@ -198,13 +198,9 @@ export default function TreatmentSection({
 
       {/* 중단: 해시태그 카드 그리드 — 좌측은 왼쪽에서, 우측은 오른쪽에서 */}
       <div ref={cardRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {treatment.benefits.map((benefit, i) => {
-          const isLeft = i % 2 === 0
-          const anim = isLeft ? 'scroll-reveal-left' : 'scroll-reveal-right'
-
-          return (
+        {treatment.benefits.map((benefit, i) => (
             <div key={i}
-              className={`space-y-2 ${cardVisible ? anim : 'scroll-hidden'}`}
+              className={`space-y-2 ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={cardVisible ? { animationDelay: `${0.1 + i * 0.08}s` } : undefined}>
               <h3 className="text-[#0080C8] font-bold text-base">
                 #{benefit.split('.')[0].replace(/^[✓\s]+/, '').slice(0, 15)}
@@ -213,8 +209,7 @@ export default function TreatmentSection({
                 {benefit.replace(/^[✓\s]+/, '')}
               </p>
             </div>
-          )
-        })}
+        ))}
       </div>
     </div>
   )

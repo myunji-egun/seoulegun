@@ -157,7 +157,7 @@ export default function DoctorProfileSection() {
   return (
     <section
       id="doctors"
-      className="bg-stone-50 scroll-mt-32"
+      className="bg-stone-50 scroll-mt-36"
       aria-labelledby="doctors-heading"
     >
       {/* 섹션 헤더 — 풀페이지 */}

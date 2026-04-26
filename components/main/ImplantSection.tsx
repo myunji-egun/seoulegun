@@ -13,13 +13,25 @@ export default function ImplantSection() {
       className="h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
       style={{ backgroundColor: '#000' }}
     >
-      {/* ── all-on-slide.jpg 풀스크린 슬라이딩 배경 ─────────────── */}
+      {/* ── 모바일: cover 풀스크린 슬라이딩 배경 ── */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="md:hidden absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
+        }}
+      />
+      {/* ── 데스크탑: 300% 와이드 슬라이딩 배경 ── */}
+      <div
+        className="hidden md:block absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
           backgroundSize: '300% auto',
           backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
           animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
         }}
       />

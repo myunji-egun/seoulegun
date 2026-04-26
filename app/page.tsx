@@ -5,6 +5,7 @@ import HeroSlider from '@/components/main/HeroSlider'
 import DoctorGroup from '@/components/main/DoctorGroup'
 import PhilosophyBanner from '@/components/main/PhilosophyBanner'
 import NaturalSolution from '@/components/main/NaturalSolution'
+import PreserveTreatSection from '@/components/main/PreserveTreatSection'
 import ImplantSection from '@/components/main/ImplantSection'
 import SedationSection from '@/components/main/SedationSection'
 import CleanSection from '@/components/main/CleanSection'
@@ -32,8 +33,9 @@ export default function Home() {
             HeroSlider,
             DoctorGroup,
             PhilosophyBanner,
-            NaturalSolution,
             ImplantSection,
+            NaturalSolution,
+            PreserveTreatSection,
             SedationSection,
             CleanSection,
             MediaSection,
@@ -62,7 +64,6 @@ export default function Home() {
             HeroSlider,
             DoctorGroup,
             PhilosophyBanner,
-            NaturalSolution,
             ImplantSection,
             SedationSection,
             CleanSection,

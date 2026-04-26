@@ -51,7 +51,7 @@ export default function AccessSection() {
   return (
     <section
       id="access"
-      className="py-20 sm:py-28 bg-white scroll-mt-32"
+      className="py-20 sm:py-28 bg-white scroll-mt-36"
       aria-labelledby="access-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const LAB_FEATURES = [
@@ -45,6 +45,7 @@ export default function LabSection() {
 
   // 3D 캐러셀 state
   const [current, setCurrent] = useState(0)
+  const [lightbox, setLightbox] = useState<string | null>(null)
   const total = LAB_IMAGES.length
 
   const goTo = useCallback(
@@ -57,21 +58,31 @@ export default function LabSection() {
     return () => clearInterval(timer)
   }, [current, goTo])
 
-  const getCardStyle = (index: number) => {
+  const getCardStyle = (index: number): React.CSSProperties => {
     let diff = index - current
     if (diff > total / 2) diff -= total
     if (diff < -total / 2) diff += total
     const absD = Math.abs(diff)
 
     if (absD > 2) {
-      return { transform: 'translateX(0) scale(0.7)', opacity: 0, zIndex: 0, pointerEvents: 'none' as const }
+      return { transform: 'translateX(0) scale(0.7)', opacity: 0, zIndex: 0, pointerEvents: 'none' }
+    }
+
+    if (diff === 0) {
+      return {
+        transform: 'translateX(0) scale(1.12) translateZ(60px)',
+        opacity: 1,
+        zIndex: 20,
+        pointerEvents: 'auto',
+        boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
+      }
     }
 
     return {
-      transform: `translateX(${diff * 320}px) scale(${1 - absD * 0.12}) rotateY(${diff * -8}deg)`,
-      opacity: 1 - absD * 0.3,
+      transform: `translateX(${diff * 320}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
+      opacity: 1 - absD * 0.35,
       zIndex: 10 - absD,
-      pointerEvents: (absD === 0 ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
+      pointerEvents: 'none',
     }
   }
 
@@ -89,7 +100,7 @@ export default function LabSection() {
   return (
     <section
       id="lab"
-      className="py-16 sm:py-24 bg-gray-900 scroll-mt-32"
+      className="py-16 sm:py-24 bg-gray-900 scroll-mt-36"
       aria-labelledby="lab-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -185,8 +196,9 @@ export default function LabSection() {
             return (
               <div
                 key={i}
-                className="absolute w-[280px] sm:w-[380px] lg:w-[480px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out"
+                className={`absolute w-[280px] sm:w-[380px] lg:w-[480px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
                 style={{ ...style, transformStyle: 'preserve-3d' }}
+                onClick={() => i === current && setLightbox(src)}
               >
                 <img src={src} alt={`서울이건치과 기공소 ${i + 1}`} className="w-full h-full object-cover" draggable={false} />
                 {i !== current && <div className="absolute inset-0 bg-black/20 rounded-2xl" />}
@@ -227,6 +239,29 @@ export default function LabSection() {
           />
         ))}
       </div>
+
+      {/* 라이트박스 모달 */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={() => setLightbox(null)}
+            aria-label="닫기"
+          >
+            <X size={28} />
+          </button>
+          <img
+            src={lightbox}
+            alt="확대 사진"
+            className="max-w-5xl max-h-[90vh] w-full object-contain rounded-xl"
+            onClick={(e) => e.stopPropagation()}
+            draggable={false}
+          />
+        </div>
+      )}
     </section>
   )
 }
