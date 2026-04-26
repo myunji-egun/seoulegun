@@ -3,7 +3,6 @@
 import { useRef } from 'react'
 import HeroSlider from '@/components/main/HeroSlider'
 import DoctorGroup from '@/components/main/DoctorGroup'
-import NaturalSolution from '@/components/main/NaturalSolution'
 import PreserveTreatSection from '@/components/main/PreserveTreatSection'
 import ImplantSection from '@/components/main/ImplantSection'
 import ImplantTypeSection from '@/components/main/ImplantTypeSection'
@@ -36,7 +35,6 @@ export default function Home() {
             ImplantSection,
             ImplantTypeSection,
             ImplantFaqSection,
-            NaturalSolution,
             PreserveTreatSection,
             SedationSection,
             CleanSection,
