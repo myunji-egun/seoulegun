@@ -13,30 +13,17 @@ const NAV_ITEMS = [
   { label: '교정치료', href: '/orthodontics' },
 ]
 
+const PHONE = '031-896-5512'
+
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
   const pathname = usePathname()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white shadow-sm'
-            : 'bg-transparent'
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: '#2B2D42' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center h-16 sm:h-20 gap-6 lg:gap-10">
 
             {/* 로고 */}
             <Link
@@ -45,11 +32,9 @@ export default function Header() {
               aria-label="서울이건치과 홈으로 이동"
             >
               <img
-                src={scrolled
-                  ? '/images/logo/egun-logo%20(1).svg?v=2'
-                  : '/images/logo/egun-logo-white%20(1).gif'}
+                src="/images/logo/egun-logo-white%20(1).gif"
                 alt="서울이건치과"
-                className="h-20 sm:h-28 w-auto transition-opacity duration-300"
+                className="h-20 sm:h-28 w-auto"
               />
             </Link>
 
@@ -65,56 +50,58 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     className={`relative px-3 xl:px-4 py-2 text-sm font-medium transition-colors duration-200 group ${
-                      scrolled
-                        ? isActive
-                          ? 'text-[#0080C8]'
-                          : 'text-gray-700 hover:text-[#0080C8]'
-                        : isActive
-                          ? 'text-white'
-                          : 'text-white/90 hover:text-white'
+                      isActive ? 'text-[#92DCE5]' : 'text-white/90 hover:text-white'
                     }`}
                   >
                     {item.label}
-                    {/* 호버/활성 밑줄 */}
                     <span
                       className={`absolute bottom-0 left-3 xl:left-4 right-3 xl:right-4 h-0.5 rounded-full transition-transform duration-200 origin-left ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
-                      style={{ backgroundColor: '#0080C8' }}
+                      style={{ backgroundColor: '#92DCE5' }}
                     />
                   </Link>
                 )
               })}
             </nav>
 
-            {/* 햄버거 메뉴 버튼 (lg 미만) */}
-            <button
-              onClick={() => setNavOpen(true)}
-              aria-label="메뉴 열기"
-              aria-expanded={navOpen}
-              aria-controls="mobile-nav"
-              className={`lg:hidden w-11 h-11 flex flex-col items-center justify-center gap-[5px] rounded-lg transition-colors ${
-                scrolled
-                  ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
-              }`}
+            {/* 상담하기 버튼 (데스크탑) */}
+            <a
+              href={`tel:${PHONE}`}
+              className="hidden lg:flex ml-auto items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-opacity hover:opacity-80"
+              style={{ backgroundColor: '#92DCE5', color: '#2B2D42' }}
             >
-              <span
-                className={`block w-6 h-0.5 rounded-full transition-colors ${
-                  scrolled ? 'bg-gray-700' : 'bg-white'
-                }`}
-              />
-              <span
-                className={`block w-6 h-0.5 rounded-full transition-colors ${
-                  scrolled ? 'bg-gray-700' : 'bg-white'
-                }`}
-              />
-              <span
-                className={`block w-4 h-0.5 rounded-full self-start ml-[5px] transition-colors ${
-                  scrolled ? 'bg-gray-700' : 'bg-white'
-                }`}
-              />
-            </button>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.59.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.02l-2.2 2.19z"/>
+              </svg>
+              상담하기
+            </a>
+
+            {/* 햄버거 메뉴 버튼 (lg 미만) */}
+            <div className="lg:hidden ml-auto flex items-center gap-3">
+              <a
+                href={`tel:${PHONE}`}
+                className="flex items-center justify-center w-9 h-9 rounded-full"
+                style={{ backgroundColor: '#92DCE5', color: '#2B2D42' }}
+                aria-label="전화 상담"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.59.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.02l-2.2 2.19z"/>
+                </svg>
+              </a>
+              <button
+                onClick={() => setNavOpen(true)}
+                aria-label="메뉴 열기"
+                aria-expanded={navOpen}
+                aria-controls="mobile-nav"
+                className="w-11 h-11 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <span className="block w-6 h-0.5 rounded-full bg-white" />
+                <span className="block w-6 h-0.5 rounded-full bg-white" />
+                <span className="block w-4 h-0.5 rounded-full self-start ml-[5px] bg-white" />
+              </button>
+            </div>
+
           </div>
         </div>
       </header>
