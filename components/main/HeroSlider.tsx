@@ -7,8 +7,8 @@ import WebGLHero from '@/components/ui/WebGLHero'
 const SLIDES = [
   {
     id: 0,
-    headline: '수원치과 서울대 출신 원장',
-    sub: '책임진료 서울이건치과',
+    headline: '서울대 출신 대표원장',
+    sub: '서울이건치과 수원',
     image: '/images/slides/slide-2.png',
     accent: 'var(--e-primary)',
   },
@@ -183,7 +183,7 @@ export default function HeroSlider() {
               031-896-5512
             </a>
             <a
-              href="http://pf.kakao.com/_xmDDNxb"
+              href="https://pf.kakao.com/_nqBms"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-7 py-3 text-sm font-semibold rounded-full transition-all duration-300"

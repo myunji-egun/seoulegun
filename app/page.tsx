@@ -6,6 +6,8 @@ import DoctorGroup from '@/components/main/DoctorGroup'
 import NaturalSolution from '@/components/main/NaturalSolution'
 import PreserveTreatSection from '@/components/main/PreserveTreatSection'
 import ImplantSection from '@/components/main/ImplantSection'
+import ImplantTypeSection from '@/components/main/ImplantTypeSection'
+import ImplantFaqSection from '@/components/main/ImplantFaqSection'
 import SedationSection from '@/components/main/SedationSection'
 import CleanSection from '@/components/main/CleanSection'
 import MediaSection from '@/components/main/MediaSection'
@@ -32,6 +34,8 @@ export default function Home() {
             HeroSlider,
             DoctorGroup,
             ImplantSection,
+            ImplantTypeSection,
+            ImplantFaqSection,
             NaturalSolution,
             PreserveTreatSection,
             SedationSection,
@@ -62,6 +66,8 @@ export default function Home() {
             HeroSlider,
             DoctorGroup,
             ImplantSection,
+            ImplantTypeSection,
+            ImplantFaqSection,
             SedationSection,
             CleanSection,
             MediaSection,

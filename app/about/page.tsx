@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import AnchorNav from '@/components/about/AnchorNav'
 import PhilosophySection from '@/components/about/PhilosophySection'
+import DoctorTeamSection from '@/components/about/DoctorTeamSection'
 import DoctorProfileSection from '@/components/about/DoctorProfileSection'
 import ScheduleSection from '@/components/about/ScheduleSection'
 import InteriorSection from '@/components/about/InteriorSection'
@@ -37,6 +38,7 @@ export default function AboutPage() {
 
       {/* 섹션들 */}
       <PhilosophySection />
+      <DoctorTeamSection />
       <DoctorProfileSection />
       <ScheduleSection />
       <InteriorSection />

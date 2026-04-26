@@ -12,7 +12,7 @@ export default function DoctorGroup() {
       {/* 배경 이미지 - 모바일/PC 동일 */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/doctors/doctor-group-3.png)' }}
+        style={{ backgroundImage: 'url(/images/doctors/doctor-group.jpg)' }}
       />
 
       {/* 텍스트 오버레이 */}

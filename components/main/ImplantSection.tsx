@@ -40,7 +40,7 @@ export default function ImplantSection() {
 
       {/* ── 콘텐츠 ───────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-col items-center text-center">
-        <p className={`text-xs tracking-[0.4em] uppercase text-stone-500 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+        <p className={`tracking-[0.4em] uppercase text-stone-500 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`} style={{ fontSize: '14px' }}>
           Implant Solution
         </p>
         <h2
@@ -72,7 +72,7 @@ export default function ImplantSection() {
           >
             All on 4
           </span>
-          <p className="text-stone-500 text-xs tracking-widest mt-1 uppercase">Full-Arch Rehabilitation</p>
+          <p className="text-stone-500 tracking-widest mt-1 uppercase" style={{ fontSize: '14px' }}>Full-Arch Rehabilitation</p>
         </div>
 
         {/* 특징 */}
@@ -87,8 +87,8 @@ export default function ImplantSection() {
               className={`flex flex-col items-center ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={isVisible ? { animationDelay: `${0.45 + i * 0.1}s` } : undefined}
             >
-              <p className="text-xs font-bold mb-0.5" style={{ color: 'var(--e-accent)' }}>{feat.label}</p>
-              <p className="text-xs text-stone-300">{feat.desc}</p>
+              <p className="font-bold mb-0.5" style={{ fontSize: '16px', color: 'var(--e-accent)' }}>{feat.label}</p>
+              <p style={{ fontSize: '16px', color: 'rgb(214 211 209)' }}>{feat.desc}</p>
             </div>
           ))}
         </div>
@@ -104,7 +104,7 @@ export default function ImplantSection() {
       </div>
 
       {/* Scroll Down */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-stone-600 text-xs tracking-widest">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-stone-600 tracking-widest" style={{ fontSize: '14px' }}>
         <span>SCROLL DOWN</span>
         <ChevronDown size={16} className="animate-bounce" aria-hidden="true" />
       </div>

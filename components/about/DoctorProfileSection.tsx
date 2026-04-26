@@ -57,6 +57,7 @@ function DoctorCard({
   return (
     <article
       ref={mergedRef}
+      id={doctor.id}
       className="min-h-screen lg:h-screen flex items-center py-12 lg:py-0"
     >
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,18 +162,31 @@ export default function DoctorProfileSection() {
       aria-labelledby="doctors-heading"
     >
       {/* 섹션 헤더 — 풀페이지 */}
-      <div className="min-h-[60vh] lg:h-screen flex items-center py-16 lg:py-0">
-        <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className={`text-[12px] font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+      <div className="relative min-h-[60vh] lg:h-screen flex items-center py-16 lg:py-0 overflow-hidden">
+        {/* 배경 이미지 — 세로 기준 중하방 노출 */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/images/clinic/egun-outerior.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 70%',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+        {/* 어두운 오버레이 */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 100%)' }} />
+
+        <div ref={ref} className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className={`text-[14px] font-semibold tracking-[0.25em] uppercase text-[#92DCE5] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             Our Doctors
           </p>
           <h2 id="doctors-heading"
-            className={`text-[32px] sm:text-[42px] lg:text-[54px] font-bold text-gray-900 leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[32px] sm:text-[42px] lg:text-[54px] font-bold text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.1s' } : undefined}>
             한자리에서<br />
-            <span className="text-[#0080C8]">변하지 않는 마음</span>
+            <span style={{ color: '#92DCE5' }}>변하지 않는 마음</span>
           </h2>
-          <p className={`mt-6 text-[14px] sm:text-[16px] text-gray-500 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          <p className={`mt-6 text-[16px] sm:text-[18px] text-white/75 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.2s' } : undefined}>
             각자의 전문 분야에서 최선을 다하며<br />
             언제나 같은 자리에서 기다리고 있습니다.

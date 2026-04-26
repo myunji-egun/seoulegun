@@ -59,7 +59,7 @@ export default function CleanSection() {
             className={`inline-block px-6 py-3 rounded-2xl text-white text-base font-medium transition-opacity hover:opacity-80 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
             style={{ backgroundColor: '#0080C8', ...(isVisible ? { animationDelay: '0.3s' } : {}) }}
           >
-            위생 시스템 더 보기
+            믿을 수 있는 위생 시스템
           </Link>
         </div>
 

@@ -32,8 +32,12 @@ export default function NaturalSolution() {
   const { ref, isVisible } = useScrollReveal(0.2)
 
   return (
-    <section className="h-screen w-full flex flex-col items-center justify-center px-4 py-12 overflow-hidden"
-      style={{ backgroundColor: 'var(--e-dark)' }}>
+    <section className="h-screen w-full flex flex-col items-center justify-center px-4 py-12 overflow-hidden relative"
+      style={{ background: 'linear-gradient(160deg, #1a1f3a 0%, #0f142b 100%)' }}>
+      {/* 가운데 이미지 쪽 그라디언트 글로우 */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(60% 55% at 50% 65%, rgba(79,195,247,0.13) 0%, transparent 70%)',
+      }} />
 
       <div ref={ref} className="text-center mb-8 md:mb-12">
         <p className={`text-xs tracking-[0.35em] uppercase mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}

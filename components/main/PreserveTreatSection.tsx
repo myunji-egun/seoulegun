@@ -5,22 +5,22 @@ import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const CARDS = [
-  { img: '/images/treatments/preserve_treat (1).jpg', spine: 'ONE·DAY', tag: '#레진', title: '원데이 레진 빌드업', desc: '하루에 자연스럽게 복원, 치아 삭제 최소화' },
-  { img: '/images/treatments/preserve_treat (2).jpg', spine: 'VPT', tag: '#신경보존', title: 'VPT 신경보존술', desc: '신경치료 대신 내 신경을 살리는 치료' },
-  { img: '/images/treatments/preserve_treat (3).jpg', spine: 'ONLAY', tag: '#최소삭제', title: '최소삭제 온레이', desc: '크라운 대신, 건강한 치아는 최대한 보존' },
-  { img: '/images/treatments/preserve_treat (4).jpg', spine: 'ROOT', tag: '#근관치료', title: '신경치료·근관치료', desc: '염증을 제거하고 치아 기능을 회복합니다' },
-  { img: '/images/treatments/preserve_treat (5).jpg', spine: 'GUM', tag: '#잇몸', title: '잇몸치료', desc: '염증 없는 잇몸으로 치아 수명을 연장합니다' },
+  { img: '/images/treatments/resin-buildup.jpg',        spine: 'ONE·DAY', tag: '#레진',   title: '원데이 레진 빌드업', desc: '하루에 자연스럽게 복원, 치아 삭제 최소화' },
+  { img: '/images/treatments/vpt.jpg',                  spine: 'VPT',     tag: '#신경보존', title: 'VPT 신경보존술',    desc: '신경치료 대신 내 신경을 살리는 치료' },
+  { img: '/images/treatments/preserve_treat.jpg',        spine: 'ONLAY',   tag: '#최소삭제', title: '최소삭제 온레이',   desc: '크라운 대신, 건강한 치아는 최대한 보존' },
+  { img: '/images/treatments/endo-1.jpg',               spine: 'ROOT',    tag: '#근관치료', title: '신경치료·근관치료', desc: '염증을 제거하고 치아 기능을 회복합니다' },
+  { img: '/images/treatments/sc-rp.jpg',                spine: 'GUM',     tag: '#잇몸',   title: '잇몸치료',          desc: '염증 없는 잇몸으로 치아 수명을 연장합니다' },
 ]
 
 const CARD_W = 360
 const CARD_H = 202 // 16:9
 
 const OPEN_POS = [
-  { x: 30,  z:  60 },
-  { x: 150, z:  30 },
-  { x: 270, z:   0 },
-  { x: 390, z: -30 },
-  { x: 510, z: -60 },
+  { x: 640, z:  40 },
+  { x: 480, z:  20 },
+  { x: 320, z:   0 },
+  { x: 160, z: -20 },
+  { x:   0, z: -40 },
 ]
 
 export default function PreserveTreatSection() {
@@ -60,14 +60,12 @@ export default function PreserveTreatSection() {
 
   const getTransform = (i: number): string => {
     if (!isOpen)
-      return 'translate3d(-200px, 0, -800px) rotateY(90deg) scale(0.9)'
-    if (activeIdx === i)
-      return 'translate3d(140px, 0, 320px) rotateY(0deg) scale(1.15)'
+      return 'translate3d(200px, 0, -800px) rotateY(-90deg) scale(0.9)'
     if (activeIdx !== null)
-      return `translate3d(${OPEN_POS[i].x}px, 0, ${OPEN_POS[i].z - 400}px) rotateY(80deg) scale(0.85)`
+      return `translate3d(${OPEN_POS[i].x}px, 0, ${OPEN_POS[i].z - 400}px) rotateY(-55deg) scale(0.85)`
     if (hoverIdx === i)
-      return `translate3d(${OPEN_POS[i].x}px, -6px, ${OPEN_POS[i].z + 20}px) rotateY(45deg)`
-    return `translate3d(${OPEN_POS[i].x}px, 0, ${OPEN_POS[i].z}px) rotateY(68deg)`
+      return `translate3d(${OPEN_POS[i].x}px, -6px, ${OPEN_POS[i].z + 20}px) rotateY(-22deg)`
+    return `translate3d(${OPEN_POS[i].x}px, 0, ${OPEN_POS[i].z}px) rotateY(-40deg)`
   }
 
   const getFilter = (i: number): string => {
@@ -116,7 +114,7 @@ export default function PreserveTreatSection() {
       <div
         className="absolute flex flex-col"
         style={{
-          top: '12vh', right: '6vw',
+          top: '12vh', left: '6vw',
           maxWidth: '560px',
           zIndex: 5,
           opacity: isVisible ? 1 : 0,
@@ -124,15 +122,15 @@ export default function PreserveTreatSection() {
           transition: 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s',
         }}
       >
-        <p style={{ color: '#4fc3f7', letterSpacing: '6px', fontSize: '12px', fontWeight: 500, marginBottom: '14px' }}>
+        <p style={{ color: '#4fc3f7', letterSpacing: '6px', fontSize: '14px', fontWeight: 500, marginBottom: '14px' }}>
           NATURAL TOOTH SOLUTION
         </p>
-        <h2 style={{ fontSize: 'clamp(30px, 3.4vw, 46px)', fontWeight: 700, letterSpacing: '-0.5px', lineHeight: 1.2, color: '#fff' }}>
+        <h2 style={{ fontSize: 'clamp(30px, 3.2vw, 46px)', fontWeight: 700, letterSpacing: '-0.5px', lineHeight: 1.3, color: '#fff' }}>
           내 치아를 <span style={{ color: '#4fc3f7' }}>최대한 남기는</span>
           <br />
           <span style={{ color: '#fff' }}>가장 좋은 임플란트는</span>
           <br />
-          <span style={{ color: '#4fc3f7', fontSize: 'clamp(24px, 2.7vw, 38px)' }}>내가 가진 치아</span>
+          <span style={{ color: '#4fc3f7', fontWeight: 900 }}>내가 가진 치아</span>
           <span style={{ color: '#fff' }}>입니다.</span>
         </h2>
         <p style={{ color: '#b8c0d9', marginTop: '18px', fontSize: '15px', lineHeight: 1.75 }}>
@@ -154,8 +152,8 @@ export default function PreserveTreatSection() {
           >
             자연치아살리기 게시판 →
           </Link>
-          <Link
-            href="/contact"
+          <a
+            href="tel:031-896-5512"
             style={{
               padding: '12px 22px', borderRadius: '999px',
               fontSize: '14px', fontWeight: 700, letterSpacing: '0.5px',
@@ -167,16 +165,16 @@ export default function PreserveTreatSection() {
             className="hover:bg-white/10"
           >
             빠른 상담
-          </Link>
+          </a>
         </div>
       </div>
 
-      {/* ── 좌측 하단: 서랍 블록 ── */}
+      {/* ── 우측 하단: 서랍 블록 ── */}
       <div
         className="absolute"
         style={{
-          left: '4vw', bottom: '5vh',
-          width: 'min(780px, 70vw)', height: '360px',
+          left: '24vw', bottom: '5vh',
+          width: 'min(1050px, 72vw)', height: '360px',
           zIndex: 4,
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 0.5s ease 0.3s',
@@ -185,7 +183,7 @@ export default function PreserveTreatSection() {
         {/* TREATMENT ARCHIVE 레이블 */}
         <div
           className="absolute left-1 flex items-center gap-2.5"
-          style={{ top: '-28px', fontSize: '11px', letterSpacing: '3px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}
+          style={{ top: '-28px', fontSize: '13px', letterSpacing: '3px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}
         >
           <span style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.3)', display: 'block' }} />
           TREATMENT ARCHIVE
@@ -194,7 +192,7 @@ export default function PreserveTreatSection() {
         {/* 3D Perspective 컨테이너 */}
         <div
           className="relative w-full h-full"
-          style={{ perspective: '2200px', perspectiveOrigin: '30% 50%' }}
+          style={{ perspective: '2200px', perspectiveOrigin: '80% 50%' }}
         >
           {/* 바닥 글로우 */}
           <div
@@ -225,7 +223,7 @@ export default function PreserveTreatSection() {
                   backfaceVisibility: 'hidden',
                   transform: getTransform(i),
                   filter: getFilter(i),
-                  opacity: isOpen ? 1 : 0,
+                  opacity: isOpen ? (activeIdx === i ? 0 : 1) : 0,
                   pointerEvents: isOpen ? 'auto' : 'none',
                   transition: `transform 0.9s cubic-bezier(.2,.85,.2,1) ${isOpen ? i * 0.08 : 0}s, box-shadow 0.4s ease, filter 0.4s ease, opacity 0.5s ease`,
                   zIndex: getZ(i),
@@ -254,8 +252,8 @@ export default function PreserveTreatSection() {
                 <span
                   className="absolute"
                   style={{
-                    top: '14px', left: '14px',
-                    fontSize: '10px', letterSpacing: '3px', color: '#4fc3f7',
+                    top: '14px', right: '14px',
+                    fontSize: '12px', letterSpacing: '3px', color: '#4fc3f7',
                     fontWeight: 700, writingMode: 'vertical-rl', textOrientation: 'mixed',
                     background: 'rgba(15,20,43,0.85)', padding: '8px 5px',
                     borderRadius: '6px', border: '1px solid rgba(79,195,247,0.35)',
@@ -269,10 +267,10 @@ export default function PreserveTreatSection() {
                 <span
                   className="absolute"
                   style={{
-                    top: '14px', right: '14px',
+                    top: '14px', left: '14px',
                     padding: '4px 10px', borderRadius: '999px',
                     background: 'rgba(79,195,247,0.22)', color: '#fff',
-                    fontSize: '10px', letterSpacing: '1px',
+                    fontSize: '12px', letterSpacing: '1px',
                     border: '1px solid rgba(79,195,247,0.4)',
                     opacity: activeIdx === i ? 1 : 0,
                     transition: 'opacity 0.35s ease',
@@ -281,13 +279,13 @@ export default function PreserveTreatSection() {
                   {card.tag}
                 </span>
                 {/* 타이틀/설명 */}
-                <div className="absolute left-0 right-0 bottom-0 p-4">
+                <div className="absolute left-0 right-0 bottom-0 p-4 text-right">
                   <h3 style={{ fontSize: '17px', fontWeight: 700, letterSpacing: '-0.3px', color: '#fff' }}>
                     {card.title}
                   </h3>
                   <p
                     style={{
-                      color: '#b8c0d9', fontSize: '12px', marginTop: '4px', lineHeight: 1.5,
+                      color: '#b8c0d9', fontSize: '14px', marginTop: '4px', lineHeight: 1.5,
                       opacity: activeIdx === i ? 1 : 0,
                       transform: activeIdx === i ? 'translateY(0)' : 'translateY(4px)',
                       transition: 'opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s',
@@ -309,13 +307,13 @@ export default function PreserveTreatSection() {
             style={{
               padding: '10px 18px', borderRadius: '999px',
               background: '#4fc3f7', color: '#0b1228',
-              fontSize: '12px', fontWeight: 700, letterSpacing: '1px',
+              fontSize: '14px', fontWeight: 700, letterSpacing: '1px',
               border: 'none', cursor: 'pointer',
             }}
           >
             {isOpen ? '서랍 닫기' : '서랍 열기'}
           </button>
-          <span style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', paddingLeft: '6px' }}>
+          <span style={{ fontSize: '13px', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', paddingLeft: '6px' }}>
             <b style={{ color: '#4fc3f7' }}>
               {String(counterNum + 1).padStart(2, '0')}
             </b>{' '}/ {String(CARDS.length).padStart(2, '0')}
@@ -323,13 +321,73 @@ export default function PreserveTreatSection() {
         </div>
       </div>
 
-      {/* ESC 힌트 */}
+      {/* ── 풀스크린 카드 오버레이 ── */}
       {activeIdx !== null && (
         <div
-          className="absolute top-6 left-7 z-20"
-          style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase' }}
+          className="absolute inset-0 z-[200] flex items-center justify-center"
+          style={{ backgroundColor: 'rgba(5, 8, 20, 0.92)', backdropFilter: 'blur(6px)' }}
+          onClick={() => setActiveIdx(null)}
         >
-          ESC · 빈 공간 클릭 시 닫힘
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative rounded-2xl overflow-hidden"
+            style={{
+              width: '82vw',
+              maxWidth: '1100px',
+              aspectRatio: '16 / 9',
+              boxShadow: '0 50px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(79,195,247,0.25)',
+              animation: 'card-fly-in 0.42s cubic-bezier(0.15, 0.85, 0.2, 1) both',
+            }}
+          >
+            {/* 배경 이미지 */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url(${CARDS[activeIdx].img})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+            {/* 하단 그라디언트 */}
+            <div
+              className="absolute inset-0 flex flex-col justify-end"
+              style={{
+                background: 'linear-gradient(to top, rgba(8,12,28,0.95) 0%, rgba(8,12,28,0.3) 55%, transparent 100%)',
+                padding: '40px 44px',
+              }}
+            >
+              <span style={{ color: '#4fc3f7', fontSize: '13px', letterSpacing: '4px', marginBottom: '12px', display: 'block' }}>
+                {CARDS[activeIdx].tag}
+              </span>
+              <h3 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px', lineHeight: 1.2 }}>
+                {CARDS[activeIdx].title}
+              </h3>
+              <p style={{ color: '#b8c0d9', fontSize: 'clamp(16px, 1.8vw, 22px)', marginTop: '12px', lineHeight: 1.65 }}>
+                {CARDS[activeIdx].desc}
+              </p>
+            </div>
+            {/* 닫기 버튼 */}
+            <button
+              onClick={(e) => { e.stopPropagation(); setActiveIdx(null) }}
+              className="absolute top-4 right-4 flex items-center justify-center rounded-full"
+              style={{
+                width: '42px', height: '42px',
+                background: 'rgba(0,0,0,0.55)',
+                border: '1px solid rgba(255,255,255,0.25)',
+                color: '#fff', fontSize: '20px', cursor: 'pointer',
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+            {/* ESC 힌트 */}
+            <span
+              className="absolute bottom-4 right-5"
+              style={{ fontSize: '12px', letterSpacing: '3px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase' }}
+            >
+              ESC · click to close
+            </span>
+          </div>
         </div>
       )}
     </section>

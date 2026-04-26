@@ -44,7 +44,7 @@ export const clinicInfo: ClinicInfo = {
   latitude: 37.264707,
   longitude: 127.041222,
   socialLinks: {
-    kakao: 'http://pf.kakao.com/_xmDDNxb',
+    kakao: 'https://pf.kakao.com/_nqBms',
     youtube: 'https://youtube.com/@seoulegun',
     blog: 'https://blog.naver.com/seoulegundc',
     naverPlace: 'https://m.place.naver.com/restaurant/12872860',
