@@ -3,7 +3,6 @@
 import { useRef } from 'react'
 import HeroSlider from '@/components/main/HeroSlider'
 import DoctorGroup from '@/components/main/DoctorGroup'
-import PhilosophyBanner from '@/components/main/PhilosophyBanner'
 import NaturalSolution from '@/components/main/NaturalSolution'
 import PreserveTreatSection from '@/components/main/PreserveTreatSection'
 import ImplantSection from '@/components/main/ImplantSection'
@@ -32,7 +31,6 @@ export default function Home() {
           [
             HeroSlider,
             DoctorGroup,
-            PhilosophyBanner,
             ImplantSection,
             NaturalSolution,
             PreserveTreatSection,
@@ -63,7 +61,6 @@ export default function Home() {
           [
             HeroSlider,
             DoctorGroup,
-            PhilosophyBanner,
             ImplantSection,
             SedationSection,
             CleanSection,
