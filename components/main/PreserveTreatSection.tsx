@@ -114,7 +114,7 @@ export default function PreserveTreatSection() {
       <div
         className="absolute flex flex-col"
         style={{
-          top: '12vh', left: '6vw',
+          top: '12vh', left: '12vw',
           maxWidth: '560px',
           zIndex: 5,
           opacity: isVisible ? 1 : 0,
@@ -173,7 +173,7 @@ export default function PreserveTreatSection() {
       <div
         className="absolute"
         style={{
-          left: '24vw', bottom: '5vh',
+          left: '30vw', bottom: '5vh',
           width: 'min(1050px, 72vw)', height: '360px',
           zIndex: 4,
           opacity: isVisible ? 1 : 0,

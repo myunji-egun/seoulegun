@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, X } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const FAQS = [
@@ -28,11 +28,10 @@ const FAQS = [
 ]
 
 export default function ImplantFaqSection() {
-  const [clickIdx, setClickIdx] = useState<number | null>(0)
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const { ref, isVisible } = useScrollReveal(0.15)
 
-  const isOpen = (i: number) => clickIdx === i || hoverIdx === i
+  const isOpen = (i: number) => hoverIdx === i
 
   return (
     <section
@@ -84,11 +83,10 @@ export default function ImplantFaqSection() {
                 <button
                   className="w-full flex items-center justify-between text-left gap-4"
                   style={{ paddingTop: '20px', paddingBottom: isOpen(i) ? '12px' : '20px' }}
-                  onClick={() => setClickIdx(clickIdx === i ? null : i)}
                 >
                   <span
                     style={{
-                      fontSize: '24px',
+                      fontSize: '22px',
                       color: isOpen(i) ? '#4fc3f7' : 'rgba(255,255,255,0.5)',
                       flexShrink: 0,
                       transition: 'color 0.2s ease',
@@ -99,7 +97,7 @@ export default function ImplantFaqSection() {
                   <span
                     className="flex-1"
                     style={{
-                      fontSize: '28px',
+                      fontSize: '26px',
                       fontWeight: isOpen(i) ? 700 : 500,
                       color: isOpen(i) ? '#fff' : 'rgba(255,255,255,0.92)',
                       transition: 'color 0.2s ease, font-weight 0.2s ease',
@@ -114,10 +112,7 @@ export default function ImplantFaqSection() {
                       transition: 'border-color 0.2s ease',
                     }}
                   >
-                    {clickIdx === i
-                      ? <X size={14} style={{ color: '#4fc3f7' }} />
-                      : <Plus size={14} style={{ color: isOpen(i) ? '#4fc3f7' : 'rgba(255,255,255,0.4)' }} />
-                    }
+                    <Plus size={14} style={{ color: isOpen(i) ? '#4fc3f7' : 'rgba(255,255,255,0.4)' }} />
                   </span>
                 </button>
 
