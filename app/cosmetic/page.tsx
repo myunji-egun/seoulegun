@@ -1,6 +1,7 @@
 // @TASK Board - 심미보철 페이지
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
+import CosmeticIdentity from '@/components/board/CosmeticIdentity'
 import { cosmeticTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function CosmeticPage() {
       subtitle="자연스러운 아름다움을 되찾습니다"
       treatments={cosmeticTreatments}
       heroImage="/images/board/esthetic-2.jpg"
+      extraSection={<CosmeticIdentity />}
     />
   )
 }

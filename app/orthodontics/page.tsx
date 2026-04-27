@@ -1,6 +1,7 @@
 // @TASK Board - 교정치료 페이지
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
+import OrthodonticsIdentity from '@/components/board/OrthodonticsIdentity'
 import { orthodonticsTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function OrthodonticsPage() {
       treatments={orthodonticsTreatments}
       hideCases
       heroImage="/images/board/ortho-doctor.jpg"
+      extraSection={<OrthodonticsIdentity />}
     />
   )
 }

@@ -1,6 +1,7 @@
 // @TASK Board - 임플란트 페이지
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
+import ImplantIdentity from '@/components/board/ImplantIdentity'
 import { implantTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function ImplantPage() {
       subtitle="상실된 치아의 완벽한 복원 솔루션"
       treatments={implantTreatments}
       videoId="RkhAehLEia4"
+      extraSection={<ImplantIdentity />}
     />
   )
 }

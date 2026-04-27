@@ -1,6 +1,7 @@
 // @TASK Board - 소아치과 페이지
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
+import PediatricIdentity from '@/components/board/PediatricIdentity'
 import { pediatricTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function PediatricPage() {
       subtitle="아이의 첫 치과, 편안하게"
       treatments={pediatricTreatments}
       hideCases
+      extraSection={<PediatricIdentity />}
     />
   )
 }

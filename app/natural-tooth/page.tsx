@@ -1,6 +1,7 @@
 // @TASK Board - 자연치아 살리기 페이지
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
+import NaturalToothIdentity from '@/components/board/NaturalToothIdentity'
 import { naturalToothTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function NaturalToothPage() {
       subtitle="치과 치료의 기본입니다"
       treatments={naturalToothTreatments}
       videoId="pYzA7tc55lo"
+      extraSection={<NaturalToothIdentity />}
     />
   )
 }
