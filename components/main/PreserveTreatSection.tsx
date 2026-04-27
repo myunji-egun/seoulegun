@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const CARDS = [
-  { img: '/images/treatments/resin-buildup.jpg',        spine: 'ONE·DAY', tag: '#레진',   title: '원데이 레진 빌드업', desc: '하루에 자연스럽게 복원, 치아 삭제 최소화' },
-  { img: '/images/treatments/vpt.jpg',                  spine: 'VPT',     tag: '#신경보존', title: 'VPT 신경보존술',    desc: '신경치료 대신 내 신경을 살리는 치료' },
-  { img: '/images/treatments/preserve_treat.jpg',        spine: 'ONLAY',   tag: '#최소삭제', title: '최소삭제 온레이',   desc: '크라운 대신, 건강한 치아는 최대한 보존' },
-  { img: '/images/treatments/endo-1.jpg',               spine: 'ROOT',    tag: '#근관치료', title: '신경치료·근관치료', desc: '염증을 제거하고 치아 기능을 회복합니다' },
-  { img: '/images/treatments/sc-rp.jpg',                spine: 'GUM',     tag: '#잇몸',   title: '잇몸치료',          desc: '염증 없는 잇몸으로 치아 수명을 연장합니다' },
+  { img: '/images/treatments/resin-buildup.jpg', spine: 'ONE·DAY', tag: '#레진',   title: '원데이 레진 빌드업', desc: '하루에 자연스럽게 복원, 치아 삭제 최소화', href: '/natural-tooth#resin-buildup' },
+  { img: '/images/treatments/vpt.jpg',           spine: 'VPT',     tag: '#신경보존', title: 'VPT 신경보존술',    desc: '신경치료 대신 내 신경을 살리는 치료',     href: '/natural-tooth#vpt' },
+  { img: '/images/treatments/preserve_treat.jpg', spine: 'ONLAY',  tag: '#최소삭제', title: '최소삭제 온레이',   desc: '크라운 대신, 건강한 치아는 최대한 보존',  href: '/natural-tooth#onlay' },
+  { img: '/images/treatments/endo-1.jpg',        spine: 'ROOT',    tag: '#근관치료', title: '신경치료·근관치료', desc: '염증을 제거하고 치아 기능을 회복합니다',  href: '/natural-tooth#root-canal' },
+  { img: '/images/treatments/sc-rp.jpg',         spine: 'GUM',     tag: '#잇몸',   title: '잇몸치료',          desc: '염증 없는 잇몸으로 치아 수명을 연장합니다', href: '/natural-tooth#gum' },
 ]
 
 const CARD_W = 360
@@ -28,6 +29,14 @@ export default function PreserveTreatSection() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
   const [hoverIdx, setHoverIdx]   = useState<number | null>(null)
   const { ref, isVisible } = useScrollReveal(0.2)
+  const router = useRouter()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   // 섹션이 보이면 자동으로 서랍 열기
   useEffect(() => {
@@ -329,8 +338,8 @@ export default function PreserveTreatSection() {
           onClick={() => setActiveIdx(null)}
         >
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative rounded-2xl overflow-hidden"
+            onClick={(e) => { e.stopPropagation(); isMobile ? setActiveIdx(null) : router.push(CARDS[activeIdx].href) }}
+            className="relative rounded-2xl overflow-hidden cursor-pointer"
             style={{
               width: '82vw',
               maxWidth: '1100px',
@@ -385,7 +394,7 @@ export default function PreserveTreatSection() {
               className="absolute bottom-4 right-5"
               style={{ fontSize: '12px', letterSpacing: '3px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase' }}
             >
-              ESC · click to close
+              ESC to close · click to enter
             </span>
           </div>
         </div>
