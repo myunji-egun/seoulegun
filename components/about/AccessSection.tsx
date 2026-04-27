@@ -206,9 +206,14 @@ export default function AccessSection() {
           <div className="rounded-2xl bg-stone-50 border border-stone-200 p-6">
             <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <span className="text-xl" aria-hidden="true">🚌</span>
-              대중교통
+              버스 · 주차 안내
             </h3>
-            <div className="space-y-4 mb-4">
+            <img
+              src="/images/clinic/map-guide.png"
+              alt="서울이건치과 주차 및 버스 정류장 안내 지도"
+              className="w-full h-auto rounded-xl mb-4"
+            />
+            <div className="space-y-4">
               {TRANSIT_INFO.map((transit) => (
                 <div key={transit.type}>
                   <p className="text-xs font-semibold text-[#0080C8] uppercase tracking-wider mb-1.5">
@@ -229,10 +234,6 @@ export default function AccessSection() {
                   </ul>
                 </div>
               ))}
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <img src="/images/clinic/bus.png" alt="버스 정류장 안내 1" className="w-full h-auto rounded-xl" />
-              <img src="/images/clinic/bus-2.png" alt="버스 정류장 안내 2" className="w-full h-auto rounded-xl" />
             </div>
           </div>
         </div>

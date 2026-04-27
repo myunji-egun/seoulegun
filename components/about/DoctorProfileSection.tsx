@@ -1,40 +1,8 @@
 'use client'
 
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef } from 'react'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
-
-function useDoctorSnap(threshold = 0.3) {
-  const cardRef = useRef<HTMLElement>(null)
-  const hasSnapped = useRef(false)
-
-  useEffect(() => {
-    const el = cardRef.current
-    if (!el) return
-
-    // 데스크톱(lg) 전용
-    const mql = window.matchMedia('(min-width: 1024px)')
-    if (!mql.matches) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasSnapped.current) {
-          hasSnapped.current = true
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-        if (!entry.isIntersecting) {
-          hasSnapped.current = false
-        }
-      },
-      { threshold },
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
-
-  return cardRef
-}
 
 function DoctorCard({
   doctor,
@@ -44,15 +12,10 @@ function DoctorCard({
   index: number
 }) {
   const { ref, isVisible } = useScrollReveal(0.15)
-  const snapRef = useDoctorSnap(0.3)
 
-  const mergedRef = useCallback(
-    (node: HTMLElement | null) => {
-      (ref as React.MutableRefObject<HTMLElement | null>).current = node
-      ;(snapRef as React.MutableRefObject<HTMLElement | null>).current = node
-    },
-    [ref, snapRef],
-  )
+  const mergedRef = (node: HTMLElement | null) => {
+    (ref as React.MutableRefObject<HTMLElement | null>).current = node
+  }
 
   return (
     <article
