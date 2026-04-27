@@ -61,7 +61,6 @@ export const orthodonticsTreatments: TreatmentContent[] = [
     title: '소아성장기교정',
     subtitle: '치아 배열만이 아니라 성장 방향까지 함께 살핍니다',
     image: '/images/treatments/kids.png',
-    sideImage: '/images/treatments/ortho-case.png',
     description:
       '성장기 아이의 **골격 발육과 치아 배열을 함께 고려**하여 적절한 시기에 개입하는 교정치료입니다. **턱의 성장 방향, 영구치 맹출 공간, 구강 습관** 등을 종합적으로 평가하여 **성장 잠재력을 활용한 치료**를 계획합니다.',
     richContent: `### 💡 한 줄 요약
