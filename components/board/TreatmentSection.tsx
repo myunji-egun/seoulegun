@@ -169,6 +169,11 @@ export default function TreatmentSection({
                 afterAlt={`${treatment.title} 시술 후`}
                 beforeScale={treatment.beforeScale}
               />
+            ) : treatment.image && treatment.sideImage ? (
+              <div className="space-y-3">
+                <img src={treatment.image} alt={treatment.title} className="w-full h-auto rounded-2xl" />
+                <img src={treatment.sideImage} alt={`${treatment.title} 사례`} className="w-full h-auto rounded-2xl" />
+              </div>
             ) : treatment.image ? (
               <img
                 src={treatment.image}
@@ -184,15 +189,22 @@ export default function TreatmentSection({
         </div>}
       </div>
 
-      {/* bottomImage: 글귀 아래 전폭 이미지 */}
+      {/* bottomImage: 글귀 아래 이미지 (sideImage가 있으면 나란히) */}
       {treatment.bottomImage && (
-        <div className={`${textVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+        <div className={`${treatment.sideImage ? 'grid grid-cols-2 gap-4' : ''} ${textVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={textVisible ? { animationDelay: '0.4s' } : undefined}>
           <img
             src={treatment.bottomImage}
             alt={treatment.title}
             className="w-full h-auto rounded-2xl"
           />
+          {treatment.sideImage && (
+            <img
+              src={treatment.sideImage}
+              alt={`${treatment.title} 사례`}
+              className="w-full h-auto rounded-2xl"
+            />
+          )}
         </div>
       )}
 

@@ -180,40 +180,24 @@ export default function AccessSection() {
           </div>
         </div>
 
-        {/* 하단: 주차 + 대중교통 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
-          {/* 주차 안내 */}
-          <div className="rounded-2xl bg-stone-50 border border-stone-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="text-xl" aria-hidden="true">🅿️</span>
-              주차 안내
-            </h3>
-            <ul className="space-y-2 mb-4">
-              {PARKING_INFO.map((info, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="text-[#0080C8] mt-0.5">·</span>
-                  {info}
-                </li>
-              ))}
-            </ul>
-            <div className="grid grid-cols-2 gap-3">
-              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl" />
-              <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl" />
-            </div>
-          </div>
+        {/* 하단: 교통 · 주차 통합 안내 */}
+        <div className="mt-10 rounded-2xl bg-stone-50 border border-stone-200 p-6 sm:p-8">
+          <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2 text-base">
+            <span className="text-xl" aria-hidden="true">🚌</span>
+            교통 · 주차 안내
+          </h3>
 
-          {/* 대중교통 안내 */}
-          <div className="rounded-2xl bg-stone-50 border border-stone-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="text-xl" aria-hidden="true">🚌</span>
-              버스 · 주차 안내
-            </h3>
-            <img
-              src="/images/clinic/map-guide.png"
-              alt="서울이건치과 주차 및 버스 정류장 안내 지도"
-              className="w-full h-auto rounded-xl mb-4"
-            />
-            <div className="space-y-4">
+          {/* 안내 지도 전체 너비 */}
+          <img
+            src="/images/clinic/map-guide.png"
+            alt="서울이건치과 주차 및 버스 정류장 안내 지도"
+            className="w-full h-auto rounded-xl mb-6"
+          />
+
+          {/* 교통 + 주차 2컬럼 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {/* 교통 정보 */}
+            <div className="space-y-5">
               {TRANSIT_INFO.map((transit) => (
                 <div key={transit.type}>
                   <p className="text-xs font-semibold text-[#0080C8] uppercase tracking-wider mb-1.5">
@@ -234,6 +218,25 @@ export default function AccessSection() {
                   </ul>
                 </div>
               ))}
+            </div>
+
+            {/* 주차 안내 */}
+            <div>
+              <p className="text-xs font-semibold text-[#0080C8] uppercase tracking-wider mb-3">
+                🅿️ 주차 안내
+              </p>
+              <ul className="space-y-2 mb-4">
+                {PARKING_INFO.map((info, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                    <span className="text-[#0080C8] mt-0.5 shrink-0">·</span>
+                    {info}
+                  </li>
+                ))}
+              </ul>
+              <div className="grid grid-cols-2 gap-3">
+                <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl" />
+                <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl" />
+              </div>
             </div>
           </div>
         </div>
