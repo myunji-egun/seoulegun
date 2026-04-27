@@ -18,12 +18,26 @@ precision highp float;
 
 uniform sampler2D u_from;
 uniform sampler2D u_to;
-uniform float     u_t;        // slide transition 0 → 1
-uniform vec2      u_mouse;    // normalized 0..1 (y already flipped)
-uniform float     u_hover;    // 0..1 eased strength
+uniform float     u_t;           // slide transition 0 → 1
+uniform vec2      u_mouse;       // normalized 0..1 (y already flipped)
+uniform float     u_hover;       // 0..1 eased strength
 uniform float     u_time;
+uniform float     u_from_aspect; // image intrinsic width/height
+uniform float     u_to_aspect;
+uniform float     u_canvas_aspect; // canvas width/height
 
 varying vec2 v_uv;
+
+// object-fit: cover in UV space
+vec2 coverUV(vec2 uv, float imgAspect, float canvasAspect) {
+  vec2 c = uv - 0.5;
+  if (canvasAspect > imgAspect) {
+    c.y *= canvasAspect / imgAspect;
+  } else {
+    c.x *= imgAspect / canvasAspect;
+  }
+  return c + 0.5;
+}
 
 void main() {
   vec2 uv = v_uv;
@@ -36,9 +50,9 @@ void main() {
   vec2  dir     = normalize(delta + vec2(0.0001));
   vec2  warpUV  = uv + dir * ripple;
 
-  // ── slide crossfade (no warp) ────────────────────────────
-  vec2  fromUV = warpUV;
-  vec2  toUV   = warpUV;
+  // ── cover-fit UV per image ────────────────────────────────
+  vec2 fromUV = coverUV(warpUV, u_from_aspect, u_canvas_aspect);
+  vec2 toUV   = coverUV(warpUV, u_to_aspect,   u_canvas_aspect);
 
   vec4 c0 = texture2D(u_from, fromUV);
   vec4 c1 = texture2D(u_to,   toUV);
@@ -62,7 +76,9 @@ function makeProgram(gl: WebGLRenderingContext) {
   return prog
 }
 
-function loadTexture(gl: WebGLRenderingContext, src: string): Promise<WebGLTexture> {
+interface TexEntry { tex: WebGLTexture; aspect: number }
+
+function loadTexture(gl: WebGLRenderingContext, src: string): Promise<TexEntry> {
   return new Promise((resolve) => {
     const tex = gl.createTexture()!
     const img = new Image()
@@ -73,7 +89,7 @@ function loadTexture(gl: WebGLRenderingContext, src: string): Promise<WebGLTextu
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
-      resolve(tex)
+      resolve({ tex, aspect: img.naturalWidth / img.naturalHeight })
     }
     img.src = src
   })
@@ -93,7 +109,8 @@ export default function WebGLHero({ images, fromIndex, toIndex, transitionProgre
   // GL objects
   const glRef   = useRef<WebGLRenderingContext | null>(null)
   const progRef = useRef<WebGLProgram | null>(null)
-  const texRef  = useRef<WebGLTexture[]>([])
+  const texRef  = useRef<TexEntry[]>([])
+  const canvasAspectRef = useRef(16 / 9)
 
   // cached uniform locations
   const uRef = useRef<Record<string, WebGLUniformLocation | null>>({})
@@ -142,10 +159,13 @@ export default function WebGLHero({ images, fromIndex, toIndex, transitionProgre
 
     // cache the rest
     uRef.current = {
-      t:     gl.getUniformLocation(prog, 'u_t'),
-      mouse: gl.getUniformLocation(prog, 'u_mouse'),
-      hover: gl.getUniformLocation(prog, 'u_hover'),
-      time:  gl.getUniformLocation(prog, 'u_time'),
+      t:            gl.getUniformLocation(prog, 'u_t'),
+      mouse:        gl.getUniformLocation(prog, 'u_mouse'),
+      hover:        gl.getUniformLocation(prog, 'u_hover'),
+      time:         gl.getUniformLocation(prog, 'u_time'),
+      fromAspect:   gl.getUniformLocation(prog, 'u_from_aspect'),
+      toAspect:     gl.getUniformLocation(prog, 'u_to_aspect'),
+      canvasAspect: gl.getUniformLocation(prog, 'u_canvas_aspect'),
     }
 
     // load all slide images as textures
@@ -159,6 +179,7 @@ export default function WebGLHero({ images, fromIndex, toIndex, transitionProgre
       canvas.width  = Math.round(canvas.clientWidth  * dpr)
       canvas.height = Math.round(canvas.clientHeight * dpr)
       gl.viewport(0, 0, canvas.width, canvas.height)
+      canvasAspectRef.current = canvas.clientWidth / (canvas.clientHeight || 1)
     }
     resize()
     const ro = new ResizeObserver(resize)
@@ -210,16 +231,21 @@ export default function WebGLHero({ images, fromIndex, toIndex, transitionProgre
 
       if (gl && prog && txs.length === images.length) {
         const { fromIndex: fi, toIndex: ti, transitionProgress: tp } = propsRef.current
+        const from = txs[fi] ?? txs[0]
+        const to   = txs[ti] ?? txs[0]
 
         gl.activeTexture(gl.TEXTURE0)
-        gl.bindTexture(gl.TEXTURE_2D, txs[fi] ?? txs[0])
+        gl.bindTexture(gl.TEXTURE_2D, from.tex)
         gl.activeTexture(gl.TEXTURE1)
-        gl.bindTexture(gl.TEXTURE_2D, txs[ti] ?? txs[0])
+        gl.bindTexture(gl.TEXTURE_2D, to.tex)
 
-        gl.uniform1f(u.t!,     tp)
-        gl.uniform2f(u.mouse!, mouse.current.x, mouse.current.y)
-        gl.uniform1f(u.hover!, hover.current)
-        gl.uniform1f(u.time!,  timeRef.current)
+        gl.uniform1f(u.t!,            tp)
+        gl.uniform2f(u.mouse!,        mouse.current.x, mouse.current.y)
+        gl.uniform1f(u.hover!,        hover.current)
+        gl.uniform1f(u.time!,         timeRef.current)
+        gl.uniform1f(u.fromAspect!,   from.aspect)
+        gl.uniform1f(u.toAspect!,     to.aspect)
+        gl.uniform1f(u.canvasAspect!, canvasAspectRef.current)
 
         gl.drawArrays(gl.TRIANGLES, 0, 6)
       }
