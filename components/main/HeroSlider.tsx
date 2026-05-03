@@ -131,6 +131,7 @@ export default function HeroSlider() {
         aria-hidden="true"
         className="md:hidden absolute inset-0 w-full h-full object-cover"
         style={{
+          objectFit: 'cover',
           animation: `hero-fadein 0.5s ease both, ${current === 0 ? 'hero-pan-ltr' : 'hero-pan-rtc'} ${INTERVAL}ms ease-in-out both`,
         }}
       />
@@ -159,8 +160,8 @@ export default function HeroSlider() {
             className="text-[15px] md:text-[17px] tracking-[0.3em] uppercase mb-3"
             style={{ color: slide.accent }}
           >
-            <span className="text-white font-bold">서울이건치과</span>{' '}
-            <span className="text-[13px] md:text-[15px] opacity-60">수원</span>
+            <span className="text-[20px] md:text-[22px] text-white font-bold">서울이건치과</span>{' '}
+            <span className="text-[18px] md:text-[20px] opacity-60">수원</span>
           </p>
           <h1
             key={`headline-${current}`}
@@ -187,7 +188,7 @@ export default function HeroSlider() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-7 py-3 text-sm font-semibold rounded-full transition-all duration-300"
-              style={{ backgroundColor: slide.accent, color: '#fff' }}
+              style={{ backgroundColor: '#FEE500', color: '#191919' }}
             >
               카카오 상담 신청
             </a>

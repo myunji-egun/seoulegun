@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const MEDIA_ITEMS = [
-  { id: 'notice', label: '공지사항', image: '/images/media-image/notice.jpg?v=4', href: '/notice', hoverColor: '#0080C8' },
-  { id: 'blog', label: '원장님 칼럼', image: '/images/media-image/blog.jpg?v=4', href: '/media?tab=blog', hoverColor: '#92DCE5' },
-  { id: 'youtube', label: '이건TV', image: '/images/media-image/youtube.jpg?v=4', href: '/media?tab=youtube', hoverColor: '#FF0000' },
-  { id: 'review', label: '환자분 실제 후기', image: '/images/media-image/review.jpg?v=4', href: '/media?tab=review', hoverColor: '#92DCE5' },
+  { id: 'notice',  label: '공지사항',       image: '/images/media-image/notice.webp',  href: '/notice',            hoverColor: '#92DCE5' },
+  { id: 'blog',    label: '원장님 칼럼',     image: '/images/media-image/blog.webp',    href: '/media?tab=blog',    hoverColor: '#22C55E' },
+  { id: 'youtube', label: '이건TV',          image: '/images/media-image/youtube.webp', href: '/media?tab=youtube', hoverColor: '#FF0000' },
+  { id: 'review',  label: '환자분 실제 후기', image: '/images/media-image/review.webp',  href: '/media?tab=review',  hoverColor: '#22C55E' },
 ] as const
 
 export default function MediaSection() {
@@ -42,12 +42,17 @@ export default function MediaSection() {
               <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-stone-200 flex items-center justify-center">
                 <img src={item.image} alt={item.label}
                   className="w-[90%] h-[90%] object-cover transition-transform duration-500 group-hover:scale-105 rounded-lg" />
+                {/* 호버 테두리 + 글로우 */}
                 <div
-                  className="absolute inset-0 rounded-xl border-[4px] transition-all duration-300 pointer-events-none"
-                  style={{ borderColor: isHov ? item.hoverColor : 'transparent' }}
+                  className="absolute inset-0 rounded-xl pointer-events-none transition-all duration-300"
+                  style={{
+                    border: isHov ? `6px solid ${item.hoverColor}` : '6px solid transparent',
+                    boxShadow: isHov ? `inset 0 0 0 1px ${item.hoverColor}40, 0 0 28px ${item.hoverColor}55` : 'none',
+                  }}
                 />
               </div>
-              <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-stone-700 transition-colors duration-300" style={isHov ? { color: item.hoverColor } : undefined}>
+              <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-stone-700 transition-colors duration-300"
+                style={isHov ? { color: item.hoverColor } : undefined}>
                 {item.label}
               </p>
             </Link>

@@ -1,10 +1,9 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 export default function DoctorGroup() {
-  const router = useRouter()
   const { ref, isVisible } = useScrollReveal(0.3)
 
   return (
@@ -12,7 +11,7 @@ export default function DoctorGroup() {
       {/* 배경 이미지 - 모바일/PC 동일 */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/doctors/doctor-group.jpg)' }}
+        style={{ backgroundImage: 'url(/images/doctors/doctors_1.jpg)' }}
       />
 
       {/* 텍스트 오버레이 */}
@@ -30,8 +29,8 @@ export default function DoctorGroup() {
           <span style={{ color: 'var(--e-primary)', fontWeight: 700 }}>서울대학교</span> 출신 2인 대표원장
         </p>
 
-        <button
-          onClick={() => router.push('/about#doctors')}
+        <Link
+          href="/about#doctor-team"
           className={`text-sm font-medium transition-all duration-200 px-8 py-2.5 rounded-full ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{
             color: 'var(--e-primary)',
@@ -40,7 +39,7 @@ export default function DoctorGroup() {
           }}
         >
           자세히보기 →
-        </button>
+        </Link>
       </div>
     </section>
   )

@@ -32,9 +32,9 @@ varying vec2 v_uv;
 vec2 coverUV(vec2 uv, float imgAspect, float canvasAspect) {
   vec2 c = uv - 0.5;
   if (canvasAspect > imgAspect) {
-    c.y *= canvasAspect / imgAspect;
+    c.y *= imgAspect / canvasAspect;
   } else {
-    c.x *= imgAspect / canvasAspect;
+    c.x *= canvasAspect / imgAspect;
   }
   return c + 0.5;
 }

@@ -19,7 +19,7 @@ const TYPES = [
     subtitle: 'IMMEDIATE LOADING',
     quote: '수술 직후 틀니 없이 식사가 가능한 치아 제작',
     features: ['당일 임시 보철', '저작 기능 즉시 회복', '최소 회복 기간'],
-    img: '/images/treatments/immediate-after.jpg',
+    img: '/images/treatments/immediate_2.webp',
     href: '/implant#immediate-loading',
   },
   {
@@ -91,7 +91,7 @@ export default function ImplantTypeSection() {
 
                 <p
                   className="italic leading-relaxed mb-4 lg:mb-5"
-                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.48)' }}
+                  style={{ fontSize: '15px', color: 'rgba(255,255,255,0.48)' }}
                 >
                   &ldquo;{type.quote}&rdquo;
                 </p>
@@ -106,7 +106,7 @@ export default function ImplantTypeSection() {
                     <li
                       key={j}
                       className="flex items-center gap-2"
-                      style={{ fontSize: '13px', color: 'rgba(255,255,255,0.62)' }}
+                      style={{ fontSize: '15px', color: 'rgba(255,255,255,0.62)' }}
                     >
                       <span style={{ color: 'rgba(255,255,255,0.28)' }}>—</span>
                       {feat}

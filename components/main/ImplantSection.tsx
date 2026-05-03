@@ -87,7 +87,7 @@ export default function ImplantSection() {
               className={`flex flex-col items-center ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={isVisible ? { animationDelay: `${0.45 + i * 0.1}s` } : undefined}
             >
-              <p className="font-bold mb-0.5" style={{ fontSize: '16px', color: 'var(--e-accent)' }}>{feat.label}</p>
+              <p className="font-bold mb-0.5" style={{ fontSize: '18px', color: 'var(--e-accent)' }}>{feat.label}</p>
               <p style={{ fontSize: '16px', color: 'rgb(214 211 209)' }}>{feat.desc}</p>
             </div>
           ))}
