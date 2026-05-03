@@ -40,7 +40,7 @@ export default function Header() {
 
             {/* 데스크톱 네비게이션 (lg 이상) */}
             <nav
-              className="hidden lg:flex items-center gap-1 xl:gap-2"
+              className="hidden lg:flex flex-1 justify-center items-center gap-3 xl:gap-5"
               aria-label="주 메뉴"
             >
               {NAV_ITEMS.map((item) => {
@@ -49,13 +49,13 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-3 xl:px-4 py-2 text-sm font-medium transition-colors duration-200 group ${
+                    className={`relative px-5 xl:px-6 py-2 text-[17px] font-medium transition-colors duration-200 group ${
                       isActive ? 'text-[#92DCE5]' : 'text-white/90 hover:text-white'
                     }`}
                   >
                     {item.label}
                     <span
-                      className={`absolute bottom-0 left-3 xl:left-4 right-3 xl:right-4 h-0.5 rounded-full transition-transform duration-200 origin-left ${
+                      className={`absolute bottom-0 left-5 xl:left-6 right-5 xl:right-6 h-0.5 rounded-full transition-transform duration-200 origin-left ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
                       style={{ backgroundColor: '#92DCE5' }}

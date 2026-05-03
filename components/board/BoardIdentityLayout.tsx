@@ -44,10 +44,10 @@ export default function BoardIdentityLayout({ label, title, description, pillars
               <div className="flex items-start gap-3">
                 <div className="w-1 h-full min-h-12 bg-[#0080C8]/30 rounded-full group-hover:bg-[#0080C8] transition-colors mt-0.5" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1.5 text-sm sm:text-base">
+                  <h3 className="font-semibold text-gray-900 mb-1.5 text-[17px] sm:text-[19px]">
                     {pillar.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                  <p className="text-[15px] sm:text-[17px] text-gray-600 leading-relaxed whitespace-pre-line">
                     {pillar.description}
                   </p>
                 </div>
