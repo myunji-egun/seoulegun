@@ -29,11 +29,11 @@ function DoctorCard({
           {/* 왼쪽: 이름 + 학력·경력 (위 정렬) */}
           <div className="flex flex-col justify-start space-y-4 lg:order-1">
             <div>
-              <p className={`text-[12px] font-semibold tracking-[0.2em] uppercase text-[#0080C8] mb-1 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              <p className={`text-[20px] font-semibold tracking-[0.2em] uppercase text-[#0080C8] mb-1 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
                 style={isVisible ? { animationDelay: '0.3s' } : undefined}>
                 {doctor.specialtyDetail ?? doctor.specialty}
               </p>
-              <h3 className={`text-[20px] sm:text-[22px] font-bold text-gray-900 mb-0.5 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              <h3 className={`text-[24px] sm:text-[26px] font-bold text-gray-900 mb-0.5 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
                 style={isVisible ? { animationDelay: '0.4s' } : undefined}>
                 {doctor.name} {doctor.role}
               </h3>
@@ -43,7 +43,7 @@ function DoctorCard({
 
             {doctor.careers && doctor.careers.length > 0 && (
               <div>
-                <h4 className={`text-[12px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+                <h4 className={`text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
                   style={isVisible ? { animationDelay: '0.6s' } : undefined}>
                   학력 · 경력
                 </h4>
@@ -52,7 +52,7 @@ function DoctorCard({
                     <li key={i} className={`flex items-start gap-2 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
                       style={isVisible ? { animationDelay: `${0.7 + i * 0.1}s` } : undefined}>
                       <span className="mt-1.5 w-1 h-1 rounded-full bg-[#0080C8] shrink-0" />
-                      <span className="text-[14px] text-gray-700 leading-relaxed">{career}</span>
+                      <span className="text-[18px] text-gray-700 leading-relaxed">{career}</span>
                     </li>
                   ))}
                 </ul>
@@ -62,13 +62,13 @@ function DoctorCard({
 
           {/* 중앙: 사진 */}
           <div className="lg:order-2 flex items-center justify-center">
-            <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] w-[242px] sm:w-[275px] lg:w-[308px] bg-stone-100 shadow-md mx-auto ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}>
+            <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] w-[290px] sm:w-[340px] lg:w-[400px] bg-stone-100 shadow-md mx-auto ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}>
               <img
                 src={doctor.image}
                 alt={`${doctor.name} ${doctor.role}`}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute top-3 left-3 bg-[#0080C8] text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
+              <div className="absolute top-3 left-3 bg-[#0080C8] text-white text-[14px] font-semibold px-2.5 py-0.5 rounded-full">
                 {doctor.role}
               </div>
             </div>
@@ -99,10 +99,10 @@ function DoctorCard({
               <div className={`bg-stone-50 border border-stone-200 rounded-xl p-4 relative ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
                 style={isVisible ? { animationDelay: `${0.7 + (doctor.careers?.length ?? 0) * 0.1 + 0.2}s` } : undefined}>
                 <span className="absolute top-3 right-4 text-[26px] text-[#0080C8]/20 font-serif leading-none select-none">&ldquo;</span>
-                <p className="text-[14px] sm:text-[16px] text-gray-700 leading-relaxed pr-6 italic whitespace-pre-line text-right">
+                <p className="text-[18px] sm:text-[20px] text-gray-700 leading-relaxed pr-6 italic whitespace-pre-line text-right">
                   {doctor.letter}
                 </p>
-                <p className="text-right text-[12px] text-[#0080C8] font-semibold mt-2">
+                <p className="text-right text-[16px] text-[#0080C8] font-semibold mt-2">
                   — {doctor.name} {doctor.role}
                 </p>
               </div>

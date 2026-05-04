@@ -107,6 +107,10 @@ export default function AccessSection() {
                   <address className="not-italic text-sm text-gray-800 leading-relaxed">
                     {clinicInfo.address}
                   </address>
+                  <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
+                    본관 : 파리바게트 건물 2층<br />
+                    별관 : GS마트, 뜰커피 건물 3층
+                  </p>
                 </div>
               </div>
 
@@ -182,35 +186,28 @@ export default function AccessSection() {
 
         {/* 하단: 교통 · 주차 통합 안내 */}
         <div className="mt-10 rounded-2xl bg-stone-50 border border-stone-200 p-6 sm:p-8">
-          <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2 text-base">
+          <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2 text-xl">
             <span className="text-xl" aria-hidden="true">🚌</span>
             교통 · 주차 안내
           </h3>
 
-          {/* 안내 지도 전체 너비 */}
-          <img
-            src="/images/clinic/map-guide.png"
-            alt="서울이건치과 주차 및 버스 정류장 안내 지도"
-            className="w-full h-auto rounded-xl mb-6"
-          />
-
-          {/* 교통 + 주차 2컬럼 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {/* 교통 정보 */}
+          {/* 교통·주차(좌) + map-guide(우) 2컬럼 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
+            {/* 왼쪽: 교통 + 주차 안내 + 주차 사진 */}
             <div className="space-y-5">
               {TRANSIT_INFO.map((transit) => (
                 <div key={transit.type}>
-                  <p className="text-xs font-semibold text-[#0080C8] uppercase tracking-wider mb-1.5">
+                  <p className="text-base font-semibold text-[#0080C8] uppercase tracking-wider mb-1.5">
                     {transit.icon} {transit.type}
                   </p>
                   <ul className="space-y-1">
                     {transit.lines.map((line, i) => (
-                      <li key={i} className="text-sm text-gray-700 leading-relaxed">
+                      <li key={i} className="text-[18px] text-gray-700 leading-relaxed">
                         {line.name && <span className="font-medium">{line.name}</span>}
                         {line.stop && (
                           <>
                             {line.name && <br />}
-                            <span className="text-gray-500 text-xs">{line.stop}</span>
+                            <span className="text-gray-500 text-base">{line.stop}</span>
                           </>
                         )}
                       </li>
@@ -218,25 +215,34 @@ export default function AccessSection() {
                   </ul>
                 </div>
               ))}
+
+              {/* 주차 안내 */}
+              <div className="pt-2">
+                <p className="text-base font-semibold text-[#0080C8] uppercase tracking-wider mb-3">
+                  🅿️ 주차 안내
+                </p>
+                <ul className="space-y-2 mb-4">
+                  {PARKING_INFO.map((info, i) => (
+                    <li key={i} className="flex items-start gap-2 text-[18px] text-gray-700">
+                      <span className="text-[#0080C8] mt-0.5 shrink-0">·</span>
+                      {info}
+                    </li>
+                  ))}
+                </ul>
+                <div className="grid grid-cols-2 gap-3">
+                  <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl" />
+                  <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl" />
+                </div>
+              </div>
             </div>
 
-            {/* 주차 안내 */}
-            <div>
-              <p className="text-xs font-semibold text-[#0080C8] uppercase tracking-wider mb-3">
-                🅿️ 주차 안내
-              </p>
-              <ul className="space-y-2 mb-4">
-                {PARKING_INFO.map((info, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                    <span className="text-[#0080C8] mt-0.5 shrink-0">·</span>
-                    {info}
-                  </li>
-                ))}
-              </ul>
-              <div className="grid grid-cols-2 gap-3">
-                <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl" />
-                <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl" />
-              </div>
+            {/* 오른쪽: map-guide 지도 */}
+            <div className="flex items-start">
+              <img
+                src="/images/clinic/map-guide.png"
+                alt="서울이건치과 버스 정류장 안내 지도"
+                className="w-full h-auto rounded-xl"
+              />
             </div>
           </div>
         </div>

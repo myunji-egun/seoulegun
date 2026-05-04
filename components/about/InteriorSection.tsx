@@ -78,7 +78,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
     }
 
     return {
-      transform: `translateX(${diff * 320}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
+      transform: `translateX(${diff * 480}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
       opacity: 1 - absD * 0.35,
       zIndex: 10 - absD,
       pointerEvents: 'none',
@@ -89,7 +89,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
     <>
       <div
         className="relative w-full overflow-hidden"
-        style={{ perspective: '1200px', height: '420px' }}
+        style={{ perspective: '1800px', height: '640px' }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -97,7 +97,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
           {images.map((src, i) => (
             <div
               key={i}
-              className={`absolute w-[280px] sm:w-[380px] lg:w-[480px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
+              className={`absolute w-[420px] sm:w-[570px] lg:w-[720px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
               style={{ ...getCardStyle(i), transformStyle: 'preserve-3d' }}
               onClick={() => i === current && setLightbox(src)}
             >
@@ -109,7 +109,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
 
         {/* 화살표: 중앙 이미지 양쪽 가장자리에 고정 */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
-          <div className="relative w-[280px] sm:w-[380px] lg:w-[480px] h-full flex items-center">
+          <div className="relative w-[420px] sm:w-[570px] lg:w-[720px] h-full flex items-center">
             <button onClick={() => goTo(current - 1)}
               className="pointer-events-auto absolute -left-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
               aria-label="이전 사진">

@@ -47,11 +47,25 @@ export default function LabSection() {
   const [current, setCurrent] = useState(0)
   const [lightbox, setLightbox] = useState<string | null>(null)
   const total = LAB_IMAGES.length
+  const touchStart = useRef<number | null>(null)
 
   const goTo = useCallback(
     (index: number) => setCurrent(((index % total) + total) % total),
     [total],
   )
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = e.touches[0].clientX
+  }, [])
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStart.current === null) return
+    const diff = touchStart.current - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 50) {
+      goTo(diff > 0 ? current + 1 : current - 1)
+    }
+    touchStart.current = null
+  }, [current, goTo])
 
   useEffect(() => {
     const timer = setInterval(() => goTo(current + 1), AUTO_INTERVAL)
@@ -79,7 +93,7 @@ export default function LabSection() {
     }
 
     return {
-      transform: `translateX(${diff * 320}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
+      transform: `translateX(${diff * 480}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
       opacity: 1 - absD * 0.35,
       zIndex: 10 - absD,
       pointerEvents: 'none',
@@ -100,7 +114,7 @@ export default function LabSection() {
   return (
     <section
       id="lab"
-      className="py-16 sm:py-24 bg-gray-900 scroll-mt-36"
+      className="py-20 sm:py-28 bg-gray-900 scroll-mt-36"
       aria-labelledby="lab-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -188,7 +202,9 @@ export default function LabSection() {
       {/* 3D 캐러셀 */}
       <div
         className="relative w-full overflow-hidden"
-        style={{ perspective: '1200px', height: '420px' }}
+        style={{ perspective: '1800px', height: '640px' }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="absolute inset-0 flex items-center justify-center">
           {LAB_IMAGES.map((src, i) => {
@@ -196,7 +212,7 @@ export default function LabSection() {
             return (
               <div
                 key={i}
-                className={`absolute w-[280px] sm:w-[380px] lg:w-[480px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
+                className={`absolute w-[420px] sm:w-[570px] lg:w-[720px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
                 style={{ ...style, transformStyle: 'preserve-3d' }}
                 onClick={() => i === current && setLightbox(src)}
               >
@@ -209,7 +225,7 @@ export default function LabSection() {
 
         {/* 화살표: 중앙 이미지 양쪽 가장자리에 고정 */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
-          <div className="relative w-[280px] sm:w-[380px] lg:w-[480px] h-full flex items-center">
+          <div className="relative w-[420px] sm:w-[570px] lg:w-[720px] h-full flex items-center">
             <button
               onClick={() => goTo(current - 1)}
               className="pointer-events-auto absolute -left-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
