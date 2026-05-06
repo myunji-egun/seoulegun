@@ -108,7 +108,7 @@ export default function PreserveTreatSection() {
           <span style={{ color: '#4fc3f7', fontWeight: 900 }}>내가 가진 치아</span>
           <span style={{ color: '#fff' }}>입니다.</span>
         </h2>
-        <p style={{ color: '#b8c0d9', marginTop: '14px', fontSize: '17px', lineHeight: 1.7 }}>
+        <p style={{ color: '#b8c0d9', marginTop: '14px', fontSize: '19px', lineHeight: 1.7 }}>
           치아는 한 번 삭제하면 <strong style={{ color: '#fff' }}>되돌릴 수 없기에</strong>,
           처음 치료 방향이 가장 중요합니다. 저희는 충치를 없애는 것을 넘어{' '}
           <strong style={{ color: '#fff' }}>"어디까지 살릴 수 있는지"</strong>를 먼저 고민합니다.

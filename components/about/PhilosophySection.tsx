@@ -68,10 +68,10 @@ export default function PhilosophySection() {
               <div className="flex items-start gap-3">
                 <div className="w-1 h-full min-h-12 bg-[#0080C8]/30 rounded-full group-hover:bg-[#0080C8] transition-colors mt-0.5" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1.5 text-sm sm:text-base">
+                  <h3 className="font-semibold text-gray-900 mb-1.5 text-base sm:text-[18px]">
                     {value.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed whitespace-pre-line">
                     {value.description}
                   </p>
                 </div>

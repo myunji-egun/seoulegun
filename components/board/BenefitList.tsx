@@ -8,7 +8,7 @@ interface BenefitListProps {
 export default function BenefitList({ benefits }: BenefitListProps) {
   return (
     <div className="bg-[#F8F7F9] rounded-2xl p-6 sm:p-8">
-      <h3 className="text-lg font-semibold text-gray-800 mb-5">
+      <h3 className="text-xl font-semibold text-gray-800 mb-5">
         이런 점이 도움이 됩니다
       </h3>
       <ul className="space-y-3" role="list">
@@ -19,7 +19,7 @@ export default function BenefitList({ benefits }: BenefitListProps) {
               size={20}
               aria-hidden="true"
             />
-            <span className="text-gray-700 text-sm sm:text-base leading-relaxed">
+            <span className="text-gray-700 text-base sm:text-[18px] leading-relaxed">
               {benefit}
             </span>
           </li>

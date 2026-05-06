@@ -56,45 +56,6 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* 소셜 링크 */}
-            <div className="flex items-center gap-3 pt-1">
-              <a
-                href={clinicInfo.socialLinks.kakao}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/70 hover:bg-[#0080C8] hover:text-white transition-colors"
-                aria-label="카카오 채널"
-              >
-                K
-              </a>
-              <a
-                href={clinicInfo.socialLinks.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/70 hover:bg-[#0080C8] hover:text-white transition-colors"
-                aria-label="유튜브 채널"
-              >
-                Y
-              </a>
-              <a
-                href={clinicInfo.socialLinks.blog}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/70 hover:bg-[#0080C8] hover:text-white transition-colors"
-                aria-label="네이버 블로그"
-              >
-                N
-              </a>
-              <a
-                href={clinicInfo.socialLinks.naverPlace}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/70 hover:bg-[#0080C8] hover:text-white transition-colors"
-                aria-label="네이버 플레이스"
-              >
-                P
-              </a>
-            </div>
           </div>
 
           {/* 진료시간표 */}

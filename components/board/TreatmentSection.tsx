@@ -22,7 +22,7 @@ function inlineParse(text: string) {
 /** 단순 **볼드** 강조만 처리하는 기본 description 렌더러 */
 function HighlightedDescription({ text }: { text: string }) {
   return (
-    <p className="text-gray-600 leading-[1.9] text-[15px]">
+    <p className="text-gray-600 leading-[1.9] text-[17px]">
       {inlineParse(text)}
     </p>
   )
@@ -40,7 +40,7 @@ function RichDescription({ content }: { content: string }) {
       elements.push(
         <ul key={key++} className="space-y-1.5 pl-1 my-2">
           {listItems.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-gray-600 text-[15px] leading-relaxed">
+            <li key={i} className="flex items-start gap-2 text-gray-600 text-[17px] leading-relaxed">
               <span className="shrink-0">{item.replace(/^-\s*/, '').split(' ')[0]}</span>
               <span>{inlineParse(item.replace(/^-\s*[\S]*\s*/, ''))}</span>
             </li>
@@ -77,7 +77,7 @@ function RichDescription({ content }: { content: string }) {
       flushList()
       const quoteText = line.replace(/^> /, '')
       elements.push(
-        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[14px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#92DCE5' }}>
+        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[16px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#92DCE5' }}>
           {inlineParse(quoteText)}
         </blockquote>
       )
@@ -99,7 +99,7 @@ function RichDescription({ content }: { content: string }) {
     // plain text
     flushList()
     elements.push(
-      <p key={key++} className="text-gray-600 text-[15px] leading-[1.85] my-1">
+      <p key={key++} className="text-gray-600 text-[17px] leading-[1.85] my-1">
         {inlineParse(line)}
       </p>
     )
@@ -214,10 +214,10 @@ export default function TreatmentSection({
             <div key={i}
               className={`space-y-2 ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={cardVisible ? { animationDelay: `${0.1 + i * 0.08}s` } : undefined}>
-              <h3 className="text-[#0080C8] font-bold text-base">
+              <h3 className="text-[#0080C8] font-bold text-[18px]">
                 #{benefit.split('.')[0].replace(/^[✓\s]+/, '').slice(0, 15)}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 text-base leading-relaxed">
                 {benefit.replace(/^[✓\s]+/, '')}
               </p>
             </div>

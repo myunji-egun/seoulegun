@@ -70,7 +70,7 @@ export default function ImplantTypeSection() {
               <div className="p-5 lg:p-7 flex flex-col">
                 <p
                   className="tracking-[0.25em] mb-3 lg:mb-5"
-                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.28)' }}
+                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.28)' }}
                 >
                   TYPE / {type.num}
                 </p>
@@ -84,14 +84,14 @@ export default function ImplantTypeSection() {
 
                 <p
                   className="tracking-[0.18em] uppercase mb-2 lg:mb-3"
-                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.32)' }}
+                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.32)' }}
                 >
                   {type.subtitle}
                 </p>
 
                 <p
                   className="italic leading-relaxed mb-4 lg:mb-5"
-                  style={{ fontSize: '15px', color: 'rgba(255,255,255,0.48)' }}
+                  style={{ fontSize: '17px', color: 'rgba(255,255,255,0.48)' }}
                 >
                   &ldquo;{type.quote}&rdquo;
                 </p>
@@ -106,7 +106,7 @@ export default function ImplantTypeSection() {
                     <li
                       key={j}
                       className="flex items-center gap-2"
-                      style={{ fontSize: '15px', color: 'rgba(255,255,255,0.62)' }}
+                      style={{ fontSize: '17px', color: 'rgba(255,255,255,0.62)' }}
                     >
                       <span style={{ color: 'rgba(255,255,255,0.28)' }}>—</span>
                       {feat}

@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import DoctorTeamSection from '@/components/about/DoctorTeamSection'
 
 function DoctorCard({
   doctor,
@@ -120,7 +121,7 @@ export default function DoctorProfileSection() {
 
   return (
     <section
-      id="doctors"
+      id="doctor-profile"
       className="bg-stone-50 scroll-mt-36"
       aria-labelledby="doctors-heading"
     >
@@ -156,6 +157,9 @@ export default function DoctorProfileSection() {
           </p>
         </div>
       </div>
+
+      {/* 이건진료진 카드 그리드 */}
+      <DoctorTeamSection />
 
       {/* 원장님 카드 — 각각 풀페이지 */}
       {doctors.map((doctor, index) => (

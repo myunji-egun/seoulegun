@@ -42,7 +42,7 @@ export default function CtaSection() {
       aria-labelledby="cta-heading"
     >
       <div className="text-center mb-10">
-        <p className="text-[#0080C8] text-sm font-semibold tracking-widest uppercase mb-2">
+        <p className="text-[#0080C8] text-base font-semibold tracking-widest uppercase mb-2">
           Consulting
         </p>
         <h2
@@ -51,7 +51,7 @@ export default function CtaSection() {
         >
           궁금한 점이 있으신가요?
         </h2>
-        <p className="text-gray-500 text-base leading-relaxed max-w-md mx-auto">
+        <p className="text-gray-500 text-[18px] leading-relaxed max-w-md mx-auto">
           전화, 카카오, 온라인 예약 중 편한 방법으로 문의해 주세요.
         </p>
       </div>
@@ -69,8 +69,8 @@ export default function CtaSection() {
             >
               <Icon size={28} className={iconColor} aria-hidden="true" />
               <div className="text-center">
-                <p className="font-semibold text-sm">{label}</p>
-                <p className={`text-xs mt-0.5 opacity-80`}>{description}</p>
+                <p className="font-semibold text-base">{label}</p>
+                <p className={`text-sm mt-0.5 opacity-80`}>{description}</p>
               </div>
             </a>
           ),

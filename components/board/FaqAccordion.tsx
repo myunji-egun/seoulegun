@@ -27,7 +27,7 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">
+      <h3 className="text-xl font-semibold text-gray-800 mb-4">
         자주 묻는 질문
       </h3>
       <dl className="space-y-2">
@@ -55,7 +55,7 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
                   >
                     Q
                   </span>
-                  <span className="flex-1 text-sm sm:text-base font-medium text-gray-800">
+                  <span className="flex-1 text-base sm:text-[18px] font-medium text-gray-800">
                     {item.question}
                   </span>
                   <ChevronDown
@@ -80,8 +80,8 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
                     className="shrink-0 w-8 h-8 rounded-full object-cover mt-0.5"
                   />
                   <div>
-                    <span className="text-xs font-semibold text-[#0080C8] mb-1 block">원장 답변</span>
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    <span className="text-sm font-semibold text-[#0080C8] mb-1 block">원장 답변</span>
+                    <p className="text-base sm:text-[18px] text-gray-600 leading-relaxed">
                       {item.answer}
                     </p>
                   </div>

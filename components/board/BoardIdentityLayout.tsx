@@ -21,7 +21,7 @@ export default function BoardIdentityLayout({ label, title, description, pillars
     <section className="py-16 sm:py-24 bg-white border-b border-gray-100">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+        <p className={`text-sm font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
           {label}
         </p>
 
@@ -30,7 +30,7 @@ export default function BoardIdentityLayout({ label, title, description, pillars
           {title}
         </h2>
 
-        <p className={`text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl mb-12 sm:mb-16 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+        <p className={`text-base sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl mb-12 sm:mb-16 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}>
           {description}
         </p>
@@ -44,10 +44,10 @@ export default function BoardIdentityLayout({ label, title, description, pillars
               <div className="flex items-start gap-3">
                 <div className="w-1 h-full min-h-12 bg-[#0080C8]/30 rounded-full group-hover:bg-[#0080C8] transition-colors mt-0.5" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1.5 text-[17px] sm:text-[19px]">
+                  <h3 className="font-semibold text-gray-900 mb-1.5 text-[19px] sm:text-[21px]">
                     {pillar.title}
                   </h3>
-                  <p className="text-[15px] sm:text-[17px] text-gray-600 leading-relaxed whitespace-pre-line">
+                  <p className="text-[17px] sm:text-[19px] text-gray-600 leading-relaxed whitespace-pre-line">
                     {pillar.description}
                   </p>
                 </div>

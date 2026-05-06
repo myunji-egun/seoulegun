@@ -33,7 +33,7 @@ export default function MapSection() {
             <img
               src="/images/logo/egun-logo%20(1).svg?v=2"
               alt="서울이건치과"
-              className="h-5 mb-3"
+              className="h-10 mb-3"
             />
             <div className="w-8 h-0.5 bg-[var(--e-primary)] mb-3" />
             <a

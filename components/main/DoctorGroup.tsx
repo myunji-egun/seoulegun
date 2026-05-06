@@ -30,7 +30,7 @@ export default function DoctorGroup() {
         </p>
 
         <Link
-          href="/about#doctor-team"
+          href="/about#doctors"
           className={`text-sm font-medium transition-all duration-200 px-8 py-2.5 rounded-full ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{
             color: 'var(--e-primary)',

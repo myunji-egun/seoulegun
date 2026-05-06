@@ -49,7 +49,7 @@ export default function CaseGallery({
 
   if (loading) {
     return (
-      <div className="text-center py-8 text-gray-400 text-sm">
+      <div className="text-center py-8 text-gray-400 text-base">
         증례 불러오는 중...
       </div>
     )
@@ -63,7 +63,7 @@ export default function CaseGallery({
   return (
     <>
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-4">증례 사진</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-4">증례 사진</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {cases.map((item) => (
             <button
@@ -104,11 +104,11 @@ export default function CaseGallery({
                 </div>
               )}
               <div className="p-3">
-                <p className="font-semibold text-sm text-gray-900 truncate">
+                <p className="font-semibold text-base text-gray-900 truncate">
                   {item.title}
                 </p>
                 {item.description && (
-                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">
                     {item.description}
                   </p>
                 )}
@@ -120,7 +120,7 @@ export default function CaseGallery({
         {/* 블로그 링크 — 증례 카드 아래에 별도 표시 */}
         {allBlogs.length > 0 && (
           <div className="mt-6 space-y-2">
-            <h4 className="text-sm font-semibold text-gray-500 mb-3">관련 블로그</h4>
+            <h4 className="text-base font-semibold text-gray-500 mb-3">관련 블로그</h4>
             {allBlogs.map((blog) => (
               <a
                 key={blog.id}
@@ -130,7 +130,7 @@ export default function CaseGallery({
                 className="flex items-center gap-2 p-3 rounded-xl border border-gray-200 hover:border-[#0080C8] hover:bg-stone-50 transition-colors group"
               >
                 <ExternalLink size={14} className="text-[#0080C8] shrink-0" />
-                <span className="text-sm text-gray-700 group-hover:text-[#0080C8] truncate">
+                <span className="text-base text-gray-700 group-hover:text-[#0080C8] truncate">
                   {blog.blog_title || blog.blog_url}
                 </span>
                 <span className="text-[10px] text-gray-400 shrink-0 ml-auto hidden sm:block truncate max-w-[200px]">
@@ -181,7 +181,7 @@ export default function CaseGallery({
 
             <div className="p-5 space-y-3">
               {selected.description && (
-                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                <p className="text-base text-gray-600 leading-relaxed whitespace-pre-line">
                   {selected.description}
                 </p>
               )}
