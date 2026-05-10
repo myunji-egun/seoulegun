@@ -156,7 +156,7 @@ export default function AboutChapterSnap() {
     }
 
     const handleAnchorScroll = () => {
-      lockedUntilRef.current = Date.now() + 900
+      lockedUntilRef.current = Date.now() + 3000
     }
 
     window.addEventListener('wheel', handleWheel, { passive: false })
