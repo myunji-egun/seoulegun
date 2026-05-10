@@ -114,6 +114,9 @@ export default function TreatmentSection({
 }: TreatmentSectionProps) {
   const { ref: textRef, isVisible: textVisible } = useScrollReveal(0.15)
   const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+  const isRootCanal = treatment.treatmentType === 'root-canal'
+  const imageTopMargin = isRootCanal ? 'md:mt-[calc(2.5rem+3cm)]' : 'md:mt-10'
+  const singleImageFrameClass = isRootCanal ? 'max-w-[105%] mx-auto' : 'bg-gray-100 max-w-[70%] mx-auto'
 
   return (
     <div className="space-y-12">
@@ -124,7 +127,7 @@ export default function TreatmentSection({
           <img
             src="/images/logo/egun-logo%20(1).svg?v=2"
             alt="수원치과 서울이건치과"
-            className={`h-8 mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-8'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           />
           <h2 className={`text-2xl sm:text-3xl font-bold text-gray-900 leading-tight ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.1s' } : undefined}>
@@ -148,9 +151,9 @@ export default function TreatmentSection({
         </div>
 
         {/* 이미지 영역 — 오른쪽에서 슬라이드인 (bottomImage 사용 시 숨김) */}
-        {!treatment.bottomImage && <div className={`order-first md:order-last md:mt-10 ${textVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+        {!treatment.bottomImage && <div className={`order-first md:order-last ${imageTopMargin} ${textVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={textVisible ? { animationDelay: '0.15s' } : undefined}>
-          <div className={`${treatment.beforeImage && treatment.afterImage || treatment.videoUrl ? '' : 'bg-gray-100 max-w-[70%] mx-auto'} rounded-2xl flex items-center justify-center overflow-hidden`}>
+          <div className={`${treatment.beforeImage && treatment.afterImage || treatment.videoUrl ? '' : singleImageFrameClass} rounded-2xl flex items-center justify-center overflow-hidden`}>
             {treatment.videoUrl ? (
               <div className="w-full aspect-video rounded-2xl overflow-hidden">
                 <iframe
@@ -208,6 +211,21 @@ export default function TreatmentSection({
         </div>
       )}
 
+      {/* bottomVideoUrl: 해시태그 카드 위 영상 */}
+      {treatment.bottomVideoUrl && (
+        <div className={`w-full ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+          <div className="w-full aspect-video rounded-2xl overflow-hidden">
+            <iframe
+              src={`https://www.youtube.com/embed/${treatment.bottomVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={`${treatment.title} 영상`}
+            />
+          </div>
+        </div>
+      )}
+
       {/* 중단: 해시태그 카드 그리드 — 좌측은 왼쪽에서, 우측은 오른쪽에서 */}
       <div ref={cardRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {treatment.benefits.map((benefit, i) => (
@@ -215,10 +233,10 @@ export default function TreatmentSection({
               className={`space-y-2 ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={cardVisible ? { animationDelay: `${0.1 + i * 0.08}s` } : undefined}>
               <h3 className="text-[#0080C8] font-bold text-[18px]">
-                #{benefit.split('.')[0].replace(/^[✓\s]+/, '').slice(0, 15)}
+                #{benefit.tag}
               </h3>
               <p className="text-gray-600 text-base leading-relaxed">
-                {benefit.replace(/^[✓\s]+/, '')}
+                {benefit.description}
               </p>
             </div>
         ))}

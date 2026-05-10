@@ -52,7 +52,7 @@ export default function TreatmentPage({
           <section
             key={treatment.treatmentType}
             id={treatment.treatmentType}
-            className="py-16 sm:py-20 border-b border-gray-100 last:border-b-0 space-y-10"
+            className="py-16 sm:py-20 scroll-mt-44 border-b border-gray-100 last:border-b-0 space-y-10"
             aria-labelledby={`heading-${treatment.treatmentType}`}
           >
             {/* id를 heading에도 심어 두면 ARIA 연결이 자연스러워지지만,
