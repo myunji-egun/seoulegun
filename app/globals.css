@@ -205,3 +205,14 @@
   transform: none !important;
 }
 
+.natural-tooth-page .scroll-hidden,
+.natural-tooth-page .scroll-reveal-drop,
+.natural-tooth-page .scroll-reveal-up,
+.natural-tooth-page .scroll-reveal-scale,
+.natural-tooth-page .scroll-reveal-left,
+.natural-tooth-page .scroll-reveal-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+

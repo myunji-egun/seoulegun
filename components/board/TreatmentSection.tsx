@@ -213,7 +213,7 @@ export default function TreatmentSection({
 
       {/* bottomVideoUrl: 해시태그 카드 위 영상 */}
       {treatment.bottomVideoUrl && (
-        <div className={`w-full ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+        <div className={`w-full max-w-[50%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           <div className="w-full aspect-video rounded-2xl overflow-hidden">
             <iframe
               src={`https://www.youtube.com/embed/${treatment.bottomVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}
