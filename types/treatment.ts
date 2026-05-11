@@ -10,7 +10,17 @@ export interface TreatmentContent {
   subtitle: string
   description: string
   richContent?: string   // 마크다운 형식 본문 (###, >, ---, - 지원)
-  benefits: { tag: string; description: string }[]
+  highlights?: { icon: string; label: string; desc: string }[]
+  steps?: { title: string; desc?: string; icon?: string }[]
+  indications?: string[]
+  benefits: { tag: string; description: string; icon?: string }[]
+  benefitsTitle?: string
+  comparison?: {
+    leftLabel: string
+    rightLabel: string
+    rows: { label: string; icon?: string; leftText: string; rightText: string }[]
+  }
+  bottomCta?: string
   faq: FAQ[]
   image?: string
   beforeImage?: string

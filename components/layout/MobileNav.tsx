@@ -16,6 +16,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: '임플란트', href: '/implant' },
   { label: '심미보철', href: '/cosmetic' },
   { label: '서울이건 교정치료', href: '/orthodontics' },
+  { label: '소아치과', href: '/pediatric' },
 ]
 
 interface MobileNavProps {

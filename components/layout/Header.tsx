@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: '임플란트', href: '/implant' },
   { label: '심미보철', href: '/cosmetic' },
   { label: '교정치료', href: '/orthodontics' },
+  { label: '소아치과', href: '/pediatric' },
 ]
 
 const PHONE = '031-896-5512'
@@ -21,7 +22,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: '#2B2D42' }}>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16 sm:h-20 gap-6 lg:gap-10">
 
@@ -32,9 +33,9 @@ export default function Header() {
               aria-label="서울이건치과 홈으로 이동"
             >
               <img
-                src="/images/logo/egun-logo-white%20(1).gif"
+                src="/images/logo/egun-logo%20(1).svg"
                 alt="서울이건치과"
-                className="h-20 sm:h-28 w-auto"
+                className="h-[60px] sm:h-[72px] w-auto"
               />
             </Link>
 
@@ -50,7 +51,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     className={`relative px-5 xl:px-6 py-2 text-[17px] font-medium transition-colors duration-200 group ${
-                      isActive ? 'text-[#92DCE5]' : 'text-white/90 hover:text-white'
+                      isActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
                     {item.label}
@@ -58,31 +59,31 @@ export default function Header() {
                       className={`absolute bottom-0 left-5 xl:left-6 right-5 xl:right-6 h-0.5 rounded-full transition-transform duration-200 origin-left ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
-                      style={{ backgroundColor: '#92DCE5' }}
+                      style={{ backgroundColor: '#0080C8' }}
                     />
                   </Link>
                 )
               })}
             </nav>
 
-            {/* 상담하기 버튼 (데스크탑) */}
+            {/* 예약하기 버튼 (데스크탑) */}
             <a
               href={`tel:${PHONE}`}
-              className="hidden lg:flex ml-auto items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-opacity hover:opacity-80"
-              style={{ backgroundColor: '#92DCE5', color: '#2B2D42' }}
+              className="hidden lg:flex ml-auto items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-80 text-white"
+              style={{ backgroundColor: '#0080C8' }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.59.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.02l-2.2 2.19z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
               </svg>
-              상담하기
+              예약하기
             </a>
 
             {/* 햄버거 메뉴 버튼 (lg 미만) */}
             <div className="lg:hidden ml-auto flex items-center gap-3">
               <a
                 href={`tel:${PHONE}`}
-                className="flex items-center justify-center w-9 h-9 rounded-full"
-                style={{ backgroundColor: '#92DCE5', color: '#2B2D42' }}
+                className="flex items-center justify-center w-9 h-9 rounded-full text-white"
+                style={{ backgroundColor: '#0080C8' }}
                 aria-label="전화 상담"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -94,11 +95,11 @@ export default function Header() {
                 aria-label="메뉴 열기"
                 aria-expanded={navOpen}
                 aria-controls="mobile-nav"
-                className="w-11 h-11 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-white/10 transition-colors"
+                className="w-11 h-11 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-gray-100 transition-colors"
               >
-                <span className="block w-6 h-0.5 rounded-full bg-white" />
-                <span className="block w-6 h-0.5 rounded-full bg-white" />
-                <span className="block w-4 h-0.5 rounded-full self-start ml-[5px] bg-white" />
+                <span className="block w-6 h-0.5 rounded-full bg-gray-700" />
+                <span className="block w-6 h-0.5 rounded-full bg-gray-700" />
+                <span className="block w-4 h-0.5 rounded-full self-start ml-[5px] bg-gray-700" />
               </button>
             </div>
 
