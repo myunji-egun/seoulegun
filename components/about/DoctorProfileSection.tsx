@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import { GraduationCap, UsersRound } from 'lucide-react'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import DoctorTeamSection from '@/components/about/DoctorTeamSection'
@@ -126,10 +127,13 @@ export default function DoctorProfileSection() {
       aria-labelledby="doctors-heading"
     >
       {/* 섹션 헤더 — 풀페이지 */}
-      <div className="relative min-h-[60vh] lg:h-screen flex items-center py-16 lg:py-0 overflow-hidden">
+      <div
+        id="doctor-intro"
+        className="relative min-h-screen flex items-center overflow-hidden scroll-mt-36 bg-white lg:bg-transparent"
+      >
         {/* 배경 이미지 — 세로 기준 중하방 노출 */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden lg:block"
           style={{
             backgroundImage: "url('/images/clinic/egun-outerior.jpg')",
             backgroundSize: 'cover',
@@ -138,9 +142,62 @@ export default function DoctorProfileSection() {
           }}
         />
         {/* 어두운 오버레이 */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 100%)' }} />
+        <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 100%)' }} />
 
-        <div ref={ref} className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full px-5 py-10 lg:hidden">
+          <div className="mx-auto max-w-[390px] rounded-[28px] bg-white">
+            <p className="mb-8 text-center text-[16px] font-semibold text-gray-700">
+              의료진 소개
+            </p>
+
+            <h2 className="text-center text-[24px] font-bold leading-snug text-gray-900">
+              <span className="text-[#0080C8]">서울대학교 출신 대표원장 2인</span>
+              <br />
+              전문의료진으로 구성된
+              <br />
+              서울이건치과
+            </h2>
+
+            <div className="mt-7 overflow-hidden rounded-[18px] bg-stone-50 shadow-[0_12px_34px_rgba(43,45,66,0.08)]">
+              <img
+                src="/images/doctors/doctors-mobile-v2-crop.png"
+                alt="서울이건치과 의료진"
+                className="w-full h-auto"
+              />
+            </div>
+
+            <p className="mt-7 text-center text-[16px] font-medium leading-relaxed text-gray-600">
+              풍부한 경험과 전문성을 갖춘 의료진이
+              <br />
+              처음부터 끝까지 책임진료합니다.
+            </p>
+
+            <div className="mt-8 grid grid-cols-2 rounded-[18px] bg-[#0057B8] px-5 py-6 text-white shadow-[0_12px_26px_rgba(0,87,184,0.28)]">
+              <div className="flex flex-col items-center justify-center gap-3 border-r border-white/30 px-2 text-center">
+                <GraduationCap className="h-9 w-9 text-white" strokeWidth={1.6} />
+                <p className="text-[15px] font-semibold leading-relaxed">
+                  서울대학교 출신
+                  <br />
+                  대표원장 2인
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center gap-3 px-2 text-center">
+                <UsersRound className="h-9 w-9 text-white" strokeWidth={1.6} />
+                <p className="text-[15px] font-semibold leading-relaxed">
+                  분야별 전문의
+                  <br />
+                  협진 진료
+                </p>
+              </div>
+            </div>
+
+            <p className="mt-7 text-center text-[15px] font-medium leading-relaxed text-gray-500">
+              꾸준한 연구와 학술활동으로 더 나은 진료를 약속드립니다.
+            </p>
+          </div>
+        </div>
+
+        <div ref={ref} className="relative z-10 hidden max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:block">
           <p className={`text-[14px] font-semibold tracking-[0.25em] uppercase text-[#92DCE5] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             Our Doctors
           </p>

@@ -194,3 +194,25 @@
 .scroll-reveal-left { animation: slide-in-left 0.6s ease-out both !important; opacity: 1 !important; }
 .scroll-reveal-right { animation: slide-in-right 0.6s ease-out both !important; opacity: 1 !important; }
 
+.about-page .scroll-hidden,
+.about-page .scroll-reveal-drop,
+.about-page .scroll-reveal-up,
+.about-page .scroll-reveal-scale,
+.about-page .scroll-reveal-left,
+.about-page .scroll-reveal-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.natural-tooth-page .scroll-hidden,
+.natural-tooth-page .scroll-reveal-drop,
+.natural-tooth-page .scroll-reveal-up,
+.natural-tooth-page .scroll-reveal-scale,
+.natural-tooth-page .scroll-reveal-left,
+.natural-tooth-page .scroll-reveal-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+

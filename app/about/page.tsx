@@ -6,6 +6,7 @@ import ScheduleSection from '@/components/about/ScheduleSection'
 import InteriorSection from '@/components/about/InteriorSection'
 import LabSection from '@/components/about/LabSection'
 import AccessSection from '@/components/about/AccessSection'
+import AboutChapterSnap from '@/components/about/AboutChapterSnap'
 
 export const metadata: Metadata = {
   title: '수원치과 이건치과소개 | 서울이건치과',
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="about-page">
+      <AboutChapterSnap />
       {/* SEO h1 */}
       <h1 className="sr-only">수원치과 서울이건치과 소개 - 서울대 출신 원장 2인 책임진료</h1>
 
@@ -42,6 +44,6 @@ export default function AboutPage() {
       <InteriorSection />
       <LabSection />
       <AccessSection />
-    </>
+    </div>
   )
 }

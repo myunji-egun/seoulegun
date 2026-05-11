@@ -16,3 +16,9 @@
 
 모바일에서는 타이틀 크기를 줄이고, 우측 설명문이 아래로 내려오게 해주세요.
 
+이건플레이스 주소 (리뷰)주소 : https://m.place.naver.com/restaurant/12872860
+
+유튜브 주소 : https://www.youtube.com/channel/UCwOs9Acu3VSBKfN-8KQU7Tg
+블로그 주소 : https://blog.naver.com/seoulegundc
+카카오톡 상담 : https://pf.kakao.com/\_nqBms
+
