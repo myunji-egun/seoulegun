@@ -193,7 +193,7 @@ export default function LabSection() {
         </div>
 
         {/* 기공소 시설 라벨 */}
-        <div className="flex items-center gap-4 mb-10">
+        <div id="lab-facilities" className="flex items-center gap-4 mb-10 scroll-mt-36">
           <h3 className="text-lg font-semibold text-white">기공소 시설</h3>
           <div className="flex-1 h-px bg-gray-700" />
         </div>

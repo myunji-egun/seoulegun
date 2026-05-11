@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
+import { hasSupabaseConfig } from '@/lib/supabase/config'
 
 // GET: 증례 목록 (공개, ?board_category 필터)
 export async function GET(request: NextRequest) {
   try {
+    if (!hasSupabaseConfig()) {
+      return NextResponse.json([])
+    }
+
     const supabase = await createClient()
     const { searchParams } = new URL(request.url)
     const boardCategory = searchParams.get('board_category')
@@ -37,6 +42,13 @@ export async function GET(request: NextRequest) {
 // POST: 증례 추가 (인증 필요)
 export async function POST(request: NextRequest) {
   try {
+    if (!hasSupabaseConfig()) {
+      return NextResponse.json(
+        { error: 'Supabase 환경변수가 설정되지 않았습니다.' },
+        { status: 503 },
+      )
+    }
+
     if (!(await isAdminAuthenticated())) {
       return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 })
     }

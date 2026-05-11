@@ -13,14 +13,22 @@ interface BoardAnchorNavProps {
 }
 
 export default function BoardAnchorNav({ items }: BoardAnchorNavProps) {
-  const [activeId, setActiveId] = useState<string>(items[0]?.id ?? '')
+  const [activeId, setActiveId] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.slice(1)
+      if (hash && items.some((item) => item.id === hash)) return hash
+    }
+    return items[0]?.id ?? ''
+  })
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       e.preventDefault()
       const el = document.getElementById(id)
       if (!el) return
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const offset = 164
+      const top = el.getBoundingClientRect().top + window.scrollY - offset
+      window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' })
       setActiveId(id)
     },
     [],
@@ -68,7 +76,7 @@ export default function BoardAnchorNav({ items }: BoardAnchorNavProps) {
                 <a
                   href={`#${item.id}`}
                   onClick={(e) => handleClick(e, item.id)}
-                  className={`inline-block px-4 sm:px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 border-b-2 ${
+                  className={`inline-block px-4 sm:px-5 py-3 text-base font-medium whitespace-nowrap transition-all duration-200 border-b-2 ${
                     isActive
                       ? 'text-[#0080C8] border-[#0080C8]'
                       : 'text-gray-500 border-transparent hover:text-[#0080C8] hover:border-[#0080C8]/40'

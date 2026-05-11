@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const MEDIA_ITEMS = [
-  { id: 'notice',  label: '공지사항',       image: '/images/media-image/notice.webp',  href: '/notice',            hoverColor: '#92DCE5' },
-  { id: 'blog',    label: '원장님 칼럼',     image: '/images/media-image/blog.webp',    href: '/media?tab=blog',    hoverColor: '#22C55E' },
-  { id: 'youtube', label: '이건TV',          image: '/images/media-image/youtube.webp', href: '/media?tab=youtube', hoverColor: '#FF0000' },
-  { id: 'review',  label: '환자분 실제 후기', image: '/images/media-image/review.webp',  href: '/media?tab=review',  hoverColor: '#22C55E' },
-] as const
+  { id: 'notice',  label: '공지사항',       image: '/images/media-image/notice.webp',  href: '/notice',                                                    external: false, hoverColor: '#92DCE5' },
+  { id: 'blog',    label: '원장님 칼럼',     image: '/images/media-image/blog.webp',    href: 'https://blog.naver.com/seoulegundc',                          external: true,  hoverColor: '#22C55E' },
+  { id: 'youtube', label: '이건TV',          image: '/images/media-image/youtube.webp', href: 'https://youtube.com/@seoulegun',                             external: true,  hoverColor: '#FF0000' },
+  { id: 'review',  label: '환자분 실제 후기', image: '/images/media-image/review.webp',  href: 'https://m.place.naver.com/restaurant/12872860',               external: true,  hoverColor: '#22C55E' },
+]
 
 export default function MediaSection() {
   const { ref, isVisible } = useScrollReveal(0.2)
@@ -36,6 +36,7 @@ export default function MediaSection() {
             <Link key={item.id} href={item.href}
               className={`group relative flex flex-col items-center ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={isVisible ? { animationDelay: `${0.2 + i * 0.12}s` } : undefined}
+              {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               onMouseEnter={() => setHovered(item.id)}
               onMouseLeave={() => setHovered(null)}
             >

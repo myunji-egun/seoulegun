@@ -12,12 +12,14 @@ export const metadata: Metadata = {
 
 export default function NaturalToothPage() {
   return (
-    <TreatmentPage
+    <div className="natural-tooth-page">
+      <TreatmentPage
       title="자연치아 살리기"
       subtitle="치과 치료의 기본입니다"
       treatments={naturalToothTreatments}
       videoId="pYzA7tc55lo"
       extraSection={<NaturalToothIdentity />}
-    />
+      />
+    </div>
   )
 }

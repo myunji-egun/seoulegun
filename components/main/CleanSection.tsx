@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 export default function CleanSection() {
@@ -54,13 +53,15 @@ export default function CleanSection() {
             <span style={{ color: '#92DCE5', fontWeight: 600 }}>소독</span>을 진행합니다.
           </p>
 
-          <Link
-            href="/about#interior"
+          <a
+            href="https://fromel.biz/business/system/"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`inline-block px-6 py-3 rounded-2xl text-white text-base font-medium transition-opacity hover:opacity-80 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
             style={{ backgroundColor: '#0080C8', ...(isVisible ? { animationDelay: '0.3s' } : {}) }}
           >
             믿을 수 있는 위생 시스템
-          </Link>
+          </a>
         </div>
 
         {/* 이미지 영역 — 데스크탑만 표시 */}

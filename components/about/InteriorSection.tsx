@@ -191,7 +191,11 @@ export default function InteriorSection() {
       <Carousel3D images={MAIN_IMAGES} altPrefix="서울이건치과 본관 내부" />
 
       {/* 별관 */}
-      <div ref={annexRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+      <div
+        ref={annexRef}
+        id="interior-annex"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 scroll-mt-36"
+      >
         <div className={`flex items-center gap-4 mb-10 ${annexVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
           <h3 className="text-lg font-bold text-gray-900">별관</h3>
           <div className="flex-1 h-px bg-gray-200" />

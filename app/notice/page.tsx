@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import { hasSupabaseConfig } from '@/lib/supabase/config'
 
 interface Notice {
   id: string
@@ -8,23 +10,48 @@ interface Notice {
   notice_date: string
 }
 
+interface NoticePageProps {
+  searchParams?: Promise<{
+    page?: string
+  }>
+}
+
 export const metadata = {
   title: '공지사항 | 수원치과 서울이건치과',
   description: '수원치과 서울이건치과의 최신 공지사항, 휴무일정, 진료안내를 확인하세요.',
 }
 
-export default async function NoticePage() {
-  const supabase = await createClient()
-  const { data: notices } = await supabase
-    .from('notices')
-    .select('*')
-    .eq('is_active', true)
-    .order('notice_date', { ascending: false })
+export default async function NoticePage({ searchParams }: NoticePageProps) {
+  const params = await searchParams
+  let notices: Notice[] = []
 
-  const items: Notice[] = notices || []
+  if (hasSupabaseConfig()) {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('notices')
+      .select('*')
+      .eq('is_active', true)
+      .order('notice_date', { ascending: false })
 
-  // 이미지가 있는 최근 공지 3개
-  const imageNotices = items.filter((n) => n.image_url).slice(0, 3)
+    notices = data || []
+  }
+
+  const items: Notice[] = notices
+
+  const recentItems = items.slice(0, 3)
+  const imageNotices = items.filter((n) => n.image_url)
+  const imagesPerPage = 5
+  const requestedPage = Number(params?.page || '1')
+  const totalImagePages = Math.max(1, Math.ceil(imageNotices.length / imagesPerPage))
+  const currentImagePage = Math.min(
+    Math.max(Number.isFinite(requestedPage) ? requestedPage : 1, 1),
+    totalImagePages,
+  )
+  const imagePageStart = (currentImagePage - 1) * imagesPerPage
+  const pagedImageNotices = imageNotices.slice(
+    imagePageStart,
+    imagePageStart + imagesPerPage,
+  )
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString('ko-KR', {
@@ -35,7 +62,7 @@ export default async function NoticePage() {
   }
 
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <div className="text-center mb-12">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
           공지사항
@@ -45,56 +72,99 @@ export default async function NoticePage() {
         </p>
       </div>
 
-      {/* 최근 이미지 공지 상단 배너 */}
-      {imageNotices.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-          {imageNotices.map((notice) => (
-            <div key={notice.id} className="rounded-xl overflow-hidden border border-gray-200 bg-white hover:shadow-md transition-shadow">
-              <img
-                src={notice.image_url!}
-                alt={notice.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-sm text-gray-900 truncate">{notice.title}</h3>
-                <time className="text-xs text-gray-400 mt-1 block">{formatDate(notice.notice_date)}</time>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
       {items.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
           등록된 공지사항이 없습니다.
         </div>
       ) : (
-        <div className="space-y-4">
-          {items.map((notice) => (
-            <article
-              key={notice.id}
-              className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <h2 className="text-lg font-semibold text-gray-900">
-                    {notice.title}
+        <div className="space-y-14">
+          <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+            <div className="border-b border-gray-200 bg-gray-50 px-5 py-4 sm:px-6">
+              <h2 className="text-lg font-semibold text-gray-900">공지 목록</h2>
+            </div>
+            <ol className="divide-y divide-gray-200">
+              {recentItems.map((notice, index) => (
+                <li key={notice.id}>
+                  <div className="flex gap-3 px-5 py-4 transition-colors hover:bg-gray-50 sm:px-6">
+                    <span className="w-10 flex-shrink-0 text-base font-semibold text-[#0080C8] tabular-nums">
+                      {String(index + 1).padStart(2, '0')}.
+                    </span>
+                    <h2 className="min-w-0 text-base sm:text-lg font-semibold text-gray-900">
+                      {notice.title}
+                    </h2>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {imageNotices.length > 0 && (
+            <div>
+              <div className="mb-5 flex items-end justify-between gap-4">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                    공지 이미지
                   </h2>
-                  {notice.image_url && (
-                    <img src={notice.image_url} alt={notice.title} className="w-full h-auto rounded-lg mt-3 max-h-80 object-cover" />
-                  )}
-                  {notice.content && (
-                    <p className="mt-2 text-sm text-gray-600 whitespace-pre-line leading-relaxed">
-                      {notice.content}
-                    </p>
-                  )}
+                  <p className="mt-2 text-sm text-gray-500">
+                    등록된 이미지를 최신순으로 원본 비율 그대로 보여드립니다.
+                  </p>
                 </div>
-                <time className="text-xs text-gray-400 whitespace-nowrap flex-shrink-0">
-                  {formatDate(notice.notice_date)}
-                </time>
               </div>
-            </article>
-          ))}
+
+              <div className="space-y-8">
+                {pagedImageNotices.map((notice) => (
+                  <article
+                    key={notice.id}
+                    className="overflow-hidden rounded-lg border border-gray-200 bg-white"
+                  >
+                    <div className="flex flex-col gap-2 border-b border-gray-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+                      <h3 className="text-base font-semibold text-gray-900">
+                        {notice.title}
+                      </h3>
+                      <time className="text-sm text-gray-500 whitespace-nowrap">
+                        {formatDate(notice.notice_date)}
+                      </time>
+                    </div>
+                    <div className="bg-gray-50 px-3 py-4 sm:px-6 sm:py-6">
+                      <img
+                        src={notice.image_url!}
+                        alt={notice.title}
+                        className="mx-auto h-auto max-w-full rounded-md border border-gray-100 bg-white"
+                      />
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              {totalImagePages > 1 && (
+                <nav
+                  aria-label="공지 이미지 페이지"
+                  className="mt-8 flex justify-center gap-2"
+                >
+                  {Array.from({ length: totalImagePages }, (_, index) => {
+                    const page = index + 1
+                    const isCurrent = page === currentImagePage
+
+                    return (
+                      <Link
+                        key={page}
+                        href={`/notice?page=${page}`}
+                        aria-current={isCurrent ? 'page' : undefined}
+                        className={[
+                          'flex h-10 min-w-10 items-center justify-center rounded-md border px-3 text-sm font-semibold transition-colors',
+                          isCurrent
+                            ? 'border-[#0080C8] bg-[#0080C8] text-white'
+                            : 'border-gray-200 bg-white text-gray-700 hover:border-[#0080C8] hover:text-[#0080C8]',
+                        ].join(' ')}
+                      >
+                        {page}
+                      </Link>
+                    )
+                  })}
+                </nav>
+              )}
+            </div>
+          )}
         </div>
       )}
     </section>

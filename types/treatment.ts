@@ -10,7 +10,7 @@ export interface TreatmentContent {
   subtitle: string
   description: string
   richContent?: string   // 마크다운 형식 본문 (###, >, ---, - 지원)
-  benefits: string[]
+  benefits: { tag: string; description: string }[]
   faq: FAQ[]
   image?: string
   beforeImage?: string
@@ -19,4 +19,5 @@ export interface TreatmentContent {
   videoUrl?: string
   bottomImage?: string
   sideImage?: string
+  bottomVideoUrl?: string
 }

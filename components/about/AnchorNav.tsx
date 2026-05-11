@@ -10,7 +10,6 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { id: 'philosophy', label: '진료철학' },
   { id: 'doctors', label: '의료진소개' },
-  { id: 'schedule', label: '진료일정' },
   { id: 'interior', label: '내부전경' },
   { id: 'lab', label: '디지털기공소' },
   { id: 'access', label: '오시는길' },
@@ -54,7 +53,8 @@ export default function AnchorNav() {
     if (!el) return
     const OFFSET = 144 // fixed header (80px) + AnchorNav (~52px) + buffer
     const top = el.getBoundingClientRect().top + window.scrollY - OFFSET
-    window.scrollTo({ top, behavior: 'smooth' })
+    window.dispatchEvent(new CustomEvent('about-anchor-scroll'))
+    window.scrollTo({ top, behavior: 'auto' })
   }
 
   return (

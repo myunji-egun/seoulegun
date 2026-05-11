@@ -18,7 +18,7 @@ const TRANSIT_INFO = [
     lines: [
       {
         name: '피자스쿨 매탄점에서 왼쪽 방향으로 이동',
-        stop: '두산부동산공인중개사 사무소에서 오른쪽으로 돌면 파리바게트 빌딩 2층 서울이건치과 입구가 있습니다.',
+        stop: '두산부동산공인중개사 사무소에서 오른쪽으로 돌면 파리바게트 빌딩 2층 서울이건치과 입구가 있습니다.\n본관 : 파리바게트 건물 2층\n별관 : 뜰커피, GS마트 건물 3층',
       },
     ],
   },
@@ -207,7 +207,7 @@ export default function AccessSection() {
                         {line.stop && (
                           <>
                             {line.name && <br />}
-                            <span className="text-gray-500 text-base">{line.stop}</span>
+                            <span className="text-gray-500 text-base whitespace-pre-line">{line.stop}</span>
                           </>
                         )}
                       </li>
