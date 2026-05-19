@@ -20,11 +20,11 @@ export default function DoctorGroup() {
         style={{ background: 'linear-gradient(to top, rgba(43,45,66,0.45) 0%, transparent 100%)' }} />
 
       <div ref={ref} className="relative z-10 h-full flex flex-col items-center justify-center px-4 pb-32 -mt-[118px]">
-        <h2 className={`text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] font-bold text-gray-900 text-center leading-[1.2] tracking-tight mb-5 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+        <h2 className={`text-[32px] sm:text-[38px] md:text-[46px] lg:text-[52px] font-bold text-gray-900 text-center leading-[1.2] tracking-tight mb-5 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           한자리에서 <span style={{ color: 'var(--e-primary)' }}>변하지 않는 마음</span>
         </h2>
 
-        <p className={`text-[20px] sm:text-[24px] md:text-[28px] text-gray-700 text-center tracking-wide mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+        <p className={`text-[30px] sm:text-[34px] md:text-[38px] text-gray-700 text-center tracking-wide mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}>
           <span style={{ color: 'var(--e-primary)', fontWeight: 700 }}>서울대학교</span> 출신 2인 대표원장
         </p>
