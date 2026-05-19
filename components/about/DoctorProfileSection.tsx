@@ -1,117 +1,121 @@
 'use client'
 
-import { useRef } from 'react'
-import { GraduationCap, UsersRound } from 'lucide-react'
+import { GraduationCap, Award, UsersRound } from 'lucide-react'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import DoctorTeamSection from '@/components/about/DoctorTeamSection'
 
 function DoctorCard({
   doctor,
-  index,
 }: {
   doctor: (typeof doctors)[0]
-  index: number
 }) {
-  const { ref, isVisible } = useScrollReveal(0.15)
-
+  const { ref, isVisible } = useScrollReveal(0.1)
   const mergedRef = (node: HTMLElement | null) => {
     (ref as React.MutableRefObject<HTMLElement | null>).current = node
   }
 
   return (
-    <article
-      ref={mergedRef}
-      id={doctor.id}
-      className="min-h-screen lg:h-screen flex items-center py-12 lg:py-0"
-    >
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-10 items-stretch">
+    <article ref={mergedRef} id={doctor.id} className="py-16 sm:py-20 scroll-mt-36">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* 왼쪽: 이름 + 학력·경력 (위 정렬) */}
-          <div className="flex flex-col justify-start space-y-4 lg:order-1">
+        {/* 섹션 레이블 */}
+        <div className={`flex items-center gap-2 mb-6 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+          <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">의료진 소개</p>
+        </div>
+
+        {/* 메인 카드 */}
+        <div className={`rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 bg-[#EEF4FA] ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}
+          style={isVisible ? { animationDelay: '0.05s' } : undefined}>
+
+          {/* 왼쪽: 사진 */}
+          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[500px] overflow-hidden">
+            <img
+              src={doctor.image}
+              alt={`${doctor.name} ${doctor.role}`}
+              className="w-full h-full object-cover object-top"
+            />
+            {doctor.documents && doctor.documents.length > 0 && (
+              <div className="absolute bottom-4 left-4 flex gap-2">
+                {doctor.documents.map((doc, i) => (
+                  <img
+                    key={i}
+                    src={doc}
+                    alt={`${doctor.name} 자격증 ${i + 1}`}
+                    className="w-32 h-40 object-cover rounded-lg shadow-xl border-2 border-white"
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* 오른쪽: 정보 + 학력·경력 */}
+          <div className="p-8 lg:p-10 flex flex-col gap-6">
+            {/* 전문 분야 태그 + 이름 */}
             <div>
-              <p className={`text-[20px] font-semibold tracking-[0.2em] uppercase text-[#0080C8] mb-1 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-                style={isVisible ? { animationDelay: '0.3s' } : undefined}>
+              <p className="text-[17px] text-gray-500 mb-3 tracking-wide">
                 {doctor.specialtyDetail ?? doctor.specialty}
               </p>
-              <h3 className={`text-[24px] sm:text-[26px] font-bold text-gray-900 mb-0.5 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-                style={isVisible ? { animationDelay: '0.4s' } : undefined}>
-                {doctor.name} {doctor.role}
+              <h3 className="text-4xl sm:text-5xl font-black text-gray-900 mb-1 leading-tight">
+                {doctor.name}{' '}
+                <span className="font-bold">{doctor.role}</span>
               </h3>
-              <div className={`w-8 h-0.5 bg-[#0080C8] mt-2 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-                style={isVisible ? { animationDelay: '0.5s' } : undefined} />
+              {doctor.subRole && (
+                <p className="text-base text-gray-600 mt-1">{doctor.subRole}</p>
+              )}
+              <div className="w-8 h-0.5 bg-[#0080C8] mt-3" />
             </div>
 
-            {doctor.careers && doctor.careers.length > 0 && (
+            {/* 학력·경력 */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <GraduationCap size={15} className="text-[#0080C8]" />
+                <h4 className="font-semibold text-gray-700 text-[15px]">학력 · 경력</h4>
+              </div>
+              <ul className="space-y-2">
+                {doctor.careers.map((c, i) => (
+                  <li key={i} className="flex items-start gap-2 text-[15px] text-gray-700 leading-relaxed">
+                    <span className="text-[#0080C8] shrink-0 mt-0.5">•</span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 학회 활동 및 수료 */}
+            {doctor.memberships && doctor.memberships.length > 0 && (
               <div>
-                <h4 className={`text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-                  style={isVisible ? { animationDelay: '0.6s' } : undefined}>
-                  학력 · 경력
-                </h4>
-                <ul className="space-y-1.5">
-                  {doctor.careers.map((career, i) => (
-                    <li key={i} className={`flex items-start gap-2 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-                      style={isVisible ? { animationDelay: `${0.7 + i * 0.1}s` } : undefined}>
-                      <span className="mt-1.5 w-1 h-1 rounded-full bg-[#0080C8] shrink-0" />
-                      <span className="text-[18px] text-gray-700 leading-relaxed">{career}</span>
+                <div className="flex items-center gap-2 mb-3">
+                  <Award size={15} className="text-[#0080C8]" />
+                  <h4 className="font-semibold text-gray-700 text-[15px]">학회 활동 및 수료</h4>
+                </div>
+                <ul className="space-y-2">
+                  {doctor.memberships.map((m, i) => (
+                    <li key={i} className="flex items-start gap-2 text-[15px] text-gray-700 leading-relaxed">
+                      <span className="text-[#0080C8] shrink-0 mt-0.5">•</span>
+                      {m}
                     </li>
                   ))}
                 </ul>
               </div>
             )}
           </div>
-
-          {/* 중앙: 사진 */}
-          <div className="lg:order-2 flex items-center justify-center">
-            <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] w-[290px] sm:w-[340px] lg:w-[400px] bg-stone-100 shadow-md mx-auto ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}>
-              <img
-                src={doctor.image}
-                alt={`${doctor.name} ${doctor.role}`}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3 bg-[#0080C8] text-white text-[14px] font-semibold px-2.5 py-0.5 rounded-full">
-                {doctor.role}
-              </div>
-            </div>
-          </div>
-
-          {/* 오른쪽: 졸업장 + 편지 (아래 정렬) */}
-          <div className="flex flex-col justify-end gap-4 lg:order-3">
-            {/* 졸업장 이미지 2열 */}
-            {doctor.documents && doctor.documents.length > 0 && (
-              <div className="grid grid-cols-2 gap-3">
-                {doctor.documents.map((src, i) => (
-                  <div
-                    key={i}
-                    className={`aspect-[3/4] rounded-xl overflow-hidden border-2 border-stone-200 bg-stone-100 shadow-sm ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
-                    style={isVisible ? { animationDelay: `${0.4 + i * 0.15}s` } : undefined}
-                  >
-                    <img
-                      src={src}
-                      alt={`${doctor.name} ${doctor.role} 자격증 ${i + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {doctor.letter && (
-              <div className={`bg-stone-50 border border-stone-200 rounded-xl p-4 relative ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
-                style={isVisible ? { animationDelay: `${0.7 + (doctor.careers?.length ?? 0) * 0.1 + 0.2}s` } : undefined}>
-                <span className="absolute top-3 right-4 text-[26px] text-[#0080C8]/20 font-serif leading-none select-none">&ldquo;</span>
-                <p className="text-[18px] sm:text-[20px] text-gray-700 leading-relaxed pr-6 italic whitespace-pre-line text-right">
-                  {doctor.letter}
-                </p>
-                <p className="text-right text-[16px] text-[#0080C8] font-semibold mt-2">
-                  — {doctor.name} {doctor.role}
-                </p>
-              </div>
-            )}
-          </div>
-
         </div>
+
+        {/* 편지 — 풀너비 하단, 필기체 */}
+        {doctor.letter && (
+          <div className={`mt-5 rounded-3xl bg-[#EEF4FA] px-10 py-8 relative ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={isVisible ? { animationDelay: '0.2s' } : undefined}>
+            <span className="absolute top-5 left-8 text-6xl text-[#0080C8]/15 font-serif select-none leading-none">❝</span>
+            <p className="text-xl sm:text-2xl text-gray-700 leading-[2] italic whitespace-pre-line pl-10" style={{ fontFamily: "'Georgia', 'Nanum Myeongjo', serif" }}>
+              {doctor.letter}
+            </p>
+            <p className="mt-4 pl-10 text-base font-semibold" style={{ color: '#0080C8' }}>
+              — {doctor.name} {doctor.role}
+            </p>
+          </div>
+        )}
+
       </div>
     </article>
   )
@@ -202,7 +206,7 @@ export default function DoctorProfileSection() {
             Our Doctors
           </p>
           <h2 id="doctors-heading"
-            className={`text-[32px] sm:text-[42px] lg:text-[54px] font-bold text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[22px] sm:text-[28px] lg:text-[36px] font-normal text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.1s' } : undefined}>
             한자리에서<br />
             <span style={{ color: '#92DCE5' }}>변하지 않는 마음</span>
@@ -218,9 +222,9 @@ export default function DoctorProfileSection() {
       {/* 이건진료진 카드 그리드 */}
       <DoctorTeamSection />
 
-      {/* 원장님 카드 — 각각 풀페이지 */}
-      {doctors.map((doctor, index) => (
-        <DoctorCard key={doctor.id} doctor={doctor} index={index} />
+      {/* 원장님 카드 — 각각 */}
+      {doctors.map((doctor) => (
+        <DoctorCard key={doctor.id} doctor={doctor} />
       ))}
     </section>
   )

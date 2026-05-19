@@ -31,7 +31,7 @@ export default function DoctorTeamSection() {
         {/* 타이틀 */}
         <div className={`mb-10 sm:mb-14 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           <p className="text-xs tracking-[0.35em] uppercase text-[#0080C8] mb-2">Medical Team</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">이건진료진</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">이건진료진</h2>
           <div className="mt-3 w-10 h-0.5 bg-[#0080C8]" />
         </div>
 

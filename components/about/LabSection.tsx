@@ -125,7 +125,7 @@ export default function LabSection() {
           </p>
           <h2
             id="lab-heading"
-            className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={headerVisible ? { animationDelay: '0.1s' } : undefined}
           >
             디지털 기공소
