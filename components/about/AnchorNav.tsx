@@ -68,7 +68,7 @@ export default function AnchorNav() {
             <li key={item.id} className="shrink-0">
               <button
                 onClick={() => handleClick(item.id)}
-                className={`relative px-3 sm:px-5 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
+                className={`relative px-3 sm:px-5 py-3.5 text-[17px] font-medium transition-colors whitespace-nowrap ${
                   activeId === item.id
                     ? 'text-[#0080C8]'
                     : 'text-gray-500 hover:text-gray-800'

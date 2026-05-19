@@ -43,7 +43,7 @@ export default function PhilosophySection() {
         {/* 메인 타이틀 */}
         <h2
           id="philosophy-heading"
-          className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.1s' } : undefined}
         >
           마음을 담아<br />

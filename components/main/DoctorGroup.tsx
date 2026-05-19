@@ -19,19 +19,19 @@ export default function DoctorGroup() {
       <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
         style={{ background: 'linear-gradient(to top, rgba(43,45,66,0.45) 0%, transparent 100%)' }} />
 
-      <div ref={ref} className="relative z-10 h-full flex flex-col items-center pt-[100px] md:pt-20 lg:pt-28 px-4">
-        <h2 className={`text-[25px] sm:text-[27px] md:text-[33px] lg:text-[39px] font-black text-gray-900 text-center leading-[1.3] mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+      <div ref={ref} className="relative z-10 h-full flex flex-col items-center justify-center px-4 pb-32 -mt-[118px]">
+        <h2 className={`text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] font-bold text-gray-900 text-center leading-[1.2] tracking-tight mb-5 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           한자리에서 <span style={{ color: 'var(--e-primary)' }}>변하지 않는 마음</span>
         </h2>
 
-        <p className={`text-[17px] sm:text-[19px] md:text-[21px] text-gray-700 text-center mb-6 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+        <p className={`text-[20px] sm:text-[24px] md:text-[28px] text-gray-700 text-center tracking-wide mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}>
           <span style={{ color: 'var(--e-primary)', fontWeight: 700 }}>서울대학교</span> 출신 2인 대표원장
         </p>
 
         <Link
           href="/about#doctors"
-          className={`text-sm font-medium transition-all duration-200 px-8 py-2.5 rounded-full ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+          className={`text-sm font-medium transition-all duration-200 px-5 py-2 rounded-full ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{
             color: 'var(--e-primary)',
             border: '1.5px solid var(--e-primary)',

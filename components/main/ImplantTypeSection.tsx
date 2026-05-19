@@ -67,7 +67,7 @@ export default function ImplantTypeSection() {
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.09)'; (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0.03)' }}
             >
               {/* 텍스트 영역 */}
-              <div className="p-5 lg:p-7 flex flex-col">
+              <div className="p-5 lg:p-7 flex flex-col flex-grow">
                 <p
                   className="tracking-[0.25em] mb-3 lg:mb-5"
                   style={{ fontSize: '13px', color: 'rgba(255,255,255,0.28)' }}

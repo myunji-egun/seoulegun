@@ -207,7 +207,7 @@ export default function AccessSection() {
                         {line.stop && (
                           <>
                             {line.name && <br />}
-                            <span className="text-gray-500 text-base whitespace-pre-line">{line.stop}</span>
+                            <span className="text-gray-600 whitespace-pre-line">{line.stop}</span>
                           </>
                         )}
                       </li>
@@ -229,9 +229,14 @@ export default function AccessSection() {
                     </li>
                   ))}
                 </ul>
-                <div className="grid grid-cols-2 gap-3">
-                  <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내 1" className="w-full h-auto rounded-xl" />
-                  <img src="/images/clinic/parking%20(2).jpg" alt="주차장 안내 2" className="w-full h-auto rounded-xl" />
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { src: '/images/clinic/way-1.png', alt: '오시는 길 안내 1' },
+                    { src: '/images/clinic/way-2.png', alt: '오시는 길 안내 2' },
+                    { src: '/images/clinic/way-3.jpg', alt: '오시는 길 안내 3' },
+                  ].map((img, i) => (
+                    <img key={i} src={img.src} alt={img.alt} className="w-full h-auto rounded-xl" />
+                  ))}
                 </div>
               </div>
             </div>

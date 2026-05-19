@@ -139,17 +139,13 @@ export default function TreatmentSection({
             alt="수원치과 서울이건치과"
             className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           />
-          <h2 className={`text-2xl sm:text-3xl font-bold text-gray-900 leading-tight ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          <h2 className={`text-3xl sm:text-4xl font-bold text-gray-900 leading-tight ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.1s' } : undefined}>
             {treatment.title}
           </h2>
-          <p className={`text-xl text-[#0080C8] font-bold ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          <p className={`text-[22px] sm:text-[24px] text-[#0080C8] font-bold leading-snug ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.2s' } : undefined}>
             {treatment.subtitle}
-          </p>
-          <p className={`text-[12px] text-gray-400 font-medium ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-            style={textVisible ? { animationDelay: '0.25s' } : undefined}>
-            수원치과 서울이건치과
           </p>
           <div className={`${textVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.3s' } : undefined}>
@@ -173,8 +169,8 @@ export default function TreatmentSection({
                     {i + 1}
                   </span>
                   <div>
-                    <p className="font-bold text-[16px] text-gray-900 leading-tight">{step.title}</p>
-                    {step.desc && <p className="text-[14px] text-gray-600 leading-relaxed mt-1">{step.desc}</p>}
+                    <p className="font-bold text-[17px] text-gray-900 leading-tight">{step.title}</p>
+                    {step.desc && <p className="text-[16px] text-gray-600 leading-relaxed mt-1">{step.desc}</p>}
                   </div>
                 </div>
               ))}
@@ -188,8 +184,8 @@ export default function TreatmentSection({
               {treatment.highlights.map((h, i) => (
                 <div key={i} className="flex flex-col items-center text-center gap-1.5 py-2">
                   <LucideIcon name={h.icon} size={26} className="text-[#0080C8]" />
-                  <p className="font-bold text-sm text-gray-900 leading-tight">{h.label}</p>
-                  <p className="text-[13px] text-gray-600 font-medium leading-relaxed">{h.desc}</p>
+                  <p className="font-bold text-[17px] text-gray-900 leading-tight">{h.label}</p>
+                  <p className="text-[15px] text-gray-600 font-medium leading-relaxed">{h.desc}</p>
                 </div>
               ))}
             </div>
@@ -281,8 +277,8 @@ export default function TreatmentSection({
             {treatment.highlights.map((h, i) => (
               <div key={i} className="flex flex-col items-center text-center gap-2 py-3">
                 <LucideIcon name={h.icon} size={36} className="text-gray-300" />
-                <p className="font-bold text-[14px] text-gray-900 leading-tight">{h.label}</p>
-                <p className="text-[13px] text-gray-600 font-medium leading-relaxed">{h.desc}</p>
+                <p className="font-bold text-[18px] text-gray-900 leading-tight">{h.label}</p>
+                <p className="text-[16px] text-gray-600 font-medium leading-relaxed">{h.desc}</p>
               </div>
             ))}
           </div>
@@ -339,7 +335,7 @@ export default function TreatmentSection({
       {/* 치료 과정 스텝 카드 */}
       {treatment.steps && !isTriPanel && (
         <div ref={cardRef} className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">{treatment.title} 치료 과정</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">{treatment.title} 치료 과정</h2>
           <div className="flex items-stretch w-full overflow-x-auto pb-2">
             {treatment.steps.map((step, i) => (
               <div key={i} className="flex items-center flex-1 min-w-[130px]">
@@ -347,11 +343,11 @@ export default function TreatmentSection({
                   <span className="w-9 h-9 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-sm font-bold shrink-0">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="font-bold text-[15px] text-gray-900 leading-tight">{step.title}</p>
+                  <p className="font-bold text-[17px] text-gray-900 leading-tight">{step.title}</p>
                   {step.icon && (
                     <LucideIcon name={step.icon} size={30} className="text-gray-300" />
                   )}
-                  <p className="text-[13px] text-gray-600 font-medium leading-relaxed">{step.desc}</p>
+                  <p className="text-[16px] text-gray-600 font-medium leading-relaxed">{step.desc}</p>
                 </div>
                 {i < treatment.steps!.length - 1 && (
                   <ChevronRight size={18} className="text-gray-300 mx-2 shrink-0" />
@@ -366,14 +362,14 @@ export default function TreatmentSection({
       {treatment.indications && !isTriPanel && (
         <div className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{ animationDelay: '0.1s' }}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">{treatment.title}가 필요한 경우</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">{treatment.title}가 필요한 경우</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {treatment.indications.map((ind, i) => (
               <div key={i} className="bg-gray-50 rounded-2xl p-5 flex flex-col items-center gap-3 text-center">
                 <span className="w-8 h-8 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                   <LucideIcon name="Check" size={16} className="text-white" strokeWidth={3} />
                 </span>
-                <p className="text-[14px] text-gray-700 font-medium leading-relaxed whitespace-pre-line">{ind}</p>
+                <p className="text-[16px] text-gray-700 font-medium leading-relaxed whitespace-pre-line">{ind}</p>
               </div>
             ))}
           </div>
@@ -397,7 +393,7 @@ export default function TreatmentSection({
 
       {/* benefits 섹션 타이틀 */}
       {treatment.benefitsTitle && (
-        <h2 className={`text-2xl font-bold text-gray-900 text-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+        <h2 className={`text-3xl font-bold text-gray-900 text-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           {treatment.benefitsTitle}
         </h2>
       )}
@@ -411,10 +407,10 @@ export default function TreatmentSection({
             {benefit.icon && (
               <LucideIcon name={benefit.icon} size={36} className="text-[#0080C8] mb-1" />
             )}
-            <h3 className="text-[#0080C8] font-bold text-[16px] leading-snug">
+            <h3 className="text-[#0080C8] font-bold text-[18px] leading-snug">
               #{benefit.tag}
             </h3>
-            <p className="text-gray-600 text-[14px] leading-relaxed">
+            <p className="text-gray-600 text-[16px] leading-relaxed">
               {benefit.description}
             </p>
           </div>
@@ -424,7 +420,7 @@ export default function TreatmentSection({
       {/* 비교표 */}
       {treatment.comparison && (
         <div className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`} style={{ animationDelay: '0.15s' }}>
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-6">
             {treatment.comparison.leftLabel}와의 차이점
           </h2>
           <div className="rounded-2xl overflow-hidden border border-gray-100">
@@ -441,14 +437,14 @@ export default function TreatmentSection({
             {/* 데이터 행 */}
             {treatment.comparison.rows.map((row, i) => (
               <div key={i} className={`grid grid-cols-[1fr_auto_1fr] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
-                <div className="flex items-center justify-center px-4 py-4 text-[14px] text-gray-500 text-center leading-snug border-r border-gray-100">
+                <div className="flex items-center justify-center px-4 py-4 text-[16px] text-gray-500 text-center leading-snug border-r border-gray-100">
                   {row.leftText}
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 w-28 sm:w-36 px-2 py-4 border-r border-gray-100">
                   {row.icon && <LucideIcon name={row.icon} size={18} className="text-[#0080C8]" />}
-                  <span className="text-[12px] font-semibold text-gray-700">{row.label}</span>
+                  <span className="text-[14px] font-semibold text-gray-700">{row.label}</span>
                 </div>
-                <div className="flex items-center justify-center px-4 py-4 text-[14px] font-semibold text-center leading-snug" style={{ color: '#0080C8' }}>
+                <div className="flex items-center justify-center px-4 py-4 text-[16px] font-semibold text-center leading-snug" style={{ color: '#0080C8' }}>
                   {row.rightText}
                 </div>
               </div>
@@ -462,7 +458,7 @@ export default function TreatmentSection({
         <div className={`flex items-center gap-4 border border-gray-200 rounded-2xl px-6 py-5 bg-gray-50 ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{ animationDelay: '0.2s' }}>
           <LucideIcon name="Smile" size={28} className="text-[#0080C8] shrink-0" />
-          <p className="text-[15px] text-gray-700 font-medium leading-relaxed">{treatment.bottomCta}</p>
+          <p className="text-[17px] text-gray-700 font-medium leading-relaxed">{treatment.bottomCta}</p>
         </div>
       )}
     </div>
