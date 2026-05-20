@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
     }
 
     return NextResponse.json(data, { status: 201 })
@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
     const { data, error } = await query
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
     }
 
     return NextResponse.json(data)
