@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: '수원 임플란트 | 서울이건치과',
   description:
     '수원치과 서울이건치과 임플란트 - 올온, 즉시로딩, 네비게이션, 상악동 거상술, 당뇨 환자 임플란트를 안내합니다.',
+  alternates: {
+    canonical: 'https://egundc.com/implant',
+  },
 }
 
 export default function ImplantPage() {

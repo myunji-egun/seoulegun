@@ -9,12 +9,15 @@ export const metadata: Metadata = {
   title: '수원 서울이건치과 | 서울대 출신 원장 2인 책임진료',
   description:
     '수원치과 서울이건치과 - 서울대 출신 대표 원장 2인이 처음 상담부터 치료 마무리까지 책임지고 진료합니다. 수원 임플란트, 교정, 충치치료, 심미보철, 소아치과.',
-  metadataBase: new URL('https://egun.vercel.app'),
+  metadataBase: new URL('https://egundc.com'),
+  alternates: {
+    canonical: 'https://egundc.com',
+  },
   openGraph: {
     title: '수원 서울이건치과 | 서울대 출신 원장 2인 책임진료',
     description:
       '수원치과 서울이건치과 - 서울대 출신 대표 원장 2인이 책임진료합니다. 수원 임플란트, 교정, 충치치료.',
-    url: 'https://egun.vercel.app',
+    url: 'https://egundc.com',
     siteName: '서울이건치과',
     locale: 'ko_KR',
     type: 'website',
@@ -33,9 +36,6 @@ export const metadata: Metadata = {
     description:
       '수원치과 서울이건치과 - 서울대 출신 대표 원장 2인이 책임진료합니다. 수원 임플란트, 교정, 충치치료.',
     images: ['/images/logo/egun-logo%20(1).png'],
-  },
-  alternates: {
-    canonical: '/',
   },
 }
 
