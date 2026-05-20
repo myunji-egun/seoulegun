@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE_URL = 'https://egun.vercel.app'
+const BASE_URL = 'https://egundc.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
@@ -8,9 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/about', priority: 0.8 },
     { url: '/natural-tooth', priority: 0.8 },
     { url: '/implant', priority: 0.8 },
-    { url: '/cosmetic', priority: 0.8 },
-    { url: '/orthodontics', priority: 0.8 },
+    { url: '/digital-prosthesis', priority: 0.8 },
+    { url: '/orthodontic', priority: 0.8 },
     { url: '/pediatric', priority: 0.8 },
+    { url: '/sedation', priority: 0.7 },
+    { url: '/location', priority: 0.7 },
+    { url: '/invisalign', priority: 0.7 },
     { url: '/media', priority: 0.6 },
     { url: '/notice', priority: 0.5 },
   ]

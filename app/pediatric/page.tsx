@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: '수원 소아치과 | 서울이건치과',
   description:
     '수원치과 서울이건치과 소아치과 - 소아 충치치료, 불소도포, 실란트, 성장기 교정 상담 등 아이의 첫 치과를 편안하게 안내합니다.',
+  alternates: {
+    canonical: 'https://egundc.com/pediatric',
+  },
 }
 
 export default function PediatricPage() {

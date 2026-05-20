@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
 
-Sitemap: https://egun.vercel.app/sitemap.xml
+# 관리자·인증·API 경로 차단
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /signup
+
+Sitemap: https://egundc.com/sitemap.xml
