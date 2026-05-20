@@ -16,7 +16,7 @@ function DoctorCard({
   }
 
   return (
-    <article ref={mergedRef} id={doctor.id} className="py-16 sm:py-20 scroll-mt-36">
+    <article ref={mergedRef} id={doctor.id} className="pt-8 pb-16 sm:pb-20 scroll-mt-36">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 섹션 레이블 */}
@@ -202,16 +202,16 @@ export default function DoctorProfileSection() {
         </div>
 
         <div ref={ref} className="relative z-10 hidden max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:block">
-          <p className={`text-[14px] font-semibold tracking-[0.25em] uppercase text-[#92DCE5] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <p className={`text-[24px] font-semibold tracking-[0.25em] uppercase text-[#92DCE5] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             Our Doctors
           </p>
           <h2 id="doctors-heading"
-            className={`text-[22px] sm:text-[28px] lg:text-[36px] font-normal text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[32px] sm:text-[38px] lg:text-[46px] font-normal text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.1s' } : undefined}>
             한자리에서<br />
             <span style={{ color: '#92DCE5' }}>변하지 않는 마음</span>
           </h2>
-          <p className={`mt-6 text-[16px] sm:text-[18px] text-white/75 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          <p className={`mt-6 text-[26px] sm:text-[28px] text-white/75 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.2s' } : undefined}>
             각자의 전문 분야에서 최선을 다하며<br />
             언제나 같은 자리에서 기다리고 있습니다.

@@ -109,13 +109,6 @@ export const naturalToothTreatments: TreatmentContent[] = [
       { icon: 'Ban', label: '염증 차단', desc: '염증이 더 퍼지지 않도록 막습니다.' },
       { icon: 'Link', label: '보철 연계', desc: '치료 후 크라운 등 보철로 이어갑니다.' },
     ],
-    steps: [
-      { title: '정밀 진단', desc: 'X-ray로 신경 감염 범위 확인', icon: 'ScanLine' },
-      { title: '신경관 접근', desc: '치아 안쪽의 감염된 신경 조직 제거', icon: 'Zap' },
-      { title: '신경관 소독', desc: '세균이 남지 않도록 깨끗하게 세척', icon: 'Droplets' },
-      { title: '신경관 충전', desc: '빈 공간을 특수 재료로 빈틈없이 채움', icon: 'PackagePlus' },
-      { title: '크라운 보호', desc: '약해진 치아를 씌워 파절 방지', icon: 'ShieldCheck' },
-    ],
     indications: [
       '치아가 심하게\n아프거나\n저린 경우',
       '잇몸 주변으로\n고름이\n생긴 경우',

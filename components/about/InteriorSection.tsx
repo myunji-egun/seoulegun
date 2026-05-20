@@ -69,7 +69,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
 
     if (diff === 0) {
       return {
-        transform: 'translateX(0) scale(1.12) translateZ(60px)',
+        transform: 'translateX(0) scale(1.0) translateZ(60px)',
         opacity: 1,
         zIndex: 20,
         pointerEvents: 'auto',
@@ -97,7 +97,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
           {images.map((src, i) => (
             <div
               key={i}
-              className={`absolute w-[420px] sm:w-[570px] lg:w-[720px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
+              className={`absolute w-[calc(100vw-40px)] max-w-[420px] sm:max-w-none sm:w-[570px] lg:w-[720px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
               style={{ ...getCardStyle(i), transformStyle: 'preserve-3d' }}
               onClick={() => i === current && setLightbox(src)}
             >
@@ -109,7 +109,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
 
         {/* 화살표: 중앙 이미지 양쪽 가장자리에 고정 */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
-          <div className="relative w-[420px] sm:w-[570px] lg:w-[720px] h-full flex items-center">
+          <div className="relative w-[calc(100vw-40px)] max-w-[420px] sm:max-w-none sm:w-[570px] lg:w-[720px] h-full flex items-center">
             <button onClick={() => goTo(current - 1)}
               className="pointer-events-auto absolute -left-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
               aria-label="이전 사진">

@@ -193,7 +193,7 @@ export default function AccessSection() {
 
           {/* 교통·주차(좌) + map-guide(우) 2컬럼 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
-            {/* 왼쪽: 교통 + 주차 안내 + 주차 사진 */}
+            {/* 왼쪽: 교통 안내 */}
             <div className="space-y-5">
               {TRANSIT_INFO.map((transit) => (
                 <div key={transit.type}>
@@ -213,11 +213,19 @@ export default function AccessSection() {
                       </li>
                     ))}
                   </ul>
+                  {transit.type === '버스' && (
+                    <div className="mt-3 flex flex-col gap-3">
+                      <img src="/images/clinic/bus.png" alt="버스 정류장 안내 1" className="w-full h-auto rounded-xl" />
+                      <img src="/images/clinic/bus-2.png" alt="버스 정류장 안내 2" className="w-full h-auto rounded-xl" />
+                    </div>
+                  )}
                 </div>
               ))}
+            </div>
 
-              {/* 주차 안내 */}
-              <div className="pt-2">
+            {/* 오른쪽: 주차 안내 + way-1, way-2, parking */}
+            <div className="flex flex-col gap-3">
+              <div>
                 <p className="text-base font-semibold text-[#0080C8] uppercase tracking-wider mb-3">
                   🅿️ 주차 안내
                 </p>
@@ -229,25 +237,10 @@ export default function AccessSection() {
                     </li>
                   ))}
                 </ul>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { src: '/images/clinic/way-1.png', alt: '오시는 길 안내 1' },
-                    { src: '/images/clinic/way-2.png', alt: '오시는 길 안내 2' },
-                    { src: '/images/clinic/way-3.jpg', alt: '오시는 길 안내 3' },
-                  ].map((img, i) => (
-                    <img key={i} src={img.src} alt={img.alt} className="w-full h-auto rounded-xl" />
-                  ))}
-                </div>
               </div>
-            </div>
-
-            {/* 오른쪽: map-guide 지도 */}
-            <div className="flex items-start">
-              <img
-                src="/images/clinic/map-guide.png"
-                alt="서울이건치과 버스 정류장 안내 지도"
-                className="w-full h-auto rounded-xl"
-              />
+              <img src="/images/clinic/way-1.png" alt="오시는 길 안내 1" className="w-full h-auto rounded-xl" />
+              <img src="/images/clinic/way-2.png" alt="오시는 길 안내 2" className="w-full h-auto rounded-xl" />
+              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내" className="w-full h-auto rounded-xl" />
             </div>
           </div>
         </div>
