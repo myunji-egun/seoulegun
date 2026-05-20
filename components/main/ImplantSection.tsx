@@ -10,7 +10,7 @@ export default function ImplantSection() {
   return (
     <section
       ref={ref}
-      className="h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
+      className="min-h-[calc(100vh-80px)] md:h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
       style={{ backgroundColor: '#000' }}
     >
       {/* ── 모바일: cover 풀스크린 슬라이딩 배경 ── */}
@@ -24,12 +24,12 @@ export default function ImplantSection() {
           animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
         }}
       />
-      {/* ── 데스크탑: 300% 와이드 슬라이딩 배경 ── */}
+      {/* ── 데스크탑: cover 배경 ── */}
       <div
         className="hidden md:block absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
-          backgroundSize: '300% auto',
+          backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
@@ -62,8 +62,9 @@ export default function ImplantSection() {
           style={isVisible ? { animationDelay: '0.3s' } : undefined}
         >
           <span
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight select-none"
+            className="font-black tracking-tight select-none"
             style={{
+              fontSize: 'clamp(36px, 7vw, 96px)',
               background: 'linear-gradient(135deg, var(--e-primary) 0%, var(--e-accent) 50%, var(--e-primary) 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
