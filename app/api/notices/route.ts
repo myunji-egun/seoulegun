@@ -19,7 +19,7 @@ export async function GET() {
       .order('notice_date', { ascending: false })
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
     }
 
     return NextResponse.json(data)
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
     }
 
     return NextResponse.json(data, { status: 201 })

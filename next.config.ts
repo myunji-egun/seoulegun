@@ -11,9 +11,25 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // 구 URL → 신 URL 301 영구 리다이렉트
       { source: '/cosmetic', destination: '/digital-prosthesis', permanent: true },
       { source: '/orthodontics', destination: '/orthodontic', permanent: true },
+    ]
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+        ],
+      },
     ]
   },
 }

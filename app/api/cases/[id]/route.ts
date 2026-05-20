@@ -38,7 +38,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         .eq('id', id)
 
       if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 })
+        return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
       }
     }
 
@@ -90,7 +90,7 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
     const { error } = await supabase.from('cases').delete().eq('id', id)
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
