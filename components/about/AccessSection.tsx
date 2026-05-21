@@ -101,13 +101,13 @@ export default function AccessSection() {
                   aria-hidden="true"
                 />
                 <div>
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
                     주소
                   </p>
-                  <address className="not-italic text-sm text-gray-800 leading-relaxed">
+                  <address className="not-italic text-base text-gray-800 leading-relaxed">
                     {clinicInfo.address}
                   </address>
-                  <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
+                  <p className="text-sm text-gray-500 mt-1.5 leading-relaxed">
                     본관 : 파리바게트 건물 2층<br />
                     별관 : GS마트, 뜰커피 건물 3층
                   </p>
@@ -122,12 +122,12 @@ export default function AccessSection() {
                   aria-hidden="true"
                 />
                 <div>
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
                     전화
                   </p>
                   <a
                     href={`tel:${clinicInfo.phone.replace(/-/g, '')}`}
-                    className="text-sm text-gray-800 hover:text-[#0080C8] transition-colors font-medium"
+                    className="text-base text-gray-800 hover:text-[#0080C8] transition-colors font-medium"
                   >
                     {clinicInfo.phone}
                   </a>
@@ -139,7 +139,7 @@ export default function AccessSection() {
             <div className="rounded-2xl border border-gray-100 p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
                 <Clock className="w-5 h-5 text-[#0080C8]" aria-hidden="true" />
-                <h3 className="text-sm font-semibold text-gray-700">
+                <h3 className="text-base font-semibold text-gray-700">
                   진료시간
                 </h3>
               </div>
@@ -148,7 +148,7 @@ export default function AccessSection() {
                 {clinicInfo.businessHours.map((h) => (
                   <div
                     key={h.day}
-                    className="flex items-center text-sm"
+                    className="flex items-center text-base"
                   >
                     <span className="text-gray-600 w-8 shrink-0">{h.day}</span>
                     <span
@@ -159,13 +159,13 @@ export default function AccessSection() {
                       {h.hours}
                     </span>
                     {h.note && (
-                      <span className="text-xs text-[#0080C8] font-medium">
+                      <span className="text-sm text-[#0080C8] font-medium">
                         {h.note}
                       </span>
                     )}
                   </div>
                 ))}
-                <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100">
+                <p className="text-sm text-gray-400 mt-3 pt-3 border-t border-gray-100">
                   * 점심시간 12:30 - 14:00 (토요일 없음)
                 </p>
               </div>
