@@ -16,12 +16,12 @@ function DoctorCard({
   }
 
   return (
-    <article ref={mergedRef} id={doctor.id} className="pt-8 pb-16 sm:pb-20 scroll-mt-36">
+    <article ref={mergedRef} id={doctor.id} className="pt-6 pb-8 scroll-mt-36">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 섹션 레이블 */}
-        <div className={`flex items-center gap-2 mb-6 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
-          <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">의료진 소개</p>
+        <div className={`flex items-center gap-2 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900">의료진 소개</p>
         </div>
 
         {/* 메인 카드 */}
@@ -29,7 +29,7 @@ function DoctorCard({
           style={isVisible ? { animationDelay: '0.05s' } : undefined}>
 
           {/* 왼쪽: 사진 */}
-          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[500px] overflow-hidden">
+          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[380px] lg:max-h-[520px] overflow-hidden">
             <img
               src={doctor.image}
               alt={`${doctor.name} ${doctor.role}`}
@@ -42,7 +42,7 @@ function DoctorCard({
                     key={i}
                     src={doc}
                     alt={`${doctor.name} 자격증 ${i + 1}`}
-                    className="w-32 h-40 object-cover rounded-lg shadow-xl border-2 border-white"
+                    className="w-24 h-32 object-cover rounded-lg shadow-xl border-2 border-white"
                   />
                 ))}
               </div>
@@ -50,31 +50,31 @@ function DoctorCard({
           </div>
 
           {/* 오른쪽: 정보 + 학력·경력 */}
-          <div className="p-8 lg:p-10 flex flex-col gap-6">
+          <div className="p-6 lg:p-8 flex flex-col gap-4">
             {/* 전문 분야 태그 + 이름 */}
             <div>
-              <p className="text-[17px] text-gray-500 mb-3 tracking-wide">
+              <p className="text-sm text-gray-500 mb-2 tracking-wide">
                 {doctor.specialtyDetail ?? doctor.specialty}
               </p>
-              <h3 className="text-4xl sm:text-5xl font-black text-gray-900 mb-1 leading-tight">
+              <h3 className="text-3xl sm:text-4xl font-black text-gray-900 mb-1 leading-tight">
                 {doctor.name}{' '}
                 <span className="font-bold">{doctor.role}</span>
               </h3>
               {doctor.subRole && (
-                <p className="text-base text-gray-600 mt-1">{doctor.subRole}</p>
+                <p className="text-sm text-gray-600 mt-1">{doctor.subRole}</p>
               )}
-              <div className="w-8 h-0.5 bg-[#0080C8] mt-3" />
+              <div className="w-8 h-0.5 bg-[#0080C8] mt-2" />
             </div>
 
             {/* 학력·경력 */}
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <GraduationCap size={15} className="text-[#0080C8]" />
-                <h4 className="font-semibold text-gray-700 text-[15px]">학력 · 경력</h4>
+              <div className="flex items-center gap-2 mb-2">
+                <GraduationCap size={14} className="text-[#0080C8]" />
+                <h4 className="font-semibold text-gray-700 text-sm">학력 · 경력</h4>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {doctor.careers.map((c, i) => (
-                  <li key={i} className="flex items-start gap-2 text-[15px] text-gray-700 leading-relaxed">
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed">
                     <span className="text-[#0080C8] shrink-0 mt-0.5">•</span>
                     {c}
                   </li>
@@ -85,13 +85,13 @@ function DoctorCard({
             {/* 학회 활동 및 수료 */}
             {doctor.memberships && doctor.memberships.length > 0 && (
               <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <Award size={15} className="text-[#0080C8]" />
-                  <h4 className="font-semibold text-gray-700 text-[15px]">학회 활동 및 수료</h4>
+                <div className="flex items-center gap-2 mb-2">
+                  <Award size={14} className="text-[#0080C8]" />
+                  <h4 className="font-semibold text-gray-700 text-sm">학회 활동 및 수료</h4>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-1">
                   {doctor.memberships.map((m, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[15px] text-gray-700 leading-relaxed">
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed">
                       <span className="text-[#0080C8] shrink-0 mt-0.5">•</span>
                       {m}
                     </li>
