@@ -6,7 +6,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     treatmentType: 'vpt',
     title: 'VPT 신경보존술',
     subtitle: '통증은 줄이고, 신경은 최대한 살리는 방향으로',
-    image: '/images/treatments/vpt-treat.jpg',
+    image: '/images/treatments/vpt-treat.png',
     description:
       '신경을 살리면 치아의 수명을 오래 유지하고 건강한 치아를 유지할 수 있습니다.',
     highlights: [
