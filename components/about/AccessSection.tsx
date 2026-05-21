@@ -193,7 +193,7 @@ export default function AccessSection() {
 
           {/* 교통·주차(좌) + map-guide(우) 2컬럼 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
-            {/* 왼쪽: 교통 안내 */}
+            {/* 왼쪽: 교통 안내 + 주차장 사진 */}
             <div className="space-y-5">
               {TRANSIT_INFO.map((transit) => (
                 <div key={transit.type}>
@@ -215,9 +215,10 @@ export default function AccessSection() {
                   </ul>
                 </div>
               ))}
+              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내" className="w-full h-auto rounded-xl" />
             </div>
 
-            {/* 오른쪽: 주차 안내 + way-1, way-2, parking */}
+            {/* 오른쪽: 주차 안내 + way-1, way-2 */}
             <div className="flex flex-col gap-3">
               <div>
                 <p className="text-base font-semibold text-[#0080C8] uppercase tracking-wider mb-3">
@@ -234,7 +235,6 @@ export default function AccessSection() {
               </div>
               <img src="/images/clinic/way-1.png" alt="오시는 길 안내 1" className="w-full h-auto rounded-xl" />
               <img src="/images/clinic/way-2.png" alt="오시는 길 안내 2" className="w-full h-auto rounded-xl" />
-              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내" className="w-full h-auto rounded-xl" />
             </div>
           </div>
         </div>
