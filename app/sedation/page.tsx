@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: '수원 수면진료 | 서울이건치과 무통·편안한 치료',
+  title: '수면진료 안내｜치과 공포감이 큰 분들을 위한 상담',
   description:
-    '치과 공포가 있으신 분도 서울이건치과 수면진료로 편안하게 치료받으세요. 의식하 진정(수면마취)을 통한 안전하고 편안한 무통치료를 제공합니다.',
+    '치과 진료에 대한 긴장감이 큰 경우 상담을 통해 진료 방법을 결정할 수 있습니다. 개인 상태에 따라 적용 여부는 달라질 수 있습니다.',
   alternates: {
     canonical: 'https://egundc.com/sedation',
   },
@@ -28,7 +28,7 @@ const FEATURES = [
 export default function SedationPage() {
   return (
     <main className="pt-20 sm:pt-24">
-      <h1 className="sr-only">수원 수면진료 - 서울이건치과 편안한 무통치료</h1>
+      <h1 className="sr-only">치과 수면진료 상담 안내</h1>
 
       {/* 히어로 */}
       <section className="py-20 sm:py-28 bg-gradient-to-b from-[#EEF4FA] to-white">

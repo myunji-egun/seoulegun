@@ -9,9 +9,9 @@ import AccessSection from '@/components/about/AccessSection'
 import AboutChapterSnap from '@/components/about/AboutChapterSnap'
 
 export const metadata: Metadata = {
-  title: '수원치과 이건치과소개 | 서울이건치과',
+  title: '서울이건치과 소개｜수원 영통 치과',
   description:
-    '수원치과 서울이건치과 - 서울대 출신 원장 2인의 진료 철학, 의료진 소개, 진료일정, 내부전경, 디지털 기공소, 오시는길을 안내합니다.',
+    '서울이건치과의 진료 철학, 의료진, 진료 공간, 본관·별관 운영 안내를 확인하실 수 있습니다.',
   alternates: {
     canonical: 'https://egundc.com/about',
   },
@@ -22,7 +22,7 @@ export default function AboutPage() {
     <div className="about-page">
       <AboutChapterSnap />
       {/* SEO h1 */}
-      <h1 className="sr-only">수원치과 서울이건치과 소개 - 서울대 출신 원장 2인 책임진료</h1>
+      <h1 className="sr-only">서울이건치과 소개</h1>
 
       {/* 페이지 히어로 - 영상 배경 */}
       <div className="relative aspect-video sm:aspect-auto sm:h-[70vh] overflow-hidden">

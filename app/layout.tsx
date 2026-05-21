@@ -6,17 +6,17 @@ import { LocalBusinessJsonLd } from '@/components/seo/JsonLd'
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher'
 
 export const metadata: Metadata = {
-  title: '수원 서울이건치과 | 서울대 출신 원장 2인 책임진료',
+  title: '서울이건치과｜수원 영통 치과',
   description:
-    '수원치과 서울이건치과 - 서울대 출신 대표 원장 2인이 처음 상담부터 치료 마무리까지 책임지고 진료합니다. 수원 임플란트, 교정, 충치치료, 심미보철, 소아치과.',
+    '수원 영통 지역에서 자연치아 보존, 임플란트, 교정, 소아치과 진료를 안내합니다. 개인별 구강 상태에 따라 치료 계획은 달라질 수 있습니다.',
   metadataBase: new URL('https://egundc.com'),
   alternates: {
     canonical: 'https://egundc.com',
   },
   openGraph: {
-    title: '수원 서울이건치과 | 서울대 출신 원장 2인 책임진료',
+    title: '서울이건치과｜수원 영통 치과',
     description:
-      '수원치과 서울이건치과 - 서울대 출신 대표 원장 2인이 책임진료합니다. 수원 임플란트, 교정, 충치치료.',
+      '수원 영통 지역에서 자연치아 보존, 임플란트, 교정, 소아치과 진료를 안내합니다.',
     url: 'https://egundc.com',
     siteName: '서울이건치과',
     locale: 'ko_KR',
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '수원 서울이건치과 | 서울대 출신 원장 2인 책임진료',
+    title: '서울이건치과｜수원 영통 치과',
     description:
-      '수원치과 서울이건치과 - 서울대 출신 대표 원장 2인이 책임진료합니다. 수원 임플란트, 교정, 충치치료.',
+      '수원 영통 지역에서 자연치아 보존, 임플란트, 교정, 소아치과 진료를 안내합니다.',
     images: ['/images/logo/egun-logo%20(1).png'],
   },
 }

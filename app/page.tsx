@@ -19,6 +19,7 @@ export default function Home() {
 
   return (
     <>
+      <h1 className="sr-only">수원 영통 서울이건치과</h1>
       {/* Desktop: scroll-snap fullpage */}
       <div
         ref={containerRef}

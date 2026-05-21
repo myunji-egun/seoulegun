@@ -3,9 +3,9 @@ import TreatmentPage from '@/components/board/TreatmentPage'
 import { orthodonticsTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
-  title: '수원 인비절라인 투명교정 | 서울이건치과',
+  title: '수원 인비절라인｜투명교정 상담 안내',
   description:
-    '수원치과 서울이건치과 인비절라인 - 투명한 교정 장치로 눈에 띄지 않게 치아를 가지런히 교정합니다. 3D 디지털 시뮬레이션으로 치료 결과를 미리 확인하세요.',
+    '인비절라인 등 투명교정은 치아 배열, 교합 상태, 착용 시간에 따라 적합 여부가 달라질 수 있습니다. 상담을 통해 확인이 필요합니다.',
   alternates: {
     canonical: 'https://egundc.com/invisalign',
   },
@@ -18,8 +18,8 @@ const invisalignTreatments = orthodonticsTreatments.filter(
 export default function InvisalignPage() {
   return (
     <TreatmentPage
-      title="인비절라인 투명교정"
-      subtitle="눈에 띄지 않게, 편안하게"
+      title="수원 인비절라인 상담 안내"
+      subtitle="치아 배열과 교합 상태를 먼저 확인합니다"
       treatments={invisalignTreatments}
       hideCases
       heroImage="/images/board/invisalign.jpg"
