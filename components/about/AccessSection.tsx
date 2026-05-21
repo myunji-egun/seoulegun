@@ -213,12 +213,6 @@ export default function AccessSection() {
                       </li>
                     ))}
                   </ul>
-                  {transit.type === '버스' && (
-                    <div className="mt-3 flex flex-col gap-3">
-                      <img src="/images/clinic/bus.png" alt="버스 정류장 안내 1" className="w-full h-auto rounded-xl" />
-                      <img src="/images/clinic/bus-2.png" alt="버스 정류장 안내 2" className="w-full h-auto rounded-xl" />
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
