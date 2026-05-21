@@ -60,6 +60,12 @@ export const naturalToothTreatments: TreatmentContent[] = [
     title: '최소삭제 온레이',
     subtitle: '손상된 부위만 덮어 치아를 최대한 보존하는 방법',
     image: '/images/treatments/onlay-treat.jpg',
+    photoGrid: [
+      { src: '/images/treatments/onlay-1.jpg', caption: '치료 전' },
+      { src: '/images/treatments/onlay-2.jpg', caption: '온레이 삭제 (형성)' },
+      { src: '/images/treatments/onlay-3.jpg', caption: '온레이 제작 및 장착 과정' },
+      { src: '/images/treatments/onlay-4.jpg', caption: '치료 완료 (온레이 완료)' },
+    ],
     description:
       '치아 전체를 씌우는 크라운 대신, 손상된 부위만 정밀하게 덮어 치질 손실을 최소화하는 보존 보철입니다.',
     highlights: [

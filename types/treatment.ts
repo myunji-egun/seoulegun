@@ -30,4 +30,5 @@ export interface TreatmentContent {
   bottomImage?: string
   sideImage?: string
   bottomVideoUrl?: string
+  photoGrid?: { src: string; caption: string }[]
 }

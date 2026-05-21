@@ -227,6 +227,16 @@ export default function TreatmentSection({
         {/* 이미지 영역 — 오른쪽에서 슬라이드인 (bottomImage 사용 시 숨김) */}
         {!treatment.bottomImage && <div className={`order-first md:order-last ${imageTopMargin} ${textVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={textVisible ? { animationDelay: '0.15s' } : undefined}>
+          {treatment.photoGrid ? (
+            <div className="grid grid-cols-2 gap-2">
+              {treatment.photoGrid.map((item, i) => (
+                <div key={i} className="rounded-xl overflow-hidden">
+                  <img src={item.src} alt={item.caption} className="w-full aspect-[4/3] object-cover" />
+                  <p className="text-center text-sm text-gray-600 font-medium mt-1.5 pb-1">{item.caption}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
           <div className={`${treatment.beforeImage && treatment.afterImage || treatment.videoUrl ? '' : singleImageFrameClass} rounded-2xl flex items-center justify-center overflow-hidden`}>
             {treatment.videoUrl ? (
               <div className="w-full aspect-video rounded-2xl overflow-hidden">
@@ -263,6 +273,7 @@ export default function TreatmentSection({
               </div>
             )}
           </div>
+          )}
         </div>}
       </div>
 
