@@ -5,9 +5,10 @@ export const implantTreatments: TreatmentContent[] = [
     boardCategory: 'implant',
     treatmentType: 'all-on',
     title: '올온 임플란트',
-    subtitle: '4~6개의 임플란트로 위 또는 아래 전체 치아를 완성하는 치료',
-    image: '/images/allon/all-on (1).jpg',
-    description: '치아가 대부분 없는 경우, 소수의 임플란트로 전체 치아 기능 회복을 함께 계획합니다.',
+    subtitle: '여러 치아를 잃은 경우, 전체 기능 회복을 함께 고민합니다',
+    image: '/images/treatments/all-on (1).jpg',
+    sideImage: '/images/allon/all-on-slide.jpg',
+    description: '4~6개의 임플란트로 위 또는 아래 전체 치아를 한 번에 완성하는 치료',
     richContent: `### ❓ 기존 틀니와 뭐가 다른가요?
 
 일반 틀니는 매일 빼고 끼워야 하며, 씹는 힘이 자연치아의 **30%에 불과**합니다.
@@ -28,23 +29,24 @@ export const implantTreatments: TreatmentContent[] = [
     ],
     benefitsTitle: '올온 임플란트의 장점',
     benefits: [
-      { tag: '소수 임플란트로 전체 치아 기능 회복', description: '4~6개의 임플란트로 전체 치아 기능 회복을 계획할 수 있습니다.', icon: 'Zap' },
-      { tag: '틀니 불편함 해소', description: '틀니의 불편함을 줄이고 고정식 치아로 일상생활을 할 수 있습니다.', icon: 'Smile' },
-      { tag: '자연스러운 씹는 기능', description: '보철 구조를 함께 설계하여 안정적인 씹는 기능 회복을 기대할 수 있습니다.', icon: 'Utensils' },
+      { tag: '소수 임플란트로 전체 치아 기능 회복', description: '소수의 임플란트로 전체 치아 기능 회복을 계획할 수 있습니다.', icon: 'BadgeCheck' },
+      { tag: '틀니 불편함에서 벗어나기', description: '틀니 사용에 따른 불편함을 줄이는 데 도움이 될 수 있습니다.', icon: 'Smile' },
       { tag: '뼈 이식 최소화 가능', description: '뼈 이식 없이도 식립이 가능한 경우가 있어 수술 부담을 줄일 수 있습니다.', icon: 'Shield' },
-      { tag: '개인 맞춤 설계', description: '환자의 구강 상태에 맞춰 치료 계획을 개별적으로 수립합니다.', icon: 'ClipboardCheck' },
+      { tag: '안정적인 씹는 기능 회복', description: '보철 구조를 함께 설계하여 안정적인 씹는 기능 회복을 기대할 수 있습니다.', icon: 'Sparkles' },
+      { tag: '개인 맞춤 치료 계획', description: '환자 상태에 맞춰 치료 계획을 개별적으로 수립할 수 있습니다.', icon: 'ClipboardCheck' },
     ],
     comparison: {
       leftLabel: '일반 틀니',
       rightLabel: '올온 임플란트',
       rows: [
-        { label: '고정 방식', icon: 'Lock', leftText: '탈착식으로 매일 빼고 끼워야 합니다.', rightText: '고정식으로 자연치아처럼 사용합니다.' },
-        { label: '씹는 힘', icon: 'Utensils', leftText: '자연치아의 약 30% 수준입니다.', rightText: '자연치아에 가까운 씹는 기능 회복 가능.' },
-        { label: '편의성', icon: 'Smile', leftText: '빠질 수 있고 발음에 불편감이 생깁니다.', rightText: '빠짐 없이 안정적으로 사용할 수 있습니다.' },
-        { label: '장기 관리', icon: 'CalendarDays', leftText: '잇몸 변화에 따라 잦은 재제작이 필요합니다.', rightText: '정기 관리로 장기간 사용이 가능합니다.' },
+        { label: '착용 방식', icon: 'BadgeCheck', leftText: '매일 빼고 끼움', rightText: '고정식 (빼지 않음)' },
+        { label: '씹는 힘', icon: 'Utensils', leftText: '자연치아의 약 30%', rightText: '자연치아의 70~80% 회복 가능' },
+        { label: '불편함', icon: 'Clock', leftText: '이물감, 헐거움, 잇몸 통증', rightText: '이물감 적고, 안정적' },
+        { label: '심미성', icon: 'Smile', leftText: '잇몸 노출, 부자연스러움', rightText: '자연치아와 유사한 심미성' },
+        { label: '관리', icon: 'Tooth', leftText: '세정 필요, 관리 번거로움', rightText: '일반 치아처럼 관리 가능' },
       ],
     },
-    bottomCta: '정밀한 진단과 계획을 통해, 심는 날 바로 자연치아처럼 생활할 수 있도록 함께합니다.',
+    bottomCta: '적은 부담으로 전체 치아의 기능과 자신감을 되찾아 드립니다.',
     faq: [
       {
         question: '치아가 거의 없으면 모두 많은 개수의 임플란트가 필요한가요?',
@@ -67,9 +69,9 @@ export const implantTreatments: TreatmentContent[] = [
     boardCategory: 'implant',
     treatmentType: 'immediate-loading',
     title: '즉시로딩 임플란트',
-    subtitle: '식립 당일 임시치아를 올려, 당일부터 식사·일상이 가능한 고난도 임플란트',
+    subtitle: '임플란트 식립 당일, 임시치아까지 연결해 일상 공백을 줄입니다',
     image: '/images/treatments/immediate_2.webp',
-    description: '임플란트를 심는 당일 바로 임시치아를 연결해, 치아 없는 기간 없이 일상으로 복귀할 수 있는 고난도 치료입니다. 뼈 밀도와 초기 고정력을 엄격히 평가한 후 적용합니다.',
+    description: '치아 없는 기간을 최소화하기 위해, 임플란트 식립 당일 임시치아 연결까지 함께 계획하는 치료',
     richContent: `### ❓ 일반 임플란트와 뭐가 다른가요?
 
 일반 임플란트는 뼈와 결합하는 동안 **3~6개월을 기다려야** 합니다.
@@ -90,23 +92,24 @@ export const implantTreatments: TreatmentContent[] = [
     ],
     benefitsTitle: '즉시로딩 임플란트의 장점',
     benefits: [
-      { tag: '당일 임시치아 연결', description: '식립 당일 임시치아를 연결해 심미적·기능적 공백을 없앨 수 있습니다.', icon: 'Zap' },
-      { tag: '치아 없는 기간 제로', description: '치아가 없는 불편한 기간을 최소화해 바로 일상생활이 가능합니다.', icon: 'Smile' },
-      { tag: '치료 기간 단축', description: '적절한 증례에서는 전체 치료 기간을 크게 단축할 수 있습니다.', icon: 'Clock' },
-      { tag: '엄격한 적합성 평가', description: '조건이 맞는 분께만 진행하는 고난도 시술로 안전성을 높입니다.', icon: 'Shield' },
-      { tag: '빠른 일상 복귀', description: '수술 당일부터 임시치아로 부드러운 식사와 일상생활이 가능합니다.', icon: 'CheckCircle' },
+      { tag: '당일 임시치아 연결', description: '식립 당일 임시치아를 연결해 심미적·기능적 공백을 줄일 수 있습니다.', icon: 'Zap' },
+      { tag: '치아 없는 기간 최소화', description: '치아가 없는 불편한 기간을 줄여 일상 복귀를 빠르게 계획할 수 있습니다.', icon: 'Smile' },
+      { tag: '전체 치료 기간 단축', description: '적절한 증례에서는 최종 보철까지의 전체 흐름을 효율적으로 줄일 수 있습니다.', icon: 'Clock' },
+      { tag: '초기 고정력 정밀 평가', description: '뼈 밀도와 초기 고정력을 확인해 가능한 경우에만 적용합니다.', icon: 'Shield' },
+      { tag: '중요 일정 전 심미 회복', description: '긴 치아 공백이 부담되는 분께 심미적인 회복 계획을 세울 수 있습니다.', icon: 'BadgeCheck' },
     ],
     comparison: {
       leftLabel: '일반 임플란트',
       rightLabel: '즉시로딩 임플란트',
       rows: [
-        { label: '임시치아', icon: 'Link', leftText: '수개월 후에 연결합니다.', rightText: '수술 당일 바로 연결합니다.' },
-        { label: '식사 가능', icon: 'Utensils', leftText: '수술 후 식사 제한이 있습니다.', rightText: '당일부터 부드러운 식사가 가능합니다.' },
-        { label: '치료 기간', icon: 'Clock', leftText: '최종 보철까지 3~6개월 소요됩니다.', rightText: '전체 치료 기간을 크게 단축할 수 있습니다.' },
-        { label: '적용 조건', icon: 'Shield', leftText: '대부분의 증례에 적용 가능합니다.', rightText: '뼈 상태와 고정력이 충분한 분께 적용합니다.' },
+        { label: '임시치아', icon: 'Link', leftText: '골유착 후 연결', rightText: '식립 당일 연결 가능' },
+        { label: '치아 공백', icon: 'Smile', leftText: '수개월간 불편 가능', rightText: '공백 기간 최소화' },
+        { label: '식사', icon: 'Utensils', leftText: '초기 식사 제한', rightText: '부드러운 음식부터 가능' },
+        { label: '치료 기간', icon: 'Clock', leftText: '최종 보철까지 3~6개월', rightText: '전체 기간 단축 가능' },
+        { label: '적용 조건', icon: 'Shield', leftText: '일반적인 증례에 적용', rightText: '초기 고정력 충분할 때 적용' },
       ],
     },
-    bottomCta: '수술 당일 바로 임시치아를 올려, 치아 없는 불편함 없이 일상으로 복귀할 수 있도록 함께합니다.',
+    bottomCta: '치아 없는 시간을 줄이고, 당일의 불편을 다음 일상으로 이어가지 않도록 함께합니다.',
     faq: [
       {
         question: '즉시로딩은 누구나 가능한가요?',
