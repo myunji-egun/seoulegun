@@ -5,9 +5,9 @@ import PediatricIdentity from '@/components/board/PediatricIdentity'
 import { pediatricTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
-  title: '수원 소아치과 | 서울이건치과',
+  title: '수원 소아치과｜아이 치아 관리와 진료 안내',
   description:
-    '수원치과 서울이건치과 소아치과 - 소아 충치치료, 불소도포, 실란트, 성장기 교정 상담 등 아이의 첫 치과를 편안하게 안내합니다.',
+    '아이의 치아 성장, 충치 예방, 치열 발달 상태를 확인하고 연령에 맞는 진료 방향을 안내합니다.',
   alternates: {
     canonical: 'https://egundc.com/pediatric',
   },
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 export default function PediatricPage() {
   return (
     <TreatmentPage
-      title="소아치과 치료"
-      subtitle="아이의 첫 치과, 편안하게"
+      title="수원 소아치과 진료 안내"
+      subtitle="아이의 치아 성장과 구강 관리를 함께 살펴봅니다"
       treatments={pediatricTreatments}
       hideCases
       extraSection={<PediatricIdentity />}

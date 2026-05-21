@@ -5,9 +5,9 @@ import ImplantIdentity from '@/components/board/ImplantIdentity'
 import { implantTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
-  title: '수원 임플란트 | 서울이건치과',
+  title: '수원 임플란트｜치료 전 확인해야 할 사항',
   description:
-    '수원치과 서울이건치과 임플란트 - 올온, 즉시로딩, 네비게이션, 상악동 거상술, 당뇨 환자 임플란트를 안내합니다.',
+    '임플란트 치료는 잇몸뼈, 교합, 전신질환 여부에 따라 계획이 달라질 수 있습니다. 정확한 진단은 치과 상담을 통해 확인이 필요합니다.',
   alternates: {
     canonical: 'https://egundc.com/implant',
   },
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 export default function ImplantPage() {
   return (
     <TreatmentPage
-      title="임플란트"
-      subtitle="상실된 치아의 완벽한 복원 솔루션"
+      title="수원 임플란트 치료 안내"
+      subtitle="상실된 치아를 회복하는 방법"
       treatments={implantTreatments}
       videoId="RkhAehLEia4"
       extraSection={<ImplantIdentity />}

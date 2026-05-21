@@ -4,9 +4,9 @@ import CosmeticIdentity from '@/components/board/CosmeticIdentity'
 import { cosmeticTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
-  title: '수원 심미보철 라미네이트 | 서울이건치과',
+  title: '심미보철·디지털 보철｜수원 영통 치과',
   description:
-    '수원치과 서울이건치과 심미보철 - 라미네이트, 올세라믹 크라운, 잇몸미백 등 자연스러운 아름다움을 되찾는 치료를 안내합니다.',
+    '치아의 기능과 심미성을 함께 고려해 보철치료를 안내합니다. 보철 종류와 치료 방향은 개인의 구강 상태에 따라 달라질 수 있습니다.',
   alternates: {
     canonical: 'https://egundc.com/digital-prosthesis',
   },
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function DigitalProsthesisPage() {
   return (
     <TreatmentPage
-      title="심미보철"
-      subtitle="자연스러운 아름다움을 되찾습니다"
+      title="심미보철과 디지털 보철"
+      subtitle="치아의 기능과 심미를 함께 고려합니다"
       treatments={cosmeticTreatments}
       heroImage="/images/board/esthetic-2.jpg"
       extraSection={<CosmeticIdentity />}
