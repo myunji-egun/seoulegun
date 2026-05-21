@@ -185,7 +185,7 @@ export default function TreatmentSection({
                 <div key={i} className="flex flex-col items-center text-center gap-1.5 py-2">
                   <LucideIcon name={h.icon} size={26} className="text-[#0080C8]" />
                   <p className="font-bold text-[17px] text-gray-900 leading-tight">{h.label}</p>
-                  <p className="text-[15px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
+                  <p className="text-[14px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
                 </div>
               ))}
             </div>
@@ -278,7 +278,7 @@ export default function TreatmentSection({
               <div key={i} className="flex flex-col items-center text-center gap-2 py-3">
                 <LucideIcon name={h.icon} size={36} className="text-gray-300" />
                 <p className="font-bold text-[18px] text-gray-900 leading-tight">{h.label}</p>
-                <p className="text-[16px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
+                <p className="text-[15px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
               </div>
             ))}
           </div>
