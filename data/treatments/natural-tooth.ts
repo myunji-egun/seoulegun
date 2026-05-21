@@ -10,10 +10,10 @@ export const naturalToothTreatments: TreatmentContent[] = [
     description:
       '신경을 살리면 치아의 수명을 오래 유지하고 건강한 치아를 유지할 수 있습니다.',
     highlights: [
-      { icon: 'Shield', label: '자연치아 보존', desc: '내 치아를 최대한 보존합니다.' },
-      { icon: 'Smile', label: '통증 최소화', desc: '통증을 줄여 편안하게 치료합니다.' },
-      { icon: 'CalendarDays', label: '치료 기간 단축', desc: '짧은 기간으로 일상 복귀가 빠릅니다.' },
-      { icon: 'Star', label: '높은 성공률', desc: '정확한 진단과 치료로 높은 성공률을 자랑합니다.' },
+      { icon: 'Shield', label: '자연치아 보존', desc: '내 치아를\n최대한 보존합니다.' },
+      { icon: 'Smile', label: '통증 최소화', desc: '통증을 줄여\n편안하게 치료합니다.' },
+      { icon: 'CalendarDays', label: '치료 기간 단축', desc: '짧은 기간으로\n일상 복귀가 빠릅니다.' },
+      { icon: 'Star', label: '높은 성공률', desc: '정확한 진단과 치료로\n높은 성공률을 자랑합니다.' },
     ],
     steps: [
       { title: '정밀 진단', desc: 'X-ray, CT로 신경 상태 진단', icon: 'ScanLine' },
@@ -104,10 +104,10 @@ export const naturalToothTreatments: TreatmentContent[] = [
     description:
       '감염된 신경을 제거해 더 이상 퍼지지 않도록 막고, 치아는 그대로 살려두는 치료입니다.',
     highlights: [
-      { icon: 'Shield', label: '치아 보존', desc: '발치 대신 치아를 끝까지 지킵니다.' },
-      { icon: 'Smile', label: '통증 해소', desc: '감염 조직 제거로 통증을 줄입니다.' },
-      { icon: 'Ban', label: '염증 차단', desc: '염증이 더 퍼지지 않도록 막습니다.' },
-      { icon: 'Link', label: '보철 연계', desc: '치료 후 크라운 등 보철로 이어갑니다.' },
+      { icon: 'Shield', label: '치아 보존', desc: '발치 대신\n치아를 끝까지 지킵니다.' },
+      { icon: 'Smile', label: '통증 해소', desc: '감염 조직 제거로\n통증을 줄입니다.' },
+      { icon: 'Ban', label: '염증 차단', desc: '염증이 더\n퍼지지 않도록 막습니다.' },
+      { icon: 'Link', label: '보철 연계', desc: '치료 후 크라운 등\n보철로 이어갑니다.' },
     ],
     indications: [
       '치아가 심하게\n아프거나\n저린 경우',
@@ -151,10 +151,10 @@ export const naturalToothTreatments: TreatmentContent[] = [
     description:
       '초기에 발견할수록 치료가 간단하고, 내 치아를 훨씬 오래 지킬 수 있습니다.',
     highlights: [
-      { icon: 'Trash2', label: '염증 원인 제거', desc: '치석과 세균을 깨끗이 정리합니다.' },
-      { icon: 'Heart', label: '출혈·붓기 개선', desc: '잇몸 불편감을 줄이는 데 도움이 됩니다.' },
+      { icon: 'Trash2', label: '염증 원인 제거', desc: '치석과 세균을\n깨끗이 정리합니다.' },
+      { icon: 'Heart', label: '출혈·붓기 개선', desc: '잇몸 불편감을\n줄이는 데 도움이 됩니다.' },
       { icon: 'TrendingDown', label: '진행 억제', desc: '치주질환 악화를 막습니다.' },
-      { icon: 'CalendarDays', label: '장기 관리', desc: '정기 유지관리로 구강 건강을 지킵니다.' },
+      { icon: 'CalendarDays', label: '장기 관리', desc: '정기 유지관리로\n구강 건강을 지킵니다.' },
     ],
     steps: [
       { title: '정밀 검사', desc: '잇몸 깊이 측정, X-ray로 뼈 손실 확인', icon: 'ScanLine' },
@@ -207,10 +207,10 @@ export const naturalToothTreatments: TreatmentContent[] = [
 
 크라운은 치아를 많이 깎고 여러 번 내원해야 하지만, 레진빌드업은 **내 치아를 깎지 않고 위에 덧쌓는 방식**으로 당일 완성됩니다. 나중에 상태가 변해도 **추가 치료 선택지가 그대로 남아있습니다.**`,
     highlights: [
-      { icon: 'Shield', label: '내 치아 보존', desc: '치아 삭제 없이 최소한으로' },
-      { icon: 'Clock', label: '당일 완성', desc: '하루 만에 치료 완료' },
-      { icon: 'Sparkles', label: '자연스러운 심미성', desc: '자연치아와 같은 자연스러운 색감' },
-      { icon: 'ShieldCheck', label: '추후 치료 유리', desc: '이후 추가 치료에도 치아 보존에 유리' },
+      { icon: 'Shield', label: '내 치아 보존', desc: '치아 삭제 없이\n최소한으로' },
+      { icon: 'Clock', label: '당일 완성', desc: '하루 만에\n치료 완료' },
+      { icon: 'Sparkles', label: '자연스러운 심미성', desc: '자연치아와 같은\n자연스러운 색감' },
+      { icon: 'ShieldCheck', label: '추후 치료 유리', desc: '이후 추가 치료에도\n치아 보존에 유리' },
     ],
     benefitsTitle: '원데이 레진 빌드업의 장점',
     benefits: [

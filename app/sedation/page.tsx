@@ -13,15 +13,15 @@ export const metadata: Metadata = {
 const FEATURES = [
   {
     title: '치과 공포증 환자',
-    desc: '치과에 대한 극도의 불안·공포감이 있는 분도 편안하게 치료받으실 수 있습니다.',
+    desc: '치과에 대한 극도의 불안·공포감이 있는 분도\n편안하게 치료받으실 수 있습니다.',
   },
   {
     title: '복잡한 복합 시술',
-    desc: '임플란트, 발치 등 여러 부위를 한 번에 진행해야 하는 경우에 적합합니다.',
+    desc: '임플란트, 발치 등 여러 부위를\n한 번에 진행해야 하는 경우에 적합합니다.',
   },
   {
     title: '구역반사가 심한 경우',
-    desc: '구역질이 심하거나 입을 오래 벌리기 힘드신 분께 도움이 됩니다.',
+    desc: '구역질이 심하거나\n입을 오래 벌리기 힘드신 분께 도움이 됩니다.',
   },
 ]
 
@@ -59,7 +59,7 @@ export default function SedationPage() {
                   <span className="text-xs font-bold text-[#0080C8]">0{i + 1}</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2 text-[15px]">{f.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{f.desc}</p>
+                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{f.desc}</p>
               </div>
             ))}
           </div>
