@@ -93,7 +93,7 @@ export default function LabSection() {
     }
 
     return {
-      transform: `translateX(${diff * 480}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
+      transform: `translateX(${diff * 336}px) scale(${1 - absD * 0.15}) rotateY(${diff * -8}deg)`,
       opacity: 1 - absD * 0.35,
       zIndex: 10 - absD,
       pointerEvents: 'none',
@@ -202,7 +202,7 @@ export default function LabSection() {
       {/* 3D 캐러셀 */}
       <div
         className="relative w-full overflow-hidden"
-        style={{ perspective: '1800px', height: '640px' }}
+        style={{ perspective: '1800px', height: '448px' }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -212,7 +212,7 @@ export default function LabSection() {
             return (
               <div
                 key={i}
-                className={`absolute w-[calc(100vw-40px)] max-w-[420px] sm:max-w-none sm:w-[570px] lg:w-[720px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
+                className={`absolute w-[calc(100vw-40px)] max-w-[300px] sm:max-w-none sm:w-[400px] lg:w-[504px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out${i === current ? ' cursor-pointer' : ''}`}
                 style={{ ...style, transformStyle: 'preserve-3d' }}
                 onClick={() => i === current && setLightbox(src)}
               >
@@ -225,7 +225,7 @@ export default function LabSection() {
 
         {/* 화살표: 중앙 이미지 양쪽 가장자리에 고정 */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
-          <div className="relative w-[calc(100vw-40px)] max-w-[420px] sm:max-w-none sm:w-[570px] lg:w-[720px] h-full flex items-center">
+          <div className="relative w-[calc(100vw-40px)] max-w-[300px] sm:max-w-none sm:w-[400px] lg:w-[504px] h-full flex items-center">
             <button
               onClick={() => goTo(current - 1)}
               className="pointer-events-auto absolute -left-6 z-30 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
