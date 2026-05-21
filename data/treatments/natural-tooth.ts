@@ -220,16 +220,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     subtitle: '가능한 한 보존적으로, 필요한 부분을 정교하게 회복합니다',
     beforeImage: '/images/treatments/resin-before.jpg',
     afterImage: '/images/treatments/resin-after.jpg',
-    description: '치아 삭제 없이, 당일에, 내 치아를 그대로 살리는 방법입니다.',
-    richContent: `### ❓ 씌우는 것과 뭐가 다른가요?
-
-크라운은 치아를 많이 깎고 여러 번 내원해야 하지만, 레진빌드업은 **내 치아를 깎지 않고 위에 덧쌓는 방식**으로 당일 완성됩니다. 나중에 상태가 변해도 **추가 치료 선택지가 그대로 남아있습니다.**`,
-    highlights: [
-      { icon: 'Shield', label: '내 치아 보존', desc: '치아 삭제 없이\n최소한으로' },
-      { icon: 'Clock', label: '당일 완성', desc: '하루 만에\n치료 완료' },
-      { icon: 'Sparkles', label: '자연스러운 심미성', desc: '자연치아와 같은\n자연스러운 색감' },
-      { icon: 'ShieldCheck', label: '추후 치료 유리', desc: '이후 추가 치료에도\n치아 보존에 유리' },
-    ],
+    description: '크라운은 치아를 많이 깎아야 합니다. 레진 빌드업은 깎지 않고 손상된 부위에만 직접 덧쌓아 당일 완성합니다. 한 번 깎인 치아는 되돌릴 수 없습니다. 깎지 않는 것이 곧 치아를 지키는 것입니다.',
     benefitsTitle: '원데이 레진 빌드업의 장점',
     benefits: [
       { tag: '치아 삭제 없거나 최소화', description: '치아 삭제 없이 또는 최소한의 삭제로 치료할 수 있습니다.', icon: 'Shield' },
