@@ -10,33 +10,67 @@ function DoctorCard({
 }: {
   doctor: (typeof doctors)[0]
 }) {
-  const { ref, isVisible } = useScrollReveal(0.1)
+  const { ref, isVisible } = useScrollReveal(0.08)
   const mergedRef = (node: HTMLElement | null) => {
     (ref as React.MutableRefObject<HTMLElement | null>).current = node
   }
 
   return (
-    <article ref={mergedRef} id={doctor.id} className="pt-6 pb-8 scroll-mt-36">
+    <article ref={mergedRef} id={doctor.id} className="py-6 scroll-mt-36">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 섹션 레이블 */}
         <div className={`flex items-center gap-2 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
-          <p className="text-2xl sm:text-3xl font-bold text-gray-900">의료진 소개</p>
+          <GraduationCap size={18} className="text-[#0080C8]" />
+          <p className="text-base font-semibold text-gray-700">의료진 소개</p>
+          <div className="mt-1 w-8 h-0.5 bg-[#0080C8]" />
         </div>
 
-        {/* 메인 카드 */}
-        <div className={`rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 bg-[#EEF4FA] ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}
+        {/* 메인 카드 — 3컬럼 */}
+        <div className={`rounded-2xl overflow-hidden bg-white shadow-sm border border-gray-100 grid grid-cols-1 lg:grid-cols-[2fr_2fr_2fr] ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.05s' } : undefined}>
 
-          {/* 왼쪽: 사진 */}
-          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[380px] lg:max-h-[520px] overflow-hidden">
+          {/* 1열: 사진 */}
+          <div className="relative aspect-[3/4] lg:aspect-auto overflow-hidden bg-[#EEF4FA]">
             <img
               src={doctor.image}
               alt={`${doctor.name} ${doctor.role}`}
               className="w-full h-full object-cover object-top"
             />
+          </div>
+
+          {/* 2열: 이름 + 편지 */}
+          <div className="p-7 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-gray-100">
+            <div>
+              <p className="text-sm text-gray-400 mb-2 tracking-wide">
+                {doctor.specialtyDetail ?? doctor.specialty}
+              </p>
+              <h3 className="text-3xl sm:text-4xl font-black text-gray-900 mb-1 leading-tight">
+                {doctor.name}{' '}
+                <span className="text-2xl sm:text-3xl font-bold">{doctor.role}</span>
+              </h3>
+              {doctor.subRole && (
+                <p className="text-sm text-gray-500 mt-1">{doctor.subRole}</p>
+              )}
+              <div className="w-8 h-0.5 bg-[#0080C8] mt-3 mb-6" />
+            </div>
+
+            {doctor.letter && (
+              <div className="relative">
+                <span className="text-5xl text-[#0080C8]/20 font-serif select-none leading-none block mb-2">❝</span>
+                <p className="text-base text-gray-600 leading-[1.9] italic whitespace-pre-line"
+                  style={{ fontFamily: "'Georgia', 'Nanum Myeongjo', serif" }}>
+                  {doctor.letter}
+                </p>
+                <p className="mt-4 text-sm font-semibold" style={{ color: '#0080C8' }}>
+                  — {doctor.name} {doctor.role}
+                </p>
+              </div>
+            )}
+
+            {/* 자격증 이미지 */}
             {doctor.documents && doctor.documents.length > 0 && (
-              <div className="absolute bottom-4 left-4 flex gap-2">
+              <div className="flex gap-3 mt-4">
                 {doctor.documents.map((doc, i) => (
                   <img
                     key={i}
@@ -49,32 +83,16 @@ function DoctorCard({
             )}
           </div>
 
-          {/* 오른쪽: 정보 + 학력·경력 */}
-          <div className="p-6 lg:p-8 flex flex-col gap-4">
-            {/* 전문 분야 태그 + 이름 */}
+          {/* 3열: 학력·경력 + 학회 */}
+          <div className="p-7 flex flex-col gap-6">
             <div>
-              <p className="text-sm text-gray-500 mb-2 tracking-wide">
-                {doctor.specialtyDetail ?? doctor.specialty}
-              </p>
-              <h3 className="text-3xl sm:text-4xl font-black text-gray-900 mb-1 leading-tight">
-                {doctor.name}{' '}
-                <span className="font-bold">{doctor.role}</span>
-              </h3>
-              {doctor.subRole && (
-                <p className="text-sm text-gray-600 mt-1">{doctor.subRole}</p>
-              )}
-              <div className="w-8 h-0.5 bg-[#0080C8] mt-2" />
-            </div>
-
-            {/* 학력·경력 */}
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <GraduationCap size={14} className="text-[#0080C8]" />
+              <div className="flex items-center gap-2 mb-3">
+                <GraduationCap size={15} className="text-[#0080C8]" />
                 <h4 className="font-semibold text-gray-700 text-sm">학력 · 경력</h4>
               </div>
-              <ul className="space-y-1">
+              <ul className="space-y-1.5">
                 {doctor.careers.map((c, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
                     <span className="text-[#0080C8] shrink-0 mt-0.5">•</span>
                     {c}
                   </li>
@@ -82,16 +100,15 @@ function DoctorCard({
               </ul>
             </div>
 
-            {/* 학회 활동 및 수료 */}
             {doctor.memberships && doctor.memberships.length > 0 && (
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Award size={14} className="text-[#0080C8]" />
+                <div className="flex items-center gap-2 mb-3">
+                  <Award size={15} className="text-[#0080C8]" />
                   <h4 className="font-semibold text-gray-700 text-sm">학회 활동 및 수료</h4>
                 </div>
-                <ul className="space-y-1">
+                <ul className="space-y-1.5">
                   {doctor.memberships.map((m, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
                       <span className="text-[#0080C8] shrink-0 mt-0.5">•</span>
                       {m}
                     </li>
@@ -101,20 +118,6 @@ function DoctorCard({
             )}
           </div>
         </div>
-
-        {/* 편지 */}
-        {doctor.letter && (
-          <div className={`mt-5 rounded-3xl bg-[#EEF4FA] px-10 py-8 relative ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-            style={isVisible ? { animationDelay: '0.2s' } : undefined}>
-            <span className="absolute top-5 left-8 text-6xl text-[#0080C8]/15 font-serif select-none leading-none">❝</span>
-            <p className="text-xl sm:text-2xl text-gray-700 leading-[2] italic whitespace-pre-line pl-10" style={{ fontFamily: "'Georgia', 'Nanum Myeongjo', serif" }}>
-              {doctor.letter}
-            </p>
-            <p className="mt-4 pl-10 text-base font-semibold" style={{ color: '#0080C8' }}>
-              — {doctor.name} {doctor.role}
-            </p>
-          </div>
-        )}
 
       </div>
     </article>
