@@ -17,7 +17,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: '심미보철', href: '/digital-prosthesis' },
   { label: '서울이건 교정치료', href: '/orthodontic' },
   { label: '소아치과', href: '/pediatric' },
-  { label: '수면진료', href: '/sedation' },
   { label: '오시는 길', href: '/location' },
 ]
 

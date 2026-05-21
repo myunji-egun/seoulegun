@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/digital-prosthesis', priority: 0.8 },
     { url: '/orthodontic', priority: 0.8 },
     { url: '/pediatric', priority: 0.8 },
-    { url: '/sedation', priority: 0.7 },
     { url: '/location', priority: 0.7 },
     { url: '/invisalign', priority: 0.7 },
     { url: '/media', priority: 0.6 },
