@@ -175,9 +175,7 @@ export default function InteriorSection() {
         </h2>
         <p className={`text-sm sm:text-base text-gray-500 max-w-2xl leading-relaxed mb-12 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={headerVisible ? { animationDelay: '0.2s' } : undefined}>
-          쾌적하고 편안한 환경에서<br className="sm:hidden" />
-          치료받으실 수 있도록<br />
-          공간을 세심하게 구성하였습니다.
+          쾌적하고 편안한 환경에서 치료받으실 수 있도록 공간을 세심하게 구성하였습니다.
         </p>
 
         {/* 본관 라벨 */}
