@@ -5,11 +5,11 @@ import { doctors, Doctor } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import DoctorTeamSection from '@/components/about/DoctorTeamSection'
 
-// 페이지별 그룹: [이재성·정채윤], [유수현·박지원], [백설아]
+// 페이지별 그룹: [이재성], [유수현·정채윤], [박지원·백설아]
 const doctorGroups: Doctor[][] = [
-  [doctors[0], doctors[1]],
-  [doctors[2], doctors[3]],
-  [doctors[4]],
+  [doctors[0]],
+  [doctors[1], doctors[2]],
+  [doctors[4], doctors[3]],
 ]
 
 function DoctorPageCard({ doctor }: { doctor: Doctor }) {
