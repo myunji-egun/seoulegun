@@ -5,6 +5,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     boardCategory: 'natural-tooth',
     treatmentType: 'vpt',
     title: 'VPT 신경보존술',
+    heroTitle: { line1: 'VPT', line2: '신경보존술' },
     subtitle: '통증은 줄이고, 신경은 최대한 살리는 방향으로',
     image: '/images/treatments/vpt-treat.png',
     description:
@@ -58,6 +59,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     boardCategory: 'natural-tooth',
     treatmentType: 'onlay',
     title: '최소삭제 온레이',
+    heroTitle: { line1: '최소삭제', line2: '온레이' },
     subtitle: '손상된 부위만 덮어 치아를 최대한 보존하는 방법',
     image: '/images/treatments/onlay-treat.jpg',
     photoGrid: [
@@ -71,7 +73,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     highlights: [
       { icon: 'Shield', label: '치아 보존', desc: '크라운보다\n삭제를 줄입니다.' },
       { icon: 'Scissors', label: '최소 삭제', desc: '손상 부위만\n정밀하게 덮습니다.' },
-      { icon: 'Sparkles', label: '자연스러운 색감', desc: '자연치아와\n유사한 색상 재현.' },
+      { icon: 'Sparkles', label: '자연스러운색감', desc: '자연치아와\n유사한 색상 재현.' },
       { icon: 'ShieldCheck', label: '추후 치료 유리', desc: '치아 구조를\n최대한 보존합니다.' },
     ],
     steps: [
@@ -117,6 +119,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     boardCategory: 'natural-tooth',
     treatmentType: 'root-canal',
     title: '근관치료 (신경치료)',
+    heroTitle: { line1: '근관치료', line2: '신경치료' },
     subtitle: '손상된 신경을 정리하고, 내 치아를 지키는 치료',
     image: '/images/treatments/endo_1.jpg',
     description:
@@ -163,6 +166,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     boardCategory: 'natural-tooth',
     treatmentType: 'gum',
     title: '잇몸치료',
+    heroTitle: { line2: '잇몸치료' },
     subtitle: '붓고 피나는 잇몸, 원인부터 차분히 살펴보겠습니다',
     beforeImage: '/images/treatments/sc-before.jpg',
     afterImage: '/images/treatments/sc-after.jpg',
@@ -175,11 +179,11 @@ export const naturalToothTreatments: TreatmentContent[] = [
       { icon: 'CalendarDays', label: '장기 관리', desc: '정기 유지관리로\n구강 건강을 지킵니다.' },
     ],
     steps: [
-      { title: '정밀 검사', desc: '잇몸 깊이 측정, X-ray로 뼈 손실 확인', icon: 'ScanLine' },
-      { title: '스케일링', desc: '치석·플라크 제거로 염증 원인 차단', icon: 'Sparkles' },
+      { title: '정밀 검사', desc: '잇몸 깊이 측정,\nX-ray로 뼈 손실 확인', icon: 'ScanLine' },
+      { title: '스케일링', desc: '치석·플라크 제거로\n염증 원인 차단', icon: 'Sparkles' },
       { title: '치근활택술', desc: '잇몸 안쪽 깊은 치석까지 꼼꼼히 제거', icon: 'Search' },
       { title: '경과 관찰', desc: '잇몸 상태 회복 여부 확인', icon: 'Eye' },
-      { title: '정기 유지관리', desc: '3~6개월마다 재발 방지 관리', icon: 'CalendarDays' },
+      { title: '정기 유지관리', desc: '3~6개월마다\n재발방지 관리', icon: 'CalendarDays' },
     ],
     indications: [
       '양치 시 잇몸에서\n피가 나는\n경우',
@@ -217,6 +221,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     boardCategory: 'natural-tooth',
     treatmentType: 'resin-buildup',
     title: '원데이 레진 빌드업',
+    heroTitle: { line1: '원데이', line2: '레진 빌드업' },
     subtitle: '가능한 한 보존적으로, 필요한 부분을 정교하게 회복합니다',
     beforeImage: '/images/treatments/resin-before.jpg',
     afterImage: '/images/treatments/resin-after.jpg',

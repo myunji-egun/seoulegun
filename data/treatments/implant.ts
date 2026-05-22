@@ -71,6 +71,8 @@ export const implantTreatments: TreatmentContent[] = [
     title: '즉시로딩 임플란트',
     subtitle: '임플란트 식립 당일, 임시치아까지 연결해 일상 공백을 줄입니다',
     image: '/images/treatments/immediate_2.webp',
+    beforeImage: '/images/treatments/immediate-before.jpg',
+    afterImage: '/images/treatments/immediate_2.jpg',
     description: '치아 없는 기간을 최소화하기 위해, 임플란트 식립 당일 임시치아 연결까지 함께 계획하는 치료',
     richContent: `### ❓ 일반 임플란트와 뭐가 다른가요?
 
