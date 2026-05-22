@@ -134,6 +134,7 @@ export const implantTreatments: TreatmentContent[] = [
     boardCategory: 'implant',
     treatmentType: 'navigation',
     title: '네비게이션 임플란트',
+    heroTitle: { line1: '네비게이션', line2: '임플란트' },
     subtitle: '디지털 분석을 바탕으로 계획하는 임플란트 치료',
     image: '/images/treatments/navigation.jpg',
     description:
@@ -180,6 +181,7 @@ export const implantTreatments: TreatmentContent[] = [
     boardCategory: 'implant',
     treatmentType: 'sinus-lift',
     title: '상악동 거상술',
+    heroTitle: { line2: '상악동 거상술' },
     subtitle:
       '위 어금니 뼈가 부족한 경우, 임플란트를 위한 기반을 함께 만듭니다',
     videoUrl: 'https://youtu.be/RmQSCxLQpKA',
@@ -223,6 +225,7 @@ export const implantTreatments: TreatmentContent[] = [
     boardCategory: 'implant',
     treatmentType: 'diabetes',
     title: '당뇨 환자 임플란트',
+    heroTitle: { line1: '당뇨환자', line2: '임플란트' },
     subtitle: '혈당 조절 상태를 함께 살피며 계획하는 임플란트 치료',
     beforeImage: '/images/treatments/impl-before.jpg',
     afterImage: '/images/treatments/impl-after.jpg',

@@ -5,6 +5,7 @@ export const pediatricTreatments: TreatmentContent[] = [
     boardCategory: 'pediatric',
     treatmentType: 'pediatric-cavity',
     title: '소아충치치료',
+    heroTitle: { line1: '소아', line2: '충치치료' },
     subtitle: '아이의 치아는 빠르게 변할 수 있어 조기 관리가 중요합니다',
     bottomImage: '/images/treatments/kids.png',
     description:
@@ -38,6 +39,7 @@ export const pediatricTreatments: TreatmentContent[] = [
     boardCategory: 'pediatric',
     treatmentType: 'laughing-gas',
     title: '웃음가스치료',
+    heroTitle: { line2: '웃음가스치료' },
     subtitle: '치과를 무서워하는 아이를 위한 보조적 진정 방법',
     description:
       '아산화질소(웃음가스)를 이용해 **치료 중 아이의 불안과 긴장을 줄여주는** 보조적 진정 방법입니다. **의식이 유지된 상태에서** 편안함을 느낄 수 있도록 돕고, 흡입을 멈추면 **빠르게 회복되어 일상 복귀가 가능합니다.**',
