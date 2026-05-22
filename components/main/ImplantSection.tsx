@@ -56,7 +56,7 @@ export default function ImplantSection() {
           디지털 정밀 진단 기반 임플란트
         </p>
 
-        {/* All on 4 대형 타이틀 */}
+        {/* 올온임플란트 대형 타이틀 */}
         <div
           className={`mb-8 md:mb-10 ${isVisible ? 'scroll-reveal-scale' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.3s' } : undefined}
@@ -71,7 +71,7 @@ export default function ImplantSection() {
               backgroundClip: 'text',
             }}
           >
-            All on 4
+            올온임플란트
           </span>
           <p className="text-stone-500 tracking-widest mt-1 uppercase" style={{ fontSize: '14px' }}>Full-Arch Rehabilitation</p>
         </div>

@@ -5,6 +5,7 @@ export const cosmeticTreatments: TreatmentContent[] = [
     boardCategory: 'cosmetic',
     treatmentType: 'laminate',
     title: '최소삭제 라미네이트',
+    heroTitle: { line1: '최소삭제', line2: '라미네이트' },
     subtitle: '앞니의 형태와 색, 균형을 보며 계획하는 심미치료',
     image: '/images/board/laminate.jpg',
     description:
@@ -98,6 +99,7 @@ export const cosmeticTreatments: TreatmentContent[] = [
     boardCategory: 'cosmetic',
     treatmentType: 'gum-contouring',
     title: '잇몸성형술',
+    heroTitle: { line2: '잇몸성형술' },
     subtitle: '치아만이 아니라 잇몸선의 균형도 함께 살핍니다',
     beforeImage: '/images/treatments/ctg-before.jpg',
     afterImage: '/images/treatments/ctg-after.jpg',

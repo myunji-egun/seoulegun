@@ -5,6 +5,7 @@ export const orthodonticsTreatments: TreatmentContent[] = [
     boardCategory: 'orthodontics',
     treatmentType: 'invisalign',
     title: '인비절라인 투명교정',
+    heroTitle: { line1: '인비절라인', line2: '투명교정' },
     subtitle: '일상생활의 편의성과 심미성을 함께 고려하는 교정치료',
     image: '/images/board/invisalign.jpg',
     bottomVideoUrl: 'https://youtu.be/hHeK7uRXsNg?si=9GlYXeF0rpTpqy7D',
@@ -60,6 +61,7 @@ export const orthodonticsTreatments: TreatmentContent[] = [
     boardCategory: 'orthodontics',
     treatmentType: 'pediatric-ortho',
     title: '소아성장기교정',
+    heroTitle: { line1: '성장기', line2: '소아교정' },
     subtitle: '치아 배열만이 아니라 성장 방향까지 함께 살핍니다',
     image: '/images/treatments/ortho-case.png',
     description:
