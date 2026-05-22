@@ -909,14 +909,37 @@ export default function TreatmentSection({
             alt="수원치과 서울이건치과"
             className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           />
-          <h2 className={`text-3xl sm:text-4xl font-bold text-gray-900 leading-tight ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-            style={textVisible ? { animationDelay: '0.1s' } : undefined}>
-            {treatment.title}
-          </h2>
-          <p className={`text-[22px] sm:text-[24px] text-[#0080C8] font-bold leading-snug ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-            style={textVisible ? { animationDelay: '0.2s' } : undefined}>
-            {treatment.subtitle}
-          </p>
+          {treatment.heroTitle ? (
+            <>
+              <div className={`flex items-center gap-1.5 text-[#0080C8] text-[13px] font-semibold ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+                style={textVisible ? { animationDelay: '0.08s' } : undefined}>
+                <LucideIcon name="ShieldCheck" size={13} />
+                <span>{treatment.subtitle}</span>
+              </div>
+              <h2 className={`leading-none ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+                style={textVisible ? { animationDelay: '0.1s' } : undefined}>
+                {treatment.heroTitle.line1 && (
+                  <span className="block text-[52px] sm:text-[64px] font-black text-gray-900 leading-[1.05]">
+                    {treatment.heroTitle.line1}
+                  </span>
+                )}
+                <span className="block text-[52px] sm:text-[64px] font-black leading-[1.05]" style={{ color: '#0080C8' }}>
+                  {treatment.heroTitle.line2}
+                </span>
+              </h2>
+            </>
+          ) : (
+            <>
+              <h2 className={`text-3xl sm:text-4xl font-bold text-gray-900 leading-tight ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+                style={textVisible ? { animationDelay: '0.1s' } : undefined}>
+                {treatment.title}
+              </h2>
+              <p className={`text-[22px] sm:text-[24px] text-[#0080C8] font-bold leading-snug ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+                style={textVisible ? { animationDelay: '0.2s' } : undefined}>
+                {treatment.subtitle}
+              </p>
+            </>
+          )}
           <div className={`${textVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={textVisible ? { animationDelay: '0.3s' } : undefined}>
             {/* richContent + highlights 동시에 있으면 → 아래 사이드패널로, 여기선 description만 */}
@@ -955,7 +978,7 @@ export default function TreatmentSection({
                 <div key={i} className="flex flex-col items-center text-center gap-1.5 py-2">
                   <LucideIcon name={h.icon} size={26} className="text-[#0080C8]" />
                   <p className="font-bold text-[17px] text-gray-900 leading-tight">{h.label}</p>
-                  <p className="text-[14px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
+                  <p className="text-[12px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
                 </div>
               ))}
             </div>
@@ -1133,7 +1156,7 @@ export default function TreatmentSection({
                   {step.icon && (
                     <LucideIcon name={step.icon} size={30} className="text-gray-300" />
                   )}
-                  <p className="text-[16px] text-gray-600 font-medium leading-relaxed">{step.desc}</p>
+                  <p className="text-[16px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{step.desc}</p>
                 </div>
                 {i < treatment.steps!.length - 1 && (
                   <ChevronRight size={18} className="text-gray-300 mx-2 shrink-0" />

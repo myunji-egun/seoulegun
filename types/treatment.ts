@@ -31,4 +31,5 @@ export interface TreatmentContent {
   sideImage?: string
   bottomVideoUrl?: string
   photoGrid?: { src: string; caption: string }[]
+  heroTitle?: { line1?: string; line2: string }
 }
