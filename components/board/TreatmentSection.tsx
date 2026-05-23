@@ -205,13 +205,6 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
             alt="올온 임플란트 보철"
             className="absolute right-0 top-0 w-[82%] max-w-[560px] rounded-[28px] object-cover shadow-[0_24px_70px_rgba(15,71,110,0.14)]"
           />
-          {treatment.sideImage && (
-            <img
-              src={treatment.sideImage}
-              alt="올온 임플란트 보철 제작 사례"
-              className="absolute left-0 bottom-2 w-[92%] rounded-[22px] object-cover border border-white/80 shadow-[0_26px_80px_rgba(15,71,110,0.16)]"
-            />
-          )}
         </div>
       </div>
 
@@ -892,6 +885,467 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
   )
 }
 
+function LaminateChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  const summaryCards = [
+    {
+      icon: 'Sparkles',
+      title: '한 줄 요약',
+      body: '치아를 거의 깎지 않고 얇은 세라믹 조각을 붙여 색·모양·길이를 한 번에 개선하는 심미치료',
+    },
+    {
+      icon: 'Gem',
+      title: '세라믹 라미네이트란?',
+      body: '치아 표면에 도자기처럼 얇은 세라믹 조각을 접착하여 변색, 형태 이상, 벌어진 치아 등을 자연스럽게 개선합니다. 기존 치아 구조를 최대한 살리면서 진행합니다.',
+    },
+    {
+      icon: 'SmilePlus',
+      title: '이런 분께 적합합니다',
+      body: '치아 변색이나 형태 이상이 신경 쓰이지만 치아를 최대한 보존하고 싶은 분께 먼저 고려할 수 있습니다.',
+    },
+  ]
+
+  return (
+    <div className="space-y-12">
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="Gem" size={18} />
+            <span>치아 삭제를 최소화한 앞니 심미치료</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[58px] lg:text-[66px] font-black leading-[1.06] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              {treatment.heroTitle?.line1 && (
+                <span className="block">{treatment.heroTitle.line1}</span>
+              )}
+              <span className="block text-[#0080C8]">{treatment.heroTitle?.line2}</span>
+            </h2>
+            <p
+              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              {treatment.subtitle}
+            </p>
+          </div>
+
+          <div
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+              치아 표면을 최소한으로 다듬고{' '}
+              <span className="font-semibold" style={{ color: '#0080C8' }}>얇은 세라믹을 접착</span>하여
+              형태, 색상, 배열을 개선합니다. 내 치아는 그대로, 미소만 새로 태어납니다.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
+          <div className="relative rounded-[28px] overflow-hidden bg-white border border-white shadow-[0_28px_90px_rgba(15,71,110,0.16)]">
+            {treatment.beforeImage && treatment.afterImage ? (
+              <BeforeAfterSlider
+                beforeSrc={treatment.beforeImage}
+                afterSrc={treatment.afterImage}
+                beforeAlt={`${treatment.title} 시술 전`}
+                afterAlt={`${treatment.title} 시술 후`}
+              />
+            ) : treatment.image ? (
+              <img src={treatment.image} alt={treatment.title} className="w-full h-auto" />
+            ) : (
+              <div className="w-full aspect-[4/3] flex items-center justify-center text-gray-400 text-sm">
+                치료 이미지 준비 중
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {summaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          라미네이트의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['Gem', 'Sparkles', 'BadgeCheck', 'CalendarCheck', 'ShieldCheck'][i] ?? 'CheckCircle'}
+                size={46}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="Gem" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+          깎지 않아도 달라집니다. 내 치아는 그대로, 미소만 새로 태어납니다.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  const summaryCards = [
+    {
+      icon: 'Sparkles',
+      title: '한 줄 요약',
+      body: '금속 장치 없이 투명한 맞춤 틀을 끼워 일상에서 눈에 띄지 않게 치아를 가지런히 만드는 교정치료',
+    },
+    {
+      icon: 'ArrowRightLeft',
+      title: '일반 교정과 다른 점',
+      body: '철사 교정은 금속 장치를 달고 생활해야 하지만, 인비절라인은 투명해서 대화·미소·사진 모두 자연스럽습니다. 식사 때는 빼서 드시면 됩니다.',
+    },
+    {
+      icon: 'CalendarCheck',
+      title: '이런 분께 적합합니다',
+      body: '교정은 원하지만 티나는 게 부담스럽거나, 직장·학교 등 대외활동이 많아 외관이 중요한 분께 적합합니다.',
+    },
+  ]
+
+  return (
+    <div className="space-y-12">
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="SmilePlus" size={18} />
+            <span>심미성과 편의성을 함께 고려하는 투명교정</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[58px] lg:text-[66px] font-black leading-[1.06] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              {treatment.heroTitle?.line1 && (
+                <span className="block">{treatment.heroTitle.line1}</span>
+              )}
+              <span className="block text-[#0080C8]">{treatment.heroTitle?.line2}</span>
+            </h2>
+            <p
+              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              {treatment.subtitle}
+            </p>
+          </div>
+
+          <div
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+              투명한 교정 장치로 치아 배열을 조금씩 개선해가는 교정치료입니다.{' '}
+              <span className="font-semibold" style={{ color: '#0080C8' }}>눈에 잘 띄지 않아</span>{' '}
+              일상생활 속에서도 비교적 자연스럽게 착용할 수 있다는 점이 특징입니다.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
+          <div className="relative rounded-[28px] overflow-hidden bg-white border border-white shadow-[0_28px_90px_rgba(15,71,110,0.16)]">
+            {treatment.beforeImage && treatment.afterImage ? (
+              <BeforeAfterSlider
+                beforeSrc={treatment.beforeImage}
+                afterSrc={treatment.afterImage}
+                beforeAlt={`${treatment.title} 시술 전`}
+                afterAlt={`${treatment.title} 시술 후`}
+              />
+            ) : treatment.image ? (
+              <img src={treatment.image} alt={treatment.title} className="w-full h-auto" />
+            ) : (
+              <div className="w-full aspect-[4/3] flex items-center justify-center text-gray-400 text-sm">
+                치료 이미지 준비 중
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {summaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+          </div>
+        ))}
+      </div>
+
+      {treatment.bottomVideoUrl && (
+        <div className={`w-full max-w-[60%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+          <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-[0_18px_60px_rgba(16,55,91,0.1)]">
+            <iframe
+              src={`https://www.youtube.com/embed/${treatment.bottomVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={`${treatment.title} 영상`}
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          인비절라인의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['SmilePlus', 'ArrowRightLeft', 'Sparkles', 'ShieldCheck', 'CalendarCheck'][i] ?? 'CheckCircle'}
+                size={46}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="SmilePlus" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+          끼고 있는지도 모릅니다. 투명하게 시작해서, 가지런하게 완성합니다.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  const summaryCards = [
+    {
+      icon: 'Sparkles',
+      title: '한 줄 요약',
+      body: '뼈와 턱이 한창 자라는 시기를 활용해, 치열과 턱 발육을 올바른 방향으로 유도하는 교정치료',
+    },
+    {
+      icon: 'Zap',
+      title: '왜 어릴 때 교정이 유리한가요?',
+      body: '성인이 되면 뼈가 굳어 교정이 어렵습니다. 성장기에는 뼈가 유연하여 적은 힘으로도 효과적으로 턱과 치열을 바로잡고, 나중에 큰 치료를 예방할 수 있습니다.',
+    },
+    {
+      icon: 'CalendarCheck',
+      title: '이런 분께 적합합니다',
+      body: '앞니가 거꾸로 물리거나 구강 호흡을 하는 아이, 영구치 배열이 걱정되는 성장기 자녀를 두신 분께 먼저 고려할 수 있습니다.',
+    },
+  ]
+
+  return (
+    <div className="space-y-12">
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="ShieldCheck" size={18} />
+            <span>성장 시기를 활용하는 어린이 교정치료</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[58px] lg:text-[66px] font-black leading-[1.06] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              {treatment.heroTitle?.line1 && (
+                <span className="block">{treatment.heroTitle.line1}</span>
+              )}
+              <span className="block text-[#0080C8]">{treatment.heroTitle?.line2}</span>
+            </h2>
+            <p
+              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              {treatment.subtitle}
+            </p>
+          </div>
+
+          <div
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+              성장기 아이의{' '}
+              <span className="font-semibold" style={{ color: '#0080C8' }}>골격 발육과 치아 배열을 함께 고려</span>하여
+              적절한 시기에 개입하는 교정치료입니다. 성장 잠재력을 활용해 더 효과적으로 치료합니다.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
+          <div className="relative rounded-[28px] overflow-hidden bg-white border border-white shadow-[0_28px_90px_rgba(15,71,110,0.16)]">
+            {treatment.beforeImage && treatment.afterImage ? (
+              <BeforeAfterSlider
+                beforeSrc={treatment.beforeImage}
+                afterSrc={treatment.afterImage}
+                beforeAlt={`${treatment.title} 시술 전`}
+                afterAlt={`${treatment.title} 시술 후`}
+              />
+            ) : treatment.image ? (
+              <img src={treatment.image} alt={treatment.title} className="w-full h-auto" />
+            ) : (
+              <div className="w-full aspect-[4/3] flex items-center justify-center text-gray-400 text-sm">
+                치료 이미지 준비 중
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {summaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          소아교정의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['Zap', 'ShieldCheck', 'Sparkles', 'SmilePlus', 'CalendarCheck'][i] ?? 'CheckCircle'}
+                size={46}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="ShieldCheck" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+          교정의 최적기는 다시 오지 않습니다. 성장이 끝나기 전에 시작할수록 치료는 간단해집니다.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function TreatmentSection({
   treatment,
 }: TreatmentSectionProps) {
@@ -916,6 +1370,18 @@ export default function TreatmentSection({
 
   if (treatment.treatmentType === 'resin-buildup') {
     return <ResinBuildupChapter treatment={treatment} />
+  }
+
+  if (treatment.treatmentType === 'laminate') {
+    return <LaminateChapter treatment={treatment} />
+  }
+
+  if (treatment.treatmentType === 'invisalign') {
+    return <InvisalignChapter treatment={treatment} />
+  }
+
+  if (treatment.treatmentType === 'pediatric-ortho') {
+    return <PediatricOrthoChapter treatment={treatment} />
   }
 
   return (

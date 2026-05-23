@@ -77,9 +77,6 @@ export default function DoctorTeamSection() {
                     <p className="text-white font-bold text-[18px] leading-tight">
                       {doctor.name}
                     </p>
-                    <p className="mt-1 text-[18px] font-bold leading-tight text-[#8BCBFF]">
-                      {doctor.specialtyDetail || doctor.specialty}
-                    </p>
                     <p className="mt-1 text-white/75 text-[14px]">{doctor.role}</p>
                   </div>
 
@@ -114,7 +111,7 @@ export default function DoctorTeamSection() {
                   <p className="text-[18px] font-bold leading-tight text-gray-950">
                     {doctor.name} <span className="text-gray-500">{doctor.role}</span>
                   </p>
-                  <p className="mt-1 text-[18px] font-extrabold leading-tight text-[#0080C8]">
+                  <p className="mt-1 text-[16px] font-extrabold leading-tight text-[#0080C8]">
                     {doctor.specialtyDetail || HOVER_SPECIALTY[doctor.id] || doctor.specialty}
                   </p>
                 </div>

@@ -8,6 +8,8 @@ export const cosmeticTreatments: TreatmentContent[] = [
     heroTitle: { line1: '최소삭제', line2: '라미네이트' },
     subtitle: '앞니의 형태와 색, 균형을 보며 계획하는 심미치료',
     image: '/images/board/laminate.jpg',
+    beforeImage: '/images/treatments/lami_before.jpg',
+    afterImage: '/images/treatments/lami_after.jpg',
     description:
       '치아 표면을 최소한으로 다듬고 **얇은 세라믹을 접착하여 형태, 색상, 배열을 개선**하는 심미치료입니다. **치아 삭제량을 줄이면서도** 자연스러운 결과를 기대할 수 있으며, 변색, 형태 이상, 벌어진 치아 등 다양한 심미적 고민에 대응할 수 있습니다.',
     richContent: `### 💡 한 줄 요약
