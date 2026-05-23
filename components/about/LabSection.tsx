@@ -23,7 +23,6 @@ const LAB_IMAGES = [
   '/images/ddlab/ddlab%20(1).jpg',
   '/images/ddlab/ddlab%20(2).jpg',
   '/images/ddlab/ddlab%20(3).jpg',
-  '/images/ddlab/ddlab%20(4).jpg',
   '/images/ddlab/ddlab%20(7).jpg',
   '/images/ddlab/ddlab%20(10).jpg',
   '/images/ddlab/ddlab%20(11).jpg',

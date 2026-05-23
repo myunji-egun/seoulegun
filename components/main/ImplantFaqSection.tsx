@@ -36,23 +36,23 @@ export default function ImplantFaqSection() {
   return (
     <section
       ref={ref}
-      className="h-screen w-full flex flex-col justify-center"
+      className="min-h-screen w-full flex flex-col justify-center"
       style={{ backgroundColor: '#1a2035' }}
     >
-      <div className="w-full max-w-6xl mx-auto px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-10 sm:gap-8 lg:gap-20 items-center">
+      <div className="w-full max-w-5xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-[0.85fr_1.75fr] gap-8 sm:gap-7 lg:gap-14 items-center">
 
           {/* 왼쪽: 제목 */}
           <div className={`${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <p
               className="tracking-[0.3em] uppercase mb-4"
-              style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)' }}
+              style={{ fontSize: '10px', color: 'rgba(255,255,255,0.35)' }}
             >
               FREQUENTLY ASKED
             </p>
             <h2
               className="font-bold text-white leading-tight"
-              style={{ fontSize: 'clamp(32px, 4vw, 60px)' }}
+              style={{ fontSize: 'clamp(26px, 3vw, 42px)' }}
             >
               궁금한 점을
               <br />
@@ -75,18 +75,18 @@ export default function ImplantFaqSection() {
                 style={{
                   borderBottom: '1px solid rgba(255,255,255,0.1)',
                   borderLeft: isOpen(i) ? '3px solid #4fc3f7' : '3px solid transparent',
-                  paddingLeft: isOpen(i) ? '14px' : '0px',
+                  paddingLeft: isOpen(i) ? '12px' : '0px',
                   transition: 'border-left-color 0.25s ease, padding-left 0.25s ease',
                 }}
               >
                 {/* 질문 버튼 */}
                 <button
                   className="w-full flex items-center justify-between text-left gap-4"
-                  style={{ paddingTop: '20px', paddingBottom: isOpen(i) ? '12px' : '20px' }}
+                  style={{ paddingTop: '14px', paddingBottom: isOpen(i) ? '10px' : '14px' }}
                 >
                   <span
                     style={{
-                      fontSize: '22px',
+                      fontSize: '16px',
                       color: isOpen(i) ? '#4fc3f7' : 'rgba(255,255,255,0.5)',
                       flexShrink: 0,
                       transition: 'color 0.2s ease',
@@ -97,7 +97,7 @@ export default function ImplantFaqSection() {
                   <span
                     className="flex-1"
                     style={{
-                      fontSize: '26px',
+                      fontSize: '19px',
                       fontWeight: isOpen(i) ? 700 : 500,
                       color: isOpen(i) ? '#fff' : 'rgba(255,255,255,0.92)',
                       transition: 'color 0.2s ease, font-weight 0.2s ease',
@@ -106,30 +106,30 @@ export default function ImplantFaqSection() {
                     {faq.q}
                   </span>
                   <span
-                    className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                    className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center"
                     style={{
                       border: `1px solid ${isOpen(i) ? 'rgba(79,195,247,0.5)' : 'rgba(255,255,255,0.2)'}`,
                       transition: 'border-color 0.2s ease',
                     }}
                   >
-                    <Plus size={14} style={{ color: isOpen(i) ? '#4fc3f7' : 'rgba(255,255,255,0.4)' }} />
+                    <Plus size={12} style={{ color: isOpen(i) ? '#4fc3f7' : 'rgba(255,255,255,0.4)' }} />
                   </span>
                 </button>
 
                 {/* 답변 — max-height 트랜지션으로 부드럽게 열림 */}
                 <div
                   style={{
-                    maxHeight: isOpen(i) ? '220px' : '0px',
+                    maxHeight: isOpen(i) ? '160px' : '0px',
                     overflow: 'hidden',
                     transition: 'max-height 0.38s cubic-bezier(0.2, 0.8, 0.2, 1)',
                   }}
                 >
-                  <div style={{ paddingBottom: '20px', paddingLeft: '52px', paddingRight: '40px' }}>
+                  <div style={{ paddingBottom: '16px', paddingLeft: '38px', paddingRight: '32px' }}>
                     <p
                       style={{
-                        fontSize: '26px',
+                        fontSize: '18px',
                         color: 'rgba(255,255,255,0.62)',
-                        lineHeight: 1.75,
+                        lineHeight: 1.65,
                       }}
                     >
                       {faq.a}

@@ -227,7 +227,7 @@ export const implantTreatments: TreatmentContent[] = [
     title: '당뇨 환자 임플란트',
     heroTitle: { line1: '당뇨환자', line2: '임플란트' },
     subtitle: '혈당 조절 상태를 함께 살피며 계획하는 임플란트 치료',
-    beforeImage: '/images/treatments/impl-before.jpg',
+    beforeImage: '/images/treatments/impl-before.jpg?v=2',
     afterImage: '/images/treatments/impl-after.jpg',
     description:
       '당뇨가 있는 경우에도 **혈당 조절 상태와 전신 건강을 확인**하면서 임플란트 치료를 계획할 수 있습니다. **당화혈색소 수치, 복용 약물, 상처 치유 경과** 등을 종합적으로 평가하여 **안전한 치료 시기와 방법**을 함께 결정합니다.',

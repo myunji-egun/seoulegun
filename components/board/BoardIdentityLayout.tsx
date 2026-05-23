@@ -25,29 +25,29 @@ export default function BoardIdentityLayout({ label, title, description, pillars
           {label}
         </p>
 
-        <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+        <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight tracking-normal mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.1s' } : undefined}>
           {title}
         </h2>
 
-        <p className={`text-base sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl mb-12 sm:mb-16 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+        <p className={`text-base sm:text-[18px] text-gray-600 leading-[1.85] tracking-normal max-w-2xl mb-12 sm:mb-16 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}>
           {description}
         </p>
 
-        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6`}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {pillars.map((pillar, i) => (
             <div key={pillar.title}
               className={`group ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={isVisible ? { animationDelay: `${0.3 + i * 0.1}s` } : undefined}
             >
-              <div className="flex items-start gap-3">
-                <div className="w-1 h-full min-h-12 bg-[#0080C8]/30 rounded-full group-hover:bg-[#0080C8] transition-colors mt-0.5" />
+              <div className="flex items-start gap-4 py-1">
+                <div className="w-1 h-full min-h-16 bg-[#0080C8]/30 rounded-full group-hover:bg-[#0080C8] transition-colors mt-1" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1.5 text-[19px] sm:text-[21px]">
+                  <h3 className="font-bold text-gray-900 mb-3 text-[20px] sm:text-[21px] leading-[1.35] tracking-normal">
                     {pillar.title}
                   </h3>
-                  <p className="text-[17px] sm:text-[19px] text-gray-600 leading-relaxed whitespace-pre-line">
+                  <p className="text-[18px] sm:text-[19px] text-gray-600 leading-[1.85] tracking-normal whitespace-pre-line">
                     {pillar.description}
                   </p>
                 </div>

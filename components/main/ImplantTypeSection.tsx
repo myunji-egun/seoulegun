@@ -39,74 +39,83 @@ export default function ImplantTypeSection() {
   return (
     <section
       ref={ref}
-      className="h-screen w-full flex flex-col justify-center"
-      style={{ backgroundColor: '#1a2035' }}
+      className="min-h-screen w-full flex flex-col justify-center bg-white"
     >
-      <div className="w-full max-w-6xl mx-auto px-5 lg:px-8" style={{ paddingTop: '5vh', paddingBottom: '5vh' }}>
-        <p
-          className={`tracking-[0.3em] uppercase mb-5 lg:mb-8 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
-          style={{ fontSize: '12px', color: 'rgba(255,255,255,0.28)' }}
-        >
-          IMPLANT SOLUTION TYPES
-        </p>
+      <div className="w-full max-w-5xl mx-auto px-5 lg:px-8" style={{ paddingTop: 'clamp(110px, 14vh, 150px)', paddingBottom: '8vh' }}>
+        <div className={`mb-8 lg:mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
+          <p
+            className="font-black tracking-tight uppercase leading-none select-none"
+            style={{
+              fontSize: 'clamp(34px, 5vw, 84px)',
+              background: 'linear-gradient(135deg, var(--e-primary) 0%, var(--e-accent) 48%, var(--e-primary) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: '0 18px 46px rgba(0,128,200,0.18)',
+            }}
+          >
+            IMPLANT SOLUTION TYPES
+          </p>
+          <div className="mt-3 h-1.5 w-28 rounded-full bg-[var(--e-primary)] shadow-[0_0_24px_rgba(0,128,200,0.35)]" />
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
           {TYPES.map((type, i) => (
             <Link
               key={i}
               href={type.href}
-              className={`rounded-2xl flex flex-col overflow-hidden group cursor-pointer ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              className={`rounded-xl flex flex-col overflow-hidden group cursor-pointer ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
               style={{
-                border: '1px solid rgba(255,255,255,0.09)',
-                backgroundColor: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(26,32,53,0.12)',
+                backgroundColor: '#252a3c',
                 textDecoration: 'none',
                 transition: 'border-color 0.25s ease, background-color 0.25s ease',
                 ...(isVisible ? { animationDelay: `${i * 0.12}s` } : {}),
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(79,195,247,0.35)'; (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(79,195,247,0.04)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.09)'; (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0.03)' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(79,195,247,0.35)'; (e.currentTarget as HTMLElement).style.backgroundColor = '#283044' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(26,32,53,0.12)'; (e.currentTarget as HTMLElement).style.backgroundColor = '#252a3c' }}
             >
               {/* 텍스트 영역 */}
-              <div className="p-5 lg:p-7 flex flex-col flex-grow">
+              <div className="p-4 lg:p-5 flex flex-col flex-grow">
                 <p
-                  className="tracking-[0.25em] mb-3 lg:mb-5"
-                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.28)' }}
+                  className="tracking-[0.25em] mb-2 lg:mb-3"
+                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.28)' }}
                 >
                   TYPE / {type.num}
                 </p>
 
                 <h3
                   className="font-bold text-white leading-tight mb-1 lg:mb-2"
-                  style={{ fontSize: 'clamp(22px, 2.4vw, 32px)' }}
+                  style={{ fontSize: 'clamp(19px, 1.8vw, 25px)' }}
                 >
                   {type.title}
                 </h3>
 
                 <p
                   className="tracking-[0.18em] uppercase mb-2 lg:mb-3"
-                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.32)' }}
+                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.32)' }}
                 >
                   {type.subtitle}
                 </p>
 
                 <p
-                  className="italic leading-relaxed mb-4 lg:mb-5"
-                  style={{ fontSize: '17px', color: 'rgba(255,255,255,0.48)' }}
+                  className="italic leading-relaxed mb-3 lg:mb-4"
+                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.48)' }}
                 >
                   &ldquo;{type.quote}&rdquo;
                 </p>
 
                 <div
-                  className="mb-3 lg:mb-4"
+                  className="mb-3"
                   style={{ borderTop: '1px solid rgba(255,255,255,0.09)' }}
                 />
 
-                <ul className="space-y-1.5 lg:space-y-2">
+                <ul className="space-y-1.5">
                   {type.features.map((feat, j) => (
                     <li
                       key={j}
                       className="flex items-center gap-2"
-                      style={{ fontSize: '17px', color: 'rgba(255,255,255,0.62)' }}
+                      style={{ fontSize: '13px', color: 'rgba(255,255,255,0.62)' }}
                     >
                       <span style={{ color: 'rgba(255,255,255,0.28)' }}>—</span>
                       {feat}
@@ -116,7 +125,7 @@ export default function ImplantTypeSection() {
               </div>
 
               {/* 이미지 영역 */}
-              <div style={{ height: 'clamp(240px, 30vh, 380px)', flexShrink: 0, overflow: 'hidden' }}>
+              <div style={{ height: 'clamp(170px, 21vh, 260px)', flexShrink: 0, overflow: 'hidden' }}>
                 <img
                   src={type.img}
                   alt={type.title}

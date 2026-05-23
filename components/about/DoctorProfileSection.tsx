@@ -5,6 +5,8 @@ import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import DoctorTeamSection from '@/components/about/DoctorTeamSection'
 
+const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'baek-seola', 'park-jiwon']
+
 function DoctorCard({
   doctor,
 }: {
@@ -126,6 +128,9 @@ function DoctorCard({
 
 export default function DoctorProfileSection() {
   const { ref, isVisible } = useScrollReveal(0.15)
+  const displayDoctors = [...doctors].sort(
+    (a, b) => DOCTOR_ORDER.indexOf(a.id) - DOCTOR_ORDER.indexOf(b.id)
+  )
 
   return (
     <section
@@ -199,14 +204,15 @@ export default function DoctorProfileSection() {
         </div>
 
         <div ref={ref} className="relative z-10 hidden max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:block">
-          <p className={`text-[24px] font-semibold tracking-[0.25em] uppercase text-[#92DCE5] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
-            Our Doctors
+        <p className={`text-[20px] font-semibold tracking-[0.25em] uppercase text-[#0080c8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.95), 0 0 15px rgba(0,128,200,0.5)' }}>
+  Our Doctors
           </p>
           <h2 id="doctors-heading"
             className={`text-[32px] sm:text-[38px] lg:text-[46px] font-normal text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.1s' } : undefined}>
             한자리에서<br />
-            <span style={{ color: '#92DCE5' }}>변하지 않는 마음</span>
+            <span style={{ color: '#ffffff', textShadow: '0 0 20px rgba(0,128,200,0.9), 0 2px 12px rgba(0,0,0,0.95), 0 4px 25deg rgba(0,0,0,0.8)' }}>변하지 않는 마음</span>
           </h2>
           <p className={`mt-6 text-[26px] sm:text-[28px] text-white/75 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.2s' } : undefined}>
@@ -220,7 +226,7 @@ export default function DoctorProfileSection() {
       <DoctorTeamSection />
 
       {/* 원장님 카드 — 각각 */}
-      {doctors.map((doctor) => (
+      {displayDoctors.map((doctor) => (
         <DoctorCard key={doctor.id} doctor={doctor} />
       ))}
     </section>

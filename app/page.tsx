@@ -23,7 +23,7 @@ export default function Home() {
       {/* Desktop: scroll-snap fullpage */}
       <div
         ref={containerRef}
-        className="hidden md:block h-screen overflow-y-scroll"
+        className="home-page hidden md:block h-screen overflow-y-scroll"
         style={{
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',
@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* Mobile: scroll-snap fullpage */}
       <div
-        className="md:hidden h-screen overflow-y-scroll"
+        className="home-page md:hidden h-screen overflow-y-scroll"
         style={{
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',

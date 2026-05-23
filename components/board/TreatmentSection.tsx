@@ -44,11 +44,11 @@ const immediateSummaryCards = [
   },
 ]
 
-/** **볼드** → 민트 강조 인라인 파서 */
+/** **볼드** → 브랜드 블루 강조 인라인 파서 */
 function inlineParse(text: string) {
   return text.split(/(\*\*[^*]+\*\*)/).map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
-      return <span key={i} className="font-semibold" style={{ color: '#92DCE5' }}>{part.slice(2, -2)}</span>
+      return <span key={i} className="font-semibold" style={{ color: '#0080C8' }}>{part.slice(2, -2)}</span>
     }
     return <span key={i}>{part}</span>
   })
@@ -64,6 +64,24 @@ function HighlightedDescription({ text }: { text: string }) {
 }
 
 /** richContent 마크다운 렌더러 (###, >, ---, - 지원) */
+function AllOnImageMarquee() {
+  return (
+    <div className="relative left-1/2 -mt-4 mb-2 w-screen -translate-x-1/2 overflow-hidden py-4 sm:-mt-6 sm:mb-4 sm:py-5">
+      <div className="all-on-marquee-track flex w-max items-center">
+        {[0, 1].map((item) => (
+          <img
+            key={item}
+            src="/images/allon/allonslide.jpg"
+            alt=""
+            aria-hidden="true"
+            className="h-[54px] w-auto max-w-none shrink-0 object-contain sm:h-[72px] lg:h-[92px]"
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function RichDescription({ content }: { content: string }) {
   const lines = content.split('\n')
   const elements: React.ReactNode[] = []
@@ -112,7 +130,7 @@ function RichDescription({ content }: { content: string }) {
       flushList()
       const quoteText = line.replace(/^> /, '')
       elements.push(
-        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[16px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#92DCE5' }}>
+        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[16px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#0080C8' }}>
           {inlineParse(quoteText)}
         </blockquote>
       )
@@ -196,6 +214,8 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
           )}
         </div>
       </div>
+
+      <AllOnImageMarquee />
 
       <div
         ref={cardRef}
