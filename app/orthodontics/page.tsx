@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function OrthodonticsPage() {
   return (
     <TreatmentPage
-      title="서울이건 교정치료"
+      title="수원 교정, 인비절라인"
       subtitle="가지런한 치아, 건강한 교합"
       treatments={orthodonticsTreatments}
       hideCases

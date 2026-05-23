@@ -39,7 +39,7 @@ export default function ImplantSection() {
       <div className="absolute inset-0 bg-black/70 pointer-events-none" />
 
       {/* ── 콘텐츠 ───────────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center text-center">
+      <div className="relative z-10 flex origin-center scale-[0.8] flex-col items-center text-center">
         <p className={`tracking-[0.4em] uppercase text-stone-500 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`} style={{ fontSize: '14px' }}>
           Implant Solution
         </p>

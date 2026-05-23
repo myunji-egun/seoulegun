@@ -44,7 +44,7 @@ export default function BoardHero({ title, subtitle, videoId, heroImage, heroFul
   if (heroImage) {
     return (
       <section className="relative h-[72vh] min-h-[520px] overflow-hidden bg-black" aria-label={`${title} 소개`}>
-        <img src={heroImage} alt={title} className="absolute inset-0 h-full w-full scale-[1.14] object-cover object-[center_38%]" />
+        <img src={heroImage} alt={title} className="absolute inset-0 h-full w-full scale-[1.14] object-cover object-top" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 w-full">
