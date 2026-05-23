@@ -72,7 +72,7 @@ export default function MediaPage() {
       {/* 페이지 헤더 */}
       <section className="relative flex items-center justify-center min-h-[220px] sm:min-h-[280px] overflow-hidden">
         <div
-          className="absolute inset-0 bg-gradient-to-br from-[#2B2D42] via-[#0080C8] to-[#92DCE5]"
+          className="absolute inset-0 bg-gradient-to-br from-[#2B2D42] via-[#0080C8] to-[#006EAA]"
           aria-hidden="true"
         />
         <div className="relative z-10 text-center px-4 py-12 sm:py-16">

@@ -51,7 +51,7 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-1 py-2 text-[14px] xl:text-[15px] font-medium whitespace-nowrap transition-colors duration-200 group ${
+                    className={`relative px-1 py-2 text-[18px] font-medium whitespace-nowrap transition-colors duration-200 group ${
                       isActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -70,7 +70,7 @@ export default function Header() {
             {/* 예약하기 버튼 (데스크탑) */}
             <a
               href={`tel:${PHONE}`}
-              className="hidden lg:flex ml-auto items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-80 text-white"
+              className="hidden lg:flex ml-auto items-center gap-2 px-5 py-2.5 rounded-full text-[18px] font-semibold transition-opacity hover:opacity-80 text-white"
               style={{ backgroundColor: '#0080C8' }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

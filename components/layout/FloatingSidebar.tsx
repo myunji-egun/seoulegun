@@ -154,7 +154,7 @@ export default function FloatingSidebar() {
     {/* TOP 버튼 - 사이드바 아래 */}
     <button
       onClick={scrollToTop}
-      className="flex fixed right-3 bottom-24 z-50 flex-col items-center justify-center w-10 h-12 rounded-2xl bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl text-white/60 hover:text-[#92DCE5] hover:bg-white/10 transition-all duration-200 lg:w-12 lg:h-14 lg:right-5 lg:bottom-24"
+      className="flex fixed right-3 bottom-24 z-50 flex-col items-center justify-center w-10 h-12 rounded-2xl bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl text-white/60 hover:text-[#0080C8] hover:bg-white/10 transition-all duration-200 lg:w-12 lg:h-14 lg:right-5 lg:bottom-24"
       aria-label="맨 위로"
     >
       <ChevronUp size={18} />

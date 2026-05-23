@@ -20,26 +20,26 @@ export default function NaturalPhilosophySection() {
       {/* ── 모바일 콘텐츠: 센터 정렬 ── */}
       <div className="md:hidden relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
         <h2 className={`font-black leading-[1.2] mb-6 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
-          <span className="text-[28px] sm:text-[34px] block" style={{ color: '#92DCE5' }}>
+          <span className="text-[28px] sm:text-[34px] block" style={{ color: '#0080C8' }}>
             가장 좋은 임플란트는
           </span>
           <span className="text-[28px] sm:text-[34px] block mt-1 text-white">
             내가 가진{' '}
-            <span style={{ color: '#92DCE5' }}>자연치아</span>{' '}입니다.
+            <span style={{ color: '#0080C8' }}>자연치아</span>{' '}입니다.
           </span>
         </h2>
         <p className={`text-sm text-white/85 leading-[1.85] max-w-sm ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}>
           자연치아는 인공치아가 결코 흉내 낼 수 없는{' '}
-          <strong style={{ color: '#92DCE5' }}>고유의 치주인대</strong>를 가지고 있어,
+          <strong style={{ color: '#0080C8' }}>고유의 치주인대</strong>를 가지고 있어,
           외부 충격을 완화하는 천연 완충 작용을 합니다.
         </p>
         <Link
           href="/natural-tooth"
           className={`mt-6 text-sm font-medium px-8 py-2.5 rounded-full transition-all duration-200 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{
-            color: '#92DCE5',
-            border: '1.5px solid #92DCE5',
+            color: '#0080C8',
+            border: '1.5px solid #0080C8',
             ...(isVisible ? { animationDelay: '0.4s' } : {}),
           }}
         >
@@ -58,11 +58,11 @@ export default function NaturalPhilosophySection() {
           >
             <h2 className="font-black leading-[1.1]" style={{ color: '#2B2D42' }}>
               <span className="text-6xl lg:text-7xl block">
-                <span style={{ color: '#92DCE5' }}>가장 좋은</span>{' '}임플란트는
+                <span style={{ color: '#0080C8' }}>가장 좋은</span>{' '}임플란트는
               </span>
               <span className="text-6xl lg:text-7xl block mt-1">
                 내가 가진{' '}
-                <span style={{ color: '#92DCE5' }}>자연치아</span>{' '}입니다.
+                <span style={{ color: '#0080C8' }}>자연치아</span>{' '}입니다.
               </span>
             </h2>
           </div>

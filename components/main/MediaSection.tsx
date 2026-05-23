@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const MEDIA_ITEMS = [
-  { id: 'notice',  label: '공지사항',       image: '/images/media-image/notice.webp',  href: '/notice',                                                    external: false, hoverColor: '#92DCE5' },
+  { id: 'notice',  label: '공지사항',       image: '/images/media-image/notice.webp',  href: '/notice',                                                    external: false, hoverColor: '#0080C8' },
   { id: 'blog',    label: '원장님 칼럼',     image: '/images/media-image/blog.webp',    href: 'https://blog.naver.com/seoulegundc',                          external: true,  hoverColor: '#22C55E' },
   { id: 'youtube', label: '이건TV',          image: '/images/media-image/youtube.webp', href: 'https://youtube.com/@seoulegun',                             external: true,  hoverColor: '#FF0000' },
   { id: 'review',  label: '환자분 실제 후기', image: '/images/media-image/review.webp',  href: 'https://m.place.naver.com/restaurant/12872860',               external: true,  hoverColor: '#22C55E' },
@@ -19,17 +19,17 @@ export default function MediaSection() {
     <section ref={ref}
       className="h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
       style={{ backgroundColor: 'var(--e-bg)' }}>
-      <div className="text-center mb-8 md:mb-12">
+      <div className="text-center mb-6 md:mb-9">
         <p className={`text-xs tracking-[0.35em] uppercase text-stone-400 mb-3 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           Egun Media
         </p>
-        <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold text-stone-800 leading-tight ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+        <h2 className={`text-lg md:text-xl lg:text-2xl font-bold text-stone-800 leading-tight ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.12s' } : undefined}>
           이건치과 소식
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-6xl">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 w-full max-w-5xl">
         {MEDIA_ITEMS.map((item, i) => {
           const isHov = hovered === item.id
           return (
@@ -52,7 +52,7 @@ export default function MediaSection() {
                   }}
                 />
               </div>
-              <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-stone-700 transition-colors duration-300"
+              <p className="mt-2.5 md:mt-3 text-xs md:text-sm font-semibold text-stone-700 transition-colors duration-300"
                 style={isHov ? { color: item.hoverColor } : undefined}>
                 {item.label}
               </p>

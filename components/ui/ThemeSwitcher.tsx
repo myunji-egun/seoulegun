@@ -6,22 +6,22 @@ const THEMES = [
   {
     id: 'light',
     label: '클린',
-    colors: ['#F8F7F9', '#2B2D42', '#0080C8', '#92DCE5'],
+    colors: ['#F8F7F9', '#2B2D42', '#0080C8', '#006EAA'],
   },
   {
     id: 'teal',
-    label: '민트',
-    colors: ['#F8F7F9', '#2B2D42', '#92DCE5', '#0080C8'],
+    label: '블루',
+    colors: ['#F8F7F9', '#2B2D42', '#0080C8', '#006EAA'],
   },
   {
     id: 'navy',
     label: '딥',
-    colors: ['#2B2D42', '#1a1c2e', '#92DCE5', '#0080C8'],
+    colors: ['#2B2D42', '#1a1c2e', '#0080C8', '#006EAA'],
   },
   {
     id: 'blue',
     label: '블루',
-    colors: ['#F8F7F9', '#0080C8', '#2B2D42', '#92DCE5'],
+    colors: ['#F8F7F9', '#0080C8', '#2B2D42', '#006EAA'],
   },
 ] as const
 
@@ -106,7 +106,7 @@ export default function ThemeSwitcher() {
         title="색상 테마 선택"
       >
         <div className="grid grid-cols-2 gap-0.5">
-          {(['#92DCE5', '#F8F7F9', '#2B2D42', '#0080C8'] as const).map((c, i) => (
+          {(['#0080C8', '#F8F7F9', '#2B2D42', '#006EAA'] as const).map((c, i) => (
             <span
               key={i}
               className="rounded-sm"

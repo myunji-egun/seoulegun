@@ -65,13 +65,13 @@ export default function ImplantSection() {
             className="font-black tracking-tight select-none"
             style={{
               fontSize: 'clamp(36px, 7vw, 96px)',
-              background: 'linear-gradient(135deg, var(--e-primary) 0%, var(--e-accent) 50%, var(--e-primary) 100%)',
+              background: 'linear-gradient(135deg, #4F8CC8 0%, #8BCBFF 48%, #0080C8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}
           >
-            올온임플란트
+            올온 임플란트
           </span>
           <p className="text-stone-500 tracking-widest mt-1 uppercase" style={{ fontSize: '14px' }}>Full-Arch Rehabilitation</p>
         </div>

@@ -11,11 +11,10 @@ export default function BoardHero({ title, subtitle, videoId, heroImage, heroFul
   // 영상 히어로 - 16:9 모바일 / 60vh PC
   if (videoId) {
     return (
-      <section className="relative aspect-video sm:aspect-auto sm:min-h-[60vh] overflow-hidden" aria-label={`${title} 소개`}>
+      <section className="relative h-[72vh] min-h-[520px] overflow-hidden bg-black" aria-label={`${title} 소개`}>
         <iframe
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&modestbranding=1&playsinline=1`}
-          className="absolute inset-0 w-full h-full"
-          style={{ transform: 'scale(1.2)' }}
+          className="absolute left-1/2 top-[44%] h-[120vh] min-h-full w-[213.33vh] min-w-[112vw] -translate-x-1/2 -translate-y-1/2"
           allow="autoplay; encrypted-media"
           allowFullScreen
           title={`${title} 소개 영상`}
@@ -44,8 +43,8 @@ export default function BoardHero({ title, subtitle, videoId, heroImage, heroFul
   // 이미지 히어로 - 16:9 모바일 / 60vh PC
   if (heroImage) {
     return (
-      <section className="relative aspect-video sm:aspect-auto sm:min-h-[60vh] overflow-hidden" aria-label={`${title} 소개`}>
-        <img src={heroImage} alt={title} className="absolute inset-0 w-full h-full object-cover object-top" />
+      <section className="relative h-[72vh] min-h-[520px] overflow-hidden bg-black" aria-label={`${title} 소개`}>
+        <img src={heroImage} alt={title} className="absolute inset-0 h-full w-full scale-[1.14] object-cover object-[center_38%]" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 w-full">
@@ -60,7 +59,7 @@ export default function BoardHero({ title, subtitle, videoId, heroImage, heroFul
   // 기본 그라데이션 히어로
   return (
     <section className="relative flex items-center justify-center aspect-video sm:aspect-auto sm:min-h-[340px] overflow-hidden" aria-label={`${title} 소개`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#2B2D42] via-[#0080C8] to-[#92DCE5]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2B2D42] via-[#0080C8] to-[#006EAA]" aria-hidden="true" />
       <div className="absolute inset-0 opacity-10" aria-hidden="true"
         style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, white 1px, transparent 1px), radial-gradient(circle at 75% 75%, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       <div className="relative z-10 text-center px-4 py-12 sm:py-20 max-w-3xl mx-auto">

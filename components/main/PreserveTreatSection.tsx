@@ -21,7 +21,7 @@ function CardItem({ card, idx, hoverIdx, setHoverIdx }: {
   return (
     <Link
       href={card.href}
-      className="relative rounded-xl overflow-hidden block aspect-video"
+      className="relative rounded-xl overflow-hidden block aspect-[16/10]"
       style={{
         boxShadow: hoverIdx === idx
           ? '0 0 0 2.5px rgba(79,195,247,0.85), 0 16px 36px rgba(0,0,0,0.55)'
@@ -59,7 +59,7 @@ function CardItem({ card, idx, hoverIdx, setHoverIdx }: {
         {card.spine}
       </span>
       <div className="absolute bottom-0 left-0 right-0 p-2.5 lg:p-3">
-        <h3 style={{ fontSize: 'clamp(11px, 1.1vw, 17px)', fontWeight: 700, color: '#fff', lineHeight: 1.25 }}>
+        <h3 style={{ fontSize: 'clamp(12px, 1.15vw, 18px)', fontWeight: 700, color: '#fff', lineHeight: 1.35 }}>
           {card.title}
         </h3>
       </div>
@@ -90,17 +90,17 @@ export default function PreserveTreatSection() {
 
       {/* ── 텍스트 영역 (왼쪽) ── */}
       <div
-        className="relative z-10 flex-none lg:w-[38%] flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-10 lg:py-0"
+        className="relative z-10 flex-none lg:w-[36%] flex flex-col justify-center px-8 sm:px-12 lg:px-14 py-10 lg:py-0"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
           transition: 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s',
         }}
       >
-        <p style={{ color: '#4fc3f7', letterSpacing: '6px', fontSize: '16px', fontWeight: 500, marginBottom: '14px' }}>
+        <p style={{ color: '#4fc3f7', letterSpacing: '7px', fontSize: '13px', fontWeight: 500, marginBottom: '16px' }}>
           NATURAL TOOTH SOLUTION
         </p>
-        <h2 style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 700, letterSpacing: '-0.5px', lineHeight: 1.25, color: '#fff' }}>
+        <h2 style={{ fontSize: 'clamp(24px, 2.45vw, 38px)', fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1.38, color: '#fff' }}>
           내 치아를 <span style={{ color: '#4fc3f7' }}>최대한 남기는</span>
           <br />
           <span style={{ color: '#fff' }}>가장 좋은 임플란트는</span>
@@ -108,7 +108,7 @@ export default function PreserveTreatSection() {
           <span style={{ color: '#4fc3f7', fontWeight: 900 }}>내가 가진 치아</span>
           <span style={{ color: '#fff' }}>입니다.</span>
         </h2>
-        <p style={{ color: '#b8c0d9', marginTop: '14px', fontSize: '19px', lineHeight: 1.7 }}>
+        <p style={{ color: '#b8c0d9', marginTop: '18px', fontSize: '15px', lineHeight: 1.85, letterSpacing: '0.01em' }}>
           치아는 한 번 삭제하면 <strong style={{ color: '#fff' }}>되돌릴 수 없기에</strong>,
           처음 치료 방향이 가장 중요합니다. 저희는 충치를 없애는 것을 넘어{' '}
           <strong style={{ color: '#fff' }}>"어디까지 살릴 수 있는지"</strong>를 먼저 고민합니다.
@@ -117,8 +117,8 @@ export default function PreserveTreatSection() {
           <Link
             href="/natural-tooth"
             style={{
-              padding: '10px 20px', borderRadius: '999px',
-              fontSize: '16px', fontWeight: 700, letterSpacing: '0.5px',
+              padding: '8px 16px', borderRadius: '999px',
+              fontSize: '13px', fontWeight: 700, letterSpacing: '0.5px',
               background: '#4fc3f7', color: '#0b1228',
               textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px',
               transition: 'background 0.2s, transform 0.2s',
@@ -130,8 +130,8 @@ export default function PreserveTreatSection() {
           <a
             href="tel:031-896-5512"
             style={{
-              padding: '10px 20px', borderRadius: '999px',
-              fontSize: '16px', fontWeight: 700, letterSpacing: '0.5px',
+              padding: '8px 16px', borderRadius: '999px',
+              fontSize: '13px', fontWeight: 700, letterSpacing: '0.5px',
               background: 'transparent', color: '#fff',
               border: '1px solid rgba(255,255,255,0.25)',
               textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -146,14 +146,14 @@ export default function PreserveTreatSection() {
 
       {/* ── 카드 영역 (오른쪽) ── */}
       <div
-        className="relative z-10 flex-1 flex flex-col justify-center gap-2.5 pr-5 sm:pr-8 lg:pr-14 pl-5 sm:pl-0 pb-8 pt-0 lg:py-10"
+        className="relative z-10 flex-1 flex flex-col justify-center gap-5 pr-5 sm:pr-8 lg:pr-14 pl-5 sm:pl-0 pb-8 pt-0 lg:py-12"
         style={{
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 0.6s ease 0.4s',
         }}
       >
         {/* 상단 2카드 + TREATMENT ARCHIVE 레이블 (grid-cols-3, 카드와 동일 폭 셀) */}
-        <div className="grid grid-cols-3 gap-2.5 items-end">
+        <div className="grid grid-cols-3 gap-x-3 gap-y-5 items-end">
           <CardItem card={CARDS[0]} idx={0} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           <CardItem card={CARDS[1]} idx={1} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           {/* 3번째 셀: 레이블 */}
@@ -166,7 +166,7 @@ export default function PreserveTreatSection() {
         </div>
 
         {/* 하단 3카드 (grid-cols-3) */}
-        <div className="grid grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-3 gap-x-3 gap-y-5">
           <CardItem card={CARDS[2]} idx={2} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           <CardItem card={CARDS[3]} idx={3} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           <CardItem card={CARDS[4]} idx={4} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />

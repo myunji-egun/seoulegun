@@ -12,9 +12,14 @@ const HOVER_SPECIALTY: Record<string, string> = {
   'baek-seola':   '소아진료',
 }
 
+const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'baek-seola', 'park-jiwon']
+
 export default function DoctorTeamSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const { ref, isVisible } = useScrollReveal(0.15)
+  const displayDoctors = [...doctors].sort(
+    (a, b) => DOCTOR_ORDER.indexOf(a.id) - DOCTOR_ORDER.indexOf(b.id)
+  )
 
   const handleClick = (doctorId: string) => {
     const el = document.getElementById(doctorId)
@@ -37,7 +42,7 @@ export default function DoctorTeamSection() {
 
         {/* 원장님 카드 그리드 */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
-          {doctors.map((doctor, i) => {
+          {displayDoctors.map((doctor, i) => {
             const isHovered = hoveredId === doctor.id
             return (
               <div
@@ -48,20 +53,6 @@ export default function DoctorTeamSection() {
                 onMouseLeave={() => setHoveredId(null)}
               >
                 {/* 카드 위 진료과목 라벨 (항상 공간 차지, 호버 시 표시) */}
-                <div className="h-7 flex items-center mb-2">
-                  <p
-                    className="transition-opacity duration-300"
-                    style={{
-                      fontSize: '16px',
-                      fontWeight: 700,
-                      color: '#0080C8',
-                      opacity: isHovered ? 1 : 0,
-                    }}
-                  >
-                    {HOVER_SPECIALTY[doctor.id]}
-                  </p>
-                </div>
-
                 {/* 카드 버튼 */}
                 <button
                   className="relative rounded-2xl overflow-hidden cursor-pointer text-left group focus:outline-none"
@@ -83,13 +74,13 @@ export default function DoctorTeamSection() {
                       background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)',
                     }}
                   >
-                    <p className="text-[11px] tracking-[0.2em] uppercase text-[#92DCE5] font-medium mb-0.5">
-                      {doctor.specialty}
-                    </p>
-                    <p className="text-white font-bold text-base leading-tight">
+                    <p className="text-white font-bold text-[18px] leading-tight">
                       {doctor.name}
                     </p>
-                    <p className="text-white/70 text-[12px]">{doctor.role}</p>
+                    <p className="mt-1 text-[18px] font-bold leading-tight text-[#8BCBFF]">
+                      {doctor.specialtyDetail || doctor.specialty}
+                    </p>
+                    <p className="mt-1 text-white/75 text-[14px]">{doctor.role}</p>
                   </div>
 
                   {/* 호버 오버레이: 약력 */}
@@ -100,7 +91,7 @@ export default function DoctorTeamSection() {
                       opacity: isHovered ? 1 : 0,
                     }}
                   >
-                    <p className="text-[11px] tracking-[0.2em] uppercase text-[#92DCE5] font-medium mb-1">
+                    <p className="text-[11px] tracking-[0.2em] uppercase text-[#0080C8] font-medium mb-1">
                       {doctor.specialty}
                     </p>
                     <p className="text-white font-bold text-base mb-2 leading-tight">
@@ -109,16 +100,24 @@ export default function DoctorTeamSection() {
                     <ul className="space-y-1">
                       {doctor.careers.slice(0, 3).map((career, j) => (
                         <li key={j} className="text-white/85 text-[11px] leading-snug flex items-start gap-1">
-                          <span className="text-[#92DCE5] mt-0.5 shrink-0">·</span>
+                          <span className="text-[#0080C8] mt-0.5 shrink-0">·</span>
                           {career}
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-3 text-[11px] text-[#92DCE5] font-medium tracking-wide">
+                    <p className="mt-3 text-[11px] text-[#0080C8] font-medium tracking-wide">
                       자세히 보기 →
                     </p>
                   </div>
                 </button>
+                <div className="pt-3 text-center">
+                  <p className="text-[18px] font-bold leading-tight text-gray-950">
+                    {doctor.name} <span className="text-gray-500">{doctor.role}</span>
+                  </p>
+                  <p className="mt-1 text-[18px] font-extrabold leading-tight text-[#0080C8]">
+                    {doctor.specialtyDetail || HOVER_SPECIALTY[doctor.id] || doctor.specialty}
+                  </p>
+                </div>
               </div>
             )
           })}
