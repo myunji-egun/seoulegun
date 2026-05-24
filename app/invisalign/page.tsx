@@ -11,16 +11,12 @@ export const metadata: Metadata = {
   },
 }
 
-const invisalignTreatments = orthodonticsTreatments.filter(
-  (t) => t.treatmentType === 'invisalign',
-)
-
 export default function InvisalignPage() {
   return (
     <TreatmentPage
       title="수원 인비절라인 상담 안내"
       subtitle="치아 배열과 교합 상태를 먼저 확인합니다"
-      treatments={invisalignTreatments}
+      treatments={orthodonticsTreatments}
       hideCases
       heroImage="/images/board/invisalign.jpg"
     />

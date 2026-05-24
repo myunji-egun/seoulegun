@@ -25,7 +25,7 @@ export default function DoctorTeamSection() {
     const el = document.getElementById(doctorId)
     if (!el) return
     window.dispatchEvent(new CustomEvent('about-anchor-scroll'))
-    const OFFSET = 144
+    const OFFSET = 96
     const top = el.getBoundingClientRect().top + window.scrollY - OFFSET
     window.scrollTo({ top, behavior: 'smooth' })
   }

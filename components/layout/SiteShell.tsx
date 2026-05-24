@@ -21,7 +21,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       <Header />
       <FloatingSidebar />
       <main className="pb-16 sm:pb-14">{children}</main>
-      <Footer />
+      {pathname !== '/' && <Footer />}
       <QuickConsultBar />
     </>
   )
