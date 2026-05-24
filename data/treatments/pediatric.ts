@@ -7,6 +7,7 @@ export const pediatricTreatments: TreatmentContent[] = [
     title: '소아충치치료',
     heroTitle: { line1: '소아', line2: '충치치료' },
     subtitle: '아이의 치아는 빠르게 변할 수 있어 조기 관리가 중요합니다',
+    image: '/images/treatments/childortho.jpg',
     bottomImage: '/images/treatments/kids.png',
     description:
       '유치의 충치는 **성인보다 진행 속도가 빠를 수 있으며,** 영구치 발육과 배열에도 영향을 줄 수 있어 **조기 발견과 관리가 중요합니다.** 아이의 협조도와 치아 상태에 맞춰 치료 방법을 선택하고, **불안감을 줄이면서 안전하게** 치료를 진행합니다.',
