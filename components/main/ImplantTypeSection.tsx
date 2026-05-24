@@ -39,9 +39,9 @@ export default function ImplantTypeSection() {
   return (
     <section
       ref={ref}
-      className="min-h-screen w-full flex flex-col justify-center bg-white"
+      className="min-h-screen w-full flex items-center justify-center bg-white"
     >
-      <div className="w-full max-w-5xl mx-auto origin-top scale-[0.8] px-5 lg:px-8" style={{ paddingTop: 'clamp(110px, 14vh, 150px)', paddingBottom: '8vh' }}>
+      <div className="w-full max-w-5xl mx-auto origin-center scale-[0.8] px-5 py-24 lg:px-8">
         <div className={`mb-8 lg:mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           <p
             className="font-black tracking-tight uppercase leading-none select-none"
