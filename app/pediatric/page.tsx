@@ -1,7 +1,7 @@
 // @TASK Board - 소아치과 페이지
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
-import PediatricIdentity from '@/components/board/PediatricIdentity'
+import PediatricIdentity, { PediatricCredentialSection } from '@/components/board/PediatricIdentity'
 import { pediatricTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function PediatricPage() {
       subtitle="아이의 치아 성장과 구강 관리를 함께 살펴봅니다"
       treatments={pediatricTreatments}
       hideCases
-      heroImage="/images/treatments/childortho.jpg"
+      heroReplacement={<PediatricCredentialSection />}
       extraSection={<PediatricIdentity />}
     />
   )

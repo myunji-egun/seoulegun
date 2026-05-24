@@ -65,7 +65,7 @@ export default async function NoticePage({ searchParams }: NoticePageProps) {
     <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <div className="text-center mb-12">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
-          공지사항
+          이건공지
         </h1>
         <p className="mt-3 text-gray-500">
           서울이건치과의 소식을 알려드립니다.

@@ -7,7 +7,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     title: 'VPT 신경보존술',
     heroTitle: { line1: 'VPT', line2: '신경보존술' },
     subtitle: '통증은 줄이고, 신경은 최대한 살리는 방향으로',
-    image: '/images/treatments/vpt-treat.png',
+    image: '/images/treatments/natural-tooth/vpt-treat.png',
     description:
       '신경을 살리면 치아의 수명을 오래 유지하고 건강한 치아를 유지할 수 있습니다.',
     highlights: [
@@ -61,12 +61,12 @@ export const naturalToothTreatments: TreatmentContent[] = [
     title: '최소삭제 온레이',
     heroTitle: { line1: '최소삭제', line2: '온레이' },
     subtitle: '손상된 부위만 덮어 치아를 최대한 보존하는 방법',
-    image: '/images/treatments/onlay-treat.jpg',
+    image: '/images/treatments/natural-tooth/onlay-treat.jpg',
     photoGrid: [
-      { src: '/images/treatments/onlay-1.png', caption: '치료 전' },
-      { src: '/images/treatments/onlay-2.jpg', caption: '온레이 삭제 (형성)' },
-      { src: '/images/treatments/onlay-3.jpg', caption: '온레이 제작 및 장착 과정' },
-      { src: '/images/treatments/onlay-4.jpg', caption: '치료 완료 (온레이 완료)' },
+      { src: '/images/treatments/natural-tooth/onlay-1.png', caption: '치료 전' },
+      { src: '/images/treatments/natural-tooth/onlay-2.jpg', caption: '온레이 삭제 (형성)' },
+      { src: '/images/treatments/natural-tooth/onlay-3.jpg', caption: '온레이 제작 및 장착 과정' },
+      { src: '/images/treatments/natural-tooth/onlay-4.jpg', caption: '치료 완료 (온레이 완료)' },
     ],
     description:
       '치아 전체를 씌우는 크라운 대신, 손상된 부위만 정밀하게 덮어 치질 손실을 최소화하는 보존 보철입니다.',
@@ -121,7 +121,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
     title: '근관치료 (신경치료)',
     heroTitle: { line1: '근관치료', line2: '신경치료' },
     subtitle: '손상된 신경을 정리하고, 내 치아를 지키는 치료',
-    image: '/images/treatments/endo_1.jpg',
+    image: '/images/treatments/natural-tooth/endo_1.jpg',
     description:
       '감염된 신경을 제거해 더 이상 퍼지지 않도록 막고, 치아는 그대로 살려두는 치료입니다.',
     highlights: [
@@ -168,8 +168,8 @@ export const naturalToothTreatments: TreatmentContent[] = [
     title: '잇몸치료',
     heroTitle: { line2: '잇몸치료' },
     subtitle: '붓고 피나는 잇몸, 원인부터 차분히 살펴보겠습니다',
-    beforeImage: '/images/treatments/sc-before.jpg',
-    afterImage: '/images/treatments/sc-after.jpg',
+    beforeImage: '/images/treatments/natural-tooth/sc-before.jpg',
+    afterImage: '/images/treatments/natural-tooth/sc-after.jpg',
     description:
       '초기에 발견할수록 치료가 간단하고, 내 치아를 훨씬 오래 지킬 수 있습니다.',
     highlights: [
@@ -223,8 +223,8 @@ export const naturalToothTreatments: TreatmentContent[] = [
     title: '원데이 레진 빌드업',
     heroTitle: { line1: '원데이', line2: '레진 빌드업' },
     subtitle: '가능한 한 보존적으로, 필요한 부분을 정교하게 회복합니다',
-    beforeImage: '/images/treatments/resin-before.jpg',
-    afterImage: '/images/treatments/resin-after.jpg',
+    beforeImage: '/images/treatments/natural-tooth/resin-before.jpg',
+    afterImage: '/images/treatments/natural-tooth/resin-after.jpg',
     description: '크라운처럼 많이 깎지 않고, 손상된 부위만 직접 회복하는 방법입니다. 건강한 치아를 최대한 남기면서 자연스럽게 기능과 형태를 되살립니다.',
     highlights: [
       { icon: 'Shield', label: '삭제량 최소화', desc: '건강한 치질을\n최대한 보존' },

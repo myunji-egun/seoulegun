@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import MobileNav from './MobileNav'
 
 const NAV_ITEMS = [
+  { label: '이건공지', href: '/notice' },
   { label: '이건치과소개', href: '/about' },
   { label: '자연치아살리기', href: '/natural-tooth' },
   { label: '임플란트', href: '/implant' },
@@ -70,7 +71,7 @@ export default function Header() {
             {/* 예약하기 버튼 (데스크탑) */}
             <a
               href={`tel:${PHONE}`}
-              className="hidden lg:flex ml-auto items-center gap-2 px-5 py-2.5 rounded-full text-[18px] font-semibold transition-opacity hover:opacity-80 text-white"
+              className="hidden"
               style={{ backgroundColor: '#0080C8' }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

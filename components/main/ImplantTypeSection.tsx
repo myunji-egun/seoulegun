@@ -10,7 +10,7 @@ const TYPES = [
     subtitle: 'ALL-ON-4 / 6',
     quote: '최소한의 임플란트로 틀니 없이 내 치아처럼',
     features: ['4-6개의 임플란트로 전악 고정', '틀니의 불편함 해소', '수술 당일 임시 치아 장착'],
-    img: '/images/treatments/all-on.jpg',
+    img: '/images/treatments/implant/all-on.jpg',
     href: '/implant#all-on',
   },
   {
@@ -19,7 +19,7 @@ const TYPES = [
     subtitle: 'IMMEDIATE LOADING',
     quote: '수술 직후 틀니 없이 식사가 가능한 치아 제작',
     features: ['당일 임시 보철', '저작 기능 즉시 회복', '최소 회복 기간'],
-    img: '/images/treatments/immediate_2.webp',
+    img: '/images/treatments/implant/immediate_2.webp',
     href: '/implant#immediate-loading',
   },
   {
@@ -28,7 +28,7 @@ const TYPES = [
     subtitle: 'NAVIGATION IMPLANT',
     quote: '최소 절개·최소 침습·디지털 임플란트',
     features: ['3D CT 기반 시술 계획', '수술 가이드 제작', '정확한 식립 위치'],
-    img: '/images/treatments/navigation.jpg',
+    img: '/images/treatments/implant/navigation.jpg',
     href: '/implant#navigation',
   },
 ]
@@ -39,9 +39,9 @@ export default function ImplantTypeSection() {
   return (
     <section
       ref={ref}
-      className="min-h-screen w-full flex items-center justify-center bg-white"
+      className="min-h-screen w-full flex items-center justify-center bg-white px-4 pt-[clamp(60px,7vh,90px)] pb-[clamp(80px,9vh,120px)]"
     >
-      <div className="w-full max-w-5xl mx-auto origin-center scale-[0.8] px-5 py-24 lg:px-8">
+      <div className="w-full max-w-5xl mx-auto origin-center scale-[0.72] px-5 lg:px-8">
         <div className={`mb-8 lg:mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           <p
             className="font-black tracking-tight uppercase leading-none select-none"
@@ -125,7 +125,7 @@ export default function ImplantTypeSection() {
               </div>
 
               {/* 이미지 영역 */}
-              <div style={{ height: 'clamp(170px, 21vh, 260px)', flexShrink: 0, overflow: 'hidden' }}>
+              <div style={{ height: 'clamp(140px, 17vh, 220px)', flexShrink: 0, overflow: 'hidden' }}>
                 <img
                   src={type.img}
                   alt={type.title}

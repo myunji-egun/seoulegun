@@ -109,7 +109,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative min-h-[calc(100vh-80px)] md:h-screen w-full overflow-hidden"
+      className="relative min-h-[calc(100vh-80px)] md:h-screen w-full overflow-hidden bg-white"
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
@@ -129,16 +129,16 @@ export default function HeroSlider() {
         src={slide.image}
         alt=""
         aria-hidden="true"
-        className="md:hidden absolute inset-0 w-full h-full object-cover"
+        className="md:hidden absolute inset-0 w-full h-full object-contain bg-white"
         style={{
-          objectFit: 'cover',
-          animation: `hero-fadein 0.5s ease both, ${current === 0 ? 'hero-pan-ltr' : 'hero-pan-rtc'} ${INTERVAL}ms ease-in-out both`,
+          objectFit: 'contain',
+          animation: 'hero-fadein 0.5s ease both',
         }}
       />
 
       {/* ── 반투명 그라데이션 오버레이 ──────────────────────────── */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="hidden md:block absolute inset-0 pointer-events-none"
         style={{
           background:
             'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.15) 100%)',
@@ -147,14 +147,14 @@ export default function HeroSlider() {
 
       {/* ── 하단 페이드 오버레이 ─────────────────────────────────── */}
       <div
-        className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+        className="hidden md:block absolute inset-x-0 bottom-0 h-32 pointer-events-none"
         style={{
           background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 100%)',
         }}
       />
 
       {/* ── 텍스트 오버레이 ──────────────────────────────────────── */}
-      <div className="absolute inset-0 flex items-center justify-center px-6 md:justify-start md:pl-20 lg:pl-32">
+      <div className="hidden md:flex absolute inset-0 items-center justify-center px-6 md:justify-start md:pl-20 lg:pl-32">
         <div className="text-white text-center md:text-left">
           <p
             className="text-[15px] md:text-[17px] tracking-[0.3em] uppercase mb-3"
@@ -197,7 +197,7 @@ export default function HeroSlider() {
       </div>
 
       {/* ── 왼쪽 인디케이터 (세로) ───────────────────────────────── */}
-      <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-4 z-10">
+      <div className="hidden md:flex absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-4 z-10">
         {SLIDES.map((s, i) => (
           <button
             key={s.id}
@@ -230,12 +230,12 @@ export default function HeroSlider() {
       </div>
 
       {/* ── 슬라이드 카운터 ──────────────────────────────────────── */}
-      <div className="absolute bottom-20 right-6 md:right-10 text-white/50 text-xs tracking-widest font-mono">
+      <div className="hidden md:block absolute bottom-20 right-6 md:right-10 text-white/50 text-xs tracking-widest font-mono">
         {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
       </div>
 
       {/* ── Scroll Down ──────────────────────────────────────────── */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/60 text-xs tracking-widest">
+      <div className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 text-white/60 text-xs tracking-widest">
         <span>SCROLL DOWN</span>
         <ChevronDown size={16} className="animate-bounce" aria-hidden="true" />
       </div>

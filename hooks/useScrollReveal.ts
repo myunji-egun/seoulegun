@@ -7,13 +7,18 @@ export function useScrollReveal(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // 모바일(< 1024px)에서는 애니메이션 없이 즉시 표시
+    if (window.innerWidth < 1024) {
+      setIsVisible(true)
+      return
+    }
+
     const el = ref.current
     if (!el) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // 0.5초 딜레이 후 애니메이션 시작
           setTimeout(() => {
             setIsVisible(true)
           }, 500)

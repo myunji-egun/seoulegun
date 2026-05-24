@@ -10,19 +10,19 @@ const CARDS = [
     id: 'resin',
     title: '원데이 레진빌드업',
     description: '치아색 레진으로 당일 복원.\n삭제 최소화, 자연치아 보존.',
-    image: '/images/treatments/resin-buildup-treat.jpg',
+    image: '/images/treatments/natural-tooth/resin-buildup-treat.jpg',
   },
   {
     id: 'vpt',
     title: 'VPT 신경보존술',
     description: '신경을 살리면서 치아를 지키는\n치수보존술로 수명을 연장합니다.',
-    image: '/images/treatments/vpt-treat.jpg',
+    image: '/images/treatments/natural-tooth/vpt-treat.jpg',
   },
   {
     id: 'onlay',
     title: '최소삭제 온레이',
     description: '크라운 대신 삭제를 최소화한\n온레이 보철로 치질을 보존합니다.',
-    image: '/images/treatments/onlay-treat.jpg',
+    image: '/images/treatments/natural-tooth/onlay-treat.jpg',
   },
 ]
 

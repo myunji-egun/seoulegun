@@ -11,6 +11,7 @@ import SedationSection from '@/components/main/SedationSection'
 import CleanSection from '@/components/main/CleanSection'
 import MediaSection from '@/components/main/MediaSection'
 import MapSection from '@/components/main/MapSection'
+import Footer from '@/components/layout/Footer'
 // TreatmentCarousel 비활성 (파일은 유지)
 // import TreatmentCarousel from '@/components/main/TreatmentCarousel'
 
@@ -50,6 +51,9 @@ export default function Home() {
             <Section />
           </div>
         ))}
+        <div style={{ scrollSnapAlign: 'start' }}>
+          <Footer />
+        </div>
       </div>
 
       {/* Mobile: scroll-snap fullpage */}
@@ -80,6 +84,9 @@ export default function Home() {
             <Section />
           </div>
         ))}
+        <div style={{ scrollSnapAlign: 'start' }}>
+          <Footer />
+        </div>
       </div>
     </>
   )

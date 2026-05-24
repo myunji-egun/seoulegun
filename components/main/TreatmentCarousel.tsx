@@ -24,7 +24,7 @@ const TREATMENTS = [
     id: 2,
     title: '소아치과',
     sub: '아이의 첫 치과, 편안하게',
-    image: '/images/slides/slide-6.jpg',
+    image: '/images/treatments/pediatric/kids-2.png',
     href: '/pediatric',
     color: '#4A9FE0',
   },

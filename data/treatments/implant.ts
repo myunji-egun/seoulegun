@@ -6,7 +6,7 @@ export const implantTreatments: TreatmentContent[] = [
     treatmentType: 'all-on',
     title: '올온 임플란트',
     subtitle: '여러 치아를 잃은 경우, 전체 기능 회복을 함께 고민합니다',
-    image: '/images/treatments/all-on (1).jpg',
+    image: '/images/treatments/implant/all-on (1).jpg',
     sideImage: '/images/allon/all-on-slide.jpg',
     description: '4~6개의 임플란트로 위 또는 아래 전체 치아를 한 번에 완성하는 치료',
     richContent: `### ❓ 기존 틀니와 뭐가 다른가요?
@@ -70,9 +70,9 @@ export const implantTreatments: TreatmentContent[] = [
     treatmentType: 'immediate-loading',
     title: '즉시로딩 임플란트',
     subtitle: '임플란트 식립 당일, 임시치아까지 연결해 일상 공백을 줄입니다',
-    image: '/images/treatments/immediate_2.webp',
-    beforeImage: '/images/treatments/immediate-before.jpg',
-    afterImage: '/images/treatments/immediate_2.jpg',
+    image: '/images/treatments/implant/immediate_2.webp',
+    beforeImage: '/images/treatments/implant/immediate-before.jpg',
+    afterImage: '/images/treatments/implant/immediate_2.jpg',
     description: '치아 없는 기간을 최소화하기 위해, 임플란트 식립 당일 임시치아 연결까지 함께 계획하는 치료',
     richContent: `### ❓ 일반 임플란트와 뭐가 다른가요?
 
@@ -136,7 +136,7 @@ export const implantTreatments: TreatmentContent[] = [
     title: '네비게이션 임플란트',
     heroTitle: { line1: '네비게이션', line2: '임플란트' },
     subtitle: '디지털 분석을 바탕으로 계획하는 임플란트 치료',
-    image: '/images/treatments/navigation.jpg',
+    image: '/images/treatments/implant/navigation.jpg',
     description:
       '**구강스캔과 CT를 바탕으로 임플란트 위치를 미리 계획**하고 이를 토대로 정밀한 식립을 돕는 치료 방식입니다. 디지털 데이터를 활용해 **뼈 상태, 신경 위치, 보철 방향** 등을 사전에 분석하여 보다 예측 가능한 치료를 계획할 수 있습니다.',
     richContent: `### 💡 한 줄 요약
@@ -227,8 +227,8 @@ export const implantTreatments: TreatmentContent[] = [
     title: '당뇨 환자 임플란트',
     heroTitle: { line1: '당뇨환자', line2: '임플란트' },
     subtitle: '혈당 조절 상태를 함께 살피며 계획하는 임플란트 치료',
-    beforeImage: '/images/treatments/impl-before.jpg?v=2',
-    afterImage: '/images/treatments/impl-after.jpg',
+    beforeImage: '/images/treatments/implant/impl-before.jpg?v=2',
+    afterImage: '/images/treatments/implant/impl-after.jpg',
     description:
       '당뇨가 있는 경우에도 **혈당 조절 상태와 전신 건강을 확인**하면서 임플란트 치료를 계획할 수 있습니다. **당화혈색소 수치, 복용 약물, 상처 치유 경과** 등을 종합적으로 평가하여 **안전한 치료 시기와 방법**을 함께 결정합니다.',
     richContent: `### ❓ 당뇨 환자는 왜 더 신중해야 하나요?

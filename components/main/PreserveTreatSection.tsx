@@ -5,11 +5,11 @@ import { useState } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const CARDS = [
-  { img: '/images/treatments/resin-buildup.jpg', spine: 'ONE·DAY', title: '원데이 레진 빌드업', href: '/natural-tooth#resin-buildup' },
-  { img: '/images/treatments/vpt.jpg',            spine: 'VPT',     title: 'VPT 신경보존술',    href: '/natural-tooth#vpt' },
-  { img: '/images/treatments/preserve_treat.jpg', spine: 'ONLAY',  title: '최소삭제 온레이',    href: '/natural-tooth#onlay' },
-  { img: '/images/treatments/endo-1.jpg',         spine: 'ROOT',    title: '신경치료·근관치료', href: '/natural-tooth#root-canal' },
-  { img: '/images/treatments/sc-rp.jpg',          spine: 'GUM',     title: '잇몸치료',           href: '/natural-tooth#gum' },
+  { img: '/images/treatments/natural-tooth/resin-buildup.jpg', spine: 'ONE·DAY', title: '원데이 레진 빌드업', href: '/natural-tooth#resin-buildup' },
+  { img: '/images/treatments/natural-tooth/vpt.jpg',            spine: 'VPT',     title: 'VPT 신경보존술',    href: '/natural-tooth#vpt' },
+  { img: '/images/treatments/natural-tooth/preserve_treat.jpg', spine: 'ONLAY',  title: '최소삭제 온레이',    href: '/natural-tooth#onlay' },
+  { img: '/images/treatments/natural-tooth/endo-1.jpg',         spine: 'ROOT',    title: '신경치료·근관치료', href: '/natural-tooth#root-canal' },
+  { img: '/images/treatments/natural-tooth/sc-rp.jpg',          spine: 'GUM',     title: '잇몸치료',           href: '/natural-tooth#gum' },
 ]
 
 function CardItem({ card, idx, hoverIdx, setHoverIdx }: {
@@ -74,16 +74,15 @@ export default function PreserveTreatSection() {
   return (
     <section
       ref={ref}
-      className="h-screen w-full flex flex-col lg:flex-row relative overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #1a1f3a 0%, #0f142b 100%)' }}
+      className="min-h-screen w-full flex flex-col lg:flex-row items-center relative overflow-hidden bg-white py-[clamp(90px,10vh,130px)]"
     >
       {/* 라디알 그라디언트 오버레이 */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(55% 50% at 75% 30%, rgba(79,195,247,0.15), transparent 70%),
-            radial-gradient(50% 60% at 20% 90%, rgba(25,35,80,0.8), transparent 70%)
+            radial-gradient(55% 50% at 75% 30%, rgba(79,195,247,0.08), transparent 70%),
+            radial-gradient(50% 60% at 20% 90%, rgba(79,195,247,0.05), transparent 70%)
           `,
         }}
       />
@@ -100,18 +99,18 @@ export default function PreserveTreatSection() {
         <p style={{ color: '#4fc3f7', letterSpacing: '7px', fontSize: '13px', fontWeight: 500, marginBottom: '16px' }}>
           NATURAL TOOTH SOLUTION
         </p>
-        <h2 style={{ fontSize: 'clamp(24px, 2.45vw, 38px)', fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1.38, color: '#fff' }}>
-          내 치아를 <span style={{ color: '#4fc3f7' }}>최대한 남기는</span>
+        <h2 style={{ fontSize: 'clamp(24px, 2.45vw, 38px)', fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1.38, color: '#101828' }}>
+          내 치아를 <span style={{ color: '#4f82c8' }}>최대한 남기는</span>
           <br />
-          <span style={{ color: '#fff' }}>가장 좋은 임플란트는</span>
+          <span style={{ color: '#101828' }}>가장 좋은 임플란트는</span>
           <br />
-          <span style={{ color: '#4fc3f7', fontWeight: 900 }}>내가 가진 치아</span>
-          <span style={{ color: '#fff' }}>입니다.</span>
+          <span style={{ color: '#4f82c8', fontWeight: 900 }}>내가 가진 치아</span>
+          <span style={{ color: '#101828' }}>입니다.</span>
         </h2>
-        <p style={{ color: '#b8c0d9', marginTop: '18px', fontSize: '15px', lineHeight: 1.85, letterSpacing: '0.01em' }}>
-          치아는 한 번 삭제하면 <strong style={{ color: '#fff' }}>되돌릴 수 없기에</strong>,
+        <p style={{ color: '#4b5563', marginTop: '18px', fontSize: '15px', lineHeight: 1.85, letterSpacing: '0.01em' }}>
+          치아는 한 번 삭제하면 <strong style={{ color: '#101828' }}>되돌릴 수 없기에</strong>,
           처음 치료 방향이 가장 중요합니다. 저희는 충치를 없애는 것을 넘어{' '}
-          <strong style={{ color: '#fff' }}>"어디까지 살릴 수 있는지"</strong>를 먼저 고민합니다.
+          <strong style={{ color: '#101828' }}>"어디까지 살릴 수 있는지"</strong>를 먼저 고민합니다.
         </p>
         <div className="flex gap-2.5 flex-wrap mt-5">
           <Link
@@ -132,12 +131,12 @@ export default function PreserveTreatSection() {
             style={{
               padding: '8px 16px', borderRadius: '999px',
               fontSize: '13px', fontWeight: 700, letterSpacing: '0.5px',
-              background: 'transparent', color: '#fff',
-              border: '1px solid rgba(255,255,255,0.25)',
+              background: 'transparent', color: '#101828',
+              border: '1px solid rgba(16,24,40,0.22)',
               textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px',
               transition: 'background 0.2s',
             }}
-            className="hover:bg-white/10"
+            className="hover:bg-slate-100"
           >
             빠른 상담
           </a>
@@ -158,8 +157,8 @@ export default function PreserveTreatSection() {
           <CardItem card={CARDS[1]} idx={1} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           {/* 3번째 셀: 레이블 */}
           <div className="flex flex-col justify-end pb-2 pl-1">
-            <span style={{ width: '24px', height: '1px', background: 'rgba(255,255,255,0.3)', display: 'block', marginBottom: '6px' }} />
-            <span style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', lineHeight: 1.6 }}>
+            <span style={{ width: '24px', height: '1px', background: 'rgba(16,24,40,0.25)', display: 'block', marginBottom: '6px' }} />
+            <span style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(16,24,40,0.5)', textTransform: 'uppercase', lineHeight: 1.6 }}>
               TREATMENT<br />ARCHIVE
             </span>
           </div>

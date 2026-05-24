@@ -35,12 +35,76 @@ const immediateSummaryCards = [
   {
     icon: 'Zap',
     title: '한 줄 요약',
-    body: '“임플란트를 심는 당일 임시치아를 연결해, 치아 없는 기간을 최소화하는 치료”',
+    body: '”임플란트를 심는 당일 임시치아를 연결해, 치아 없는 기간을 최소화하는 치료”',
   },
   {
     icon: 'Clock3',
     title: '왜 빠른가요?',
     body: '일반 임플란트는 뼈와 결합하는 시간을 기다린 뒤 치아를 올립니다. 즉시로딩은 뼈 밀도와 초기 고정력이 충분한 경우, 식립 당일 임시치아까지 연결해 일상 공백을 줄입니다.',
+  },
+]
+
+const sinusSummaryCards = [
+  {
+    icon: 'Lightbulb',
+    title: '한 줄 요약',
+    body: '"위턱 어금니 쪽 뼈가 부족할 때, 상악동 공간을 확보해 뼈를 이식하고 임플란트를 심을 수 있게 만드는 치료"',
+  },
+  {
+    icon: 'CircleHelp',
+    title: '왜 필요한가요?',
+    body: '치아가 빠지면 뼈가 서서히 흡수되고, 위 어금니 부위는 상악동이 가까워 뼈 높이가 특히 부족해지기 쉽습니다. 거상술로 공간을 확보하면 임플란트 식립의 기반을 마련할 수 있습니다.',
+  },
+  {
+    icon: 'TriangleAlert',
+    title: '이런 분께 특히 필요합니다',
+    body: '',
+    list: [
+      '위 어금니 임플란트에서 "뼈가 부족하다"는 말을 들은 분',
+      '치아가 빠진 지 오래된 분',
+      '다른 병원에서 임플란트가 어렵다고 한 분',
+    ],
+  },
+]
+
+const diabetesSummaryCards = [
+  {
+    icon: 'Lightbulb',
+    title: '한 줄 요약',
+    body: '"혈당 조절 상태와 전신 건강을 함께 확인하면서, 안전하게 계획하는 임플란트 치료"',
+  },
+  {
+    icon: 'CircleHelp',
+    title: '왜 더 신중해야 하나요?',
+    body: '당뇨가 있으면 면역력이 낮아지고 상처 회복이 느려 감염 위험이 높습니다. 혈당이 안정적으로 관리되는 상태라면 철저한 계획 아래 안전하게 진행할 수 있습니다.',
+  },
+  {
+    icon: 'TriangleAlert',
+    title: '이런 분께 추천드립니다',
+    body: '',
+    list: [
+      '당뇨가 있지만 임플란트를 원하시는 분',
+      '혈당이 비교적 안정적으로 관리되는 분',
+      '당뇨로 임플란트를 포기하셨던 분',
+    ],
+  },
+]
+
+const navigationSummaryCards = [
+  {
+    icon: 'Lightbulb',
+    title: '한 줄 요약',
+    body: '”3D CT 데이터를 바탕으로 식립 위치를 미리 설계하고, 계획한 그대로 정밀하게 심는 임플란트 치료”',
+  },
+  {
+    icon: 'ShieldCheck',
+    title: '왜 더 안전한가요?',
+    body: '턱 안에는 신경과 혈관이 지나고 있습니다. 수술 전 3D 시뮬레이션으로 신경 손상 위험을 최소화하고, 계획한 위치 그대로 오차 없이 식립합니다.',
+  },
+  {
+    icon: 'ScanLine',
+    title: '디지털 워크플로우',
+    body: '구강 스캔과 CT 데이터를 융합해 뼈 상태, 신경 위치, 보철 방향을 사전에 분석합니다. 가이드 제작 후 계획대로 식립해 예측 가능한 결과를 기대할 수 있습니다.',
   },
 ]
 
@@ -329,6 +393,513 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
           </p>
         </div>
       )}
+    </div>
+  )
+}
+
+function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  return (
+    <div className="space-y-12">
+      {/* ── 히어로 ── */}
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="ArrowUpFromLine" size={18} />
+            <span>뼈가 부족해도 임플란트를 가능하게</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[60px] lg:text-[72px] font-black leading-[1.02] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              <span className="block text-[#0080C8]">상악동</span>
+              <span className="block">거상술</span>
+            </h2>
+            <p
+              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              뼈가 부족하다고 했다면,<br className="hidden sm:block" />
+              포기하기 전에 먼저 확인하세요
+            </p>
+          </div>
+
+          <div
+            className={`grid grid-cols-3 gap-3 max-w-xl ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            {[
+              ['STEP 1', '뼈 높이 분석'],
+              ['STEP 2', '공간 확보'],
+              ['STEP 3', '임플란트 식립'],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
+                <p className="text-[#0080C8] text-[15px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[13px] font-semibold text-gray-600">{v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 오른쪽: 인포그래픽 패널 */}
+        <div
+          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="rounded-[28px] bg-[#EAF6FD] border border-[#D0E8F5] p-8 space-y-5 shadow-[0_24px_70px_rgba(15,71,110,0.10)]">
+            <p className="text-[13px] font-bold text-[#0080C8] uppercase tracking-widest">Sinus Lift Flow</p>
+            {[
+              { step: '01', title: '정밀 CT 분석', desc: '상악동 위치와 잔존 뼈 높이를 3D로 분석합니다' },
+              { step: '02', title: '상악동 막 거상', desc: '상악동 막을 조심스럽게 들어올려 공간을 확보합니다' },
+              { step: '03', title: '뼈 이식재 적용', desc: '확보된 공간에 뼈 이식재를 채워 높이를 만듭니다' },
+              { step: '04', title: '임플란트 식립', desc: '충분한 뼈 높이가 확보된 뒤 임플란트를 심습니다' },
+            ].map((item, i) => (
+              <div key={item.step} className="flex items-start gap-4">
+                <span className="w-9 h-9 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[13px] font-black shrink-0 mt-0.5">
+                  {item.step}
+                </span>
+                <div>
+                  <p className="text-[16px] font-black text-gray-950 leading-snug">{item.title}</p>
+                  <p className="text-[14px] text-gray-600 mt-1 leading-relaxed">{item.desc}</p>
+                </div>
+                {i < 3 && (
+                  <div className="absolute left-[18px] mt-10 w-px h-5 bg-[#B8D8EE]" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── 요약 카드 3장 ── */}
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {sinusSummaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[18px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            {card.list ? (
+              <ul className="space-y-3">
+                {card.list.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-700">
+                    <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
+                      <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* ── 장점 타이틀 ── */}
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          상악동 거상술의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      {/* ── 장점 그리드 ── */}
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['ArrowUpFromLine', 'ShieldCheck', 'Layers', 'Zap', 'ScanLine'][i] ?? 'CheckCircle'}
+                size={48}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 영상 ── */}
+      <div className="rounded-[20px] overflow-hidden shadow-[0_16px_50px_rgba(16,55,91,0.10)]">
+        <div className="relative w-full aspect-video">
+          <iframe
+            src="https://www.youtube.com/embed/RmQSCxLQpKA"
+            title="상악동 거상술 안내 영상"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
+      </div>
+
+      {/* ── 하단 CTA ── */}
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="ArrowUpFromLine" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+          뼈가 부족하다는 말이 임플란트의 끝이 아닙니다. 함께 방법을 찾겠습니다.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  return (
+    <div className="space-y-12">
+      {/* ── 히어로 ── */}
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="HeartPulse" size={18} />
+            <span>혈당 조절 상태를 함께 살피는 임플란트</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[60px] lg:text-[72px] font-black leading-[1.02] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              <span className="block">당뇨환자</span>
+              <span className="block text-[#0080C8]">임플란트</span>
+            </h2>
+            <p
+              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              당뇨가 있어도 포기하지 않아도 됩니다.<br className="hidden sm:block" />
+              체계적인 계획으로 함께합니다
+            </p>
+          </div>
+
+          <div
+            className={`grid grid-cols-3 gap-3 max-w-xl ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            {[
+              ['혈당', '사전 확인'],
+              ['계획', '맞춤 수술'],
+              ['관리', '회복 케어'],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
+                <p className="text-[#0080C8] text-[18px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[14px] font-semibold text-gray-600">{v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 오른쪽: before/after 이미지 */}
+        <div
+          className={`relative min-h-[340px] sm:min-h-[460px] lg:min-h-[520px] ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="absolute inset-4 rounded-[38px] bg-[#EAF6FD]" />
+          <div className="absolute -left-2 top-12 w-44 h-44 rounded-full bg-white/70 blur-2xl" />
+          <div className="absolute right-4 bottom-10 w-56 h-56 rounded-full bg-[#D8EFFB] blur-2xl" />
+          {treatment.beforeImage && (
+            <div className="absolute left-0 top-0 w-[72%] rounded-[26px] overflow-hidden border border-white/80 shadow-[0_24px_70px_rgba(15,71,110,0.16)] bg-white">
+              <img src={treatment.beforeImage} alt="당뇨 환자 임플란트 치료 전" className="w-full aspect-[16/9] object-cover" />
+              <div className="absolute left-4 top-4 rounded-full bg-gray-900/70 px-3 py-1 text-[13px] font-bold text-white">Before</div>
+            </div>
+          )}
+          {treatment.afterImage && (
+            <div className="absolute right-0 bottom-0 w-[82%] rounded-[28px] overflow-hidden border border-white/90 shadow-[0_30px_90px_rgba(15,71,110,0.2)] bg-white">
+              <img src={treatment.afterImage} alt="당뇨 환자 임플란트 치료 후" className="w-full aspect-[16/9] object-cover" />
+              <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[13px] font-bold text-white">After</div>
+            </div>
+          )}
+          <div className="absolute left-7 bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)]">
+            <div className="flex items-center gap-3">
+              <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name="HeartPulse" size={23} className="text-[#0080C8]" />
+              </span>
+              <div>
+                <p className="text-[13px] font-bold text-gray-500">전신 건강 고려</p>
+                <p className="text-[18px] font-black text-gray-950">체계적 치료 계획</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 요약 카드 3장 ── */}
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {diabetesSummaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[18px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            {card.list ? (
+              <ul className="space-y-3">
+                {card.list.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-700">
+                    <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
+                      <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* ── 장점 타이틀 ── */}
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          당뇨 환자 임플란트의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      {/* ── 장점 그리드 ── */}
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['HeartPulse', 'ClipboardCheck', 'ShieldCheck', 'Users', 'CalendarCheck'][i] ?? 'CheckCircle'}
+                size={48}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 하단 CTA ── */}
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="HeartPulse" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+          당뇨가 있다고 임플란트를 포기할 이유는 없습니다. 함께 안전하게 계획합니다.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  return (
+    <div className="space-y-12">
+      {/* ── 히어로 ── */}
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="ScanLine" size={18} />
+            <span>디지털 분석을 바탕으로 계획하는 임플란트</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[60px] lg:text-[72px] font-black leading-[1.02] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              <span className="block">네비게이션</span>
+              <span className="block text-[#0080C8]">임플란트</span>
+            </h2>
+            <p
+              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              3D 설계대로,<br className="hidden sm:block" />
+              오차 없이 정밀하게 심습니다
+            </p>
+          </div>
+
+          <div
+            className={`grid grid-cols-3 gap-3 max-w-xl ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            {[
+              ['3D CT', '정밀 분석'],
+              ['GUIDE', '디지털 설계'],
+              ['PLACE', '계획대로 식립'],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
+                <p className="text-[#0080C8] text-[18px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[14px] font-semibold text-gray-600">{v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 오른쪽 이미지 */}
+        <div
+          className={`relative min-h-[340px] sm:min-h-[460px] lg:min-h-[520px] ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="absolute inset-4 rounded-[38px] bg-[#EAF6FD]" />
+          <div className="absolute -left-2 top-12 w-44 h-44 rounded-full bg-white/70 blur-2xl" />
+          <div className="absolute right-4 bottom-10 w-56 h-56 rounded-full bg-[#D8EFFB] blur-2xl" />
+          <div className="relative rounded-[28px] overflow-hidden border border-white/80 shadow-[0_24px_70px_rgba(15,71,110,0.16)] bg-white">
+            <img
+              src={treatment.image}
+              alt="네비게이션 임플란트"
+              className="w-full object-cover"
+            />
+          </div>
+          <div className="absolute left-7 bottom-10 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)]">
+            <div className="flex items-center gap-3">
+              <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name="ShieldCheck" size={23} className="text-[#0080C8]" />
+              </span>
+              <div>
+                <p className="text-[13px] font-bold text-gray-500">신경 손상 위험</p>
+                <p className="text-[18px] font-black text-gray-950">최소화 목표</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 요약 카드 3장 + 적합 대상 카드 ── */}
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {navigationSummaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[18px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+          </div>
+        ))}
+
+        <div
+          className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+          style={cardVisible ? { animationDelay: '0.18s' } : undefined}
+        >
+          <div className="flex items-center gap-4 mb-5">
+            <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+              <LucideIcon name="TriangleAlert" size={25} className="text-[#0080C8]" />
+            </span>
+            <h3 className="text-[18px] font-bold text-gray-950">이런 분께 추천드립니다</h3>
+          </div>
+          <ul className="space-y-3">
+            {[
+              '신경·혈관 근처 식립이 필요한 분',
+              '복잡한 증례로 정밀 계획이 중요한 분',
+              '예측 가능한 결과를 원하시는 분',
+              '최소 절개를 원하시는 분',
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-700">
+                <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
+                  <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* ── 장점 타이틀 ── */}
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          네비게이션 임플란트의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      {/* ── 장점 그리드 ── */}
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['ScanLine', 'ShieldCheck', 'Crosshair', 'Zap', 'ClipboardCheck'][i] ?? 'CheckCircle'}
+                size={48}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 하단 CTA ── */}
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="ScanLine" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+          디지털 분석과 정밀 계획으로 예측 가능한 임플란트를 완성합니다.
+        </p>
+      </div>
     </div>
   )
 }
@@ -1346,6 +1917,157 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
   )
 }
 
+function PediatricCavityChapter({ treatment }: { treatment: TreatmentContent }) {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.12)
+  const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
+
+  const summaryCards = [
+    {
+      icon: 'Baby',
+      title: '유치도 치료가 필요합니다',
+      body: '유치는 영구치가 나올 공간을 유지하고 씹기·발음에 핵심 역할을 합니다. 방치하면 영구치 배열과 발육에 영향을 줄 수 있습니다.',
+    },
+    {
+      icon: 'Zap',
+      title: '진행 속도가 빠릅니다',
+      body: '유치의 충치는 성인 치아보다 빠르게 진행될 수 있어, 조기에 발견하고 관리하는 것이 중요합니다.',
+    },
+    {
+      icon: 'HeartHandshake',
+      title: '아이 눈높이에 맞춥니다',
+      body: '아이의 협조도와 불안감을 고려해 단계적으로 접근하며, 필요한 경우 웃음가스 등 보조 진정을 활용합니다.',
+    },
+  ]
+
+  return (
+    <div className="space-y-12">
+      <div
+        ref={heroRef}
+        className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-center"
+      >
+        <div className="space-y-6">
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+            <LucideIcon name="Baby" size={18} />
+            <span>아이의 치아를 지키는 조기 관리</span>
+          </div>
+
+          <div className="space-y-4">
+            <h2
+              className={`text-[42px] sm:text-[58px] lg:text-[66px] font-black leading-[1.06] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.08s' } : undefined}
+            >
+              <span className="block text-[#0080C8]">소아충치치료</span>
+              <span className="block text-[22px] sm:text-[28px] lg:text-[32px] mt-3 font-black text-gray-400">
+                Pediatric Cavity
+              </span>
+            </h2>
+            <p
+              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              style={heroVisible ? { animationDelay: '0.16s' } : undefined}
+            >
+              유치 충치, 빠를수록<br className="hidden sm:block" />
+              영구치에 좋습니다
+            </p>
+          </div>
+
+          <div
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+              유치의 충치는 성인보다 진행 속도가 빠를 수 있으며,
+              영구치 발육과 배열에도 영향을 줄 수 있어
+              조기 발견과 관리가 중요합니다.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          style={heroVisible ? { animationDelay: '0.12s' } : undefined}
+        >
+          <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
+          <div className="relative rounded-[28px] overflow-hidden bg-white border border-white shadow-[0_28px_90px_rgba(15,71,110,0.16)]">
+            <img
+              src={treatment.image}
+              alt={treatment.title}
+              className="w-full aspect-[4/3] object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {summaryCards.map((card, i) => (
+          <div
+            key={card.title}
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-7 shadow-[0_16px_50px_rgba(16,55,91,0.07)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+            style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+          >
+            <div className="flex items-center gap-4 mb-5">
+              <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+                <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
+              </span>
+              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+            </div>
+            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-6">
+        <div className="h-px bg-gray-200 flex-1" />
+        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          소아충치치료의 장점
+        </h3>
+        <div className="h-px bg-gray-200 flex-1" />
+      </div>
+
+      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
+          {treatment.benefits.map((benefit, i) => (
+            <div
+              key={benefit.tag}
+              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
+            >
+              <LucideIcon
+                name={['ShieldCheck', 'CalendarCheck', 'Sparkles', 'Baby', 'SmilePlus'][i] ?? 'CheckCircle'}
+                size={46}
+                className="text-[#0080C8] mb-5"
+                strokeWidth={1.8}
+              />
+              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
+                #{benefit.tag}
+              </h4>
+              <p className="text-[15px] leading-[1.85] text-gray-700">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {treatment.bottomImage && (
+        <div className="rounded-[24px] overflow-hidden shadow-[0_16px_60px_rgba(16,55,91,0.10)]">
+          <img
+            src={treatment.bottomImage}
+            alt="소아충치치료"
+            className="w-full object-cover"
+          />
+        </div>
+      )}
+
+      <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
+        <LucideIcon name="Baby" size={34} className="text-[#0080C8] shrink-0" />
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+          아이의 첫 치과 경험, 편안하고 안전하게 함께합니다.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function TreatmentSection({
   treatment,
 }: TreatmentSectionProps) {
@@ -1362,6 +2084,18 @@ export default function TreatmentSection({
 
   if (treatment.treatmentType === 'immediate-loading') {
     return <ImmediateLoadingChapter treatment={treatment} />
+  }
+
+  if (treatment.treatmentType === 'navigation') {
+    return <NavigationImplantChapter treatment={treatment} />
+  }
+
+  if (treatment.treatmentType === 'sinus-lift') {
+    return <SinusLiftChapter treatment={treatment} />
+  }
+
+  if (treatment.treatmentType === 'diabetes') {
+    return <DiabetesImplantChapter treatment={treatment} />
   }
 
   if (treatment.treatmentType === 'diastema') {
@@ -1384,17 +2118,23 @@ export default function TreatmentSection({
     return <PediatricOrthoChapter treatment={treatment} />
   }
 
+  if (treatment.treatmentType === 'pediatric-cavity') {
+    return <PediatricCavityChapter treatment={treatment} />
+  }
+
   return (
     <div className="space-y-12">
       {/* 상단: 로고 + 제목 + 설명 + 이미지 */}
       <div ref={textRef} className={`${treatment.bottomImage ? '' : 'grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12'} items-start`}>
         {/* 텍스트 영역 — 왼쪽에서 슬라이드인 */}
         <div className="space-y-4">
-          <img
-            src="/images/logo/egun-logo%20(1).svg?v=2"
-            alt="수원치과 서울이건치과"
-            className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-          />
+          {treatment.boardCategory !== 'pediatric' && (
+            <img
+              src="/images/logo/egun-logo%20(1).svg?v=2"
+              alt="수원치과 서울이건치과"
+              className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            />
+          )}
           {treatment.heroTitle ? (
             <>
               <div className={`flex items-center gap-1.5 text-[#0080C8] text-[13px] font-semibold ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}

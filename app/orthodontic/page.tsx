@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function OrthodonticPage() {
   return (
     <TreatmentPage
-      title="영통 교정치료 상담 안내"
+      title="수원교정치과 인비절라인"
       subtitle="치아 배열과 교합을 함께 확인합니다"
       treatments={orthodonticsTreatments}
       hideCases

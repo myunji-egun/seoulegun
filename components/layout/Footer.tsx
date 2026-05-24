@@ -140,12 +140,6 @@ export default function Footer() {
             <p className="text-xs text-white/25">
               &copy; {currentYear} {clinicInfo.name}. All rights reserved.
             </p>
-            <Link
-              href="/notice"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors w-fit"
-            >
-              휴무일정 보기
-            </Link>
           </div>
         </div>
       </div>

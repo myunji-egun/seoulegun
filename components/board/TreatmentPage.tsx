@@ -19,6 +19,7 @@ interface TreatmentPageProps {
   heroImage?: string
   heroFull?: boolean
   extraSection?: React.ReactNode
+  heroReplacement?: React.ReactNode
   treatImage?: string
 }
 
@@ -31,6 +32,7 @@ export default function TreatmentPage({
   heroImage,
   heroFull,
   extraSection,
+  heroReplacement,
   treatImage,
 }: TreatmentPageProps) {
   const navItems = treatments.map((t) => ({
@@ -43,7 +45,7 @@ export default function TreatmentPage({
   return (
     <>
       <FaqJsonLd faqs={allFaqs} />
-      <BoardHero title={title} subtitle={subtitle} videoId={videoId} heroImage={heroImage} heroFull={heroFull} />
+      {heroReplacement ?? <BoardHero title={title} subtitle={subtitle} videoId={videoId} heroImage={heroImage} heroFull={heroFull} />}
       {extraSection}
       <BoardAnchorNav items={navItems} />
 
