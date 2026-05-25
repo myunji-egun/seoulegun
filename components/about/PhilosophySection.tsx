@@ -34,7 +34,7 @@ export default function PhilosophySection() {
       className="py-16 sm:py-24 bg-white scroll-mt-32"
       aria-labelledby="philosophy-heading"
     >
-      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 origin-top-left scale-[0.8] w-[125%]">
         {/* 섹션 레이블 */}
         <p className={`text-sm font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
           Our Philosophy

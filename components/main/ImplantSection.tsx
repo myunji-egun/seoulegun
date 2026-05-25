@@ -13,33 +13,21 @@ export default function ImplantSection() {
       className="min-h-[calc(100vh-80px)] md:h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
       style={{ backgroundColor: '#000' }}
     >
-      {/* ── 모바일: cover 풀스크린 슬라이딩 배경 ── */}
+      {/* 배경 이미지 */}
       <div
-        className="md:hidden absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
-        }}
-      />
-      {/* ── 데스크탑: cover 배경 ── */}
-      <div
-        className="hidden md:block absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'url(/images/allon/all-on-slide.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          animation: 'bg-pan-slide 16s ease-in-out infinite alternate',
         }}
       />
       {/* 다크 오버레이 — 텍스트 가독성 */}
-      <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/80 pointer-events-none" />
 
       {/* ── 콘텐츠 ───────────────────────────────────────────── */}
-      <div className="relative z-10 flex origin-center scale-[0.8] flex-col items-center text-center">
+      <div className="relative z-10 flex flex-col items-center text-center px-4">
         <p className={`tracking-[0.4em] uppercase text-stone-500 mb-4 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`} style={{ fontSize: '14px' }}>
           Implant Solution
         </p>
@@ -65,10 +53,8 @@ export default function ImplantSection() {
             className="font-black tracking-tight select-none"
             style={{
               fontSize: 'clamp(36px, 7vw, 96px)',
-              background: 'linear-gradient(135deg, #4F8CC8 0%, #8BCBFF 48%, #0080C8 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#0080C8',
+              textShadow: '0 5px 0 rgba(0,0,0,0.55), 0 14px 30px rgba(0,0,0,0.72), 0 0 28px rgba(0,128,200,0.45)',
             }}
           >
             올온 임플란트
@@ -107,7 +93,7 @@ export default function ImplantSection() {
       {/* Scroll Down */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-stone-600 tracking-widest" style={{ fontSize: '14px' }}>
         <span>SCROLL DOWN</span>
-        <ChevronDown size={16} className="animate-bounce" aria-hidden="true" />
+        <ChevronDown size={16} aria-hidden="true" />
       </div>
     </section>
   )

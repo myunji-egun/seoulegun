@@ -546,7 +546,7 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
       </div>
 
       {/* ── 영상 ── */}
-      <div className="rounded-[20px] overflow-hidden shadow-[0_16px_50px_rgba(16,55,91,0.10)]">
+      <div className="w-full max-w-[60%] mx-auto rounded-[20px] overflow-hidden shadow-[0_16px_50px_rgba(16,55,91,0.10)]">
         <div className="relative w-full aspect-video">
           <iframe
             src="https://www.youtube.com/embed/RmQSCxLQpKA"

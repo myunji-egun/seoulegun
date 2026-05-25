@@ -39,24 +39,28 @@ export default function ImplantTypeSection() {
   return (
     <section
       ref={ref}
-      className="min-h-screen w-full flex items-center justify-center bg-white px-4 pt-[clamp(60px,7vh,90px)] pb-[clamp(80px,9vh,120px)]"
+      className="min-h-screen w-full flex items-center justify-center bg-white px-4 pt-24 sm:pt-28 pb-8"
     >
-      <div className="w-full max-w-5xl mx-auto origin-center scale-[0.72] px-5 lg:px-8">
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-5 lg:px-8 lg:scale-[0.72] lg:origin-top">
         <div className={`mb-8 lg:mb-10 ${isVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           <p
             className="font-black tracking-tight uppercase leading-none select-none"
             style={{
               fontSize: 'clamp(34px, 5vw, 84px)',
-              background: 'linear-gradient(135deg, var(--e-primary) 0%, var(--e-accent) 48%, var(--e-primary) 100%)',
+              color: '#0f172a',
+            }}
+          >
+            IMPLANT{' '}
+            <span style={{
+              background: 'linear-gradient(135deg, #0080C8 0%, #38b6ff 50%, #0080C8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              textShadow: '0 18px 46px rgba(0,128,200,0.18)',
-            }}
-          >
-            IMPLANT SOLUTION TYPES
+              filter: 'drop-shadow(0 0 16px rgba(0,128,200,0.5))',
+            }}>SOLUTION</span>{' '}
+            <span style={{ color: '#0f172a' }}>TYPES</span>
           </p>
-          <div className="mt-3 h-1.5 w-28 rounded-full bg-[var(--e-primary)] shadow-[0_0_24px_rgba(0,128,200,0.35)]" />
+          <div className="mt-3 h-1.5 w-28 rounded-full bg-[#0080C8] shadow-[0_0_24px_rgba(0,128,200,0.35)]" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
@@ -125,7 +129,7 @@ export default function ImplantTypeSection() {
               </div>
 
               {/* 이미지 영역 */}
-              <div style={{ height: 'clamp(140px, 17vh, 220px)', flexShrink: 0, overflow: 'hidden' }}>
+              <div style={{ height: 'clamp(180px, 22vh, 280px)', flexShrink: 0, overflow: 'hidden' }}>
                 <img
                   src={type.img}
                   alt={type.title}
