@@ -109,7 +109,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative min-h-[calc(100vh-80px)] md:h-screen w-full overflow-hidden bg-white"
+      className="relative h-dvh md:h-screen w-full overflow-hidden bg-white"
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
@@ -123,15 +123,22 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── 모바일 이미지 패닝 레이어 ───────────────────────────── */}
-      <img
-        key={current}
-        src={slide.image}
-        alt=""
-        aria-hidden="true"
-        className="md:hidden absolute inset-0 w-full h-full object-contain bg-white"
-        style={{ objectFit: 'contain' }}
-      />
+      {/* ── 모바일 이미지 레이어 (헤더 64px·하단바 60px 사이 영역) ── */}
+      <div
+        className="md:hidden absolute inset-x-0"
+        style={{
+          top: 'var(--mobile-header-height)',
+          bottom: 'var(--mobile-bottom-bar-height)',
+        }}
+      >
+        <img
+          key={current}
+          src={slide.image}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
 
       {/* ── 반투명 그라데이션 오버레이 ──────────────────────────── */}
       <div
