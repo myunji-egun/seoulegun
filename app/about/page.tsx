@@ -26,7 +26,7 @@ export default function AboutPage() {
       <div className="relative h-[72vh] min-h-[520px] overflow-hidden bg-black">
         <iframe
           src="https://www.youtube.com/embed/-Bahgt23YHo?autoplay=1&mute=1&loop=1&playlist=-Bahgt23YHo&controls=0&showinfo=0&modestbranding=1&playsinline=1"
-          className="absolute left-1/2 top-[44%] h-[120vh] min-h-full w-[213.33vh] min-w-[112vw] -translate-x-1/2 -translate-y-1/2"
+          className="absolute left-1/2 top-0 h-[120vh] min-h-full w-[213.33vh] min-w-[112vw] -translate-x-1/2"
           allow="autoplay; encrypted-media"
           allowFullScreen
           title="서울이건치과 소개 영상"

@@ -127,7 +127,7 @@ function Carousel3D({ images, altPrefix }: { images: string[]; altPrefix: string
       <div className="flex items-center justify-center gap-2 mt-6">
         {images.map((_, i) => (
           <button key={i} onClick={() => goTo(i)}
-            className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 bg-[#0080C8]' : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'}`}
+            className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 bg-[#0080C8]' : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'}`}
             aria-label={`사진 ${i + 1}번으로 이동`} />
         ))}
       </div>
@@ -163,25 +163,25 @@ export default function InteriorSection() {
   const { ref: annexRef, isVisible: annexVisible } = useScrollReveal(0.15)
 
   return (
-    <section id="interior" className="py-20 sm:py-28 bg-stone-50 scroll-mt-36" aria-labelledby="interior-heading">
+    <section id="interior" className="py-20 sm:py-28 bg-gray-900 scroll-mt-36" aria-labelledby="interior-heading">
       <div ref={headerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className={`text-xs font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
           Interior
         </p>
         <h2 id="interior-heading"
-          className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+          className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={headerVisible ? { animationDelay: '0.1s' } : undefined}>
           내부전경
         </h2>
-        <p className={`text-sm sm:text-base text-gray-500 max-w-2xl leading-relaxed mb-12 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+        <p className={`text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed mb-12 ${headerVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
           style={headerVisible ? { animationDelay: '0.2s' } : undefined}>
           쾌적하고 편안한 환경에서 치료받으실 수 있도록 공간을 세심하게 구성하였습니다.
         </p>
 
         {/* 본관 라벨 */}
         <div className="flex items-center gap-4 mb-10">
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">본관</h3>
-          <div className="flex-1 h-px bg-gray-200" />
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">본관</h3>
+          <div className="flex-1 h-px bg-gray-700" />
         </div>
       </div>
 
@@ -197,8 +197,8 @@ export default function InteriorSection() {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 scroll-mt-36"
       >
         <div className={`flex items-center gap-4 mb-10 ${annexVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">별관</h3>
-          <div className="flex-1 h-px bg-gray-200" />
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">별관</h3>
+          <div className="flex-1 h-px bg-gray-700" />
         </div>
       </div>
 

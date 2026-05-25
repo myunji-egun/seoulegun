@@ -25,15 +25,14 @@ export default function MapSection() {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* 카드 컨테이너 - 세로 중앙 정렬 */}
-      <div className="absolute inset-y-0 right-0 z-10 flex items-center pr-3 pt-16 md:pr-10 md:pt-20">
-        <div className="flex flex-row items-start gap-2 scale-[0.8] origin-top-right">
-          {/* 치과 정보 카드 */}
-          <div className={`w-[200px] md:w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-3 sm:p-4 md:p-5 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+      {/* 왼쪽: 치과 정보 카드 */}
+      <div className="absolute inset-y-0 left-0 z-10 flex items-center pl-3 md:pl-10">
+        <div className="scale-[0.8] origin-top-left">
+          <div className={`w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-4 md:p-5 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
             <img
               src="/images/logo/egun-logo%20(1).svg?v=2"
               alt="서울이건치과"
-              className="h-10 sm:h-14 mb-2 sm:mb-3"
+              className="h-12 mb-3"
             />
             <div className="w-8 h-0.5 bg-[var(--e-primary)] mb-3" />
             <a
@@ -59,37 +58,35 @@ export default function MapSection() {
               카카오맵 길찾기
             </a>
           </div>
+        </div>
+      </div>
 
-          {/* 진료시간 카드 */}
-          <div className={`w-[200px] md:w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-            style={isVisible ? { animationDelay: '0.15s' } : undefined}>
-            {/* 헤더 */}
-            <div className="bg-[var(--e-primary)] px-3.5 py-2 flex items-center gap-2">
+      {/* 오른쪽: 진료시간 카드 */}
+      <div className="absolute inset-y-0 right-0 z-10 flex items-center pr-3 md:pr-10">
+        <div className="scale-[0.8] origin-top-right">
+          <div className={`w-[320px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+            <div className="bg-[var(--e-primary)] px-4 py-2.5 flex items-center gap-2">
               <Clock className="w-3.5 h-3.5 text-white" aria-hidden="true" />
               <span className="text-white font-semibold text-xs">진료시간</span>
             </div>
-
-            {/* 시간표 */}
             <div className="divide-y divide-gray-100">
               {SCHEDULE.map((item) => (
-                <div key={item.day} className="flex items-center px-3.5 py-2">
-                  <span className="w-7 text-[11px] font-medium text-gray-700 shrink-0">
+                <div key={item.day} className="flex items-center px-4 py-2.5">
+                  <span className="w-7 text-[12px] font-medium text-gray-700 shrink-0">
                     {item.day}
                   </span>
-                  <span className="text-[11px] text-gray-800 tabular-nums">
+                  <span className="text-[12px] text-gray-800 tabular-nums whitespace-nowrap">
                     {item.hours}
                   </span>
                   {item.note && (
-                    <span className="ml-2 text-[10px] font-medium text-[var(--e-primary)] bg-[var(--e-primary)]/10 px-2 py-0.5 rounded-full">
+                    <span className="ml-2 text-[10px] font-medium text-[var(--e-primary)] bg-[var(--e-primary)]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
                       {item.note}
                     </span>
                   )}
                 </div>
               ))}
             </div>
-
-            {/* 하단 안내 */}
-            <div className="px-3.5 py-2 bg-gray-50/80 text-[10px] text-gray-400">
+            <div className="px-4 py-2.5 bg-gray-50/80 text-[11px] text-gray-400">
               점심 {clinicInfo.lunchTime} · 일요일/공휴일 휴진
             </div>
           </div>
