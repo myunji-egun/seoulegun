@@ -6,7 +6,7 @@ export default function DoctorGroup() {
       <img
         src="/images/doctors/doctors_2.png"
         alt="Seoul Egun dental clinic doctors"
-        className="h-full w-full object-contain object-center md:object-cover"
+        className="h-full w-full object-cover object-center"
       />
 
       <Link

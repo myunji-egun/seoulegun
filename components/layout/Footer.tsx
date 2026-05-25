@@ -51,7 +51,11 @@ export default function Footer() {
                 {clinicInfo.fax}
               </li>
               <li>
-                <span className="text-white/40 text-xs mr-1">사업자</span>
+                <span className="text-white/40 text-xs mr-1">사업자명 :</span>
+                서울이건치과의원
+              </li>
+              <li>
+                <span className="text-white/40 text-xs mr-1">사업자 번호</span>
                 {clinicInfo.businessNumber}
               </li>
             </ul>

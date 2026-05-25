@@ -45,10 +45,10 @@
 
 /* ── 이건치과 색상 팔레트 (4색 시스템) ── */
 :root {
-  --e-bg:      #F8F7F9;  /* 밝은 섹션 배경 */
-  --e-dark:    #2B2D42;  /* 어두운 섹션 배경 */
-  --e-primary: #0080C8;  /* 포인트 (버튼, 강조선, 하이라이트) */
-  --e-accent:  #0080C8;  /* 소프트 액센트 (서브 하이라이트) */
+  --e-bg:      #F8F7F9;
+  --e-dark:    #2B2D42;
+  --e-primary: #0080C8;
+  --e-accent:  #0080C8;
 }
 [data-theme="navy"] {
   --e-bg:      #2B2D42;
@@ -82,139 +82,21 @@
   }
 }
 
-/* 제목 드롭 애니메이션 */
-@keyframes drop-in {
-  from { opacity: 0; transform: translateY(-24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-drop-in {
-  animation: drop-in 0.7s ease both;
-}
-
-/* 히어로 이미지 패닝 - 모바일 전용 */
-@keyframes pan-right-to-left {
-  from { object-position: right center; }
-  to   { object-position: left center; }
-}
-@keyframes pan-left-to-right {
-  from { object-position: center; }
-  to   { object-position: right center; }
-}
-
-@media (min-width: 768px) {
-  @keyframes pan-right-to-left {
-    from { object-position: center; }
-    to   { object-position: center; }
-  }
-  @keyframes pan-left-to-right {
-    from { object-position: center; }
-    to   { object-position: center; }
-  }
-}
-
-/* 배경 이미지 좌우 패닝 */
-@keyframes bg-pan-slide {
-  from { background-position: 0% center; }
-  to   { background-position: 100% center; }
-}
-
-/* 모바일 히어로 이미지 패닝 */
-@keyframes hero-pan-ltr {
-  from { object-position: 50% 50%; }
-  to   { object-position: 80% 50%; }
-}
-@keyframes hero-pan-rtc {
-  from { object-position: 80% 50%; }
-  to   { object-position: 50% 50%; }
-}
-@keyframes hero-fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* 이미지 마퀴 */
-@keyframes marquee-x {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee-x 18s linear infinite;
-}
-
-/* 히어로 페이드인 */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in {
-  animation: fade-in 0.7s ease both;
-}
-
-/* 스크롤 진입 키프레임 */
-@keyframes reveal-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes reveal-scale {
-  from { opacity: 0; transform: scale(0.93); }
-  to   { opacity: 1; transform: scale(1); }
-}
-@keyframes slide-in-left {
-  from { opacity: 0; transform: translateX(-60px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(60px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes typing {
-  from { max-width: 0; }
-  to   { max-width: 20ch; }
-}
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: var(--e-primary); }
-}
-
-/* 카드 풀스크린 날아오기 */
-@keyframes card-fly-in {
-  0%   { opacity: 0; transform: scale(0.12) translateY(80px); }
-  65%  { opacity: 1; transform: scale(1.04) translateY(-6px); }
-  100% { opacity: 1; transform: scale(1)    translateY(0);    }
-}
-
-/* 스크롤 애니메이션 유틸리티 */
-.scroll-hidden { opacity: 0 !important; }
-.scroll-reveal-drop  { animation: drop-in 0.7s ease both !important; opacity: 1 !important; }
-.scroll-reveal-up    { animation: reveal-up 0.6s ease both !important; opacity: 1 !important; }
-.scroll-reveal-scale { animation: reveal-scale 0.6s ease both !important; opacity: 1 !important; }
-.scroll-reveal-left  { animation: slide-in-left 0.6s ease-out both !important; opacity: 1 !important; }
-.scroll-reveal-right { animation: slide-in-right 0.6s ease-out both !important; opacity: 1 !important; }
-
-/* 자연치아살리기 게시판: 스크롤 애니메이션 전부 비활성화 */
-.natural-tooth-page .scroll-hidden,
-.natural-tooth-page .scroll-reveal-drop,
-.natural-tooth-page .scroll-reveal-up,
-.natural-tooth-page .scroll-reveal-scale,
-.natural-tooth-page .scroll-reveal-left,
-.natural-tooth-page .scroll-reveal-right {
+/* ── 모든 애니메이션 비활성화 (비포애프터 슬라이더 제외) ── */
+.animate-drop-in,
+.animate-fade-in,
+.animate-marquee,
+.animate-bounce,
+.scroll-hidden,
+.scroll-reveal-drop,
+.scroll-reveal-up,
+.scroll-reveal-scale,
+.scroll-reveal-left,
+.scroll-reveal-right,
+.all-on-marquee-track {
   animation: none !important;
   opacity: 1 !important;
   transform: none !important;
-}
-
-/* 모바일(< 1024px): 텍스트 애니메이션 전부 비활성화 */
-@media (max-width: 1023px) {
-  .scroll-hidden,
-  .scroll-reveal-drop,
-  .scroll-reveal-up,
-  .scroll-reveal-scale,
-  .scroll-reveal-left,
-  .scroll-reveal-right {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
 
 /* Homepage readability: keep supporting copy at 18px or larger. */
@@ -247,23 +129,3 @@
 .home-page [style*="font-size: clamp(17px"] {
   font-size: 18px !important;
 }
-
-.all-on-marquee-track {
-  animation: all-on-marquee 28s linear infinite;
-}
-
-@keyframes all-on-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .all-on-marquee-track {
-    animation: none;
-  }
-}
-

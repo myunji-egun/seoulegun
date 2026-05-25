@@ -130,10 +130,7 @@ export default function HeroSlider() {
         alt=""
         aria-hidden="true"
         className="md:hidden absolute inset-0 w-full h-full object-contain bg-white"
-        style={{
-          objectFit: 'contain',
-          animation: 'hero-fadein 0.5s ease both',
-        }}
+        style={{ objectFit: 'contain' }}
       />
 
       {/* ── 반투명 그라데이션 오버레이 ──────────────────────────── */}
@@ -165,14 +162,13 @@ export default function HeroSlider() {
           </p>
           <h1
             key={`headline-${current}`}
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-1 animate-fade-in"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-1"
           >
             {slide.headline}
           </h1>
           <h2
             key={`sub-${current}`}
-            className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-light leading-tight animate-fade-in"
-            style={{ animationDelay: '0.15s' }}
+            className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-light leading-tight"
           >
             {slide.sub}
           </h2>
@@ -237,7 +233,7 @@ export default function HeroSlider() {
       {/* ── Scroll Down ──────────────────────────────────────────── */}
       <div className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 text-white/60 text-xs tracking-widest">
         <span>SCROLL DOWN</span>
-        <ChevronDown size={16} className="animate-bounce" aria-hidden="true" />
+        <ChevronDown size={16} aria-hidden="true" />
       </div>
     </section>
   )
