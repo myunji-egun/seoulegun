@@ -107,7 +107,7 @@ export const doctors: Doctor[] = [
     role: '원장',
     specialty: '소아',
     subRole: '소아치과 전문의',
-    specialtyDetail: '소아치과 · 성장기교정 · 불소도포',
+    specialtyDetail: '소아치과 · 불소도포',
     image: '/images/doctors/doctor-paek.png',
     careers: [
       '단국대학교 치과대학 졸업',
