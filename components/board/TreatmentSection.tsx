@@ -1833,7 +1833,7 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
         </div>
 
         <div
-          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          className={`relative w-[50%] mx-auto ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={heroVisible ? { animationDelay: '0.12s' } : undefined}
         >
           <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />

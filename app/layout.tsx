@@ -1,5 +1,10 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 import SiteShell from '@/components/layout/SiteShell'
 import { LocalBusinessJsonLd } from '@/components/seo/JsonLd'

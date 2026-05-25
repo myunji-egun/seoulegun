@@ -17,7 +17,7 @@ const pillars = [
 
 export function PediatricCredentialSection() {
   return (
-    <section>
+    <section className="pt-16 sm:pt-20">
       <img
         src="/images/doctors/paek-pediatric-specialist-banner.png"
         alt="소아치과 전문의 직접 진료 백설아 원장"
@@ -29,11 +29,21 @@ export function PediatricCredentialSection() {
 
 export default function PediatricIdentity() {
   return (
-    <BoardIdentityLayout
+    <>
+      {/* 모바일 전용: 불소도포 섹션 위 이미지 */}
+      <div className="md:hidden">
+        <img
+          src="/images/board/baek-child.jpg"
+          alt="소아치과 진료"
+          className="w-full h-auto block"
+        />
+      </div>
+      <BoardIdentityLayout
       label="PEDIATRIC DENTISTRY"
       title={<>아이의 첫 치과,<br /><span className="text-[#0080C8]">평생 구강 건강의 시작</span></>}
       description={<>아이가 치과를 무서워하지 않도록 하는 것이 먼저입니다.<br />편안한 첫 경험이 평생의 구강 건강 습관을 만들고,<br />소아 전문의가 성장 단계마다 함께합니다.</>}
       pillars={pillars}
     />
+    </>
   )
 }

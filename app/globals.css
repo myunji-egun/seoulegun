@@ -43,6 +43,13 @@
   font-display: swap;
 }
 
+/* ── 모바일 고정바 높이 변수 ── */
+:root {
+  --mobile-header-height: 64px;
+  --mobile-bottom-bar-height: 60px;
+  --mobile-view-height: calc(100dvh - var(--mobile-header-height) - var(--mobile-bottom-bar-height));
+}
+
 /* ── 이건치과 색상 팔레트 (4색 시스템) ── */
 :root {
   --e-bg:      #F8F7F9;
@@ -97,6 +104,34 @@
   animation: none !important;
   opacity: 1 !important;
   transform: none !important;
+}
+
+/* ── 모바일 전역 (768px 이하) ── */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* 버튼·링크 최소 터치 영역 44px */
+  .home-page a,
+  .home-page button {
+    min-height: 44px;
+  }
+
+  /* 본문 line-height */
+  .home-page p,
+  .home-page li,
+  .home-page span {
+    line-height: 1.65;
+  }
+
+  /* 모바일에서 max-width 고정값 해제 */
+  .home-page .max-w-5xl,
+  .home-page .max-w-7xl {
+    max-width: 100%;
+  }
+
 }
 
 /* Homepage readability: keep supporting copy at 18px or larger. */

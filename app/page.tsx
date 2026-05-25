@@ -56,37 +56,33 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Mobile: scroll-snap fullpage */}
-      <div
-        className="home-page md:hidden h-screen overflow-y-scroll"
-        style={{
-          scrollSnapType: 'y mandatory',
-          scrollBehavior: 'smooth',
-        }}
-      >
-        {(
-          [
-            HeroSlider,
-            DoctorGroup,
-            ImplantSection,
-            ImplantTypeSection,
-            ImplantFaqSection,
-            SedationSection,
-            CleanSection,
-            MediaSection,
-            MapSection,
-          ] as React.ComponentType[]
-        ).map((Section, i) => (
-          <div
-            key={i}
-            style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}
-          >
-            <Section />
+      {/* Mobile: 히어로+의료진은 snap, 나머지는 일반 스크롤 */}
+      <div className="home-page md:hidden">
+        {/* Snap container — 첫 두 섹션만 */}
+        <div
+          className="overflow-y-auto"
+          style={{
+            height: '100dvh',
+            scrollSnapType: 'y mandatory',
+          } as React.CSSProperties}
+        >
+          <div style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always', minHeight: '100dvh' }}>
+            <HeroSlider />
           </div>
-        ))}
-        <div style={{ scrollSnapAlign: 'start' }}>
-          <Footer />
+          <div style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always', minHeight: '100dvh' }}>
+            <DoctorGroup />
+          </div>
         </div>
+
+        {/* 이후 섹션: 일반 스크롤 */}
+        <ImplantSection />
+        <ImplantTypeSection />
+        <ImplantFaqSection />
+        <SedationSection />
+        <CleanSection />
+        <MediaSection />
+        <MapSection />
+        <Footer />
       </div>
     </>
   )
