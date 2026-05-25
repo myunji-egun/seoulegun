@@ -1631,7 +1631,7 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
     <div className="space-y-12">
       <div
         ref={heroRef}
-        className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
+        className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
           <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
