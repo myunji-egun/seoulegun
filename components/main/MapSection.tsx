@@ -26,8 +26,8 @@ export default function MapSection() {
       />
 
       {/* 카드 컨테이너 - 세로 중앙 정렬 */}
-      <div className="absolute inset-y-0 left-0 z-10 flex items-center pl-3 pt-16 md:pl-10 md:pt-20">
-        <div className="flex flex-row items-start gap-2 scale-[0.8] origin-top-left">
+      <div className="absolute inset-y-0 right-0 z-10 flex items-center pr-3 pt-16 md:pr-10 md:pt-20">
+        <div className="flex flex-row items-start gap-2 scale-[0.8] origin-top-right">
           {/* 치과 정보 카드 */}
           <div className={`w-[200px] md:w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-3 sm:p-4 md:p-5 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
             <img
@@ -61,7 +61,7 @@ export default function MapSection() {
           </div>
 
           {/* 진료시간 카드 */}
-          <div className={`w-[180px] md:w-[210px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+          <div className={`w-[200px] md:w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.15s' } : undefined}>
             {/* 헤더 */}
             <div className="bg-[var(--e-primary)] px-3.5 py-2 flex items-center gap-2">
