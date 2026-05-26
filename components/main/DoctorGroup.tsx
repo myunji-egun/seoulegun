@@ -4,36 +4,33 @@ export default function DoctorGroup() {
   return (
     <section className="relative h-dvh w-full overflow-hidden bg-black">
 
-      {/* ── 모바일 이미지 ── */}
+      {/* ── 모바일 이미지 (블러/오버레이 없음 → 인물 완전 노출) ── */}
       <div className="md:hidden absolute inset-0">
         <img
           src="/images/doctors/doctors_m.jpg"
           alt="서울이건치과 의료진"
           className="w-full h-full object-cover object-top"
         />
-        {/* 하단 그라데이션 */}
+        {/* 상단 텍스트 영역만 살짝 어둡게 */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 45%, transparent 100%)',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 35%)',
           }}
         />
       </div>
 
-      {/* ── 데스크톱 이미지 ── */}
+      {/* ── 데스크탑 이미지 ── */}
       <img
         src="/images/doctors/doctors_2.png"
         alt="서울이건치과 의료진"
         className="hidden md:block absolute inset-0 h-full w-full object-cover object-center"
       />
 
-      {/* ── 모바일 텍스트 + 버튼 오버레이 ── */}
+      {/* ── 모바일 텍스트 + 버튼 (상단 가운데 정렬) ── */}
       <div
-        className="md:hidden absolute inset-x-0 z-10 flex flex-col px-7"
-        style={{
-          bottom: 'calc(var(--mobile-bottom-bar-height) + 24px)',
-        }}
+        className="md:hidden absolute inset-x-0 z-10 flex flex-col items-center text-center px-7"
+        style={{ top: 'calc(var(--mobile-header-height) + 20px)' }}
       >
         {/* 헤드라인 */}
         <h2 className="text-white text-[28px] font-bold leading-tight tracking-tight">
@@ -51,7 +48,7 @@ export default function DoctorGroup() {
         {/* 버튼 */}
         <Link
           href="/about#doctor-intro"
-          className="self-start inline-flex items-center justify-center gap-2
+          className="inline-flex items-center justify-center gap-2
             h-[48px] px-7 rounded-full
             bg-[#0080C8] text-white text-[15px] font-semibold
             shadow-[0_4px_20px_rgba(0,128,200,0.4)]
@@ -73,7 +70,7 @@ export default function DoctorGroup() {
         </Link>
       </div>
 
-      {/* ── 데스크톱 버튼 (기존 위치 유지) ── */}
+      {/* ── 데스크탑 버튼 (기존 위치 유지) ── */}
       <Link
         href="/about#doctor-intro"
         className="hidden md:inline-flex absolute
