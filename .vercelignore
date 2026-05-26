@@ -3,5 +3,5 @@ node_modules
 .claude
 .next
 media
-public/images/video/egun2.mp4
-public/images/video/3-3 치과영상.mp4
+public/images/video/*.mp4
+!public/images/video/egun1.mp4
