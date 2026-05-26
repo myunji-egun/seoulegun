@@ -28,16 +28,9 @@ const SLIDES = [
   },
   {
     id: 3,
-    headline: '가지런한 치아',
-    sub: '건강한 교합',
+    headline: '소아치과 전문의',
+    sub: '직접 진료 상담',
     image: '/images/slides/slide-5.png',
-    accent: 'var(--e-primary)',
-  },
-  {
-    id: 4,
-    headline: '안전하고 편안한',
-    sub: '수면 임플란트치료',
-    image: '/images/slides/slide-6.jpg',
     accent: 'var(--e-primary)',
   },
 ]
