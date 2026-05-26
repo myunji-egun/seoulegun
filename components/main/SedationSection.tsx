@@ -87,7 +87,7 @@ export default function SedationSection() {
             className={`text-[28px] sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-2 ${visible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={{
               color: '#4fc3f7',
-              textShadow: '0 0 24px rgba(79,195,247,0.75), 0 0 56px rgba(0,128,200,0.45)',
+              textShadow: '0 2px 6px rgba(0,0,0,0.7)',
               ...(visible ? { animationDelay: '0.12s' } : {}),
             }}
           >

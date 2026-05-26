@@ -18,8 +18,11 @@ export default function CleanSection() {
           alt="멸균 소독 과정"
           className="w-full h-full object-cover"
         />
-        {/* 텍스트 가독성 오버레이 */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 65%)' }}
+        />
       </div>
 
       {/* ── 데스크탑: 2-column 레이아웃 ──────────────────────── */}
@@ -29,6 +32,7 @@ export default function CleanSection() {
         <div>
           <h2
             className={`text-[28px] md:text-3xl lg:text-4xl font-bold leading-tight mb-5 md:text-[#2B2D42] text-white ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85)' }}
           >
             감염관리도
             <br />
@@ -39,13 +43,13 @@ export default function CleanSection() {
             className={`text-sm md:text-base leading-relaxed mb-6 md:text-[#2B2D42] text-white/90 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.15s' } : undefined}
           >
-            <span style={{ color: '#0080C8', fontWeight: 600 }}>서울이건치과</span>는 치료 결과만큼이나<br />
+            <span className="text-[#60c0ff] md:text-[#0080C8] font-semibold">서울이건치과</span>는 치료 결과만큼이나<br />
             그 과정의 안전함을 중요하게 생각합니다.<br />
             모든 진료 기구는 개인별로 구분 사용 후<br />
-            <span style={{ color: '#0080C8', fontWeight: 600 }}>철저한 멸균 과정</span>을 거치며,<br />
+            <span className="text-[#60c0ff] md:text-[#0080C8] font-semibold">철저한 멸균 과정</span>을 거치며,<br />
             진료실과 장비 역시 매일<br />
-            <span style={{ color: '#0080C8', fontWeight: 600 }}>위생점검</span>과{' '}
-            <span style={{ color: '#0080C8', fontWeight: 600 }}>소독</span>을 진행합니다.
+            <span className="text-[#60c0ff] md:text-[#0080C8] font-semibold">위생점검</span>과{' '}
+            <span className="text-[#60c0ff] md:text-[#0080C8] font-semibold">소독</span>을 진행합니다.
           </p>
 
           <a

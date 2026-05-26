@@ -10,7 +10,7 @@ export default function ImplantSection() {
   return (
     <section
       ref={ref}
-      className="min-h-[calc(100vh-80px)] md:h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
+      className="h-dvh md:h-screen w-full relative overflow-hidden flex flex-col items-center justify-center px-4"
       style={{ backgroundColor: '#000' }}
     >
       {/* 배경 이미지 */}

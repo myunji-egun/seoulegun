@@ -30,7 +30,7 @@ export default function DoctorGroup() {
       {/* ── 모바일 텍스트 + 버튼 (상단 가운데 정렬) ── */}
       <div
         className="md:hidden absolute inset-x-0 z-10 flex flex-col items-center text-center px-7"
-        style={{ top: 'calc(var(--mobile-header-height) + 20px)' }}
+        style={{ top: 'calc(var(--mobile-header-height) + 50px)' }}
       >
         {/* 헤드라인 */}
         <h2 className="text-white text-[28px] font-bold leading-tight tracking-tight">
