@@ -103,7 +103,6 @@ export default function HeroSlider() {
 
   const slide      = SLIDES[current]
   const imageUrls  = SLIDES.map((s) => s.image)
-  const easedProg  = easeInOutCubic(tProg)
 
   return (
     <section
@@ -121,32 +120,20 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── 모바일 이미지 레이어 ── */}
-      <div className="md:hidden absolute inset-0 overflow-hidden">
-        {tProg < 1 && (
-          <img
-            src={SLIDES[prevIdx].image}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            style={{ transform: `translateX(${-easedProg * 100}%)` }}
-          />
-        )}
+      {/* ── 모바일 이미지 레이어 (전환 애니메이션 없음, 즉시 전환) ── */}
+      <div className="md:hidden absolute inset-0">
         <img
           key={current}
           src={slide.image}
           alt=""
           aria-hidden="true"
           className={`absolute inset-0 w-full h-full object-cover${
-            tProg >= 1 && current === 0 ? ' mobile-hero-pan' :
-            tProg >= 1 && (current === 2 || current === 3) ? ' mobile-hero-pan-center' :
-            ''
+            current === 2 || current === 3 ? ' mobile-hero-pan-center' : ''
           }`}
           style={{
-            transform: `translateX(${(1 - easedProg) * 100}%)`,
             objectPosition:
               current === 0 ? '100% top' :
-              current === 2 || current === 3 ? '100% center' :
+              current === 2 || current === 3 ? undefined :
               'center',
           }}
         />

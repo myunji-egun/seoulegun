@@ -165,25 +165,13 @@
   font-size: 18px !important;
 }
 
-/* ── 모바일 히어로 슬라이드 패닝 효과 ── */
-/* 0~11.4% (≈0.8s): 오른쪽에서 정지, 이후 ease-out으로 왼쪽 이동 */
-@keyframes mobile-hero-pan {
-  0%     { object-position: 100% top; animation-timing-function: steps(1); }
-  11.4%  { object-position: 100% top; animation-timing-function: cubic-bezier(0.22, 0, 0.12, 1); }
-  100%   { object-position: 0% top; }
-}
-.mobile-hero-pan {
-  object-position: 100% top;
-  animation: mobile-hero-pan 7s linear forwards;
-}
-
-/* 슬라이드 3·4: 오른쪽에서 정지 후 가운데까지 이동 */
+/* ── 모바일 히어로 슬라이드 3·4: 오른쪽 0.8s 정지 후 가운데까지 천천히 이동 (14s) ── */
 @keyframes mobile-hero-pan-center {
-  0%     { object-position: 100% center; animation-timing-function: steps(1); }
-  11.4%  { object-position: 100% center; animation-timing-function: cubic-bezier(0.22, 0, 0.12, 1); }
-  100%   { object-position: 50% center; }
+  0%    { object-position: 100% center; animation-timing-function: steps(1); }
+  5.7%  { object-position: 100% center; animation-timing-function: cubic-bezier(0.22, 0, 0.12, 1); }
+  100%  { object-position: 50% center; }
 }
 .mobile-hero-pan-center {
   object-position: 100% center;
-  animation: mobile-hero-pan-center 7s linear forwards;
+  animation: mobile-hero-pan-center 14s linear forwards;
 }
