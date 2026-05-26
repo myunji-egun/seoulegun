@@ -28,7 +28,7 @@ export default function CleanSection() {
         {/* 텍스트 영역 */}
         <div>
           <h2
-            className={`text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-5 md:text-[#2B2D42] text-white ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[28px] md:text-3xl lg:text-4xl font-bold leading-tight mb-5 md:text-[#2B2D42] text-white ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
           >
             감염관리도
             <br />
