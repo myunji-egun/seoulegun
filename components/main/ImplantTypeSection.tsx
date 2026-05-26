@@ -63,7 +63,7 @@ export default function ImplantTypeSection() {
           <div className="mt-3 h-1.5 w-28 rounded-full bg-[#0080C8] shadow-[0_0_24px_rgba(0,128,200,0.35)]" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
           {TYPES.map((type, i) => (
             <Link
               key={i}
