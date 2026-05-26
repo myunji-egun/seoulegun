@@ -1,17 +1,7 @@
 'use client'
 
 import { clinicInfo } from '@/data/clinic-info'
-import { Clock } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
-
-const SCHEDULE = [
-  { day: '월', hours: '09:30 - 18:30' },
-  { day: '화', hours: '09:30 - 20:30', note: '야간' },
-  { day: '수', hours: '09:30 - 18:30' },
-  { day: '목', hours: '09:30 - 20:30', note: '교정야간' },
-  { day: '금', hours: '09:30 - 20:30', note: '야간' },
-  { day: '토', hours: '09:30 - 13:30' },
-]
 
 const KAKAO_HREF = `https://map.kakao.com/link/to/서울이건치과 수원점,${clinicInfo.latitude},${clinicInfo.longitude}`
 
@@ -68,37 +58,6 @@ export default function MapSection() {
           </div>
         </div>
 
-        {/* 데스크탑: 오른쪽 진료시간 카드 */}
-        <div className="hidden md:flex absolute inset-y-0 right-0 z-10 items-center pr-10">
-          <div className="scale-[0.8] origin-top-right">
-            <div className={`w-[320px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
-              <div className="bg-[var(--e-primary)] px-4 py-2.5 flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-white" aria-hidden="true" />
-                <span className="text-white font-semibold text-xs">진료시간</span>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {SCHEDULE.map((item) => (
-                  <div key={item.day} className="flex items-center px-4 py-2.5">
-                    <span className="w-7 text-[12px] font-medium text-gray-700 shrink-0">
-                      {item.day}
-                    </span>
-                    <span className="text-[12px] text-gray-800 tabular-nums whitespace-nowrap">
-                      {item.hours}
-                    </span>
-                    {item.note && (
-                      <span className="ml-2 text-[10px] font-medium text-[var(--e-primary)] bg-[var(--e-primary)]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        {item.note}
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="px-4 py-2.5 bg-gray-50/80 text-[11px] text-gray-400">
-                점심 {clinicInfo.lunchTime} · 일요일/공휴일 휴진
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* 모바일 전용: 지도 아래 카드 영역 */}
@@ -133,33 +92,6 @@ export default function MapSection() {
           </a>
         </div>
 
-        {/* 진료시간 카드 */}
-        <div className="bg-white rounded-xl shadow border border-gray-100 overflow-hidden">
-          <div className="bg-[var(--e-primary)] px-4 py-3 flex items-center gap-2">
-            <Clock className="w-4 h-4 text-white" aria-hidden="true" />
-            <span className="text-white font-semibold text-sm">진료시간</span>
-          </div>
-          <div className="divide-y divide-gray-100">
-            {SCHEDULE.map((item) => (
-              <div key={item.day} className="flex items-center px-4 py-3">
-                <span className="w-8 text-sm font-medium text-gray-700 shrink-0">
-                  {item.day}
-                </span>
-                <span className="text-sm text-gray-800 tabular-nums whitespace-nowrap">
-                  {item.hours}
-                </span>
-                {item.note && (
-                  <span className="ml-2 text-xs font-medium text-[var(--e-primary)] bg-[var(--e-primary)]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
-                    {item.note}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="px-4 py-3 bg-gray-50 text-xs text-gray-500">
-            점심 {clinicInfo.lunchTime} · 일요일/공휴일 휴진
-          </div>
-        </div>
 
       </div>
     </section>

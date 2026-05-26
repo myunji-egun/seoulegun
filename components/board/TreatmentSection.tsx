@@ -2128,7 +2128,7 @@ export default function TreatmentSection({
       <div ref={textRef} className={`${treatment.bottomImage ? '' : 'grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12'} items-start`}>
         {/* 텍스트 영역 — 왼쪽에서 슬라이드인 */}
         <div className="space-y-4">
-          {treatment.boardCategory !== 'pediatric' && (
+          {treatment.boardCategory !== 'pediatric' && treatment.treatmentType !== 'vpt' && (
             <img
               src="/images/logo/egun-logo%20(1).svg?v=2"
               alt="수원치과 서울이건치과"
@@ -2370,6 +2370,11 @@ export default function TreatmentSection({
       {/* 치료 과정 스텝 카드 */}
       {treatment.steps && !isTriPanel && (
         <div ref={cardRef} className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+          {treatment.treatmentType === 'vpt' && (
+            <div className="mb-6 rounded-2xl overflow-hidden">
+              <img src="/images/treatments/natural-tooth/vpt.jpg" alt="VPT 신경보존술" className="w-full h-auto" />
+            </div>
+          )}
           <h2 className="text-3xl font-bold text-gray-900 mb-6">{treatment.title} 치료 과정</h2>
           <div className="flex items-stretch w-full overflow-x-auto pb-2">
             {treatment.steps.map((step, i) => (
@@ -2378,11 +2383,13 @@ export default function TreatmentSection({
                   <span className="w-9 h-9 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-sm font-bold shrink-0">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="font-bold text-[17px] text-gray-900 leading-tight">{step.title}</p>
+                  <p className="font-bold text-[17px] text-gray-900 leading-tight break-keep">{step.title}</p>
                   {step.icon && (
                     <LucideIcon name={step.icon} size={30} className="text-gray-300" />
                   )}
-                  <p className="text-[16px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{step.desc}</p>
+                  {step.desc && treatment.treatmentType !== 'vpt' && (
+                    <p className="text-[16px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{step.desc}</p>
+                  )}
                 </div>
                 {i < treatment.steps!.length - 1 && (
                   <ChevronRight size={18} className="text-gray-300 mx-2 shrink-0" />
