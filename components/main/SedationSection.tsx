@@ -83,8 +83,14 @@ export default function SedationSection() {
           <p className={`text-xs tracking-[0.35em] uppercase text-white/50 mb-3 ${visible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}>
             Sedation Dentistry
           </p>
-          <h2 className={`text-xl md:text-3xl lg:text-4xl font-bold text-white leading-tight mb-2 ${visible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
-            style={visible ? { animationDelay: '0.12s' } : undefined}>
+          <h2
+            className={`text-[28px] sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-2 ${visible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={{
+              color: '#4fc3f7',
+              textShadow: '0 0 24px rgba(79,195,247,0.75), 0 0 56px rgba(0,128,200,0.45)',
+              ...(visible ? { animationDelay: '0.12s' } : {}),
+            }}
+          >
             두려움 없는 치과치료
           </h2>
           <p className={`text-xs md:text-sm text-white/60 max-w-sm mx-auto leading-relaxed ${visible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}

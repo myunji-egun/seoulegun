@@ -19,11 +19,11 @@ export default function CleanSection() {
           className="w-full h-full object-cover"
         />
         {/* 텍스트 가독성 오버레이 */}
-        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* ── 데스크탑: 2-column 레이아웃 ──────────────────────── */}
-      <div className="relative z-10 h-full max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-9 items-center py-24">
+      <div className="relative z-10 h-full max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-9 items-start md:items-center pt-16 md:py-24 pb-8">
 
         {/* 텍스트 영역 */}
         <div>
@@ -39,17 +39,12 @@ export default function CleanSection() {
             className={`text-sm md:text-base leading-relaxed mb-6 md:text-[#2B2D42] text-white/90 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.15s' } : undefined}
           >
-            <span style={{ color: '#0080C8', fontWeight: 600 }}>서울이건치과</span>는 치료 결과만큼이나
-            <br />
-            그 과정의 안전함을 중요하게 생각합니다.
-            <br className="hidden md:block" />
-            모든 진료 기구는 개인별로 구분 사용 후{' '}
-            <span className="whitespace-nowrap">
-              <span style={{ color: '#0080C8', fontWeight: 600 }}>철저한 멸균 과정</span>을 거치며,
-            </span>
-            <br className="hidden md:block" />
-            진료실과 장비 역시 매일{' '}
-            <span style={{ color: '#0080C8', fontWeight: 600 }}>위생 점검</span>과{' '}
+            <span style={{ color: '#0080C8', fontWeight: 600 }}>서울이건치과</span>는 치료 결과만큼이나<br />
+            그 과정의 안전함을 중요하게 생각합니다.<br />
+            모든 진료 기구는 개인별로 구분 사용 후<br />
+            <span style={{ color: '#0080C8', fontWeight: 600 }}>철저한 멸균 과정</span>을 거치며,<br />
+            진료실과 장비 역시 매일<br />
+            <span style={{ color: '#0080C8', fontWeight: 600 }}>위생점검</span>과{' '}
             <span style={{ color: '#0080C8', fontWeight: 600 }}>소독</span>을 진행합니다.
           </p>
 
