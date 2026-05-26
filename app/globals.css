@@ -165,13 +165,46 @@
   font-size: 18px !important;
 }
 
-/* ── 모바일 히어로 슬라이드 3·4: 오른쪽 0.8s 정지 후 가운데까지 천천히 이동 (14s) ── */
-@keyframes mobile-hero-pan-center {
-  0%    { object-position: 100% center; animation-timing-function: steps(1); }
-  5.7%  { object-position: 100% center; animation-timing-function: cubic-bezier(0.22, 0, 0.12, 1); }
-  100%  { object-position: 50% center; }
+/* ── 모바일 히어로 슬라이드별 Pan 효과 ── */
+
+/* Slide 0: 오른쪽(100% top) 0.8s 정지 → 서서히 왼쪽으로 3cm */
+@keyframes mobile-pan-0 {
+  0%    { object-position: 100% top; animation-timing-function: steps(1); }
+  11.4% { object-position: 100% top; animation-timing-function: cubic-bezier(0.25, 0, 0.08, 1); }
+  100%  { object-position: 78% top; }
 }
-.mobile-hero-pan-center {
+.mobile-pan-0 {
+  object-position: 100% top;
+  animation: mobile-pan-0 7s linear forwards;
+}
+
+/* Slide 1: 중앙 기준 오른쪽으로 1cm 서서히 이동 */
+@keyframes mobile-pan-1 {
+  0%   { object-position: 50% center; }
+  100% { object-position: 58% center; }
+}
+.mobile-pan-1 {
+  object-position: 50% center;
+  animation: mobile-pan-1 7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+}
+
+/* Slide 2: 오른쪽(100%)에서 3cm 이동 후 정지 */
+@keyframes mobile-pan-2 {
+  0%   { object-position: 100% center; }
+  57%  { object-position: 78% center; }
+  100% { object-position: 78% center; }
+}
+.mobile-pan-2 {
   object-position: 100% center;
-  animation: mobile-hero-pan-center 14s linear forwards;
+  animation: mobile-pan-2 7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+}
+
+/* Slide 3: 오른쪽(100%)에서 1cm 매우 천천히 이동 */
+@keyframes mobile-pan-3 {
+  0%   { object-position: 100% center; }
+  100% { object-position: 92% center; }
+}
+.mobile-pan-3 {
+  object-position: 100% center;
+  animation: mobile-pan-3 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }

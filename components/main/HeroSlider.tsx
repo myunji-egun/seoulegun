@@ -120,22 +120,14 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── 모바일 이미지 레이어 (전환 애니메이션 없음, 즉시 전환) ── */}
+      {/* ── 모바일 이미지 레이어 (즉시 전환, 슬라이드별 pan) ── */}
       <div className="md:hidden absolute inset-0">
         <img
           key={current}
           src={slide.image}
           alt=""
           aria-hidden="true"
-          className={`absolute inset-0 w-full h-full object-cover${
-            current === 2 || current === 3 ? ' mobile-hero-pan-center' : ''
-          }`}
-          style={{
-            objectPosition:
-              current === 0 ? '100% top' :
-              current === 2 || current === 3 ? undefined :
-              'center',
-          }}
+          className={`absolute inset-0 w-full h-full object-cover mobile-pan-${current}`}
         />
       </div>
 
