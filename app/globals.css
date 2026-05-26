@@ -164,3 +164,12 @@
 .home-page [style*="font-size: clamp(17px"] {
   font-size: 18px !important;
 }
+
+/* ── 모바일 히어로 슬라이드 1: 우→좌 패닝 효과 ── */
+@keyframes mobile-hero-pan {
+  from { object-position: 100% top; }
+  to   { object-position: 0% top; }
+}
+.mobile-hero-pan {
+  animation: mobile-hero-pan 4s ease-in-out forwards;
+}

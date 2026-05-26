@@ -130,7 +130,7 @@ export default function HeroSlider() {
           src={slide.image}
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-center"
+          className={`w-full h-full object-cover${current === 0 ? ' mobile-hero-pan' : ' object-center'}`}
         />
       </div>
 
