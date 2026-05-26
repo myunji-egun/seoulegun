@@ -28,17 +28,17 @@ export default function Footer() {
             </div>
 
             {/* 치과 정보 */}
-            <ul className="space-y-2 text-[12px] text-white/70 leading-relaxed">
+            <ul className="space-y-2 text-[10px] text-white/70 leading-relaxed">
               <li>
-                <span className="text-white/40 text-xs mr-1">대표</span>
+                <span className="text-white/40 text-[10px] mr-1">대표</span>
                 {clinicInfo.representative}
               </li>
               <li>
-                <span className="text-white/40 text-xs mr-1">주소</span>
+                <span className="text-white/40 text-[10px] mr-1">주소</span>
                 {clinicInfo.address}
               </li>
               <li>
-                <span className="text-white/40 text-xs mr-1">전화</span>
+                <span className="text-white/40 text-[10px] mr-1">전화</span>
                 <a
                   href={`tel:${clinicInfo.phone}`}
                   className="hover:text-[#D4C4A8] transition-colors"
@@ -47,15 +47,15 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-white/40 text-xs mr-1">팩스</span>
+                <span className="text-white/40 text-[10px] mr-1">팩스</span>
                 {clinicInfo.fax}
               </li>
               <li>
-                <span className="text-white/40 text-xs mr-1">사업자명 :</span>
+                <span className="text-white/40 text-[10px] mr-1">사업자명 :</span>
                 서울이건치과의원
               </li>
               <li>
-                <span className="text-white/40 text-xs mr-1">사업자 번호</span>
+                <span className="text-white/40 text-[10px] mr-1">사업자 번호</span>
                 {clinicInfo.businessNumber}
               </li>
             </ul>
@@ -137,11 +137,11 @@ export default function Footer() {
         {/* 구분선 */}
         <div className="mt-12 pt-6 border-t border-white/10 space-y-3">
           {/* 면책 문구 */}
-          <p className="text-xs text-white/30 leading-relaxed max-w-3xl">
+          <p className="text-[10px] text-white/30 leading-relaxed max-w-3xl">
             본 페이지의 내용은 의료법에 따라 참고용 정보이며, 정확한 진단과 치료는 내원 상담을 통해 결정됩니다.
           </p>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <p className="text-xs text-white/25">
+            <p className="text-[10px] text-white/25">
               &copy; {currentYear} {clinicInfo.name}. All rights reserved.
             </p>
           </div>
