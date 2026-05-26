@@ -1,11 +1,10 @@
 'use client'
 
-import { GraduationCap, UsersRound } from 'lucide-react'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import DoctorTeamSection from '@/components/about/DoctorTeamSection'
 
-const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'baek-seola', 'park-jiwon']
+const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'park-jiwon', 'baek-seola']
 
 function DoctorCard({
   doctor,
@@ -30,13 +29,25 @@ function DoctorCard({
         className={`flex flex-col lg:flex-row lg:items-stretch w-full max-w-[1400px] mx-auto ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
         style={isVisible ? { animationDelay: '0.05s' } : undefined}
       >
-        {/* 사진 — 카드 전체 높이 채움 */}
-        <div className="flex-shrink-0 w-full lg:w-[440px] lg:self-stretch">
+        {/* 사진 — 카드 전체 높이 채움, documents는 사진 위에 오버랩 */}
+        <div className="flex-shrink-0 w-full lg:w-[440px] lg:self-stretch relative overflow-hidden">
           <img
             src={doctor.image}
             alt={`${doctor.name} ${doctor.role}`}
             className="w-full h-[340px] lg:h-full object-cover object-top block"
           />
+          {doctor.documents && doctor.documents.length > 0 && (
+            <div className="absolute bottom-4 right-4 flex gap-2 lg:gap-3">
+              {doctor.documents.map((doc, i) => (
+                <img
+                  key={i}
+                  src={doc}
+                  alt={`${doctor.name} 자격증 ${i + 1}`}
+                  className="h-[90px] lg:h-[150px] w-auto shadow-2xl border-2 border-white/40 rounded-sm"
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* 텍스트 영역 */}
@@ -90,19 +101,6 @@ function DoctorCard({
           )}
         </div>
 
-        {/* 자격증 이미지 (documents 있을 때만) */}
-        {doctor.documents && doctor.documents.length > 0 && (
-          <div className="flex flex-row gap-4 px-6 py-12 lg:px-8 lg:py-16 flex-shrink-0 items-center">
-            {doctor.documents.map((doc, i) => (
-              <img
-                key={i}
-                src={doc}
-                alt={`${doctor.name} 자격증 ${i + 1}`}
-                className="h-[160px] lg:h-[260px] w-auto object-cover block"
-              />
-            ))}
-          </div>
-        )}
       </div>
     </article>
   )
@@ -123,87 +121,45 @@ export default function DoctorProfileSection() {
       {/* 섹션 헤더 — 풀페이지 */}
       <div
         id="doctor-intro"
-        className="relative min-h-screen flex items-center overflow-hidden scroll-mt-36 bg-white lg:bg-transparent"
+        className="relative min-h-screen flex items-center overflow-hidden scroll-mt-36"
       >
         {/* 배경 이미지 */}
         <div
-          className="absolute inset-0 hidden lg:block"
+          className="absolute inset-0"
           style={{
             backgroundImage: "url('/images/clinic/egun-outerior.jpg')",
             backgroundSize: 'cover',
-            backgroundPosition: 'center 70%',
+            backgroundPosition: 'calc(50% + 220px) 70%',
             backgroundRepeat: 'no-repeat',
           }}
         />
-        <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 100%)' }} />
 
-        {/* 모바일 헤더 */}
-        <div className="relative z-10 w-full px-5 py-10 lg:hidden">
-          <div className="mx-auto max-w-[390px] rounded-[28px] bg-white">
-            <p className="mb-8 text-center text-[16px] font-semibold text-gray-700">
-              의료진 소개
-            </p>
-            <h2 className="text-center text-[24px] font-bold leading-snug text-gray-900">
-              <span className="text-[#0080C8]">서울대학교 출신 대표원장 2인</span>
-              <br />
-              전문의료진으로 구성된
-              <br />
-              서울이건치과
-            </h2>
-            <div className="mt-7 overflow-hidden rounded-[18px] bg-stone-50 shadow-[0_12px_34px_rgba(43,45,66,0.08)]">
-              <img
-                src="/images/doctors/doctors-mobile-v2-crop.png"
-                alt="서울이건치과 의료진"
-                className="w-full h-auto"
-              />
-            </div>
-            <p className="mt-7 text-center text-[16px] font-medium leading-relaxed text-gray-600">
-              풍부한 경험과 전문성을 갖춘 의료진이
-              <br />
-              처음부터 끝까지 책임진료합니다.
-            </p>
-            <div className="mt-8 grid grid-cols-2 rounded-[18px] bg-[#0057B8] px-5 py-6 text-white shadow-[0_12px_26px_rgba(0,87,184,0.28)]">
-              <div className="flex flex-col items-center justify-center gap-3 border-r border-white/30 px-2 text-center">
-                <GraduationCap className="h-9 w-9 text-white" strokeWidth={1.6} />
-                <p className="text-[15px] font-semibold leading-relaxed">
-                  서울대학교 출신
-                  <br />
-                  대표원장 2인
-                </p>
-              </div>
-              <div className="flex flex-col items-center justify-center gap-3 px-2 text-center">
-                <UsersRound className="h-9 w-9 text-white" strokeWidth={1.6} />
-                <p className="text-[15px] font-semibold leading-relaxed">
-                  분야별 전문의
-                  <br />
-                  협진 진료
-                </p>
-              </div>
-            </div>
-            <p className="mt-7 text-center text-[15px] font-medium leading-relaxed text-gray-500">
-              꾸준한 연구와 학술활동으로 더 나은 진료를 약속드립니다.
-            </p>
-          </div>
-        </div>
-
-        {/* 데스크탑 헤더 */}
-        <div ref={ref} className="relative z-10 hidden max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:block">
+        {/* 텍스트 오버레이 — 모바일 + 데스크탑 공통 */}
+        {/* 모바일: -110px 위, 아이패드(lg): 6cm 아래 + 2cm 우, 데스크탑(xl+): 0 */}
+        <div
+          ref={ref}
+          className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-8 py-16 sm:py-20
+            -translate-y-[110px]
+            lg:translate-y-[117px] lg:translate-x-[76px]
+            xl:translate-y-0 xl:translate-x-0"
+        >
           <p
-            className={`text-[20px] font-semibold tracking-[0.25em] uppercase text-[#0080c8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[15px] sm:text-[20px] font-semibold tracking-[0.25em] uppercase text-[#0080c8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.95), 0 0 15px rgba(0,128,200,0.5)' }}
           >
             Our Doctors
           </p>
           <h2
             id="doctors-heading"
-            className={`text-[32px] sm:text-[38px] lg:text-[46px] font-normal text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[28px] sm:text-[38px] lg:text-[46px] font-normal lg:font-bold text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.1s' } : undefined}
           >
             한자리에서<br />
             <span style={{ color: '#ffffff', textShadow: '0 0 20px rgba(0,128,200,0.9), 0 2px 12px rgba(0,0,0,0.95)' }}>변하지 않는 마음</span>
           </h2>
           <p
-            className={`mt-6 text-[26px] sm:text-[28px] text-white/75 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`mt-4 sm:mt-6 text-[18px] sm:text-[26px] lg:text-[28px] text-white/75 lg:text-white/90 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.2s' } : undefined}
           >
             각자의 전문 분야에서 최선을 다하며<br />

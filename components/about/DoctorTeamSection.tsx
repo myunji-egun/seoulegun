@@ -12,7 +12,7 @@ const HOVER_SPECIALTY: Record<string, string> = {
   'baek-seola':   '소아진료',
 }
 
-const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'baek-seola', 'park-jiwon']
+const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'park-jiwon', 'baek-seola']
 
 export default function DoctorTeamSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
