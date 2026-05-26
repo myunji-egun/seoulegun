@@ -129,7 +129,7 @@ export default function DoctorProfileSection() {
           style={{
             backgroundImage: "url('/images/clinic/egun-outerior.jpg')",
             backgroundSize: 'cover',
-            backgroundPosition: 'calc(50% + 220px) 70%',
+            backgroundPosition: 'calc(50% + 220px) 83%',
             backgroundRepeat: 'no-repeat',
           }}
         />
@@ -145,21 +145,21 @@ export default function DoctorProfileSection() {
             xl:translate-y-0 xl:translate-x-0"
         >
           <p
-            className={`text-[15px] sm:text-[20px] font-semibold tracking-[0.25em] uppercase text-[#0080c8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[18px] sm:text-[23px] font-semibold tracking-[0.25em] uppercase text-[#0080c8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.95), 0 0 15px rgba(0,128,200,0.5)' }}
           >
             Our Doctors
           </p>
           <h2
             id="doctors-heading"
-            className={`text-[28px] sm:text-[38px] lg:text-[46px] font-normal lg:font-bold text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`text-[31px] sm:text-[41px] lg:text-[49px] font-normal lg:font-bold text-white leading-tight ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.1s' } : undefined}
           >
             한자리에서<br />
             <span style={{ color: '#ffffff', textShadow: '0 0 20px rgba(0,128,200,0.9), 0 2px 12px rgba(0,0,0,0.95)' }}>변하지 않는 마음</span>
           </h2>
           <p
-            className={`mt-4 sm:mt-6 text-[18px] sm:text-[26px] lg:text-[28px] text-white/75 lg:text-white/90 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`mt-4 sm:mt-6 text-[21px] sm:text-[29px] lg:text-[31px] text-white/75 lg:text-white/90 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.2s' } : undefined}
           >
             각자의 전문 분야에서 최선을 다하며<br />
