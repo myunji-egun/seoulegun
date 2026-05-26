@@ -118,7 +118,7 @@ export default function PreserveTreatSection() {
             style={{
               padding: '8px 16px', borderRadius: '999px',
               fontSize: '13px', fontWeight: 700, letterSpacing: '0.5px',
-              background: '#4fc3f7', color: '#0b1228',
+              background: '#4fc3f7', color: '#fff',
               textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px',
               transition: 'background 0.2s, transform 0.2s',
             }}
