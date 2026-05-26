@@ -3,12 +3,36 @@ interface BoardHeroProps {
   title: string
   subtitle: string
   videoId?: string
+  videoSrc?: string
   heroImage?: string
   heroFull?: boolean
 }
 
-export default function BoardHero({ title, subtitle, videoId, heroImage, heroFull }: BoardHeroProps) {
-  // 영상 히어로 — 16:9 원본 비율 유지
+export default function BoardHero({ title, subtitle, videoId, videoSrc, heroImage, heroFull }: BoardHeroProps) {
+  // 로컬 영상 히어로 — 16:9 원본 비율 유지
+  if (videoSrc) {
+    return (
+      <section className="relative w-full overflow-hidden bg-black" style={{ paddingBottom: '56.25%' }} aria-label={`${title} 소개`}>
+        <video
+          src={videoSrc}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10 w-full">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight animate-drop-in">{title}</h1>
+            <p className="text-white/80 text-sm sm:text-base mt-2 animate-drop-in" style={{ animationDelay: '0.15s' }}>{subtitle}</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // 유튜브 영상 히어로 — 16:9 원본 비율 유지
   if (videoId) {
     return (
       <section className="relative w-full overflow-hidden bg-black" style={{ paddingBottom: '56.25%' }} aria-label={`${title} 소개`}>
