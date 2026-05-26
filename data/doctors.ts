@@ -50,7 +50,7 @@ export const doctors: Doctor[] = [
     title: 'DDS, MSD',
     specialty: '교정',
     subRole: '교정과 전문의',
-    specialtyDetail: '투명교정 · 성장기교정 · 설측교정',
+    specialtyDetail: '투명교정 · 성장기교정',
     image: '/images/doctors/doctor-yoo.png',
     careers: [
       '경희대학교 치의학전문대학원 졸업',
@@ -136,7 +136,7 @@ export const doctors: Doctor[] = [
     title: 'DDS, MSD',
     specialty: '보존',
     subRole: '통합치의학 전문의',
-    specialtyDetail: '보존치료 · 신경치료 · 통합치의학',
+    specialtyDetail: '보존치료 · 통합치의학',
     image: '/images/doctors/doctor-park.png',
     careers: [
       'KAIST 우등졸업',

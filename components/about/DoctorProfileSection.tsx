@@ -125,8 +125,9 @@ export default function DoctorProfileSection() {
       >
         {/* 배경 이미지 */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-x-0 top-0"
           style={{
+            bottom: '-10px',
             backgroundImage: "url('/images/clinic/egun-outerior.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'calc(50% + 220px) 83%',

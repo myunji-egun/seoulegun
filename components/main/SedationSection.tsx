@@ -60,13 +60,13 @@ export default function SedationSection() {
         src="https://www.youtube.com/embed/SOI5QjYwCMM?autoplay=1&mute=1&loop=1&playlist=SOI5QjYwCMM&controls=0&showinfo=0&modestbranding=1&playsinline=1"
         style={{
           position: 'absolute',
-          top: '50%',
+          top: '0',
           left: '50%',
           width: '100vw',
-          height: '56.25vw',   /* 16:9 */
+          height: '56.25vw',
           minHeight: '100vh',
-          minWidth: '177.78vh', /* 16:9 */
-          transform: 'translate(-50%, -50%)',
+          minWidth: '177.78vh',
+          transform: 'translateX(-50%)',
           border: 'none',
         }}
         allow="autoplay; encrypted-media; picture-in-picture"
