@@ -28,14 +28,14 @@ const SLIDES = [
   },
   {
     id: 3,
-    headline: '소아치과 전문의',
-    sub: '직접 진료 상담',
+    headline: '수원교정',
+    sub: '인비절라인',
     image: '/images/slides/slide-5.png',
     accent: 'var(--e-primary)',
   },
 ]
 
-const INTERVAL        = 7000
+const INTERVAL        = 6700
 const TRANSITION_DUR  = 2500  // ms — slide transition duration
 function easeInOutCubic(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
@@ -65,6 +65,12 @@ export default function HeroSlider() {
     setProgress(0)
     startTimeRef.current = Date.now()
   }
+
+  useEffect(() => {
+    const resetHero = () => goTo(0)
+    window.addEventListener('egun:hero-reset', resetHero)
+    return () => window.removeEventListener('egun:hero-reset', resetHero)
+  }, [])
 
   useEffect(() => {
     const tick = () => {
@@ -106,6 +112,7 @@ export default function HeroSlider() {
 
   return (
     <section
+      id="main-hero"
       className="relative h-dvh md:h-screen w-full overflow-hidden bg-white"
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
@@ -165,13 +172,13 @@ export default function HeroSlider() {
         <p className="text-white/75 text-[16px] font-semibold mb-3 tracking-widest">서울이건치과 수원</p>
         <h2
           key={`m-headline-${current}`}
-          className="text-white text-[36px] font-bold leading-tight text-center mb-2"
+          className="text-white text-[34px] font-bold leading-tight text-center mb-2"
         >
           {slide.headline}
         </h2>
         <p
           key={`m-sub-${current}`}
-          className="text-white/90 text-[22px] font-light leading-tight text-center"
+          className="text-white/90 text-[20px] font-light leading-tight text-center"
         >
           {slide.sub}
         </p>
@@ -208,18 +215,18 @@ export default function HeroSlider() {
             className="text-[15px] md:text-[17px] tracking-[0.3em] uppercase mb-3"
             style={{ color: slide.accent }}
           >
-            <span className="text-[20px] md:text-[22px] text-white font-bold">서울이건치과</span>{' '}
-            <span className="text-[18px] md:text-[20px] opacity-60">수원</span>
+            <span className="text-[18px] md:text-[20px] text-white font-bold">서울이건치과</span>{' '}
+            <span className="text-[16px] md:text-[18px] opacity-60">수원</span>
           </p>
           <h1
             key={`headline-${current}`}
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-1"
+            className="text-2xl sm:text-3xl md:text-[46px] lg:text-[58px] font-bold leading-tight mb-1"
           >
             {slide.headline}
           </h1>
           <h2
             key={`sub-${current}`}
-            className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-light leading-tight"
+            className="text-lg sm:text-2xl md:text-[34px] lg:text-[46px] font-light leading-tight"
           >
             {slide.sub}
           </h2>
@@ -281,11 +288,6 @@ export default function HeroSlider() {
         {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
       </div>
 
-      {/* ── Scroll Down ──────────────────────────────────────────── */}
-      <div className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 text-white/60 text-xs tracking-widest">
-        <span>SCROLL DOWN</span>
-        <ChevronDown size={16} aria-hidden="true" />
-      </div>
     </section>
   )
 }
