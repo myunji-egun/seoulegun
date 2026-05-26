@@ -23,7 +23,7 @@ export default function CleanSection() {
       </div>
 
       {/* ── 데스크탑: 2-column 레이아웃 ──────────────────────── */}
-      <div className="relative z-10 h-full max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-9 items-start md:items-center pt-16 md:py-24 pb-8">
+      <div className="relative z-10 h-full max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-9 items-start md:items-center pt-[140px] md:py-24 pb-8">
 
         {/* 텍스트 영역 */}
         <div>
