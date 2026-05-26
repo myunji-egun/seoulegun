@@ -28,7 +28,7 @@ export default function Footer() {
             </div>
 
             {/* 치과 정보 */}
-            <ul className="space-y-2 text-sm text-white/70 leading-relaxed">
+            <ul className="space-y-2 text-[12px] text-white/70 leading-relaxed">
               <li>
                 <span className="text-white/40 text-xs mr-1">대표</span>
                 {clinicInfo.representative}
@@ -63,7 +63,7 @@ export default function Footer() {
           </div>
 
           {/* 진료시간표 */}
-          <div>
+          <div className="hidden md:block">
             <h3 className="text-sm font-semibold text-white/50 uppercase tracking-widest mb-5">
               진료시간
             </h3>
@@ -104,7 +104,7 @@ export default function Footer() {
           </div>
 
           {/* 바로가기 링크 */}
-          <div>
+          <div className="hidden md:block">
             <h3 className="text-sm font-semibold text-white/50 uppercase tracking-widest mb-5">
               빠른 메뉴
             </h3>
