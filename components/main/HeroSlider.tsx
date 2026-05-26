@@ -138,11 +138,17 @@ export default function HeroSlider() {
           alt=""
           aria-hidden="true"
           className={`absolute inset-0 w-full h-full object-cover${
-            current === 0 ? ' mobile-hero-pan' :
-            current === 2 || current === 3 ? ' mobile-hero-pan-center' :
-            ' object-center'
+            tProg >= 1 && current === 0 ? ' mobile-hero-pan' :
+            tProg >= 1 && (current === 2 || current === 3) ? ' mobile-hero-pan-center' :
+            ''
           }`}
-          style={{ transform: `translateX(${(1 - easedProg) * 100}%)` }}
+          style={{
+            transform: `translateX(${(1 - easedProg) * 100}%)`,
+            objectPosition:
+              current === 0 ? '100% top' :
+              current === 2 || current === 3 ? '100% center' :
+              'center',
+          }}
         />
       </div>
 
