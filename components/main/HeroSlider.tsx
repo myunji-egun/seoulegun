@@ -157,28 +157,31 @@ export default function HeroSlider() {
         }}
       />
 
-      {/* ── 모바일 텍스트 오버레이 ───────────────────────────────── */}
+      {/* ── 모바일 텍스트 (중앙 배치) ──────────────────────────── */}
       <div
-        className="md:hidden absolute inset-x-0 flex flex-col items-center justify-end px-6 z-10"
-        style={{
-          top: 'var(--mobile-header-height)',
-          bottom: 'calc(var(--mobile-bottom-bar-height) + 16px)',
-          paddingBottom: '20px',
-        }}
+        className="md:hidden absolute inset-x-0 z-10 flex flex-col items-center text-center px-6"
+        style={{ top: '46%', transform: 'translateY(-50%)' }}
       >
-        <p className="text-white/80 text-sm font-semibold mb-2 tracking-widest">서울이건치과 수원</p>
+        <p className="text-white/75 text-[16px] font-semibold mb-3 tracking-widest">서울이건치과 수원</p>
         <h2
           key={`m-headline-${current}`}
-          className="text-white text-[28px] font-bold leading-tight text-center mb-1"
+          className="text-white text-[36px] font-bold leading-tight text-center mb-2"
         >
           {slide.headline}
         </h2>
         <p
           key={`m-sub-${current}`}
-          className="text-white/90 text-lg font-light leading-tight text-center mb-5"
+          className="text-white/90 text-[22px] font-light leading-tight text-center"
         >
           {slide.sub}
         </p>
+      </div>
+
+      {/* ── 모바일 버튼 (하단 고정) ─────────────────────────────── */}
+      <div
+        className="md:hidden absolute inset-x-0 z-10 px-6"
+        style={{ bottom: 'calc(var(--mobile-bottom-bar-height) + 20px)' }}
+      >
         <div className="flex gap-3 w-full">
           <a
             href="tel:031-896-5512"
