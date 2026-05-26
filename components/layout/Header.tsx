@@ -33,6 +33,17 @@ export default function Header() {
               href="/"
               className="flex items-center shrink-0"
               aria-label="서울이건치과 홈으로 이동"
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault()
+                  const desktop = document.getElementById('home-desktop')
+                  if (desktop) {
+                    desktop.scrollTo({ top: 0, behavior: 'smooth' })
+                  } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }
+                }
+              }}
             >
               <img
                 src="/images/logo/egun-logo%20(1).svg"
