@@ -2,58 +2,91 @@ import Link from 'next/link'
 
 export default function DoctorGroup() {
   return (
-    <section className="relative h-dvh w-full overflow-hidden bg-white">
+    <section className="relative h-dvh w-full overflow-hidden bg-black">
 
-      {/* 모바일: 전체 섹션 채우기 */}
+      {/* ── 모바일 이미지 ── */}
       <div className="md:hidden absolute inset-0">
         <img
-          src="/images/doctors/doctors_mobile.png"
-          alt="Seoul Egun dental clinic doctors"
-          className="w-full h-full object-contain object-center"
+          src="/images/doctors/doctors_m.jpg"
+          alt="서울이건치과 의료진"
+          className="w-full h-full object-cover object-top"
+        />
+        {/* 하단 그라데이션 */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 45%, transparent 100%)',
+          }}
         />
       </div>
 
-      {/* 데스크톱: full cover */}
+      {/* ── 데스크톱 이미지 ── */}
       <img
         src="/images/doctors/doctors_2.png"
-        alt="Seoul Egun dental clinic doctors"
+        alt="서울이건치과 의료진"
         className="hidden md:block absolute inset-0 h-full w-full object-cover object-center"
       />
 
-      {/* 버튼
-          모바일: 하단 고정바(60px) 바로 위 12px 여백
-          데스크톱: 기존 좌측 55.5% 위치
-      */}
+      {/* ── 모바일 텍스트 + 버튼 오버레이 ── */}
+      <div
+        className="md:hidden absolute inset-x-0 z-10 flex flex-col px-7"
+        style={{
+          bottom: 'calc(var(--mobile-bottom-bar-height) + 24px)',
+        }}
+      >
+        {/* 헤드라인 */}
+        <h2 className="text-white text-[28px] font-bold leading-tight tracking-tight">
+          한자리에서<br />변하지 않는 마음
+        </h2>
+
+        {/* 구분선 */}
+        <div className="w-10 h-[1.5px] bg-white/50 my-4" />
+
+        {/* 서브카피 */}
+        <p className="text-white/75 text-[17px] font-light leading-snug mb-6">
+          마음을 담아 정성을 다하여
+        </p>
+
+        {/* 버튼 */}
+        <Link
+          href="/about#doctor-intro"
+          className="self-start inline-flex items-center justify-center gap-2
+            h-[48px] px-7 rounded-full
+            bg-[#0080C8] text-white text-[15px] font-semibold
+            shadow-[0_4px_20px_rgba(0,128,200,0.4)]
+            transition-all duration-200 active:bg-[#006EAA]"
+        >
+          이건진료진 소개
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+
+      {/* ── 데스크톱 버튼 (기존 위치 유지) ── */}
       <Link
-        href="/about#doctors"
-        className="absolute
-          left-1/2 -translate-x-1/2 bottom-[72px]
-          md:left-[6.4%] md:translate-x-0 md:top-[55.5%] md:bottom-auto
-          inline-flex items-center justify-center gap-2
-          h-[52px] px-7
-          rounded-full bg-[#0080C8] text-white
+        href="/about#doctor-intro"
+        className="hidden md:inline-flex absolute
+          left-[6.4%] top-[55.5%]
+          items-center justify-center gap-2
+          h-[64px] px-0 w-[290px]
+          rounded-none bg-white/10 text-gray-800
+          border border-gray-700/70 backdrop-blur-[2px]
           text-[17px] font-semibold
-          shadow-[0_4px_20px_rgba(0,128,200,0.35)]
           transition-all duration-200
-          hover:bg-[#006EAA] hover:shadow-[0_6px_24px_rgba(0,128,200,0.5)]
-          md:rounded-none md:bg-white/10 md:text-gray-800
-          md:h-[64px] md:px-0 md:w-[290px]
-          md:border md:border-gray-700/70 md:shadow-none md:backdrop-blur-[2px]
-          md:hover:bg-white/35 md:hover:border-[#0080C8] md:hover:text-[#0080C8]"
+          hover:bg-white/35 hover:border-[#0080C8] hover:text-[#0080C8]"
       >
         자세히보기
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-4 h-4 md:hidden"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
       </Link>
     </section>
   )
