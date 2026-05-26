@@ -171,5 +171,6 @@
   to   { object-position: 0% top; }
 }
 .mobile-hero-pan {
-  animation: mobile-hero-pan 4s ease-in-out forwards;
+  object-position: 100% top;
+  animation: mobile-hero-pan 7s ease-in-out forwards;
 }
