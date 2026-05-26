@@ -123,14 +123,8 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── 모바일 이미지 레이어 (헤더 64px·하단바 60px 사이 영역) ── */}
-      <div
-        className="md:hidden absolute inset-x-0"
-        style={{
-          top: 'var(--mobile-header-height)',
-          bottom: 'var(--mobile-bottom-bar-height)',
-        }}
-      >
+      {/* ── 모바일 이미지 레이어 ── */}
+      <div className="md:hidden absolute inset-0">
         <img
           key={current}
           src={slide.image}
@@ -149,7 +143,7 @@ export default function HeroSlider() {
         }}
       />
 
-      {/* ── 하단 페이드 오버레이 ─────────────────────────────────── */}
+      {/* ── 하단 페이드 오버레이 (데스크탑) ─────────────────────── */}
       <div
         className="hidden md:block absolute inset-x-0 bottom-0 h-32 pointer-events-none"
         style={{
@@ -157,7 +151,57 @@ export default function HeroSlider() {
         }}
       />
 
-      {/* ── 텍스트 오버레이 ──────────────────────────────────────── */}
+      {/* ── 하단 페이드 오버레이 (모바일) ────────────────────────── */}
+      <div
+        className="md:hidden absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: 'calc(var(--mobile-bottom-bar-height) + 220px)',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)',
+        }}
+      />
+
+      {/* ── 모바일 텍스트 오버레이 ───────────────────────────────── */}
+      <div
+        className="md:hidden absolute inset-x-0 flex flex-col items-center justify-end px-6 z-10"
+        style={{
+          top: 'var(--mobile-header-height)',
+          bottom: 'calc(var(--mobile-bottom-bar-height) + 16px)',
+          paddingBottom: '20px',
+        }}
+      >
+        <p className="text-white/80 text-sm font-semibold mb-2 tracking-widest">서울이건치과 수원</p>
+        <h2
+          key={`m-headline-${current}`}
+          className="text-white text-2xl font-bold leading-tight text-center mb-1"
+        >
+          {slide.headline}
+        </h2>
+        <p
+          key={`m-sub-${current}`}
+          className="text-white/90 text-lg font-light leading-tight text-center mb-5"
+        >
+          {slide.sub}
+        </p>
+        <div className="flex gap-3 w-full">
+          <a
+            href="tel:031-896-5512"
+            className="flex-1 flex items-center justify-center h-12 text-sm font-semibold text-white border border-white/50 rounded-full"
+          >
+            031-896-5512
+          </a>
+          <a
+            href="https://pf.kakao.com/_nqBms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center h-12 text-sm font-semibold rounded-full"
+            style={{ backgroundColor: '#FEE500', color: '#191919' }}
+          >
+            카카오 상담
+          </a>
+        </div>
+      </div>
+
+      {/* ── 텍스트 오버레이 (데스크탑) ───────────────────────────── */}
       <div className="hidden md:flex absolute inset-0 items-center justify-center px-6 md:justify-start md:pl-20 lg:pl-32">
         <div className="text-white text-center md:text-left">
           <p

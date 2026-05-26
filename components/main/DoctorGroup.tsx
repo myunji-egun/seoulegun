@@ -4,14 +4,8 @@ export default function DoctorGroup() {
   return (
     <section className="relative h-dvh w-full overflow-hidden bg-white">
 
-      {/* 모바일: 헤더~하단바 사이 영역에 이미지 표시 (잘림 없이 contain) */}
-      <div
-        className="md:hidden absolute inset-x-0"
-        style={{
-          top: 'var(--mobile-header-height)',
-          bottom: 'var(--mobile-bottom-bar-height)',
-        }}
-      >
+      {/* 모바일: 전체 섹션 채우기 */}
+      <div className="md:hidden absolute inset-0">
         <img
           src="/images/doctors/doctors_mobile.png"
           alt="Seoul Egun dental clinic doctors"
