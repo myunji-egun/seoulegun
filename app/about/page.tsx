@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import AnchorNav from '@/components/about/AnchorNav'
+import AboutScrollSnap from '@/components/about/AboutScrollSnap'
 import PhilosophySection from '@/components/about/PhilosophySection'
 import DoctorProfileSection from '@/components/about/DoctorProfileSection'
 import ScheduleSection from '@/components/about/ScheduleSection'
@@ -22,17 +23,7 @@ export default function AboutPage() {
       {/* SEO h1 */}
       <h1 className="sr-only">서울이건치과 소개</h1>
 
-      {/* 페이지 히어로 - 영상 배경 */}
-      <div className="relative h-[72vh] min-h-[520px] overflow-hidden bg-black">
-        <iframe
-          src="https://www.youtube.com/embed/-Bahgt23YHo?autoplay=1&mute=1&loop=1&playlist=-Bahgt23YHo&controls=0&showinfo=0&modestbranding=1&playsinline=1"
-          className="absolute left-1/2 top-0 h-[120vh] min-h-full w-[213.33vh] min-w-[112vw] -translate-x-1/2"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          title="서울이건치과 소개 영상"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+      <AboutScrollSnap />
 
       {/* 앵커 내비게이션 (sticky) */}
       <AnchorNav />
