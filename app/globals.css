@@ -165,46 +165,45 @@
   font-size: 18px !important;
 }
 
-/* ── 모바일 히어로 슬라이드별 Pan 효과 (인물 오른쪽 기준) ── */
+/* ── 모바일 히어로 슬라이드별 Pan 효과 ── */
 
-/* Slide 0: 오른쪽 상단 고정 → 0.8s 정지 → 천천히 왼쪽으로 */
+/* Slide 0: 오른쪽 상단 → 0.8s 정지 → 왼쪽으로 2cm (14s) */
 @keyframes mobile-pan-0 {
-  0%    { object-position: 88% 15%; animation-timing-function: steps(1); }
-  11.4% { object-position: 88% 15%; animation-timing-function: cubic-bezier(0.25, 0, 0.08, 1); }
-  100%  { object-position: 68% 15%; }
+  0%    { object-position: 100% top; animation-timing-function: steps(1); }
+  5.7%  { object-position: 100% top; animation-timing-function: cubic-bezier(0.25, 0, 0.08, 1); }
+  100%  { object-position: 84% top; }
 }
 .mobile-pan-0 {
-  object-position: 88% 15%;
-  animation: mobile-pan-0 7s linear forwards;
+  object-position: 100% top;
+  animation: mobile-pan-0 14s linear forwards;
 }
 
-/* Slide 1: 오른쪽에서 시작 → 천천히 왼쪽으로 (인물 항상 보임) */
+/* Slide 1: 중앙(50%) → 오른쪽으로 1cm (10s) */
 @keyframes mobile-pan-1 {
-  0%   { object-position: 90% center; }
-  100% { object-position: 74% center; }
+  0%   { object-position: 50% center; }
+  100% { object-position: 58% center; }
 }
 .mobile-pan-1 {
-  object-position: 90% center;
+  object-position: 50% center;
   animation: mobile-pan-1 10s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 2: 오른쪽에서 천천히 → 절반 지점에서 정지 */
+/* Slide 2: 오른쪽(100%) → 왼쪽으로 3cm (14s) */
 @keyframes mobile-pan-2 {
-  0%   { object-position: 92% 20%; }
-  55%  { object-position: 74% 20%; }
-  100% { object-position: 74% 20%; }
-}
-.mobile-pan-2 {
-  object-position: 92% 20%;
-  animation: mobile-pan-2 7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
-}
-
-/* Slide 3: 오른쪽 고정 → 매우 천천히 소량 이동 */
-@keyframes mobile-pan-3 {
-  0%   { object-position: 88% center; }
+  0%   { object-position: 100% center; }
   100% { object-position: 76% center; }
 }
+.mobile-pan-2 {
+  object-position: 100% center;
+  animation: mobile-pan-2 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+}
+
+/* Slide 3: 오른쪽(100%) → 왼쪽으로 1cm (14s) */
+@keyframes mobile-pan-3 {
+  0%   { object-position: 100% center; }
+  100% { object-position: 92% center; }
+}
 .mobile-pan-3 {
-  object-position: 88% center;
-  animation: mobile-pan-3 12s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+  object-position: 100% center;
+  animation: mobile-pan-3 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
