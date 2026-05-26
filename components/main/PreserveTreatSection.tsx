@@ -143,19 +143,14 @@ export default function PreserveTreatSection() {
         </div>
       </div>
 
-      {/* ── 카드 영역 (오른쪽) ── */}
+      {/* ── 카드 영역 (데스크탑) ── */}
       <div
-        className="relative z-10 flex-1 flex flex-col justify-center gap-5 pr-5 sm:pr-8 lg:pr-14 pl-5 sm:pl-0 pb-8 pt-0 lg:py-12"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 0.6s ease 0.4s',
-        }}
+        className="hidden md:flex relative z-10 flex-1 flex-col justify-center gap-5 pr-8 lg:pr-14 pl-0 pb-8 pt-0 lg:py-12"
+        style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease 0.4s' }}
       >
-        {/* 상단 2카드 + TREATMENT ARCHIVE 레이블 (grid-cols-3, 카드와 동일 폭 셀) */}
         <div className="grid grid-cols-3 gap-x-3 gap-y-5 items-end">
           <CardItem card={CARDS[0]} idx={0} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           <CardItem card={CARDS[1]} idx={1} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
-          {/* 3번째 셀: 레이블 */}
           <div className="flex flex-col justify-end pb-2 pl-1">
             <span style={{ width: '24px', height: '1px', background: 'rgba(16,24,40,0.25)', display: 'block', marginBottom: '6px' }} />
             <span style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(16,24,40,0.5)', textTransform: 'uppercase', lineHeight: 1.6 }}>
@@ -163,12 +158,40 @@ export default function PreserveTreatSection() {
             </span>
           </div>
         </div>
-
-        {/* 하단 3카드 (grid-cols-3) */}
         <div className="grid grid-cols-3 gap-x-3 gap-y-5">
           <CardItem card={CARDS[2]} idx={2} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           <CardItem card={CARDS[3]} idx={3} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
           <CardItem card={CARDS[4]} idx={4} hoverIdx={hoverIdx} setHoverIdx={setHoverIdx} />
+        </div>
+      </div>
+
+      {/* ── 카드 영역 (모바일 전용 — 텍스트 없음, 2·2·1 배열) ── */}
+      <div
+        className="md:hidden w-full px-4 pb-8 flex flex-col gap-3"
+        style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease 0.4s' }}
+      >
+        {/* 2개 */}
+        <div className="grid grid-cols-2 gap-3">
+          {CARDS.slice(0, 2).map((card) => (
+            <a key={card.href} href={card.href} className="relative rounded-xl overflow-hidden block aspect-[4/3]">
+              <div className="absolute inset-0" style={{ backgroundImage: `url(${card.img})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+            </a>
+          ))}
+        </div>
+        {/* 2개 */}
+        <div className="grid grid-cols-2 gap-3">
+          {CARDS.slice(2, 4).map((card) => (
+            <a key={card.href} href={card.href} className="relative rounded-xl overflow-hidden block aspect-[4/3]">
+              <div className="absolute inset-0" style={{ backgroundImage: `url(${card.img})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+            </a>
+          ))}
+        </div>
+        {/* 1개 */}
+        <div className="grid grid-cols-2 gap-3">
+          <a href={CARDS[4].href} className="relative rounded-xl overflow-hidden block aspect-[4/3]">
+            <div className="absolute inset-0" style={{ backgroundImage: `url(${CARDS[4].img})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          </a>
+          <div />
         </div>
       </div>
     </section>
