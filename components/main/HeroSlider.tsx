@@ -35,8 +35,12 @@ const SLIDES = [
   },
 ]
 
-const INTERVAL        = 4000
-const TRANSITION_DUR  = 900   // ms — WebGL crossfade duration
+const INTERVAL        = 7000
+const TRANSITION_DUR  = 2500  // ms — slide transition duration
+function easeInOutCubic(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+}
+
 const RADIUS          = 18
 const CIRCUMFERENCE   = 2 * Math.PI * RADIUS
 
@@ -97,8 +101,9 @@ export default function HeroSlider() {
     return () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current) }
   }, [])
 
-  const slide     = SLIDES[current]
-  const imageUrls = SLIDES.map((s) => s.image)
+  const slide      = SLIDES[current]
+  const imageUrls  = SLIDES.map((s) => s.image)
+  const easedProg  = easeInOutCubic(tProg)
 
   return (
     <section
@@ -117,13 +122,23 @@ export default function HeroSlider() {
       </div>
 
       {/* ── 모바일 이미지 레이어 ── */}
-      <div className="md:hidden absolute inset-0">
+      <div className="md:hidden absolute inset-0 overflow-hidden">
+        {tProg < 1 && (
+          <img
+            src={SLIDES[prevIdx].image}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{ transform: `translateX(${-easedProg * 100}%)` }}
+          />
+        )}
         <img
           key={current}
           src={slide.image}
           alt=""
           aria-hidden="true"
-          className={`w-full h-full object-cover${current === 0 ? ' mobile-hero-pan' : ' object-center'}`}
+          className={`absolute inset-0 w-full h-full object-cover${current === 0 && tProg >= 1 ? ' mobile-hero-pan' : ' object-center'}`}
+          style={{ transform: `translateX(${(1 - easedProg) * 100}%)` }}
         />
       </div>
 
