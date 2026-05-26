@@ -169,7 +169,7 @@ export default function HeroSlider() {
         <p className="text-white/80 text-sm font-semibold mb-2 tracking-widest">서울이건치과 수원</p>
         <h2
           key={`m-headline-${current}`}
-          className="text-white text-2xl font-bold leading-tight text-center mb-1"
+          className="text-white text-[28px] font-bold leading-tight text-center mb-1"
         >
           {slide.headline}
         </h2>
