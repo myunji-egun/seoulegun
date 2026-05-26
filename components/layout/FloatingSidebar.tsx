@@ -84,7 +84,7 @@ export default function FloatingSidebar() {
 
   return (
     <aside
-      className="flex fixed right-3 top-[24%] md:top-[65%] -translate-y-1/2 z-50 flex-col rounded-2xl overflow-hidden bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl"
+      className="flex fixed right-3 top-[50%] md:top-[65%] -translate-y-1/2 z-50 flex-col rounded-2xl overflow-hidden bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl"
       aria-label="빠른 링크"
     >
       {items.map((item, index) => {
