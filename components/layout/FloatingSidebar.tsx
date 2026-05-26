@@ -35,10 +35,9 @@ function NaverBlogIcon({ size = 18 }: { size?: number }) {
 }
 
 function scrollToTop() {
-  // 풀페이지 스크롤 컨테이너 또는 window
-  const container = document.querySelector('[style*="scroll-snap-type"]') as HTMLElement | null
-  if (container) {
-    container.scrollTo({ top: 0, behavior: 'smooth' })
+  const desktop = document.getElementById('home-desktop')
+  if (desktop && desktop.scrollTop > 0) {
+    desktop.scrollTo({ top: 0, behavior: 'smooth' })
   } else {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -84,9 +83,8 @@ export default function FloatingSidebar() {
   ]
 
   return (
-    <>
     <aside
-      className="flex fixed right-3 top-1/2 -translate-y-1/2 z-50 flex-col rounded-2xl overflow-hidden bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl"
+      className="flex fixed right-3 top-[45%] md:top-[65%] -translate-y-1/2 z-50 flex-col rounded-2xl overflow-hidden bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl"
       aria-label="빠른 링크"
     >
       {items.map((item, index) => {
@@ -101,12 +99,9 @@ export default function FloatingSidebar() {
 
         const content = (
           <>
-            {/* 아이콘 */}
             <span className="group-hover:scale-110 transition-transform duration-200">
               {item.icon}
             </span>
-
-            {/* 호버 시 라벨 툴팁 */}
             <span
               className="
                 absolute right-full mr-2 px-2 py-1
@@ -149,17 +144,16 @@ export default function FloatingSidebar() {
           </Link>
         )
       })}
-    </aside>
 
-    {/* TOP 버튼 - 사이드바 아래 */}
-    <button
-      onClick={scrollToTop}
-      className="flex fixed right-3 bottom-24 z-50 flex-col items-center justify-center w-10 h-12 rounded-2xl bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-2xl text-white/60 hover:text-[#0080C8] hover:bg-white/10 transition-all duration-200 lg:w-12 lg:h-14 lg:right-5 lg:bottom-24"
-      aria-label="맨 위로"
-    >
-      <ChevronUp size={18} />
-      <span className="text-[9px] font-bold mt-0.5">TOP</span>
-    </button>
-    </>
+      {/* TOP 버튼 — 사이드바 맨 아래에 바로 연결 */}
+      <button
+        onClick={scrollToTop}
+        aria-label="맨 위로"
+        className="group relative w-10 h-10 lg:w-12 lg:h-12 flex flex-col items-center justify-center text-white/60 hover:text-[#0080C8] hover:bg-white/10 transition-all duration-200 border-t border-white/20"
+      >
+        <ChevronUp size={18} className="group-hover:scale-110 transition-transform duration-200" />
+        <span className="text-[9px] font-bold mt-0.5">TOP</span>
+      </button>
+    </aside>
   )
 }

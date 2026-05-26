@@ -165,7 +165,7 @@
   font-size: 18px !important;
 }
 
-/* ── 모바일 히어로 슬라이드 1: 우→좌 패닝 효과 ── */
+/* ── 모바일 히어로 슬라이드 패닝 효과 ── */
 @keyframes mobile-hero-pan {
   from { object-position: 100% top; }
   to   { object-position: 0% top; }
@@ -173,4 +173,14 @@
 .mobile-hero-pan {
   object-position: 100% top;
   animation: mobile-hero-pan 7s ease-in-out forwards;
+}
+
+/* 슬라이드 3·4: 우→중앙 패닝 */
+@keyframes mobile-hero-pan-center {
+  from { object-position: 100% center; }
+  to   { object-position: 50% center; }
+}
+.mobile-hero-pan-center {
+  object-position: 100% center;
+  animation: mobile-hero-pan-center 7s ease-in-out forwards;
 }

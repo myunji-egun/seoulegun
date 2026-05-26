@@ -137,7 +137,11 @@ export default function HeroSlider() {
           src={slide.image}
           alt=""
           aria-hidden="true"
-          className={`absolute inset-0 w-full h-full object-cover${current === 0 && tProg >= 1 ? ' mobile-hero-pan' : ' object-center'}`}
+          className={`absolute inset-0 w-full h-full object-cover${
+            current === 0 ? ' mobile-hero-pan' :
+            current === 2 || current === 3 ? ' mobile-hero-pan-center' :
+            ' object-center'
+          }`}
           style={{ transform: `translateX(${(1 - easedProg) * 100}%)` }}
         />
       </div>

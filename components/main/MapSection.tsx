@@ -37,7 +37,7 @@ export default function MapSection() {
 
         {/* 데스크탑: 왼쪽 정보 카드 */}
         <div className="hidden md:flex absolute inset-y-0 left-0 z-10 items-center pl-10">
-          <div className="scale-[1.6] origin-top-left">
+          <div className="scale-[0.8] origin-top-left">
             <div className={`w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-4 md:p-5 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
               <img
                 src="/images/logo/egun-logo%20(1).svg?v=2"
@@ -70,7 +70,7 @@ export default function MapSection() {
 
         {/* 데스크탑: 오른쪽 진료시간 카드 */}
         <div className="hidden md:flex absolute inset-y-0 right-0 z-10 items-center pr-10">
-          <div className="scale-[1.6] origin-top-right">
+          <div className="scale-[0.8] origin-top-right">
             <div className={`w-[320px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
               <div className="bg-[var(--e-primary)] px-4 py-2.5 flex items-center gap-2">
                 <Clock className="w-3.5 h-3.5 text-white" aria-hidden="true" />
