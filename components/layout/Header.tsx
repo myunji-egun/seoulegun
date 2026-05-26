@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import MobileNav from './MobileNav'
@@ -22,6 +22,29 @@ export default function Header() {
   const [navOpen, setNavOpen] = useState(false)
   const pathname = usePathname()
 
+  const scrollToHomeHero = () => {
+    window.dispatchEvent(new Event('egun:hero-reset'))
+
+    if (window.innerWidth >= 768) {
+      const desktop = document.getElementById('home-desktop')
+      if (desktop) {
+        desktop.scrollTo({ top: 0, behavior: 'smooth' })
+        return
+      }
+    }
+
+    const mobile = document.getElementById('home-mobile')
+    if (mobile) {
+      window.scrollTo({
+        top: mobile.getBoundingClientRect().top + window.scrollY,
+        behavior: 'smooth',
+      })
+      return
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
@@ -36,12 +59,7 @@ export default function Header() {
               onClick={(e) => {
                 if (pathname === '/') {
                   e.preventDefault()
-                  const desktop = document.getElementById('home-desktop')
-                  if (desktop) {
-                    desktop.scrollTo({ top: 0, behavior: 'smooth' })
-                  } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                  }
+                  scrollToHomeHero()
                 }
               }}
             >

@@ -97,7 +97,7 @@ export default function ImplantFaqSection() {
                   <span
                     className="flex-1"
                     style={{
-                      fontSize: '19px',
+                      fontSize: '18px',
                       fontWeight: isOpen(i) ? 700 : 500,
                       color: isOpen(i) ? '#fff' : 'rgba(255,255,255,0.92)',
                       transition: 'color 0.2s ease, font-weight 0.2s ease',
