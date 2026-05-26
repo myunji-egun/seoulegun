@@ -3,3 +3,4 @@ node_modules
 .claude
 .next
 media
+public/images/video

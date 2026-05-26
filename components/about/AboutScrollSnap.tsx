@@ -29,8 +29,8 @@ export default function AboutScrollSnap() {
     let timer: ReturnType<typeof setTimeout> | null = null
 
     const getOffset = () => {
-      const header = document.querySelector('header')
-      const anchorNav = document.querySelector('nav[aria-label="페이지 내 이동"]')
+      const header = document.querySelector('header') as HTMLElement | null
+      const anchorNav = document.querySelector('nav[aria-label="페이지 내 이동"]') as HTMLElement | null
       return (header?.offsetHeight ?? 64) + (anchorNav?.offsetHeight ?? 44)
     }
 
