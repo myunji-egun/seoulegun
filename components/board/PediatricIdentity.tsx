@@ -19,8 +19,8 @@ export function PediatricCredentialSection() {
   return (
     <section className="pt-16 sm:pt-20">
       <img
-        src="/images/doctors/paek-pediatric-specialist-banner.png"
-        alt="소아치과 전문의 직접 진료 백설아 원장"
+        src="/images/doctors/baek-child.jpg"
+        alt="보건복지부 인증 소아치과전문의 백설아 원장"
         className="w-full h-auto block"
       />
     </section>
@@ -30,14 +30,6 @@ export function PediatricCredentialSection() {
 export default function PediatricIdentity() {
   return (
     <>
-      {/* 모바일 전용: 불소도포 섹션 위 이미지 */}
-      <div className="md:hidden">
-        <img
-          src="/images/board/baek-child.jpg"
-          alt="소아치과 진료"
-          className="w-full h-auto block"
-        />
-      </div>
       <BoardIdentityLayout
       label="PEDIATRIC DENTISTRY"
       title={<>아이의 첫 치과,<br /><span className="text-[#0080C8]">평생 구강 건강의 시작</span></>}

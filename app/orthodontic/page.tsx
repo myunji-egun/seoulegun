@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import TreatmentPage from '@/components/board/TreatmentPage'
-import OrthodonticsIdentity from '@/components/board/OrthodonticsIdentity'
+import OrthodonticsIdentity, { OrthodonticsHeroBanner } from '@/components/board/OrthodonticsIdentity'
 import { orthodonticsTreatments } from '@/data/treatments'
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function OrthodonticPage() {
       subtitle="치아 배열과 교합을 함께 확인합니다"
       treatments={orthodonticsTreatments}
       hideCases
-      heroImage="/images/board/ortho-doctor.jpg"
+      heroReplacement={<OrthodonticsHeroBanner />}
       extraSection={<OrthodonticsIdentity />}
     />
   )

@@ -233,8 +233,8 @@ export default function AccessSection() {
                   ))}
                 </ul>
               </div>
-              <img src="/images/clinic/way-1.png" alt="오시는 길 안내 1" className="w-4/5 h-auto rounded-xl mx-auto block" />
-              <img src="/images/clinic/way-2.png" alt="오시는 길 안내 2" className="w-4/5 h-auto rounded-xl mx-auto block" />
+              <img src="/images/clinic/way-1.png" alt="오시는 길 안내 1" className="w-full h-auto rounded-xl block" />
+              <img src="/images/clinic/way-2.png" alt="오시는 길 안내 2" className="w-full h-auto rounded-xl block" />
             </div>
           </div>
         </div>

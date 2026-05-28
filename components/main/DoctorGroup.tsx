@@ -7,7 +7,7 @@ export default function DoctorGroup() {
       {/* ── 모바일 이미지 (블러/오버레이 없음 → 인물 완전 노출) ── */}
       <div className="md:hidden absolute inset-0">
         <img
-          src="/images/doctors/doctors_m.jpg"
+          src="/images/doctors/doctor-m.png"
           alt="서울이건치과 의료진"
           className="w-full h-full object-cover object-top"
         />

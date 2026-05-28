@@ -15,6 +15,18 @@ const pillars = [
   },
 ]
 
+export function OrthodonticsHeroBanner() {
+  return (
+    <section className="pt-16 sm:pt-20">
+      <img
+        src="/images/doctors/yoo-invisalign-orthodontic-banner.png"
+        alt="교정·인비절라인 직접 진료 유수현 원장"
+        className="w-full h-auto block"
+      />
+    </section>
+  )
+}
+
 export default function OrthodonticsIdentity() {
   return (
     <BoardIdentityLayout

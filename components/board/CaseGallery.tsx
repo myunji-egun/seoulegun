@@ -120,7 +120,7 @@ export default function CaseGallery({
         {/* 블로그 링크 — 증례 카드 아래에 별도 표시 */}
         {allBlogs.length > 0 && (
           <div className="mt-6 space-y-2">
-            <h4 className="text-base font-semibold text-gray-500 mb-3">관련 블로그</h4>
+            <h4 className="text-base font-semibold text-gray-500 mb-3">이원장 칼럼</h4>
             {allBlogs.map((blog) => (
               <a
                 key={blog.id}

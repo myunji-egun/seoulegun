@@ -55,18 +55,16 @@ export default function ScheduleSection() {
                         {row.day}
                       </td>
                       <td className="px-6 py-3.5 text-sm text-gray-800">
-                        <span
-                          className={
-                            row.isClosed ? 'text-gray-400' : ''
-                          }
-                        >
-                          {row.hours}
-                        </span>
-                        {row.note && (
-                          <span className="ml-2 inline-block text-xs font-medium bg-[#0080C8]/10 text-[#0080C8] px-2 py-0.5 rounded-full">
-                            {row.note}
+                        <div className="flex items-center gap-2">
+                          <span className={row.isClosed ? 'text-gray-400' : ''}>
+                            {row.hours}
                           </span>
-                        )}
+                          {row.note && (
+                            <span className="shrink-0 text-xs font-medium bg-[#0080C8]/10 text-[#0080C8] px-2 py-0.5 rounded-full">
+                              {row.note}
+                            </span>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}

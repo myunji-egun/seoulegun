@@ -8,6 +8,7 @@ interface BeforeAfterSliderProps {
   beforeAlt?: string
   afterAlt?: string
   beforeScale?: number
+  beforeOffsetX?: number
 }
 
 export default function BeforeAfterSlider({
@@ -16,6 +17,7 @@ export default function BeforeAfterSlider({
   beforeAlt = 'Before',
   afterAlt = 'After',
   beforeScale,
+  beforeOffsetX = 0,
 }: BeforeAfterSliderProps) {
   const [position, setPosition] = useState(50)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -67,8 +69,13 @@ export default function BeforeAfterSlider({
       <img
         src={beforeSrc}
         alt={beforeAlt}
-        className="block w-full h-auto"
-        style={beforeScale ? { transform: `scale(${beforeScale})`, transformOrigin: 'center center' } : undefined}
+        className="block h-auto"
+        style={{
+          width: beforeOffsetX ? `calc(100% + ${beforeOffsetX}px)` : '100%',
+          marginLeft: beforeOffsetX ? `-${beforeOffsetX}px` : undefined,
+          transform: beforeScale ? `scale(${beforeScale})` : undefined,
+          transformOrigin: 'center center',
+        }}
         draggable={false}
       />
 
