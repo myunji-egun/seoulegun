@@ -24,7 +24,7 @@ function CardItem({ card, idx, hoverIdx, setHoverIdx }: {
       className="relative rounded-xl overflow-hidden block aspect-[16/10]"
       style={{
         boxShadow: hoverIdx === idx
-          ? '0 0 0 2.5px rgba(79,195,247,0.85), 0 16px 36px rgba(0,0,0,0.55)'
+          ? '0 0 0 2.5px rgba(0,128,200,0.85), 0 16px 36px rgba(0,0,0,0.55)'
           : '0 4px 14px rgba(0,0,0,0.45)',
         transform: hoverIdx === idx ? 'translateY(-3px) scale(1.02)' : 'translateY(0) scale(1)',
         transition: 'box-shadow 0.3s ease, transform 0.3s ease',
@@ -50,10 +50,10 @@ function CardItem({ card, idx, hoverIdx, setHoverIdx }: {
         className="absolute"
         style={{
           top: '8px', right: '8px',
-          fontSize: '10px', letterSpacing: '2px', color: '#4fc3f7',
+          fontSize: '10px', letterSpacing: '2px', color: '#0080C8',
           fontWeight: 700, writingMode: 'vertical-rl',
           background: 'rgba(15,20,43,0.85)', padding: '5px 4px',
-          borderRadius: '4px', border: '1px solid rgba(79,195,247,0.35)',
+          borderRadius: '4px', border: '1px solid rgba(0,128,200,0.35)',
         }}
       >
         {card.spine}
@@ -81,8 +81,8 @@ export default function PreserveTreatSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(55% 50% at 75% 30%, rgba(79,195,247,0.08), transparent 70%),
-            radial-gradient(50% 60% at 20% 90%, rgba(79,195,247,0.05), transparent 70%)
+            radial-gradient(55% 50% at 75% 30%, rgba(0,128,200,0.08), transparent 70%),
+            radial-gradient(50% 60% at 20% 90%, rgba(0,128,200,0.05), transparent 70%)
           `,
         }}
       />
@@ -96,7 +96,7 @@ export default function PreserveTreatSection() {
           transition: 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s',
         }}
       >
-        <p style={{ color: '#4fc3f7', letterSpacing: '7px', fontSize: '13px', fontWeight: 500, marginBottom: '16px' }}>
+        <p style={{ color: '#0080C8', letterSpacing: '7px', fontSize: '13px', fontWeight: 500, marginBottom: '16px' }}>
           NATURAL TOOTH SOLUTION
         </p>
         <h2 style={{ fontSize: 'clamp(24px, 2.45vw, 38px)', fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1.38, color: '#101828' }}>
@@ -118,7 +118,7 @@ export default function PreserveTreatSection() {
             style={{
               padding: '8px 16px', borderRadius: '999px',
               fontSize: '13px', fontWeight: 700, letterSpacing: '0.5px',
-              background: '#4fc3f7', color: '#fff',
+              background: '#0080C8', color: '#fff',
               textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px',
               transition: 'background 0.2s, transform 0.2s',
             }}

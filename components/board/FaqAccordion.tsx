@@ -1,6 +1,5 @@
 'use client'
 
-// @TASK Board - FAQ 아코디언 (데스크톱: 호버로 열림, 모바일: 항상 열림)
 import { useState, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 
@@ -15,6 +14,7 @@ interface FaqAccordionProps {
 
 export default function FaqAccordion({ faq }: FaqAccordionProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
       </h3>
       <dl className="space-y-2">
         {faq.map((item, index) => {
-          const isOpen = isMobile || hoveredIndex === index
+          const isOpen = isMobile ? openIndex === index : hoveredIndex === index
           const answerId = `faq-answer-${index}`
 
           return (
@@ -43,12 +43,13 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
               onMouseLeave={() => !isMobile && setHoveredIndex(null)}
             >
               <dt>
-                <div
+                <button
+                  type="button"
                   className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-gray-50 transition-colors"
                   aria-expanded={isOpen}
                   aria-controls={answerId}
+                  onClick={() => isMobile && setOpenIndex(openIndex === index ? null : index)}
                 >
-                  {/* Q 아이콘 */}
                   <span
                     className="shrink-0 w-7 h-7 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-xs font-bold"
                     aria-hidden="true"
@@ -60,12 +61,12 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`shrink-0 text-gray-400 transition-transform duration-200 sm:block hidden ${
+                    className={`shrink-0 text-gray-400 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                     aria-hidden="true"
                   />
-                </div>
+                </button>
               </dt>
               <dd
                 id={answerId}

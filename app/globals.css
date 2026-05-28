@@ -167,25 +167,24 @@
 
 /* ── 모바일 히어로 슬라이드별 Pan 효과 ── */
 
-/* Slide 0: 오른쪽 상단 → 0.8s 정지 → 왼쪽으로 2cm (14s) */
+/* Slide 0: 정가운데(50%) → 살짝 왼쪽으로 (14s) */
 @keyframes mobile-pan-0 {
-  0%    { object-position: 100% top; animation-timing-function: steps(1); }
-  5.7%  { object-position: 100% top; animation-timing-function: cubic-bezier(0.25, 0, 0.08, 1); }
-  100%  { object-position: 84% top; }
+  0%   { object-position: 50% center; }
+  100% { object-position: 42% center; }
 }
 .mobile-pan-0 {
-  object-position: 100% top;
-  animation: mobile-pan-0 14s linear forwards;
+  object-position: 50% center;
+  animation: mobile-pan-0 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 1: 중앙(50%) → 오른쪽으로 1cm (10s) */
+/* Slide 1: 오른쪽(100%) → 왼쪽으로 (14s) */
 @keyframes mobile-pan-1 {
-  0%   { object-position: 50% center; }
-  100% { object-position: 58% center; }
+  0%   { object-position: 100% center; }
+  100% { object-position: 80% center; }
 }
 .mobile-pan-1 {
-  object-position: 50% center;
-  animation: mobile-pan-1 10s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+  object-position: 100% center;
+  animation: mobile-pan-1 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
 /* Slide 2: 오른쪽(100%) → 왼쪽으로 3cm (14s) */
@@ -198,10 +197,10 @@
   animation: mobile-pan-2 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 3: 오른쪽(100%) → 왼쪽으로 1cm (14s) */
+/* Slide 3: 오른쪽(100%) → 최대한 왼쪽(0%)으로 (14s) */
 @keyframes mobile-pan-3 {
   0%   { object-position: 100% center; }
-  100% { object-position: 92% center; }
+  100% { object-position: 0% center; }
 }
 .mobile-pan-3 {
   object-position: 100% center;

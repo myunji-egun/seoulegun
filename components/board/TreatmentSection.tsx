@@ -5,7 +5,6 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider'
 import * as LucideIcons from 'lucide-react'
 import type { LucideProps } from 'lucide-react'
-import { ChevronRight } from 'lucide-react'
 
 function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
   const Icon = (LucideIcons as unknown as Record<string, React.ComponentType<LucideProps>>)[name]
@@ -121,7 +120,7 @@ function inlineParse(text: string) {
 /** 단순 **볼드** 강조만 처리하는 기본 description 렌더러 */
 function HighlightedDescription({ text }: { text: string }) {
   return (
-    <p className="text-gray-600 leading-[1.9] text-[17px]">
+    <p className="text-gray-600 leading-[1.9] text-[17px] whitespace-pre-line">
       {inlineParse(text)}
     </p>
   )
@@ -640,9 +639,9 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
               <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[13px] font-bold text-white">After</div>
             </div>
           )}
-          <div className="absolute left-7 bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)]">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-7 lg:top-auto lg:translate-x-0 lg:translate-y-0 lg:bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)] whitespace-nowrap">
             <div className="flex items-center gap-3">
-              <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+              <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center shrink-0">
                 <LucideIcon name="HeartPulse" size={23} className="text-[#0080C8]" />
               </span>
               <div>
@@ -972,9 +971,9 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
               <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[13px] font-bold text-white">After</div>
             </div>
           )}
-          <div className="absolute left-7 bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)]">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-7 lg:top-auto lg:translate-x-0 lg:translate-y-0 lg:bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)] whitespace-nowrap">
             <div className="flex items-center gap-3">
-              <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center">
+              <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center shrink-0">
                 <LucideIcon name="ArrowRight" size={23} className="text-[#0080C8]" />
               </span>
               <div>
@@ -1215,6 +1214,7 @@ function DiastemaResinChapter({ treatment }: { treatment: TreatmentContent }) {
                 beforeAlt={`${treatment.title} 시술 전`}
                 afterAlt={`${treatment.title} 시술 후`}
                 beforeScale={treatment.beforeScale}
+                beforeOffsetX={treatment.beforeOffsetX}
               />
             ) : (
               <div className="w-full aspect-[4/3] flex items-center justify-center text-gray-400 text-sm">
@@ -1348,6 +1348,7 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
                 beforeAlt={`${treatment.title} 시술 전`}
                 afterAlt={`${treatment.title} 시술 후`}
                 beforeScale={treatment.beforeScale}
+                beforeOffsetX={treatment.beforeOffsetX}
               />
             ) : treatment.image ? (
               <img src={treatment.image} alt={treatment.title} className="w-full h-auto" />
@@ -1833,7 +1834,7 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
         </div>
 
         <div
-          className={`relative w-[50%] mx-auto ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          className={`relative w-full sm:w-[50%] mx-auto ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={heroVisible ? { animationDelay: '0.12s' } : undefined}
         >
           <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
@@ -2279,6 +2280,7 @@ export default function TreatmentSection({
                 beforeAlt={`${treatment.title} 시술 전`}
                 afterAlt={`${treatment.title} 시술 후`}
                 beforeScale={treatment.beforeScale}
+                beforeOffsetX={treatment.beforeOffsetX}
               />
             ) : treatment.image && treatment.sideImage ? (
               <div className="space-y-3">
@@ -2376,27 +2378,16 @@ export default function TreatmentSection({
             </div>
           )}
           <h2 className="text-3xl font-bold text-gray-900 mb-6">{treatment.title} 치료 과정</h2>
-          <div className="flex items-stretch w-full overflow-x-auto pb-2">
+          <ol className="flex flex-col gap-3">
             {treatment.steps.map((step, i) => (
-              <div key={i} className="flex items-center flex-1 min-w-[130px]">
-                <div className="flex-1 h-full bg-white border border-gray-200 rounded-2xl p-4 flex flex-col items-center text-center gap-3 shadow-sm">
-                  <span className="w-9 h-9 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-sm font-bold shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="font-bold text-[17px] text-gray-900 leading-tight break-keep">{step.title}</p>
-                  {step.icon && (
-                    <LucideIcon name={step.icon} size={30} className="text-gray-300" />
-                  )}
-                  {step.desc && treatment.treatmentType !== 'vpt' && (
-                    <p className="text-[16px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{step.desc}</p>
-                  )}
-                </div>
-                {i < treatment.steps!.length - 1 && (
-                  <ChevronRight size={18} className="text-gray-300 mx-2 shrink-0" />
-                )}
-              </div>
+              <li key={i} className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm">
+                <span className="w-9 h-9 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-sm font-bold shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="font-semibold text-[16px] text-gray-900 leading-tight break-keep">{step.title}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       )}
 
@@ -2420,7 +2411,7 @@ export default function TreatmentSection({
 
       {/* bottomVideoUrl: 해시태그 카드 위 영상 */}
       {treatment.bottomVideoUrl && (
-        <div className={`w-full max-w-[50%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+        <div className={`w-full sm:max-w-[50%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           <div className="w-full aspect-video rounded-2xl overflow-hidden">
             <iframe
               src={`https://www.youtube.com/embed/${treatment.bottomVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}

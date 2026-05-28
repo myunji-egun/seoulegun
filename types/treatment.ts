@@ -26,6 +26,7 @@ export interface TreatmentContent {
   beforeImage?: string
   afterImage?: string
   beforeScale?: number
+  beforeOffsetX?: number
   videoUrl?: string
   bottomImage?: string
   sideImage?: string

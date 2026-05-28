@@ -4,33 +4,43 @@ import { useEffect, useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import WebGLHero from '@/components/ui/WebGLHero'
 
-const SLIDES = [
+type Slide = {
+  id: number
+  headline: string
+  sub: string
+  image: string
+  isVideo?: boolean
+  accent: string
+}
+
+const SLIDES: Slide[] = [
   {
     id: 0,
     headline: '서울대 출신 대표원장',
     sub: '서울이건치과 수원',
-    image: '/images/slides/slide-2.png',
+    image: '/images/slides/slide-1.webp',
     accent: 'var(--e-primary)',
   },
   {
     id: 1,
     headline: '자연치아를 지키는',
     sub: '최소삭제 보존치료',
-    image: '/images/slides/slide-3.webp',
+    image: '/images/slides/slide-2.jpg',
     accent: 'var(--e-primary)',
   },
   {
     id: 2,
     headline: '디지털 정밀 진단',
     sub: '네비게이션 임플란트',
-    image: '/images/slides/slide-4.jpg',
+    image: '/images/slides/slide-3.png',
     accent: 'var(--e-primary)',
   },
   {
     id: 3,
     headline: '수원교정',
     sub: '인비절라인',
-    image: '/images/slides/slide-5.png',
+    image: '/images/slides/slide-4.mp4',
+    isVideo: true,
     accent: 'var(--e-primary)',
   },
 ]
@@ -108,17 +118,20 @@ export default function HeroSlider() {
   }, [])
 
   const slide      = SLIDES[current]
-  const imageUrls  = SLIDES.map((s) => s.image)
+  const imageUrls  = SLIDES.map((s) => s.isVideo ? '/images/slides/slide-3.png' : s.image)
 
   return (
     <section
       id="main-hero"
-      className="relative h-dvh md:h-screen w-full overflow-hidden bg-white"
+      className={`relative h-dvh md:h-screen w-full overflow-hidden ${slide.isVideo ? 'bg-black' : 'bg-white'}`}
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
-      {/* ── WebGL 배경 (desktop only) ───────────────────────────── */}
-      <div className="hidden md:block absolute inset-0">
+      {/* ── WebGL 배경 (desktop only, 이미지 슬라이드) ─────────── */}
+      <div
+        className="hidden md:block absolute inset-0"
+        style={{ opacity: slide.isVideo ? 0 : 1, transition: 'opacity 0.8s ease' }}
+      >
         <WebGLHero
           images={imageUrls}
           fromIndex={prevIdx}
@@ -127,15 +140,40 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── 모바일 이미지 레이어 (즉시 전환, 슬라이드별 pan) ── */}
-      <div className="md:hidden absolute inset-0">
-        <img
-          key={current}
-          src={slide.image}
-          alt=""
-          aria-hidden="true"
-          className={`absolute inset-0 w-full h-full object-cover mobile-pan-${current}`}
+      {/* ── 동영상 레이어 (데스크탑, 비디오 슬라이드일 때만 표시) ── */}
+      {slide.isVideo && (
+        <video
+          key="hero-video"
+          className="hidden md:block absolute inset-0 w-full h-full object-contain"
+          src="/images/slides/slide-4.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
         />
+      )}
+
+      {/* ── 모바일 이미지/동영상 레이어 ─────────────────────────── */}
+      <div className="md:hidden absolute inset-0">
+        {slide.isVideo ? (
+          <video
+            key="hero-video-m"
+            className="absolute inset-0 w-full h-full object-contain"
+            src="/images/slides/slide-4.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            key={current}
+            src={slide.image}
+            alt=""
+            aria-hidden="true"
+            className={`absolute inset-0 w-full h-full object-cover mobile-pan-${current}`}
+          />
+        )}
       </div>
 
       {/* ── 반투명 그라데이션 오버레이 ──────────────────────────── */}
@@ -184,29 +222,6 @@ export default function HeroSlider() {
         </p>
       </div>
 
-      {/* ── 모바일 버튼 (하단 고정) ─────────────────────────────── */}
-      <div
-        className="md:hidden absolute inset-x-0 z-10 px-6"
-        style={{ bottom: 'calc(var(--mobile-bottom-bar-height) + 20px)' }}
-      >
-        <div className="flex gap-3 w-full">
-          <a
-            href="tel:031-896-5512"
-            className="flex-1 flex items-center justify-center h-12 text-sm font-semibold text-white border border-white/50 rounded-full"
-          >
-            031-896-5512
-          </a>
-          <a
-            href="https://pf.kakao.com/_nqBms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center h-12 text-sm font-semibold rounded-full"
-            style={{ backgroundColor: '#FEE500', color: '#191919' }}
-          >
-            카카오 상담
-          </a>
-        </div>
-      </div>
 
       {/* ── 텍스트 오버레이 (데스크탑) ───────────────────────────── */}
       <div className="hidden md:flex absolute inset-0 items-center justify-center px-6 md:justify-start md:pl-20 lg:pl-32">

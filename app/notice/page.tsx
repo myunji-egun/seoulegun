@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { hasSupabaseConfig } from '@/lib/supabase/config'
+import NoticeList from '@/components/board/NoticeList'
 
 interface Notice {
   id: string
@@ -78,25 +79,7 @@ export default async function NoticePage({ searchParams }: NoticePageProps) {
         </div>
       ) : (
         <div className="space-y-14">
-          <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-            <div className="border-b border-gray-200 bg-gray-50 px-5 py-4 sm:px-6">
-              <h2 className="text-lg font-semibold text-gray-900">공지 목록</h2>
-            </div>
-            <ol className="divide-y divide-gray-200">
-              {recentItems.map((notice, index) => (
-                <li key={notice.id}>
-                  <div className="flex gap-3 px-5 py-4 transition-colors hover:bg-gray-50 sm:px-6">
-                    <span className="w-10 flex-shrink-0 text-base font-semibold text-[#0080C8] tabular-nums">
-                      {String(index + 1).padStart(2, '0')}.
-                    </span>
-                    <h2 className="min-w-0 text-base sm:text-lg font-semibold text-gray-900">
-                      {notice.title}
-                    </h2>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <NoticeList notices={recentItems} />
 
           {imageNotices.length > 0 && (
             <div>
