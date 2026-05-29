@@ -120,7 +120,7 @@ function inlineParse(text: string) {
 /** 단순 **볼드** 강조만 처리하는 기본 description 렌더러 */
 function HighlightedDescription({ text }: { text: string }) {
   return (
-    <p className="text-gray-600 leading-[1.9] text-[17px] whitespace-pre-line">
+    <p className="text-gray-600 leading-[1.9] text-[16px] whitespace-pre-line">
       {inlineParse(text)}
     </p>
   )
@@ -156,7 +156,7 @@ function RichDescription({ content }: { content: string }) {
       elements.push(
         <ul key={key++} className="space-y-1.5 pl-1 my-2">
           {listItems.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-gray-600 text-[17px] leading-relaxed">
+            <li key={i} className="flex items-start gap-2 text-gray-600 text-[16px] leading-relaxed">
               <span className="shrink-0">{item.replace(/^-\s*/, '').split(' ')[0]}</span>
               <span>{inlineParse(item.replace(/^-\s*[\S]*\s*/, ''))}</span>
             </li>
@@ -193,7 +193,7 @@ function RichDescription({ content }: { content: string }) {
       flushList()
       const quoteText = line.replace(/^> /, '')
       elements.push(
-        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[16px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#0080C8' }}>
+        <blockquote key={key++} className="border-l-2 pl-4 py-1 my-3 text-[15px] text-gray-500 italic leading-relaxed" style={{ borderColor: '#0080C8' }}>
           {inlineParse(quoteText)}
         </blockquote>
       )
@@ -215,7 +215,7 @@ function RichDescription({ content }: { content: string }) {
     // plain text
     flushList()
     elements.push(
-      <p key={key++} className="text-gray-600 text-[17px] leading-[1.85] my-1">
+      <p key={key++} className="text-gray-600 text-[16px] leading-[1.85] my-1">
         {inlineParse(line)}
       </p>
     )
@@ -223,6 +223,44 @@ function RichDescription({ content }: { content: string }) {
 
   flushList()
   return <div className="space-y-0.5">{elements}</div>
+}
+
+function BenefitsGrid({
+  benefits,
+  cardVisible,
+}: {
+  benefits: TreatmentContent['benefits']
+  cardVisible: boolean
+}) {
+  const count = benefits.length
+  const gridCols =
+    count >= 5
+      ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'
+      : count === 4
+      ? 'grid-cols-2 sm:grid-cols-4'
+      : 'grid-cols-2 sm:grid-cols-3'
+  return (
+    <div className={`grid gap-3 ${gridCols}`}>
+      {benefits.map((benefit, i) => (
+        <div
+          key={benefit.tag}
+          className={`rounded-xl overflow-hidden border border-[#D8E9F5] shadow-sm ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+          style={cardVisible ? { animationDelay: `${0.06 * i}s` } : undefined}
+        >
+          <div className="bg-[#EAF4FC] px-4 py-3 flex items-center gap-2.5">
+            <span className="text-[17px] font-black text-[#0080C8] leading-none tabular-nums shrink-0">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span className="w-px h-4 bg-[#AACCE0] shrink-0" />
+            <h4 className="text-[13px] font-bold text-[#004A7A] leading-tight">{benefit.tag}</h4>
+          </div>
+          <div className="bg-white px-4 py-3">
+            <p className="text-[12px] text-gray-500 leading-relaxed">{benefit.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
@@ -236,7 +274,7 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[0.94fr_1.06fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="MapPin" size={18} />
             <span>수원치과 서울이건치과</span>
           </div>
@@ -248,7 +286,7 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
               올온 <span className="text-[#0080C8]">임플란트</span>
             </h2>
             <p
-              className={`text-[22px] sm:text-[28px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[21px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               여러 치아를 잃은 경우,<br className="hidden sm:block" />
@@ -287,9 +325,9 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[17px] leading-[1.85] text-gray-700 whitespace-pre-line">{card.body}</p>
+            <p className="text-[16px] leading-[1.85] text-gray-700 whitespace-pre-line">{card.body}</p>
           </div>
         ))}
 
@@ -301,11 +339,11 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
             <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
               <LucideIcon name="TriangleAlert" size={25} className="text-[#0080C8]" />
             </span>
-            <h3 className="text-[20px] font-bold text-gray-950">이런 분께 특히 필요합니다</h3>
+            <h3 className="text-[19px] font-bold text-gray-950">이런 분께 특히 필요합니다</h3>
           </div>
           <ul className="space-y-4">
             {treatment.indications?.slice(0, 3).map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[17px] leading-relaxed text-gray-700">
+              <li key={item} className="flex items-start gap-3 text-[16px] leading-relaxed text-gray-700">
                 <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                   <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
                 </span>
@@ -319,38 +357,20 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
       {treatment.benefitsTitle && (
         <div className="flex items-center gap-6">
           <div className="h-px bg-gray-200 flex-1" />
-          <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
             {treatment.benefitsTitle}
           </h3>
           <div className="h-px bg-gray-200 flex-1" />
         </div>
       )}
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              {benefit.icon && <LucideIcon name={benefit.icon} size={48} className="text-[#0080C8] mb-5" strokeWidth={1.8} />}
-              <h4 className="text-[#0080C8] text-[17px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {treatment.comparison && (
         <div className="space-y-6">
           <div className="flex items-center gap-6">
             <div className="h-px bg-gray-200 flex-1" />
-            <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+            <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
               틀니와 올온임플란트 비교
             </h3>
             <div className="h-px bg-gray-200 flex-1" />
@@ -358,24 +378,24 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
 
           <div className="rounded-2xl overflow-hidden border border-[#DCE8F2] bg-white shadow-[0_16px_50px_rgba(16,55,91,0.07)]">
             <div className="grid grid-cols-[1fr_120px_1fr] sm:grid-cols-[1fr_180px_1fr]">
-              <div className="bg-[#AEB8C8] text-white text-center py-3 text-[18px] font-bold">
+              <div className="bg-[#AEB8C8] text-white text-center py-3 text-[17px] font-bold">
                 {treatment.comparison.leftLabel}
               </div>
               <div className="bg-white border-x border-[#E4EDF5]" />
-              <div className="bg-[#0080C8] text-white text-center py-3 text-[18px] font-bold">
+              <div className="bg-[#0080C8] text-white text-center py-3 text-[17px] font-bold">
                 {treatment.comparison.rightLabel}
               </div>
             </div>
             {treatment.comparison.rows.map((row) => (
               <div key={row.label} className="grid grid-cols-[1fr_120px_1fr] sm:grid-cols-[1fr_180px_1fr] border-t border-[#E4EDF5] min-h-16">
-                <div className="flex items-center justify-center px-3 py-4 text-center text-[15px] sm:text-[16px] text-gray-600 leading-snug">
+                <div className="flex items-center justify-center px-3 py-4 text-center text-[14px] sm:text-[15px] text-gray-600 leading-snug">
                   {row.leftText}
                 </div>
-                <div className="flex items-center justify-center gap-2 px-3 py-4 border-x border-[#E4EDF5] text-gray-900 font-bold text-[15px] sm:text-[16px]">
+                <div className="flex items-center justify-center gap-2 px-3 py-4 border-x border-[#E4EDF5] text-gray-900 font-bold text-[14px] sm:text-[15px]">
                   {row.icon && <LucideIcon name={row.icon} size={22} className="text-[#0080C8] shrink-0" />}
                   <span>{row.label}</span>
                 </div>
-                <div className="flex items-center justify-center px-3 py-4 text-center text-[15px] sm:text-[16px] font-bold text-[#0080C8] leading-snug">
+                <div className="flex items-center justify-center px-3 py-4 text-center text-[14px] sm:text-[15px] font-bold text-[#0080C8] leading-snug">
                   {row.rightText}
                 </div>
               </div>
@@ -387,7 +407,7 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
       {treatment.bottomCta && (
         <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
           <LucideIcon name="Tooth" size={34} className="text-[#0080C8] shrink-0" />
-          <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+          <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
             {treatment.bottomCta}
           </p>
         </div>
@@ -408,7 +428,7 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="ArrowUpFromLine" size={18} />
             <span>뼈가 부족해도 임플란트를 가능하게</span>
           </div>
@@ -422,7 +442,7 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="block">거상술</span>
             </h2>
             <p
-              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[21px] sm:text-[26px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               뼈가 부족하다고 했다면,<br className="hidden sm:block" />
@@ -440,8 +460,8 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
               ['STEP 3', '임플란트 식립'],
             ].map(([k, v]) => (
               <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
-                <p className="text-[#0080C8] text-[15px] font-black leading-none">{k}</p>
-                <p className="mt-2 text-[13px] font-semibold text-gray-600">{v}</p>
+                <p className="text-[#0080C8] text-[14px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[12px] font-semibold text-gray-600">{v}</p>
               </div>
             ))}
           </div>
@@ -453,7 +473,7 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
           style={heroVisible ? { animationDelay: '0.12s' } : undefined}
         >
           <div className="rounded-[28px] bg-[#EAF6FD] border border-[#D0E8F5] p-8 space-y-5 shadow-[0_24px_70px_rgba(15,71,110,0.10)]">
-            <p className="text-[13px] font-bold text-[#0080C8] uppercase tracking-widest">Sinus Lift Flow</p>
+            <p className="text-[12px] font-bold text-[#0080C8] uppercase tracking-widest">Sinus Lift Flow</p>
             {[
               { step: '01', title: '정밀 CT 분석', desc: '상악동 위치와 잔존 뼈 높이를 3D로 분석합니다' },
               { step: '02', title: '상악동 막 거상', desc: '상악동 막을 조심스럽게 들어올려 공간을 확보합니다' },
@@ -461,12 +481,12 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
               { step: '04', title: '임플란트 식립', desc: '충분한 뼈 높이가 확보된 뒤 임플란트를 심습니다' },
             ].map((item, i) => (
               <div key={item.step} className="flex items-start gap-4">
-                <span className="w-9 h-9 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[13px] font-black shrink-0 mt-0.5">
+                <span className="w-9 h-9 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[12px] font-black shrink-0 mt-0.5">
                   {item.step}
                 </span>
                 <div>
-                  <p className="text-[16px] font-black text-gray-950 leading-snug">{item.title}</p>
-                  <p className="text-[14px] text-gray-600 mt-1 leading-relaxed">{item.desc}</p>
+                  <p className="text-[15px] font-black text-gray-950 leading-snug">{item.title}</p>
+                  <p className="text-[13px] text-gray-600 mt-1 leading-relaxed">{item.desc}</p>
                 </div>
                 {i < 3 && (
                   <div className="absolute left-[18px] mt-10 w-px h-5 bg-[#B8D8EE]" />
@@ -489,12 +509,12 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[18px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[17px] font-bold text-gray-950">{card.title}</h3>
             </div>
             {card.list ? (
               <ul className="space-y-3">
                 {card.list.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-700">
+                  <li key={item} className="flex items-start gap-3 text-[14px] leading-relaxed text-gray-700">
                     <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                       <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
                     </span>
@@ -503,7 +523,7 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
                 ))}
               </ul>
             ) : (
-              <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+              <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
             )}
           </div>
         ))}
@@ -512,40 +532,16 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
       {/* ── 장점 타이틀 ── */}
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           상악동 거상술의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      {/* ── 장점 그리드 ── */}
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['ArrowUpFromLine', 'ShieldCheck', 'Layers', 'Zap', 'ScanLine'][i] ?? 'CheckCircle'}
-                size={48}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {/* ── 영상 ── */}
-      <div className="w-full max-w-[60%] mx-auto rounded-[20px] overflow-hidden shadow-[0_16px_50px_rgba(16,55,91,0.10)]">
+      <div className="w-full sm:max-w-[80%] mx-auto rounded-[20px] overflow-hidden shadow-[0_16px_50px_rgba(16,55,91,0.10)]">
         <div className="relative w-full aspect-video">
           <iframe
             src="https://www.youtube.com/embed/RmQSCxLQpKA"
@@ -560,7 +556,7 @@ function SinusLiftChapter({ treatment }: { treatment: TreatmentContent }) {
       {/* ── 하단 CTA ── */}
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="ArrowUpFromLine" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
           뼈가 부족하다는 말이 임플란트의 끝이 아닙니다. 함께 방법을 찾겠습니다.
         </p>
       </div>
@@ -580,7 +576,7 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
         className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="HeartPulse" size={18} />
             <span>혈당 조절 상태를 함께 살피는 임플란트</span>
           </div>
@@ -594,7 +590,7 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
               <span className="block text-[#0080C8]">임플란트</span>
             </h2>
             <p
-              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[21px] sm:text-[26px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               당뇨가 있어도 포기하지 않아도 됩니다.<br className="hidden sm:block" />
@@ -612,8 +608,8 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
               ['관리', '회복 케어'],
             ].map(([k, v]) => (
               <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
-                <p className="text-[#0080C8] text-[18px] font-black leading-none">{k}</p>
-                <p className="mt-2 text-[14px] font-semibold text-gray-600">{v}</p>
+                <p className="text-[#0080C8] text-[17px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[13px] font-semibold text-gray-600">{v}</p>
               </div>
             ))}
           </div>
@@ -630,13 +626,13 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
           {treatment.beforeImage && (
             <div className="absolute left-0 top-0 w-[72%] rounded-[26px] overflow-hidden border border-white/80 shadow-[0_24px_70px_rgba(15,71,110,0.16)] bg-white">
               <img src={treatment.beforeImage} alt="당뇨 환자 임플란트 치료 전" className="w-full aspect-[16/9] object-cover" />
-              <div className="absolute left-4 top-4 rounded-full bg-gray-900/70 px-3 py-1 text-[13px] font-bold text-white">Before</div>
+              <div className="absolute left-4 top-4 rounded-full bg-gray-900/70 px-3 py-1 text-[12px] font-bold text-white">Before</div>
             </div>
           )}
           {treatment.afterImage && (
             <div className="absolute right-0 bottom-0 w-[82%] rounded-[28px] overflow-hidden border border-white/90 shadow-[0_30px_90px_rgba(15,71,110,0.2)] bg-white">
               <img src={treatment.afterImage} alt="당뇨 환자 임플란트 치료 후" className="w-full aspect-[16/9] object-cover" />
-              <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[13px] font-bold text-white">After</div>
+              <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[12px] font-bold text-white">After</div>
             </div>
           )}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-7 lg:top-auto lg:translate-x-0 lg:translate-y-0 lg:bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)] whitespace-nowrap">
@@ -645,8 +641,8 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
                 <LucideIcon name="HeartPulse" size={23} className="text-[#0080C8]" />
               </span>
               <div>
-                <p className="text-[13px] font-bold text-gray-500">전신 건강 고려</p>
-                <p className="text-[18px] font-black text-gray-950">체계적 치료 계획</p>
+                <p className="text-[12px] font-bold text-gray-500">전신 건강 고려</p>
+                <p className="text-[17px] font-black text-gray-950">체계적 치료 계획</p>
               </div>
             </div>
           </div>
@@ -665,12 +661,12 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[18px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[17px] font-bold text-gray-950">{card.title}</h3>
             </div>
             {card.list ? (
               <ul className="space-y-3">
                 {card.list.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-700">
+                  <li key={item} className="flex items-start gap-3 text-[14px] leading-relaxed text-gray-700">
                     <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                       <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
                     </span>
@@ -679,7 +675,7 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
                 ))}
               </ul>
             ) : (
-              <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+              <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
             )}
           </div>
         ))}
@@ -688,42 +684,18 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
       {/* ── 장점 타이틀 ── */}
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           당뇨 환자 임플란트의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      {/* ── 장점 그리드 ── */}
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['HeartPulse', 'ClipboardCheck', 'ShieldCheck', 'Users', 'CalendarCheck'][i] ?? 'CheckCircle'}
-                size={48}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {/* ── 하단 CTA ── */}
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="HeartPulse" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
           당뇨가 있다고 임플란트를 포기할 이유는 없습니다. 함께 안전하게 계획합니다.
         </p>
       </div>
@@ -743,7 +715,7 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
         className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="ScanLine" size={18} />
             <span>디지털 분석을 바탕으로 계획하는 임플란트</span>
           </div>
@@ -757,7 +729,7 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
               <span className="block text-[#0080C8]">임플란트</span>
             </h2>
             <p
-              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[21px] sm:text-[26px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               3D 설계대로,<br className="hidden sm:block" />
@@ -775,8 +747,8 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
               ['PLACE', '계획대로 식립'],
             ].map(([k, v]) => (
               <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
-                <p className="text-[#0080C8] text-[18px] font-black leading-none">{k}</p>
-                <p className="mt-2 text-[14px] font-semibold text-gray-600">{v}</p>
+                <p className="text-[#0080C8] text-[17px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[13px] font-semibold text-gray-600">{v}</p>
               </div>
             ))}
           </div>
@@ -803,8 +775,8 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
                 <LucideIcon name="ShieldCheck" size={23} className="text-[#0080C8]" />
               </span>
               <div>
-                <p className="text-[13px] font-bold text-gray-500">신경 손상 위험</p>
-                <p className="text-[18px] font-black text-gray-950">최소화 목표</p>
+                <p className="text-[12px] font-bold text-gray-500">신경 손상 위험</p>
+                <p className="text-[17px] font-black text-gray-950">최소화 목표</p>
               </div>
             </div>
           </div>
@@ -823,9 +795,9 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[18px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[17px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
 
@@ -837,7 +809,7 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
             <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
               <LucideIcon name="TriangleAlert" size={25} className="text-[#0080C8]" />
             </span>
-            <h3 className="text-[18px] font-bold text-gray-950">이런 분께 추천드립니다</h3>
+            <h3 className="text-[17px] font-bold text-gray-950">이런 분께 추천드립니다</h3>
           </div>
           <ul className="space-y-3">
             {[
@@ -846,7 +818,7 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
               '예측 가능한 결과를 원하시는 분',
               '최소 절개를 원하시는 분',
             ].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-700">
+              <li key={item} className="flex items-start gap-3 text-[14px] leading-relaxed text-gray-700">
                 <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                   <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
                 </span>
@@ -860,42 +832,18 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
       {/* ── 장점 타이틀 ── */}
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           네비게이션 임플란트의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      {/* ── 장점 그리드 ── */}
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['ScanLine', 'ShieldCheck', 'Crosshair', 'Zap', 'ClipboardCheck'][i] ?? 'CheckCircle'}
-                size={48}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {/* ── 하단 CTA ── */}
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="ScanLine" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
           디지털 분석과 정밀 계획으로 예측 가능한 임플란트를 완성합니다.
         </p>
       </div>
@@ -914,7 +862,7 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
         className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="CalendarCheck" size={18} />
             <span>당일 임시치아 연결을 고려하는 임플란트</span>
           </div>
@@ -927,7 +875,7 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
               <span className="block text-[#0080C8]">임플란트</span>
             </h2>
             <p
-              className={`text-[22px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[21px] sm:text-[26px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               임플란트 식립 당일,<br className="hidden sm:block" />
@@ -945,8 +893,8 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
               ['CHECK', '적합성 평가'],
             ].map(([k, v]) => (
               <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
-                <p className="text-[#0080C8] text-[18px] font-black leading-none">{k}</p>
-                <p className="mt-2 text-[14px] font-semibold text-gray-600">{v}</p>
+                <p className="text-[#0080C8] text-[17px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[13px] font-semibold text-gray-600">{v}</p>
               </div>
             ))}
           </div>
@@ -962,13 +910,13 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
           {treatment.beforeImage && (
             <div className="absolute left-0 top-0 w-[72%] rounded-[26px] overflow-hidden border border-white/80 shadow-[0_24px_70px_rgba(15,71,110,0.16)] bg-white">
               <img src={treatment.beforeImage} alt="즉시로딩 임플란트 치료 전" className="w-full aspect-[16/9] object-cover" />
-              <div className="absolute left-4 top-4 rounded-full bg-gray-900/70 px-3 py-1 text-[13px] font-bold text-white">Before</div>
+              <div className="absolute left-4 top-4 rounded-full bg-gray-900/70 px-3 py-1 text-[12px] font-bold text-white">Before</div>
             </div>
           )}
           {treatment.afterImage && (
             <div className="absolute right-0 bottom-0 w-[82%] rounded-[28px] overflow-hidden border border-white/90 shadow-[0_30px_90px_rgba(15,71,110,0.2)] bg-white">
               <img src={treatment.afterImage} alt="즉시로딩 임플란트 치료 후" className="w-full aspect-[16/9] object-cover" />
-              <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[13px] font-bold text-white">After</div>
+              <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[12px] font-bold text-white">After</div>
             </div>
           )}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-7 lg:top-auto lg:translate-x-0 lg:translate-y-0 lg:bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)] whitespace-nowrap">
@@ -977,8 +925,8 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
                 <LucideIcon name="ArrowRight" size={23} className="text-[#0080C8]" />
               </span>
               <div>
-                <p className="text-[13px] font-bold text-gray-500">치아 없는 기간</p>
-                <p className="text-[18px] font-black text-gray-950">최소화 목표</p>
+                <p className="text-[12px] font-bold text-gray-500">치아 없는 기간</p>
+                <p className="text-[17px] font-black text-gray-950">최소화 목표</p>
               </div>
             </div>
           </div>
@@ -999,9 +947,9 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[17px] leading-[1.85] text-gray-700 whitespace-pre-line">{card.body}</p>
+            <p className="text-[16px] leading-[1.85] text-gray-700 whitespace-pre-line">{card.body}</p>
           </div>
         ))}
 
@@ -1013,11 +961,11 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
             <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
               <LucideIcon name="TriangleAlert" size={25} className="text-[#0080C8]" />
             </span>
-            <h3 className="text-[20px] font-bold text-gray-950">이런 분께 특히 필요합니다</h3>
+            <h3 className="text-[19px] font-bold text-gray-950">이런 분께 특히 필요합니다</h3>
           </div>
           <ul className="space-y-4">
             {treatment.indications?.slice(0, 3).map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[17px] leading-relaxed text-gray-700">
+              <li key={item} className="flex items-start gap-3 text-[16px] leading-relaxed text-gray-700">
                 <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                   <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
                 </span>
@@ -1032,7 +980,7 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
         <div className="rounded-[28px] bg-[#F7FBFE] border border-[#DCE8F2] p-6 sm:p-8">
           <div className="flex items-center gap-6 mb-7">
             <div className="h-px bg-gray-200 flex-1" />
-            <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+            <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
               즉시로딩 진행 흐름
             </h3>
             <div className="h-px bg-gray-200 flex-1" />
@@ -1044,12 +992,12 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
                 className={`relative rounded-2xl bg-white border border-[#E1EAF2] p-5 text-center shadow-[0_10px_30px_rgba(16,55,91,0.05)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
                 style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
               >
-                <span className="mx-auto mb-4 w-10 h-10 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[14px] font-black">
+                <span className="mx-auto mb-4 w-10 h-10 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[13px] font-black">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {step.icon && <LucideIcon name={step.icon} size={30} className="text-[#0080C8] mx-auto mb-3" strokeWidth={1.8} />}
-                <h4 className="text-[17px] font-black text-gray-950 leading-snug">{step.title}</h4>
-                {step.desc && <p className="mt-3 text-[14px] text-gray-600 leading-[1.75]">{step.desc}</p>}
+                <h4 className="text-[16px] font-black text-gray-950 leading-snug">{step.title}</h4>
+                {step.desc && <p className="mt-3 text-[13px] text-gray-600 leading-[1.75]">{step.desc}</p>}
               </div>
             ))}
           </div>
@@ -1059,38 +1007,20 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
       {treatment.benefitsTitle && (
         <div className="flex items-center gap-6">
           <div className="h-px bg-gray-200 flex-1" />
-          <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+          <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
             {treatment.benefitsTitle}
           </h3>
           <div className="h-px bg-gray-200 flex-1" />
         </div>
       )}
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              {benefit.icon && <LucideIcon name={benefit.icon} size={48} className="text-[#0080C8] mb-5" strokeWidth={1.8} />}
-              <h4 className="text-[#0080C8] text-[17px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {treatment.comparison && (
         <div className="space-y-6">
           <div className="flex items-center gap-6">
             <div className="h-px bg-gray-200 flex-1" />
-            <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+            <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
               일반 임플란트와 즉시로딩 비교
             </h3>
             <div className="h-px bg-gray-200 flex-1" />
@@ -1098,24 +1028,24 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
 
           <div className="rounded-2xl overflow-hidden border border-[#DCE8F2] bg-white shadow-[0_16px_50px_rgba(16,55,91,0.07)]">
             <div className="grid grid-cols-[1fr_120px_1fr] sm:grid-cols-[1fr_180px_1fr]">
-              <div className="bg-[#AEB8C8] text-white text-center py-3 text-[18px] font-bold">
+              <div className="bg-[#AEB8C8] text-white text-center py-3 text-[17px] font-bold">
                 {treatment.comparison.leftLabel}
               </div>
               <div className="bg-white border-x border-[#E4EDF5]" />
-              <div className="bg-[#0080C8] text-white text-center py-3 text-[18px] font-bold">
+              <div className="bg-[#0080C8] text-white text-center py-3 text-[17px] font-bold">
                 {treatment.comparison.rightLabel}
               </div>
             </div>
             {treatment.comparison.rows.map((row) => (
               <div key={row.label} className="grid grid-cols-[1fr_120px_1fr] sm:grid-cols-[1fr_180px_1fr] border-t border-[#E4EDF5] min-h-16">
-                <div className="flex items-center justify-center px-3 py-4 text-center text-[15px] sm:text-[16px] text-gray-600 leading-snug">
+                <div className="flex items-center justify-center px-3 py-4 text-center text-[14px] sm:text-[15px] text-gray-600 leading-snug">
                   {row.leftText}
                 </div>
-                <div className="flex items-center justify-center gap-2 px-3 py-4 border-x border-[#E4EDF5] text-gray-900 font-bold text-[15px] sm:text-[16px]">
+                <div className="flex items-center justify-center gap-2 px-3 py-4 border-x border-[#E4EDF5] text-gray-900 font-bold text-[14px] sm:text-[15px]">
                   {row.icon && <LucideIcon name={row.icon} size={22} className="text-[#0080C8] shrink-0" />}
                   <span>{row.label}</span>
                 </div>
-                <div className="flex items-center justify-center px-3 py-4 text-center text-[15px] sm:text-[16px] font-bold text-[#0080C8] leading-snug">
+                <div className="flex items-center justify-center px-3 py-4 text-center text-[14px] sm:text-[15px] font-bold text-[#0080C8] leading-snug">
                   {row.rightText}
                 </div>
               </div>
@@ -1127,7 +1057,7 @@ function ImmediateLoadingChapter({ treatment }: { treatment: TreatmentContent })
       {treatment.bottomCta && (
         <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
           <LucideIcon name="CalendarCheck" size={34} className="text-[#0080C8] shrink-0" />
-          <p className="text-[20px] sm:text-[22px] font-bold text-[#0080C8] text-center leading-relaxed">
+          <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
             {treatment.bottomCta}
           </p>
         </div>
@@ -1165,7 +1095,7 @@ function DiastemaResinChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="SmilePlus" size={18} />
             <span>치아 삭제를 줄이는 앞니 심미 수복</span>
           </div>
@@ -1177,12 +1107,12 @@ function DiastemaResinChapter({ treatment }: { treatment: TreatmentContent }) {
             >
               <span className="block">앞니</span>
               <span className="block text-[#0080C8]">레진치료</span>
-              <span className="block text-[22px] sm:text-[28px] lg:text-[32px] mt-3 font-black text-gray-400">
+              <span className="block text-[21px] sm:text-[27px] lg:text-[32px] mt-3 font-black text-gray-400">
                 Diastema
               </span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               치아 사이 벌어진 틈,<br className="hidden sm:block" />
@@ -1194,7 +1124,7 @@ function DiastemaResinChapter({ treatment }: { treatment: TreatmentContent }) {
             className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={heroVisible ? { animationDelay: '0.24s' } : undefined}
           >
-            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+            <p className="text-[16px] sm:text-[17px] leading-[1.9] text-gray-700">
               앞니 사이의 벌어진 공간을 치아색 레진으로 직접 채워,
               세라믹 보철 없이도 자연스러운 형태와 색상으로 당일 완성을 기대할 수 있습니다.
             </p>
@@ -1236,49 +1166,26 @@ function DiastemaResinChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
       </div>
 
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           앞니 레진치료의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['ShieldCheck', 'CalendarCheck', 'Sparkles', 'ArrowRightLeft', 'SmilePlus'][i] ?? 'CheckCircle'}
-                size={46}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="Tooth" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[18px] sm:text-[20px] font-bold text-[#0080C8] text-center leading-relaxed">
           깎지 않고, 하루 만에. 작은 틈 하나가 바꾸는 미소의 차이를 경험해 보세요.
         </p>
       </div>
@@ -1297,7 +1204,7 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="ShieldCheck" size={18} />
             <span>필요한 부분만 정교하게 회복하는 보존 치료</span>
           </div>
@@ -1310,7 +1217,7 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="block text-[#0080C8]">레진빌드업</span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[26px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               가능한 한 보존적으로,<br className="hidden sm:block" />
@@ -1328,8 +1235,8 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
               ['NATURAL', '자연 연결'],
             ].map(([k, v]) => (
               <div key={k} className="rounded-2xl border border-[#D9E7F1] bg-white px-4 py-4 text-center shadow-[0_10px_30px_rgba(16,55,91,0.06)]">
-                <p className="text-[#0080C8] text-[16px] font-black leading-none">{k}</p>
-                <p className="mt-2 text-[14px] font-semibold text-gray-600">{v}</p>
+                <p className="text-[#0080C8] text-[15px] font-black leading-none">{k}</p>
+                <p className="mt-2 text-[13px] font-semibold text-gray-600">{v}</p>
               </div>
             ))}
           </div>
@@ -1369,11 +1276,11 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
             <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
               <LucideIcon name="TriangleAlert" size={25} className="text-[#0080C8]" />
             </span>
-            <h3 className="text-[20px] font-bold text-gray-950">이런 분께 특히 필요합니다</h3>
+            <h3 className="text-[19px] font-bold text-gray-950">이런 분께 특히 필요합니다</h3>
           </div>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
             {treatment.indications?.slice(0, 3).map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[17px] leading-relaxed text-gray-700">
+              <li key={item} className="flex items-start gap-3 text-[16px] leading-relaxed text-gray-700">
                 <span className="mt-1 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                   <LucideIcon name="Check" size={12} className="text-white" strokeWidth={3} />
                 </span>
@@ -1388,7 +1295,7 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
         <div className="rounded-[28px] bg-[#F7FBFE] border border-[#DCE8F2] p-6 sm:p-8">
           <div className="flex items-center gap-6 mb-7">
             <div className="h-px bg-gray-200 flex-1" />
-            <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+            <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
               레진 빌드업 진행 흐름
             </h3>
             <div className="h-px bg-gray-200 flex-1" />
@@ -1400,12 +1307,12 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
                 className={`relative rounded-2xl bg-white border border-[#E1EAF2] p-5 text-center shadow-[0_10px_30px_rgba(16,55,91,0.05)] ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
                 style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
               >
-                <span className="mx-auto mb-4 w-10 h-10 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[14px] font-black">
+                <span className="mx-auto mb-4 w-10 h-10 rounded-full bg-[#0080C8] text-white flex items-center justify-center text-[13px] font-black">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {step.icon && <LucideIcon name={step.icon} size={30} className="text-[#0080C8] mx-auto mb-3" strokeWidth={1.8} />}
-                <h4 className="text-[17px] font-black text-gray-950 leading-snug">{step.title}</h4>
-                {step.desc && <p className="mt-3 text-[14px] text-gray-600 leading-[1.75]">{step.desc}</p>}
+                <h4 className="text-[16px] font-black text-gray-950 leading-snug">{step.title}</h4>
+                {step.desc && <p className="mt-3 text-[13px] text-gray-600 leading-[1.75]">{step.desc}</p>}
               </div>
             ))}
           </div>
@@ -1414,41 +1321,18 @@ function ResinBuildupChapter({ treatment }: { treatment: TreatmentContent }) {
 
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           원데이 레진 빌드업의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['ShieldCheck', 'CalendarCheck', 'Sparkles', 'BadgeCheck', 'ArrowRightLeft'][i] ?? 'CheckCircle'}
-                size={46}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {treatment.bottomCta && (
         <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
           <LucideIcon name="ShieldCheck" size={34} className="text-[#0080C8] shrink-0" />
-          <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+          <p className="text-[18px] sm:text-[20px] font-bold text-[#0080C8] text-center leading-relaxed">
             {treatment.bottomCta}
           </p>
         </div>
@@ -1486,7 +1370,7 @@ function LaminateChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="Gem" size={18} />
             <span>치아 삭제를 최소화한 앞니 심미치료</span>
           </div>
@@ -1502,7 +1386,7 @@ function LaminateChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="block text-[#0080C8]">{treatment.heroTitle?.line2}</span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               {treatment.subtitle}
@@ -1513,7 +1397,7 @@ function LaminateChapter({ treatment }: { treatment: TreatmentContent }) {
             className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={heroVisible ? { animationDelay: '0.24s' } : undefined}
           >
-            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+            <p className="text-[16px] sm:text-[17px] leading-[1.9] text-gray-700">
               치아 표면을 최소한으로 다듬고{' '}
               <span className="font-semibold" style={{ color: '#0080C8' }}>얇은 세라믹을 접착</span>하여
               형태, 색상, 배열을 개선합니다. 내 치아는 그대로, 미소만 새로 태어납니다.
@@ -1556,49 +1440,26 @@ function LaminateChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
       </div>
 
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           라미네이트의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['Gem', 'Sparkles', 'BadgeCheck', 'CalendarCheck', 'ShieldCheck'][i] ?? 'CheckCircle'}
-                size={46}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="Gem" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[18px] sm:text-[20px] font-bold text-[#0080C8] text-center leading-relaxed">
           깎지 않아도 달라집니다. 내 치아는 그대로, 미소만 새로 태어납니다.
         </p>
       </div>
@@ -1635,7 +1496,7 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="SmilePlus" size={18} />
             <span>심미성과 편의성을 함께 고려하는 투명교정</span>
           </div>
@@ -1651,7 +1512,7 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="block text-[#0080C8]">{treatment.heroTitle?.line2}</span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               {treatment.subtitle}
@@ -1662,7 +1523,7 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
             className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={heroVisible ? { animationDelay: '0.24s' } : undefined}
           >
-            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+            <p className="text-[16px] sm:text-[17px] leading-[1.9] text-gray-700">
               투명한 교정 장치로 치아 배열을 조금씩 개선해가는 교정치료입니다.{' '}
               <span className="font-semibold" style={{ color: '#0080C8' }}>눈에 잘 띄지 않아</span>{' '}
               일상생활 속에서도 비교적 자연스럽게 착용할 수 있다는 점이 특징입니다.
@@ -1705,15 +1566,15 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
       </div>
 
       {treatment.bottomVideoUrl && (
-        <div className={`w-full max-w-[60%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+        <div className={`w-full sm:max-w-[80%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-[0_18px_60px_rgba(16,55,91,0.1)]">
             <iframe
               src={`https://www.youtube.com/embed/${treatment.bottomVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}
@@ -1728,40 +1589,17 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
 
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           인비절라인의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['SmilePlus', 'ArrowRightLeft', 'Sparkles', 'ShieldCheck', 'CalendarCheck'][i] ?? 'CheckCircle'}
-                size={46}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="SmilePlus" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[18px] sm:text-[20px] font-bold text-[#0080C8] text-center leading-relaxed">
           끼고 있는지도 모릅니다. 투명하게 시작해서, 가지런하게 완성합니다.
         </p>
       </div>
@@ -1798,7 +1636,7 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
         className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="ShieldCheck" size={18} />
             <span>성장 시기를 활용하는 어린이 교정치료</span>
           </div>
@@ -1814,7 +1652,7 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="block text-[#0080C8]">{treatment.heroTitle?.line2}</span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               {treatment.subtitle}
@@ -1825,7 +1663,7 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
             className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={heroVisible ? { animationDelay: '0.24s' } : undefined}
           >
-            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+            <p className="text-[16px] sm:text-[17px] leading-[1.9] text-gray-700">
               성장기 아이의{' '}
               <span className="font-semibold" style={{ color: '#0080C8' }}>골격 발육과 치아 배열을 함께 고려</span>하여
               적절한 시기에 개입하는 교정치료입니다. 성장 잠재력을 활용해 더 효과적으로 치료합니다.
@@ -1868,49 +1706,26 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
       </div>
 
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           소아교정의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['Zap', 'ShieldCheck', 'Sparkles', 'SmilePlus', 'CalendarCheck'][i] ?? 'CheckCircle'}
-                size={46}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="ShieldCheck" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[18px] sm:text-[20px] font-bold text-[#0080C8] text-center leading-relaxed">
           교정의 최적기는 다시 오지 않습니다. 성장이 끝나기 전에 시작할수록 치료는 간단해집니다.
         </p>
       </div>
@@ -1947,7 +1762,7 @@ function PediatricCavityChapter({ treatment }: { treatment: TreatmentContent }) 
         className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
-          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[15px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="Baby" size={18} />
             <span>아이의 치아를 지키는 조기 관리</span>
           </div>
@@ -1958,12 +1773,12 @@ function PediatricCavityChapter({ treatment }: { treatment: TreatmentContent }) 
               style={heroVisible ? { animationDelay: '0.08s' } : undefined}
             >
               <span className="block text-[#0080C8]">소아충치치료</span>
-              <span className="block text-[22px] sm:text-[28px] lg:text-[32px] mt-3 font-black text-gray-400">
+              <span className="block text-[21px] sm:text-[27px] lg:text-[32px] mt-3 font-black text-gray-400">
                 Pediatric Cavity
               </span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[25px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               유치 충치, 빠를수록<br className="hidden sm:block" />
@@ -1975,7 +1790,7 @@ function PediatricCavityChapter({ treatment }: { treatment: TreatmentContent }) 
             className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
             style={heroVisible ? { animationDelay: '0.24s' } : undefined}
           >
-            <p className="text-[17px] sm:text-[18px] leading-[1.9] text-gray-700">
+            <p className="text-[16px] sm:text-[17px] leading-[1.9] text-gray-700">
               유치의 충치는 성인보다 진행 속도가 빠를 수 있으며,
               영구치 발육과 배열에도 영향을 줄 수 있어
               조기 발견과 관리가 중요합니다.
@@ -2009,45 +1824,22 @@ function PediatricCavityChapter({ treatment }: { treatment: TreatmentContent }) 
               <span className="w-12 h-12 rounded-full bg-[#E8F6FE] flex items-center justify-center">
                 <LucideIcon name={card.icon} size={25} className="text-[#0080C8]" />
               </span>
-              <h3 className="text-[20px] font-bold text-gray-950">{card.title}</h3>
+              <h3 className="text-[19px] font-bold text-gray-950">{card.title}</h3>
             </div>
-            <p className="text-[16px] leading-[1.85] text-gray-700">{card.body}</p>
+            <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
       </div>
 
       <div className="flex items-center gap-6">
         <div className="h-px bg-gray-200 flex-1" />
-        <h3 className="text-[26px] sm:text-[30px] font-black text-gray-950 text-center">
+        <h3 className="text-[25px] sm:text-[29px] font-black text-gray-950 text-center">
           소아충치치료의 장점
         </h3>
         <div className="h-px bg-gray-200 flex-1" />
       </div>
 
-      <div className="rounded-[28px] bg-white border border-[#E1EAF2] shadow-[0_18px_60px_rgba(16,55,91,0.08)] overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#E3ECF4]">
-          {treatment.benefits.map((benefit, i) => (
-            <div
-              key={benefit.tag}
-              className={`p-7 text-center flex flex-col items-center ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-              style={cardVisible ? { animationDelay: `${0.08 + i * 0.05}s` } : undefined}
-            >
-              <LucideIcon
-                name={['ShieldCheck', 'CalendarCheck', 'Sparkles', 'Baby', 'SmilePlus'][i] ?? 'CheckCircle'}
-                size={46}
-                className="text-[#0080C8] mb-5"
-                strokeWidth={1.8}
-              />
-              <h4 className="text-[#0080C8] text-[16px] font-black leading-snug mb-4">
-                #{benefit.tag}
-              </h4>
-              <p className="text-[15px] leading-[1.85] text-gray-700">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
 
       {treatment.bottomImage && (
         <div className="rounded-[24px] overflow-hidden shadow-[0_16px_60px_rgba(16,55,91,0.10)]">
@@ -2061,7 +1853,7 @@ function PediatricCavityChapter({ treatment }: { treatment: TreatmentContent }) 
 
       <div className="flex items-center justify-center gap-4 rounded-2xl border border-[#DCE8F2] bg-white px-6 py-5 shadow-[0_12px_40px_rgba(16,55,91,0.06)]">
         <LucideIcon name="Baby" size={34} className="text-[#0080C8] shrink-0" />
-        <p className="text-[19px] sm:text-[21px] font-bold text-[#0080C8] text-center leading-relaxed">
+        <p className="text-[18px] sm:text-[20px] font-bold text-[#0080C8] text-center leading-relaxed">
           아이의 첫 치과 경험, 편안하고 안전하게 함께합니다.
         </p>
       </div>
@@ -2138,7 +1930,7 @@ export default function TreatmentSection({
           )}
           {treatment.heroTitle ? (
             <>
-              <div className={`flex items-center gap-1.5 text-[#0080C8] text-[13px] font-semibold ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              <div className={`flex items-center gap-1.5 text-[#0080C8] text-[12px] font-semibold ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
                 style={textVisible ? { animationDelay: '0.08s' } : undefined}>
                 <LucideIcon name="ShieldCheck" size={13} />
                 <span>{treatment.subtitle}</span>
@@ -2161,7 +1953,7 @@ export default function TreatmentSection({
                 style={textVisible ? { animationDelay: '0.1s' } : undefined}>
                 {treatment.title}
               </h2>
-              <p className={`text-[22px] sm:text-[24px] text-[#0080C8] font-bold leading-snug ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              <p className={`text-[21px] sm:text-[23px] text-[#0080C8] font-bold leading-snug ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
                 style={textVisible ? { animationDelay: '0.2s' } : undefined}>
                 {treatment.subtitle}
               </p>
@@ -2189,8 +1981,8 @@ export default function TreatmentSection({
                     {i + 1}
                   </span>
                   <div>
-                    <p className="font-bold text-[17px] text-gray-900 leading-tight">{step.title}</p>
-                    {step.desc && <p className="text-[16px] text-gray-600 leading-relaxed mt-1">{step.desc}</p>}
+                    <p className="font-bold text-[16px] text-gray-900 leading-tight">{step.title}</p>
+                    {step.desc && <p className="text-[15px] text-gray-600 leading-relaxed mt-1">{step.desc}</p>}
                   </div>
                 </div>
               ))}
@@ -2204,7 +1996,7 @@ export default function TreatmentSection({
               {treatment.highlights.map((h, i) => (
                 <div key={i} className="flex flex-col items-center text-center gap-1.5 py-2">
                   <LucideIcon name={h.icon} size={26} className="text-[#0080C8]" />
-                  <p className="font-bold text-[17px] text-gray-900 leading-tight">{h.label}</p>
+                  <p className="font-bold text-[16px] text-gray-900 leading-tight">{h.label}</p>
                   <p className="text-[12px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
                 </div>
               ))}
@@ -2215,7 +2007,7 @@ export default function TreatmentSection({
           {treatment.comparison && treatment.richContent && treatment.highlights && (
             <div className={`mt-2 ${textVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
               style={textVisible ? { animationDelay: '0.4s' } : undefined}>
-              <p className="text-[13px] font-bold text-gray-800 mb-3 tracking-tight">
+              <p className="text-[12px] font-bold text-gray-800 mb-3 tracking-tight">
                 {treatment.comparison.leftLabel}와의 차이점
               </p>
               {/* 헤더 */}
@@ -2231,10 +2023,10 @@ export default function TreatmentSection({
               <div className="space-y-1">
                 {treatment.comparison.rows.map((row, i) => (
                   <div key={i} className="grid grid-cols-2 gap-1">
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] text-gray-600 font-medium leading-snug">
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-[12px] text-gray-600 font-medium leading-snug">
                       {row.leftText}
                     </div>
-                    <div className="rounded-lg px-3 py-2.5 text-[13px] font-semibold leading-snug" style={{ backgroundColor: '#EBF5FF', color: '#0060A0' }}>
+                    <div className="rounded-lg px-3 py-2.5 text-[12px] font-semibold leading-snug" style={{ backgroundColor: '#EBF5FF', color: '#0060A0' }}>
                       {row.rightText}
                     </div>
                   </div>
@@ -2254,10 +2046,10 @@ export default function TreatmentSection({
                   <div className="relative">
                     <img src={item.src} alt={item.caption} className="w-full aspect-[4/3] object-cover block" />
                     <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-[#0080C8] flex items-center justify-center shadow">
-                      <span className="text-white text-[13px] font-bold leading-none">{i + 1}</span>
+                      <span className="text-white text-[12px] font-bold leading-none">{i + 1}</span>
                     </div>
                   </div>
-                  <p className="text-center text-[15px] text-gray-700 font-semibold py-2 px-2 leading-tight">{item.caption}</p>
+                  <p className="text-center text-[14px] text-gray-700 font-semibold py-2 px-2 leading-tight">{item.caption}</p>
                 </div>
               ))}
             </div>
@@ -2314,8 +2106,8 @@ export default function TreatmentSection({
             {treatment.highlights.map((h, i) => (
               <div key={i} className="flex flex-col items-center text-center gap-2 py-3">
                 <LucideIcon name={h.icon} size={36} className="text-gray-300" />
-                <p className="font-bold text-[18px] text-gray-900 leading-tight">{h.label}</p>
-                <p className="text-[15px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
+                <p className="font-bold text-[17px] text-gray-900 leading-tight">{h.label}</p>
+                <p className="text-[14px] text-gray-600 font-medium leading-relaxed whitespace-pre-line">{h.desc}</p>
               </div>
             ))}
           </div>
@@ -2334,7 +2126,7 @@ export default function TreatmentSection({
           <div className="p-8">
             <div className="flex items-center gap-2 mb-5">
               <LucideIcon name="AlertTriangle" size={20} className="text-[#0080C8] shrink-0" />
-              <p className="text-[17px] font-bold text-gray-900">이런 분께 특히 필요합니다</p>
+              <p className="text-[16px] font-bold text-gray-900">이런 분께 특히 필요합니다</p>
             </div>
             <ul className="space-y-4">
               {treatment.indications!.map((ind, i) => (
@@ -2342,7 +2134,7 @@ export default function TreatmentSection({
                   <span className="w-6 h-6 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0 mt-0.5">
                     <LucideIcon name="Check" size={13} className="text-white" strokeWidth={3} />
                   </span>
-                  <span className="text-[16px] text-gray-700 font-medium leading-relaxed">{ind}</span>
+                  <span className="text-[15px] text-gray-700 font-medium leading-relaxed">{ind}</span>
                 </li>
               ))}
             </ul>
@@ -2384,7 +2176,7 @@ export default function TreatmentSection({
                 <span className="w-9 h-9 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-sm font-bold shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="font-semibold text-[16px] text-gray-900 leading-tight break-keep">{step.title}</p>
+                <p className="font-semibold text-[15px] text-gray-900 leading-tight break-keep">{step.title}</p>
               </li>
             ))}
           </ol>
@@ -2402,7 +2194,7 @@ export default function TreatmentSection({
                 <span className="w-8 h-8 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
                   <LucideIcon name="Check" size={16} className="text-white" strokeWidth={3} />
                 </span>
-                <p className="text-[16px] text-gray-700 font-medium leading-relaxed whitespace-pre-line">{ind}</p>
+                <p className="text-[15px] text-gray-700 font-medium leading-relaxed whitespace-pre-line">{ind}</p>
               </div>
             ))}
           </div>
@@ -2411,7 +2203,7 @@ export default function TreatmentSection({
 
       {/* bottomVideoUrl: 해시태그 카드 위 영상 */}
       {treatment.bottomVideoUrl && (
-        <div className={`w-full sm:max-w-[50%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
+        <div className={`w-full sm:max-w-[80%] mx-auto ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           <div className="w-full aspect-video rounded-2xl overflow-hidden">
             <iframe
               src={`https://www.youtube.com/embed/${treatment.bottomVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}
@@ -2431,23 +2223,9 @@ export default function TreatmentSection({
         </h2>
       )}
 
-      {/* 해시태그 카드 그리드 */}
-      <div ref={cardRef} className={`grid gap-6 ${treatment.benefitsTitle ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5' : 'grid-cols-1 sm:grid-cols-2'}`}>
-        {treatment.benefits.map((benefit, i) => (
-          <div key={i}
-            className={`space-y-2 ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'} ${treatment.benefitsTitle ? 'flex flex-col items-center text-center' : ''}`}
-            style={cardVisible ? { animationDelay: `${0.1 + i * 0.08}s` } : undefined}>
-            {benefit.icon && (
-              <LucideIcon name={benefit.icon} size={36} className="text-[#0080C8] mb-1" />
-            )}
-            <h3 className="text-[#0080C8] font-bold text-[18px] leading-snug">
-              #{benefit.tag}
-            </h3>
-            <p className="text-gray-600 text-[16px] leading-relaxed">
-              {benefit.description}
-            </p>
-          </div>
-        ))}
+      {/* 치료의 장점 카드 그리드 */}
+      <div ref={cardRef}>
+        <BenefitsGrid benefits={treatment.benefits} cardVisible={cardVisible} />
       </div>
 
       {/* 비교표 */}
@@ -2459,25 +2237,25 @@ export default function TreatmentSection({
           <div className="rounded-2xl overflow-hidden border border-gray-100">
             {/* 헤더 행 */}
             <div className="grid grid-cols-[1fr_auto_1fr]">
-              <div className="bg-gray-100 text-center py-3 text-[15px] font-bold text-gray-500">
+              <div className="bg-gray-100 text-center py-3 text-[14px] font-bold text-gray-500">
                 {treatment.comparison.leftLabel}
               </div>
               <div className="bg-gray-100 w-28 sm:w-36" />
-              <div className="py-3 text-center text-[15px] font-bold text-white" style={{ backgroundColor: '#0080C8' }}>
+              <div className="py-3 text-center text-[14px] font-bold text-white" style={{ backgroundColor: '#0080C8' }}>
                 {treatment.comparison.rightLabel}
               </div>
             </div>
             {/* 데이터 행 */}
             {treatment.comparison.rows.map((row, i) => (
               <div key={i} className={`grid grid-cols-[1fr_auto_1fr] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
-                <div className="flex items-center justify-center px-4 py-4 text-[16px] text-gray-500 text-center leading-snug border-r border-gray-100">
+                <div className="flex items-center justify-center px-4 py-4 text-[15px] text-gray-500 text-center leading-snug border-r border-gray-100">
                   {row.leftText}
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 w-28 sm:w-36 px-2 py-4 border-r border-gray-100">
                   {row.icon && <LucideIcon name={row.icon} size={18} className="text-[#0080C8]" />}
-                  <span className="text-[14px] font-semibold text-gray-700">{row.label}</span>
+                  <span className="text-[13px] font-semibold text-gray-700">{row.label}</span>
                 </div>
-                <div className="flex items-center justify-center px-4 py-4 text-[16px] font-semibold text-center leading-snug" style={{ color: '#0080C8' }}>
+                <div className="flex items-center justify-center px-4 py-4 text-[15px] font-semibold text-center leading-snug" style={{ color: '#0080C8' }}>
                   {row.rightText}
                 </div>
               </div>
@@ -2491,7 +2269,7 @@ export default function TreatmentSection({
         <div className={`flex items-center gap-4 border border-gray-200 rounded-2xl px-6 py-5 bg-gray-50 ${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{ animationDelay: '0.2s' }}>
           <LucideIcon name="Smile" size={28} className="text-[#0080C8] shrink-0" />
-          <p className="text-[17px] text-gray-700 font-medium leading-relaxed">{treatment.bottomCta}</p>
+          <p className="text-[16px] text-gray-700 font-medium leading-relaxed">{treatment.bottomCta}</p>
         </div>
       )}
     </div>
