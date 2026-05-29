@@ -1,8 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
+import { hasSupabaseConfig } from '@/lib/supabase/config'
+import { mkdir, readFile, writeFile } from 'fs/promises'
+import path from 'path'
 
 type RouteContext = { params: Promise<{ id: string }> }
+
+interface Notice {
+  id: string
+  title: string
+  content: string | null
+  image_url: string | null
+  notice_date: string
+  is_active: boolean
+  created_at: string
+  updated_at?: string
+}
+
+const localNoticePath = path.join(process.cwd(), 'data', 'local-notices.json')
+
+async function readLocalNotices(): Promise<Notice[]> {
+  try {
+    return JSON.parse(await readFile(localNoticePath, 'utf8')) as Notice[]
+  } catch {
+    return []
+  }
+}
+
+async function writeLocalNotices(notices: Notice[]) {
+  await mkdir(path.dirname(localNoticePath), { recursive: true })
+  await writeFile(localNoticePath, JSON.stringify(notices, null, 2), 'utf8')
+}
 
 // PATCH: 공지 수정 (인증 필요)
 export async function PATCH(request: NextRequest, context: RouteContext) {
@@ -11,7 +40,6 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 })
     }
 
-    const supabase = await createClient()
     const { id } = await context.params
     const body = await request.json()
     const updates: Record<string, unknown> = {}
@@ -32,6 +60,23 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
     updates.updated_at = new Date().toISOString()
 
+    if (!hasSupabaseConfig()) {
+      const notices = await readLocalNotices()
+      const index = notices.findIndex((item) => item.id === id)
+
+      if (index === -1) {
+        return NextResponse.json(
+          { error: '공지사항을 찾을 수 없습니다.' },
+          { status: 404 },
+        )
+      }
+
+      notices[index] = { ...notices[index], ...updates }
+      await writeLocalNotices(notices)
+      return NextResponse.json(notices[index])
+    }
+
+    const supabase = await createClient()
     const { data, error } = await supabase
       .from('notices')
       .update(updates)
@@ -59,8 +104,15 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 })
     }
 
-    const supabase = await createClient()
     const { id } = await context.params
+
+    if (!hasSupabaseConfig()) {
+      const notices = await readLocalNotices()
+      await writeLocalNotices(notices.filter((item) => item.id !== id))
+      return NextResponse.json({ success: true })
+    }
+
+    const supabase = await createClient()
 
     const { error } = await supabase.from('notices').delete().eq('id', id)
 
