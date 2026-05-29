@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Plus, Pencil, Trash2, X, Upload } from 'lucide-react'
 
 interface Notice {
@@ -22,6 +21,11 @@ interface FormData {
   image_url: string
 }
 
+interface UploadedImage {
+  url: string
+  name: string
+}
+
 const emptyForm: FormData = {
   title: '',
   content: '',
@@ -39,17 +43,17 @@ export default function NoticesPage() {
   const [saving, setSaving] = useState(false)
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
+  const [dragActive, setDragActive] = useState(false)
+  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([])
   const fileRef = useRef<HTMLInputElement>(null)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
     try {
-      const supabase = createClient()
-      const { data } = await supabase
-        .from('notices')
-        .select('*')
-        .order('notice_date', { ascending: false })
-      setItems(data || [])
+      const res = await fetch('/api/notices?all=1')
+      if (res.ok) {
+        setItems(await res.json())
+      }
     } catch {
       // ignore
     } finally {
@@ -64,6 +68,7 @@ export default function NoticesPage() {
   const openAddModal = () => {
     setEditingId(null)
     setForm(emptyForm)
+    setUploadedImages([])
     setModalOpen(true)
   }
 
@@ -76,26 +81,40 @@ export default function NoticesPage() {
       is_active: item.is_active,
       image_url: item.image_url || '',
     })
+    setUploadedImages([])
     setModalOpen(true)
   }
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
+  const uploadImages = async (files: File[]) => {
+    if (files.length === 0) return
+
+    const imageFiles = files.filter((file) => file.type.startsWith('image/'))
+    if (imageFiles.length === 0) return
+
     setUploading(true)
 
     try {
-      const formData = new FormData()
-      formData.append('file', file)
+      const uploaded: UploadedImage[] = []
 
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      })
+      for (const file of imageFiles) {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('folder', 'notices')
 
-      if (res.ok) {
-        const data = await res.json()
-        setForm((p) => ({ ...p, image_url: data.url }))
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        })
+
+        if (res.ok) {
+          const data = await res.json()
+          uploaded.push({ url: data.url, name: file.name })
+        }
+      }
+
+      setUploadedImages((prev) => [...prev, ...uploaded])
+      if (uploaded[0]) {
+        setForm((p) => ({ ...p, image_url: p.image_url || uploaded[0].url }))
       }
     } catch {
       // ignore
@@ -104,24 +123,60 @@ export default function NoticesPage() {
     }
   }
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await uploadImages(Array.from(e.target.files || []))
+    e.target.value = ''
+  }
+
+  const handleDrop = async (e: React.DragEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setDragActive(false)
+    await uploadImages(Array.from(e.dataTransfer.files || []))
+  }
+
+  const removeUploadedImage = (url: string) => {
+    setUploadedImages((prev) => prev.filter((image) => image.url !== url))
+    setForm((prev) => ({
+      ...prev,
+      image_url:
+        prev.image_url === url
+          ? uploadedImages.find((image) => image.url !== url)?.url || ''
+          : prev.image_url,
+    }))
+  }
+
   const handleSave = async () => {
     if (!form.title.trim()) return
     setSaving(true)
 
     try {
-      const url = editingId ? `/api/notices/${editingId}` : '/api/notices'
-      const method = editingId ? 'PATCH' : 'POST'
+      const images =
+        !editingId && uploadedImages.length > 0
+          ? uploadedImages
+          : [{ url: form.image_url, name: '' }]
 
-      const res = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
+      for (const [index, image] of images.entries()) {
+        const url = editingId ? `/api/notices/${editingId}` : '/api/notices'
+        const method = editingId ? 'PATCH' : 'POST'
+        const isMultiple = !editingId && images.length > 1
+        const payload = {
+          ...form,
+          title: isMultiple ? `${form.title.trim()} (${index + 1})` : form.title,
+          image_url: image.url || '',
+        }
 
-      if (res.ok) {
-        setModalOpen(false)
-        fetchData()
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+
+        if (!res.ok) return
       }
+
+      setModalOpen(false)
+      setUploadedImages([])
+      fetchData()
     } catch {
       // ignore
     } finally {
@@ -264,7 +319,7 @@ export default function NoticesPage() {
       {/* 추가/수정 모달 */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
+          <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white shadow-xl">
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h2 className="text-lg font-semibold text-gray-900">
                 {editingId ? '공지 수정' : '공지 추가'}
@@ -313,30 +368,99 @@ export default function NoticesPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   이미지
                 </label>
-                {form.image_url ? (
-                  <div className="relative w-full h-40 rounded-lg overflow-hidden bg-gray-100 mb-2">
-                    <img src={form.image_url} alt="미리보기" className="w-full h-full object-cover" />
+
+                <button
+                  type="button"
+                  onClick={() => fileRef.current?.click()}
+                  onDragEnter={(e) => {
+                    e.preventDefault()
+                    setDragActive(true)
+                  }}
+                  onDragOver={(e) => {
+                    e.preventDefault()
+                    setDragActive(true)
+                  }}
+                  onDragLeave={(e) => {
+                    e.preventDefault()
+                    setDragActive(false)
+                  }}
+                  onDrop={handleDrop}
+                  disabled={uploading}
+                  className={[
+                    'w-full min-h-28 rounded-lg border-2 border-dashed px-4 py-5 text-center transition-colors',
+                    'flex flex-col items-center justify-center',
+                    dragActive
+                      ? 'border-[#0080C8] bg-[#0080C8]/5 text-[#0080C8]'
+                      : 'border-gray-300 text-gray-400 hover:border-[#0080C8] hover:text-[#0080C8]',
+                    uploading ? 'cursor-wait opacity-70' : '',
+                  ].join(' ')}
+                >
+                  <Upload size={22} />
+                  <span className="mt-2 text-sm font-medium">
+                    {uploading
+                      ? '이미지 업로드 중...'
+                      : '이미지를 끌어다 놓거나 클릭해서 선택'}
+                  </span>
+                  <span className="mt-1 text-xs text-gray-400">
+                    여러 장을 한 번에 첨부할 수 있습니다.
+                  </span>
+                </button>
+
+                {uploadedImages.length > 0 ? (
+                  <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {uploadedImages.map((image, index) => (
+                      <div
+                        key={image.url}
+                        className="relative overflow-hidden rounded-lg border border-gray-200 bg-gray-50"
+                      >
+                        <img
+                          src={image.url}
+                          alt={`첨부 이미지 ${index + 1}`}
+                          className="h-28 w-full object-cover"
+                        />
+                        <span className="absolute left-2 top-2 rounded bg-black/60 px-2 py-0.5 text-xs font-semibold text-white">
+                          {index + 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => removeUploadedImage(image.url)}
+                          className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80"
+                        >
+                          <X size={14} />
+                        </button>
+                        <div className="truncate px-2 py-1.5 text-xs text-gray-500">
+                          {image.name}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : form.image_url ? (
+                  <div className="relative mt-3 h-40 w-full overflow-hidden rounded-lg bg-gray-100">
+                    <img
+                      src={form.image_url}
+                      alt="미리보기"
+                      className="h-full w-full object-cover"
+                    />
                     <button
+                      type="button"
                       onClick={() => setForm((p) => ({ ...p, image_url: '' }))}
-                      className="absolute top-2 right-2 w-6 h-6 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70"
+                      className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
                     >
                       <X size={14} />
                     </button>
                   </div>
-                ) : (
-                  <button
-                    onClick={() => fileRef.current?.click()}
-                    disabled={uploading}
-                    className="w-full h-24 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-[#0080C8] hover:text-[#0080C8] transition-colors"
-                  >
-                    <Upload size={20} />
-                    <span className="text-xs mt-1">{uploading ? '업로드 중...' : '이미지 업로드'}</span>
-                  </button>
+                ) : null}
+
+                {uploadedImages.length > 1 && !editingId && (
+                  <p className="mt-2 text-xs text-gray-500">
+                    저장하면 첨부한 이미지 수만큼 공지가 순서대로 생성됩니다.
+                  </p>
                 )}
                 <input
                   ref={fileRef}
                   type="file"
                   accept="image/*"
+                  multiple
                   onChange={handleImageUpload}
                   className="hidden"
                 />

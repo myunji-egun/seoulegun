@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { hasSupabaseConfig } from '@/lib/supabase/config'
 import NoticeList from '@/components/board/NoticeList'
+import { readFile } from 'fs/promises'
+import path from 'path'
 
 interface Notice {
   id: string
@@ -15,6 +17,36 @@ interface NoticePageProps {
   searchParams?: Promise<{
     page?: string
   }>
+}
+
+const juneScheduleNotices: Notice[] = [
+  {
+    id: 'june-main-clinic-schedule',
+    title: '6월 본관 진료안내',
+    content: '6월 본관 원장님 진료일정 안내입니다.',
+    image_url: '/uploads/notices/june-doctor-schedule-1.png',
+    notice_date: '2026-06-01',
+  },
+  {
+    id: 'june-annex-clinic-schedule',
+    title: '6월 별관 진료안내',
+    content: '6월 별관 원장님 진료일정 안내입니다.',
+    image_url: '/uploads/notices/june-doctor-schedule-2.png',
+    notice_date: '2026-06-01',
+  },
+]
+
+async function readLocalNotices(): Promise<Notice[]> {
+  try {
+    const filePath = path.join(process.cwd(), 'data', 'local-notices.json')
+    const items = JSON.parse(await readFile(filePath, 'utf8')) as Array<
+      Notice & { is_active?: boolean }
+    >
+
+    return items.filter((item) => item.is_active !== false)
+  } catch {
+    return []
+  }
 }
 
 export const metadata = {
@@ -35,11 +67,13 @@ export default async function NoticePage({ searchParams }: NoticePageProps) {
       .order('notice_date', { ascending: false })
 
     notices = data || []
+  } else {
+    notices = await readLocalNotices()
   }
 
-  const items: Notice[] = notices
+  const items: Notice[] = notices.length > 0 ? notices : juneScheduleNotices
 
-  const recentItems = items.slice(0, 3)
+  const recentItems = items
   const imageNotices = items.filter((n) => n.image_url)
   const imagesPerPage = 5
   const requestedPage = Number(params?.page || '1')
@@ -98,6 +132,7 @@ export default async function NoticePage({ searchParams }: NoticePageProps) {
                 {pagedImageNotices.map((notice) => (
                   <article
                     key={notice.id}
+                    id={`notice-image-${notice.id}`}
                     className="overflow-hidden rounded-lg border border-gray-200 bg-white"
                   >
                     <div className="flex flex-col gap-2 border-b border-gray-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
