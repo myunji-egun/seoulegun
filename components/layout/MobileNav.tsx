@@ -11,7 +11,6 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: '이건치과소개', href: '/about' },
   { label: '자연치아살리기', href: '/natural-tooth' },
   { label: '임플란트', href: '/implant' },
   { label: '심미보철', href: '/digital-prosthesis' },
@@ -21,6 +20,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const BOARD_ITEMS: NavItem[] = [
+  { label: '이건치과소개', href: '/about' },
   { label: '이건공지', href: '/notice' },
   { label: '환자사례', href: '/cases' },
   { label: '원장칼럼', href: '/column' },
@@ -94,7 +94,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           {/* 게시판 섹션 */}
           <li>
             <p className="px-6 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-              News · 게시판
+              이건뉴스
             </p>
           </li>
           {BOARD_ITEMS.map((item) => {

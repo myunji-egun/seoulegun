@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 import MobileNav from './MobileNav'
 
 const NAV_ITEMS = [
-  { label: '이건치과소개', href: '/about' },
   { label: '자연치아살리기', href: '/natural-tooth' },
   { label: '임플란트', href: '/implant' },
   { label: '심미보철', href: '/digital-prosthesis' },
@@ -16,6 +15,7 @@ const NAV_ITEMS = [
 ]
 
 const BOARD_ITEMS = [
+  { label: '이건치과소개', href: '/about' },
   { label: '이건공지', href: '/notice' },
   { label: '환자사례', href: '/cases' },
   { label: '원장칼럼', href: '/column' },
@@ -83,7 +83,7 @@ export default function Header() {
               className="hidden lg:flex flex-1 justify-center items-center gap-6 xl:gap-10"
               aria-label="주 메뉴"
             >
-              {/* 게시판 드롭다운 */}
+              {/* 이건뉴스 드롭다운 */}
               <div
                 ref={boardRef}
                 className="relative"
@@ -95,7 +95,7 @@ export default function Header() {
                     isBoardActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
                   }`}
                 >
-                  게시판
+                  이건뉴스
                   <svg className="w-3.5 h-3.5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
