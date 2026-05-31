@@ -11,6 +11,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
+  { label: '이건치과소개', href: '/about' },
   { label: '자연치아살리기', href: '/natural-tooth' },
   { label: '임플란트', href: '/implant' },
   { label: '심미보철', href: '/digital-prosthesis' },
@@ -20,10 +21,9 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const BOARD_ITEMS: NavItem[] = [
-  { label: '이건치과소개', href: '/about' },
-  { label: '이건공지', href: '/notice' },
-  { label: '환자사례', href: '/cases' },
+  { label: '공지사항', href: '/notice' },
   { label: '원장칼럼', href: '/column' },
+  { label: '환자사례', href: '/cases' },
 ]
 
 interface MobileNavProps {
@@ -91,34 +91,6 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
         {/* 메뉴 링크 */}
         <ul className="flex-1 overflow-y-auto py-4">
-          {/* 게시판 섹션 */}
-          <li>
-            <p className="px-6 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-              이건뉴스
-            </p>
-          </li>
-          {BOARD_ITEMS.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  className={`flex items-center gap-3 px-6 py-3 text-base font-medium transition-colors ${
-                    isActive
-                      ? 'text-[#0080C8] bg-[#0080C8]/5 border-r-2 border-[#0080C8]'
-                      : 'text-gray-600 hover:text-[#0080C8] hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
-                  {item.label}
-                </Link>
-              </li>
-            )
-          })}
-
-          <li><div className="mx-6 my-3 border-t border-gray-100" /></li>
-
           {/* 진료 메뉴 */}
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href
@@ -136,6 +108,33 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <span className="w-5 text-xs text-gray-400 font-normal tabular-nums">
                     {String(index + 1).padStart(2, '0')}
                   </span>
+                  {item.label}
+                </Link>
+              </li>
+            )
+          })}
+
+          {/* News 섹션 — 맨 마지막 */}
+          <li><div className="mx-6 my-3 border-t border-gray-100" /></li>
+          <li>
+            <p className="px-6 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              News
+            </p>
+          </li>
+          {BOARD_ITEMS.map((item) => {
+            const isActive = pathname === item.href
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={onClose}
+                  className={`flex items-center gap-3 px-6 py-3 text-base font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#0080C8] bg-[#0080C8]/5 border-r-2 border-[#0080C8]'
+                      : 'text-gray-600 hover:text-[#0080C8] hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
                   {item.label}
                 </Link>
               </li>
