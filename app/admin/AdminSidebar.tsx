@@ -8,6 +8,7 @@ import {
   MessageSquare,
   Images,
   Megaphone,
+  BookOpen,
   LogOut,
   Menu,
   X,
@@ -18,6 +19,7 @@ const navItems = [
   { href: '/admin/consultations', label: '상담 DB', icon: MessageSquare },
   { href: '/admin/cases', label: '증례 관리', icon: Images },
   { href: '/admin/notices', label: '공지사항', icon: Megaphone },
+  { href: '/admin/columns', label: '원장칼럼', icon: BookOpen },
 ]
 
 export default function AdminSidebar() {
