@@ -2169,22 +2169,51 @@ export default function TreatmentSection({
               <img src="/images/treatments/natural-tooth/vpt.jpg" alt="VPT 신경보존술" className="w-full h-auto" />
             </div>
           )}
-          <h2 className="text-base font-semibold text-gray-500 mb-4">{treatment.title} 치료 과정</h2>
-          <ol className="flex flex-wrap items-center gap-y-2">
+
+          <div className="mb-6">
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#0080C8]">Treatment Process</span>
+            <h2 className="text-xl font-bold text-gray-900 mt-1">{treatment.title} 치료 과정</h2>
+          </div>
+
+          {/* 데스크탑: 전체 폭 균등 배치 */}
+          <ol className="hidden md:flex items-stretch w-full">
             {treatment.steps.map((step, i) => (
-              <li key={i} className="flex items-center">
-                <span className="text-[11px] text-gray-400 font-medium mr-1 tabular-nums">
+              <li key={i} className="flex items-center flex-1 min-w-0">
+                {/* 스텝 박스 */}
+                <div className="flex-1 flex flex-col items-center text-center px-2 py-5 rounded-2xl border border-[#D8E9F5] bg-white hover:border-[#0080C8]/40 hover:bg-[#F0F7FD] transition-colors group">
+                  <span className="text-[32px] font-black tabular-nums leading-none mb-3 text-[#0080C8] group-hover:scale-110 transition-transform">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-[18px] sm:text-[20px] font-bold text-gray-900 leading-snug break-keep">
+                    {step.title}
+                  </span>
+                  {step.desc && (
+                    <span className="text-[13px] text-gray-500 mt-2 leading-relaxed break-keep">{step.desc}</span>
+                  )}
+                </div>
+                {/* 화살표 */}
+                {i < treatment.steps.length - 1 && (
+                  <div className="flex items-center justify-center w-8 shrink-0">
+                    <svg className="w-4 h-4 text-[#0080C8]/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
+
+          {/* 모바일: 2열 그리드 */}
+          <ol className="md:hidden grid grid-cols-2 gap-3">
+            {treatment.steps.map((step, i) => (
+              <li key={i} className="flex items-start gap-3 bg-white border border-[#D8E9F5] rounded-xl p-4">
+                <span className="text-[22px] font-black tabular-nums text-[#0080C8] leading-none shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span
-                  className="text-[15px] font-semibold text-gray-900"
-                  style={{ textDecoration: 'underline', textDecorationColor: '#0080C8', textUnderlineOffset: '4px' }}
-                >
-                  {step.title}
-                </span>
-                {i < treatment.steps.length - 1 && (
-                  <span className="mx-3 text-gray-300 text-sm">→</span>
-                )}
+                <div>
+                  <p className="text-[15px] font-bold text-gray-900 leading-snug">{step.title}</p>
+                  {step.desc && <p className="text-[12px] text-gray-500 mt-1 leading-relaxed">{step.desc}</p>}
+                </div>
               </li>
             ))}
           </ol>
