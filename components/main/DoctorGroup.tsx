@@ -76,10 +76,10 @@ export default function DoctorGroup() {
         className="hidden md:inline-flex absolute
           left-[6.4%] top-[55.5%]
           items-center justify-center gap-2
-          h-[64px] px-0 w-[290px]
+          h-[32px] px-4 w-[145px]
           rounded-none bg-white/10 text-gray-800
           border border-gray-700/70 backdrop-blur-[2px]
-          text-[17px] font-semibold
+          text-[13px] font-semibold
           transition-all duration-200
           hover:bg-white/35 hover:border-[#0080C8] hover:text-[#0080C8]"
       >

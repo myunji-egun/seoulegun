@@ -32,7 +32,7 @@ export default function CleanSection() {
         <div>
           <h2
             className={`text-[28px] md:text-3xl lg:text-4xl font-bold leading-tight mb-5 md:text-[#2B2D42] text-white ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
-            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85)' }}
+            style={{ textShadow: 'none' }}
           >
             감염관리도
             <br />

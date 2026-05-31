@@ -10,6 +10,7 @@ import MediaSection from '@/components/main/MediaSection'
 import MapSection from '@/components/main/MapSection'
 import Footer from '@/components/layout/Footer'
 import HomeScrollSnap from '@/components/main/HomeScrollSnap'
+import IntroScreen from '@/components/IntroScreen'
 
 const SECTIONS = [
   HeroSlider,
@@ -27,10 +28,12 @@ const SECTIONS = [
 export default function Home() {
   return (
     <>
+      <IntroScreen />
+
       <h1 className="sr-only">수원 영통 서울이건치과</h1>
       <HomeScrollSnap />
 
-      {/* 데스크탑: h-screen 스크롤 컨테이너 (CSS snap 제거, JS snap 적용) */}
+      {/* 데스크탑 */}
       <div
         id="home-desktop"
         className="home-page hidden md:block h-screen overflow-y-scroll"
@@ -45,7 +48,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 모바일: 모든 섹션 일반 문서 흐름, JS snap 적용 */}
+      {/* 모바일 */}
       <div id="home-mobile" className="home-page md:hidden">
         <HeroSlider />
         <DoctorGroup />

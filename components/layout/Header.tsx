@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import MobileNav from './MobileNav'
 
 const NAV_ITEMS = [
-  { label: '이건공지', href: '/notice' },
   { label: '이건치과소개', href: '/about' },
   { label: '자연치아살리기', href: '/natural-tooth' },
   { label: '임플란트', href: '/implant' },
@@ -16,11 +15,20 @@ const NAV_ITEMS = [
   { label: '오시는 길', href: '/location' },
 ]
 
+const BOARD_ITEMS = [
+  { label: '이건공지', href: '/notice' },
+  { label: '환자사례', href: '/cases' },
+  { label: '원장칼럼', href: '/column' },
+]
+
 const PHONE = '031-896-5512'
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false)
+  const [boardOpen, setBoardOpen] = useState(false)
+  const boardRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+  const isBoardActive = BOARD_ITEMS.some(b => pathname === b.href)
 
   const scrollToHomeHero = () => {
     window.dispatchEvent(new Event('egun:hero-reset'))
@@ -75,6 +83,46 @@ export default function Header() {
               className="hidden lg:flex flex-1 justify-center items-center gap-6 xl:gap-10"
               aria-label="주 메뉴"
             >
+              {/* 게시판 드롭다운 */}
+              <div
+                ref={boardRef}
+                className="relative"
+                onMouseEnter={() => setBoardOpen(true)}
+                onMouseLeave={() => setBoardOpen(false)}
+              >
+                <button
+                  className={`relative px-1 py-2 text-[18px] font-medium whitespace-nowrap transition-colors duration-200 group flex items-center gap-1 ${
+                    isBoardActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
+                  }`}
+                >
+                  게시판
+                  <svg className="w-3.5 h-3.5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                  <span
+                    className={`absolute bottom-0 left-1 right-1 h-0.5 rounded-full transition-transform duration-200 origin-left ${
+                      isBoardActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                    style={{ backgroundColor: '#0080C8' }}
+                  />
+                </button>
+                {boardOpen && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[120px] z-50">
+                    {BOARD_ITEMS.map(item => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`block px-5 py-2.5 text-[15px] font-medium transition-colors hover:bg-[#EAF4FC] hover:text-[#0080C8] ${
+                          pathname === item.href ? 'text-[#0080C8] bg-[#EAF4FC]' : 'text-gray-700'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href
                 return (

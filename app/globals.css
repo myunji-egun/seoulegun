@@ -99,11 +99,26 @@
 .scroll-reveal-up,
 .scroll-reveal-scale,
 .scroll-reveal-left,
-.scroll-reveal-right,
-.all-on-marquee-track {
+.scroll-reveal-right {
   animation: none !important;
   opacity: 1 !important;
   transform: none !important;
+}
+
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.all-on-marquee-track {
+  animation: marquee-x 50s linear infinite;
+}
+
+@keyframes implant-bg-pan {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% + 100vw)); }
+}
+.implant-bg-img {
+  animation: implant-bg-pan 30s ease-in-out infinite alternate;
 }
 
 /* ── 모바일 전역 (768px 이하) ── */

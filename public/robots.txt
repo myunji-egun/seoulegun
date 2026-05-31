@@ -8,3 +8,9 @@ Disallow: /api/
 Disallow: /signup
 
 Sitemap: https://egundc.com/sitemap.xml
+
+
+User-agent: *
+Disallow:
+
+Sitemap: https://egundc.com/sitemap.xml

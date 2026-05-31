@@ -1,0 +1,68 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+
+async function hashPassword(password: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(password)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { name, phone, birthday, userId, password } = body
+
+    if (!name || typeof name !== 'string' || !name.trim())
+      return NextResponse.json({ error: '이름을 입력해 주세요.' }, { status: 400 })
+
+    if (!phone || typeof phone !== 'string' || phone.replace(/\D/g, '').length < 10)
+      return NextResponse.json({ error: '올바른 전화번호를 입력해 주세요.' }, { status: 400 })
+
+    if (!birthday || typeof birthday !== 'string' || !birthday.trim())
+      return NextResponse.json({ error: '생년월일을 입력해 주세요.' }, { status: 400 })
+
+    if (!userId || typeof userId !== 'string' || userId.trim().length < 4)
+      return NextResponse.json({ error: '아이디는 4자 이상 입력해 주세요.' }, { status: 400 })
+
+    if (!/^[a-zA-Z0-9_]+$/.test(userId.trim()))
+      return NextResponse.json({ error: '아이디는 영문·숫자·_만 사용 가능합니다.' }, { status: 400 })
+
+    if (!password || typeof password !== 'string' || password.length < 8)
+      return NextResponse.json({ error: '비밀번호는 8자 이상 입력해 주세요.' }, { status: 400 })
+
+    const supabase = await createClient()
+
+    // 아이디 중복 확인
+    const { data: existing } = await supabase
+      .from('members')
+      .select('id')
+      .eq('user_id', userId.trim())
+      .single()
+
+    if (existing)
+      return NextResponse.json({ error: '이미 사용 중인 아이디입니다.' }, { status: 409 })
+
+    const passwordHash = await hashPassword(password)
+
+    const { data, error } = await supabase
+      .from('members')
+      .insert({
+        name: name.trim(),
+        phone: phone.replace(/\D/g, ''),
+        birthday: birthday.trim(),
+        user_id: userId.trim(),
+        password_hash: passwordHash,
+      })
+      .select('id, user_id, created_at')
+      .single()
+
+    if (error)
+      return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
+
+    return NextResponse.json(data, { status: 201 })
+  } catch {
+    return NextResponse.json({ error: '요청을 처리할 수 없습니다.' }, { status: 500 })
+  }
+}

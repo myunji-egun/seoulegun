@@ -129,15 +129,15 @@ function HighlightedDescription({ text }: { text: string }) {
 /** richContent 마크다운 렌더러 (###, >, ---, - 지원) */
 function AllOnImageMarquee() {
   return (
-    <div className="relative left-1/2 -mt-4 mb-2 w-screen -translate-x-1/2 overflow-hidden py-4 sm:-mt-6 sm:mb-4 sm:py-5">
-      <div className="all-on-marquee-track flex w-max items-center">
+    <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-black h-[180px] sm:h-[240px] lg:h-[280px]">
+      <div className="all-on-marquee-track flex w-max h-full items-center">
         {[0, 1].map((item) => (
           <img
             key={item}
-            src="/images/allon/allonslide.jpg"
+            src="/images/allon/all-on-side.jpg"
             alt=""
             aria-hidden="true"
-            className="h-[54px] w-auto max-w-none shrink-0 object-contain sm:h-[72px] lg:h-[92px]"
+            className="h-full w-auto max-w-none shrink-0 object-cover"
           />
         ))}
       </div>
@@ -2161,7 +2161,7 @@ export default function TreatmentSection({
         </div>
       )}
 
-      {/* 치료 과정 스텝 카드 */}
+      {/* 치료 과정 */}
       {treatment.steps && !isTriPanel && (
         <div ref={cardRef} className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           {treatment.treatmentType === 'vpt' && (
@@ -2169,14 +2169,22 @@ export default function TreatmentSection({
               <img src="/images/treatments/natural-tooth/vpt.jpg" alt="VPT 신경보존술" className="w-full h-auto" />
             </div>
           )}
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">{treatment.title} 치료 과정</h2>
-          <ol className="flex flex-col gap-3">
+          <h2 className="text-base font-semibold text-gray-500 mb-4">{treatment.title} 치료 과정</h2>
+          <ol className="flex flex-wrap items-center gap-y-2">
             {treatment.steps.map((step, i) => (
-              <li key={i} className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm">
-                <span className="w-9 h-9 rounded-full bg-[#0080C8] flex items-center justify-center text-white text-sm font-bold shrink-0">
+              <li key={i} className="flex items-center">
+                <span className="text-[11px] text-gray-400 font-medium mr-1 tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="font-semibold text-[15px] text-gray-900 leading-tight break-keep">{step.title}</p>
+                <span
+                  className="text-[15px] font-semibold text-gray-900"
+                  style={{ textDecoration: 'underline', textDecorationColor: '#0080C8', textUnderlineOffset: '4px' }}
+                >
+                  {step.title}
+                </span>
+                {i < treatment.steps.length - 1 && (
+                  <span className="mx-3 text-gray-300 text-sm">→</span>
+                )}
               </li>
             ))}
           </ol>
