@@ -42,17 +42,9 @@ vec2 coverUV(vec2 uv, float imgAspect, float canvasAspect) {
 void main() {
   vec2 uv = v_uv;
 
-  // ── liquid ripple around cursor ──────────────────────────
-  vec2  delta   = uv - u_mouse;
-  float dist    = length(delta);
-  float falloff = smoothstep(0.32, 0.02, dist);
-  float ripple  = sin(dist * 22.0 - u_time * 3.2) * 0.024 * falloff * u_hover;
-  vec2  dir     = normalize(delta + vec2(0.0001));
-  vec2  warpUV  = uv + dir * ripple;
-
   // ── cover-fit UV per image ────────────────────────────────
-  vec2 fromUV = coverUV(warpUV, u_from_aspect, u_canvas_aspect);
-  vec2 toUV   = coverUV(warpUV, u_to_aspect,   u_canvas_aspect);
+  vec2 fromUV = coverUV(uv, u_from_aspect, u_canvas_aspect);
+  vec2 toUV   = coverUV(uv, u_to_aspect,   u_canvas_aspect);
 
   vec4 c0 = texture2D(u_from, fromUV);
   vec4 c1 = texture2D(u_to,   toUV);
@@ -190,27 +182,6 @@ export default function WebGLHero({ images, fromIndex, toIndex, transitionProgre
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // ── mouse tracking ────────────────────────────────────────────────────
-  useEffect(() => {
-    const canvas = canvasRef.current!
-    const onMove = (e: MouseEvent) => {
-      const r = canvas.getBoundingClientRect()
-      targetM.current = {
-        x:     (e.clientX - r.left) / r.width,
-        y: 1 - (e.clientY - r.top)  / r.height,
-      }
-    }
-    const onEnter = () => { targetH.current = 1 }
-    const onLeave = () => { targetH.current = 0 }
-    canvas.addEventListener('mousemove', onMove, { passive: true })
-    canvas.addEventListener('mouseenter', onEnter)
-    canvas.addEventListener('mouseleave', onLeave)
-    return () => {
-      canvas.removeEventListener('mousemove', onMove)
-      canvas.removeEventListener('mouseenter', onEnter)
-      canvas.removeEventListener('mouseleave', onLeave)
-    }
-  }, [])
 
   // ── render loop (runs once; reads from refs) ──────────────────────────
   useEffect(() => {
@@ -219,10 +190,6 @@ export default function WebGLHero({ images, fromIndex, toIndex, transitionProgre
       prevTS.current  = ts
       timeRef.current += dt
 
-      // lerp mouse & hover
-      mouse.current.x += (targetM.current.x - mouse.current.x) * 0.1
-      mouse.current.y += (targetM.current.y - mouse.current.y) * 0.1
-      hover.current   += (targetH.current   - hover.current)   * 0.06
 
       const gl   = glRef.current
       const prog = progRef.current

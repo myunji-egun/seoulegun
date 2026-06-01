@@ -54,11 +54,19 @@ export default function ImplantFaqSection() {
               className="font-bold text-white leading-tight"
               style={{ fontSize: 'clamp(26px, 3vw, 42px)' }}
             >
-              궁금한 점을
-              <br />
-              먼저
-              <br />
-              풀어드립니다.
+              {/* 모바일: 2줄, 데스크탑: 3줄 */}
+              <span className="sm:hidden">
+                궁금한점을
+                <br />
+                먼저 풀어드립니다.
+              </span>
+              <span className="hidden sm:inline">
+                궁금한 점을
+                <br />
+                먼저
+                <br />
+                풀어드립니다.
+              </span>
             </h2>
           </div>
 
@@ -95,9 +103,8 @@ export default function ImplantFaqSection() {
                     Q.
                   </span>
                   <span
-                    className="flex-1"
+                    className="flex-1 text-[17px] sm:text-[18px]"
                     style={{
-                      fontSize: '18px',
                       fontWeight: isOpen(i) ? 700 : 500,
                       color: isOpen(i) ? '#fff' : 'rgba(255,255,255,0.92)',
                       transition: 'color 0.2s ease, font-weight 0.2s ease',

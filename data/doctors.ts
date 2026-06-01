@@ -22,7 +22,7 @@ export const doctors: Doctor[] = [
     title: 'DDS, MSD, PhD(c)',
     specialty: '임플란트 · 심미보철',
     subRole: '임플란트 · 심미보철 전문가',
-    specialtyDetail: '임플란트 · 전악보철 · 심미보철',
+    specialtyDetail: '고난도진료 · 심미보철',
     image: '/images/doctors/doctor-lee.png',
     careers: [
       '서울대학교 치과대학/치의학대학원 졸업',
@@ -81,7 +81,7 @@ export const doctors: Doctor[] = [
     title: 'DDS, MSD',
     specialty: '통합치의학 전문의',
     subRole: '통합치의학 전문의',
-    specialtyDetail: '임플란트 · 근관치료 · 디지털치의학',
+    specialtyDetail: '임플란트 · 디지털보철',
     image: '/images/doctors/doctor-jung.png',
     careers: [
       '서울대학교 치과대학/치의학대학원 졸업',

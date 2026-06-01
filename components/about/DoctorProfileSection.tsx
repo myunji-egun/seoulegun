@@ -25,11 +25,8 @@ function DoctorCard({
       id={doctor.id}
       className={`w-full scroll-mt-24 ${isReverse ? 'bg-[#F8F8F8]' : 'bg-white'}`}
     >
-      <div
-        className={`flex flex-col lg:flex-row lg:items-stretch w-full max-w-[1400px] mx-auto ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
-        style={isVisible ? { animationDelay: '0.05s' } : undefined}
-      >
-        {/* 사진 — 카드 전체 높이 채움, documents는 사진 위에 오버랩 */}
+      <div className="flex flex-col lg:flex-row lg:items-stretch w-full max-w-[1400px] mx-auto">
+        {/* 사진 */}
         <div className="flex-shrink-0 w-full lg:w-[440px] lg:self-stretch relative overflow-hidden">
           <img
             src={doctor.image}
@@ -53,51 +50,60 @@ function DoctorCard({
         {/* 텍스트 영역 */}
         <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 py-12 lg:py-16">
 
-          {/* 이름 */}
-          <h2 className="text-[26px] lg:text-[38px] font-bold leading-[1.3] tracking-[-0.02em] text-[#2E2E2E]">
-            {doctor.name} {doctor.role}
-          </h2>
+          {/* ① 이름 + 구분선 — 가장 먼저 */}
+          <div
+            className={isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}
+            style={isVisible ? { animationDelay: '0.05s' } : undefined}
+          >
+            <h2 className="text-[26px] lg:text-[38px] font-bold leading-[1.3] tracking-[-0.02em] text-[#2E2E2E]">
+              {doctor.name} {doctor.role}
+            </h2>
+            <div className="w-full h-px bg-gray-300 mt-4 mb-4 lg:mt-5 lg:mb-5" />
+          </div>
 
-          {/* 구분선 */}
-          <div className="w-full h-px bg-gray-300 mt-4 mb-4 lg:mt-5 lg:mb-5" />
-
-          {/* 전문과 — 구분선 아래 */}
-          <span className="block text-[15px] lg:text-[24px] font-normal leading-[1.4] tracking-[-0.015em] text-[#1D458F] mb-4 lg:mb-6">
-            {doctor.specialtyDetail ?? doctor.specialty}
-          </span>
-
-          {/* 약력 — 경력(좌) + 학회(우) 2컬럼 */}
-          <div className="flex flex-col sm:flex-row gap-x-12">
-            <ul>
-              {doctor.careers.map((c, i) => (
-                <li
-                  key={i}
-                  className={`text-[13px] lg:text-[17px] leading-[28px] tracking-[-0.01em] ${
-                    i === 0
-                      ? 'font-bold text-[#2E2E2E]'
-                      : 'font-normal text-[#5C5C5C]'
-                  }`}
-                >
-                  • {c}
-                </li>
-              ))}
-            </ul>
-            {doctor.memberships && doctor.memberships.length > 0 && (
-              <ul className="mt-2 sm:mt-0">
-                {doctor.memberships.map((m, i) => (
-                  <li key={i} className="text-[13px] lg:text-[17px] font-normal leading-[28px] tracking-[-0.01em] text-[#5C5C5C]">
-                    • {m}
+          {/* ② 전문과 + 약력 — ①이 60% 됐을 때 시작 */}
+          <div
+            className={isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}
+            style={isVisible ? { animationDelay: '0.42s' } : undefined}
+          >
+            <span className="block text-[15px] lg:text-[24px] font-normal leading-[1.4] tracking-[-0.015em] text-[#1D458F] mb-4 lg:mb-6">
+              {doctor.specialtyDetail ?? doctor.specialty}
+            </span>
+            <div className="flex flex-col sm:flex-row gap-x-12">
+              <ul>
+                {doctor.careers.map((c, i) => (
+                  <li
+                    key={i}
+                    className={`text-[13px] lg:text-[17px] leading-[28px] tracking-[-0.01em] ${
+                      i === 0 ? 'font-bold text-[#2E2E2E]' : 'font-normal text-[#5C5C5C]'
+                    }`}
+                  >
+                    • {c}
                   </li>
                 ))}
               </ul>
-            )}
+              {doctor.memberships && doctor.memberships.length > 0 && (
+                <ul className="mt-2 sm:mt-0">
+                  {doctor.memberships.map((m, i) => (
+                    <li key={i} className="text-[13px] lg:text-[17px] font-normal leading-[28px] tracking-[-0.01em] text-[#5C5C5C]">
+                      • {m}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
-          {/* 한 마디 */}
+          {/* ③ 한 마디 — ②가 60% 됐을 때 시작 */}
           {doctor.letter && (
-            <p className="mt-8 lg:mt-10 text-[14px] lg:text-[20px] font-bold leading-[1.8] tracking-[-0.01em] text-[#2E2E2E] whitespace-pre-line">
-              {doctor.letter}
-            </p>
+            <div
+              className={isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}
+              style={isVisible ? { animationDelay: '0.78s' } : undefined}
+            >
+              <p className="mt-8 lg:mt-10 text-[14px] lg:text-[20px] font-bold leading-[1.8] tracking-[-0.01em] text-[#2E2E2E] whitespace-pre-line">
+                {doctor.letter}
+              </p>
+            </div>
           )}
         </div>
 
@@ -121,16 +127,17 @@ export default function DoctorProfileSection() {
       {/* 섹션 헤더 — 풀페이지 */}
       <div
         id="doctor-intro"
-        className="relative min-h-screen flex items-center overflow-hidden scroll-mt-36"
+        className="relative min-h-screen flex items-center overflow-hidden scroll-mt-20"
       >
         {/* 배경 이미지 */}
         <div
-          className="absolute inset-x-0 top-0"
+          className="absolute inset-x-0"
           style={{
+            top: '-80px',
             bottom: '-10px',
             backgroundImage: "url('/images/clinic/egun-outerior.jpg')",
             backgroundSize: 'cover',
-            backgroundPosition: 'calc(50% + 220px) 83%',
+            backgroundPosition: 'calc(50% + 220px) 0%',
             backgroundRepeat: 'no-repeat',
           }}
         />
@@ -160,7 +167,7 @@ export default function DoctorProfileSection() {
             <span style={{ color: '#ffffff', textShadow: '0 0 20px rgba(0,128,200,0.9), 0 2px 12px rgba(0,0,0,0.95)' }}>변하지 않는 마음</span>
           </h2>
           <p
-            className={`mt-4 sm:mt-6 text-[21px] sm:text-[29px] lg:text-[31px] text-white/75 lg:text-white/90 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+            className={`mt-4 sm:mt-6 text-[20px] sm:text-[28px] lg:text-[30px] text-white/75 lg:text-white/90 max-w-2xl leading-relaxed ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             style={isVisible ? { animationDelay: '0.2s' } : undefined}
           >
             각자의 전문 분야에서 최선을 다하며<br />

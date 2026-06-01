@@ -309,7 +309,17 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
         </div>
       </div>
 
-      <AllOnImageMarquee />
+      <div className="w-full sm:max-w-[80%] mx-auto">
+        <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-[0_18px_60px_rgba(16,55,91,0.1)]">
+          <iframe
+            src="https://www.youtube.com/embed/6Alck_RGgLo?rel=0&modestbranding=1"
+            title="올온 임플란트 안내 영상"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          />
+        </div>
+      </div>
 
       <div
         ref={cardRef}
@@ -826,6 +836,18 @@ function NavigationImplantChapter({ treatment }: { treatment: TreatmentContent }
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      <div className="w-full sm:max-w-[80%] mx-auto">
+        <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-[0_18px_60px_rgba(16,55,91,0.1)]">
+          <iframe
+            src="https://www.youtube.com/embed/NA-OPSDyuJ0?rel=0&modestbranding=1"
+            title="네비게이션 임플란트 안내 영상"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          />
         </div>
       </div>
 
@@ -1868,7 +1890,7 @@ export default function TreatmentSection({
   const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
   const isTriPanel = !!(treatment.richContent && treatment.indications && treatment.steps)
   const isRootCanal = treatment.treatmentType === 'root-canal'
-  const imageTopMargin = isRootCanal ? 'md:mt-10' : 'md:mt-10'
+  const imageTopMargin = isRootCanal ? 'md:mt-10 md:translate-y-5' : 'md:mt-10'
   const singleImageFrameClass = isRootCanal ? 'max-w-[105%] mx-auto' : 'bg-gray-100 max-w-[70%] mx-auto'
 
   if (treatment.treatmentType === 'all-on') {
@@ -2220,21 +2242,25 @@ export default function TreatmentSection({
         </div>
       )}
 
-      {/* 치료가 필요한 경우 카드 */}
+      {/* 치료가 필요한 경우 — 한 줄씩 */}
       {treatment.indications && !isTriPanel && (
         <div className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
           style={{ animationDelay: '0.1s' }}>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">{treatment.title}가 필요한 경우</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            {treatment.treatmentType === 'vpt' ? 'VPT 신경보존술이' : `${treatment.title}가`} 필요한 경우
+          </h2>
+          <ul className="space-y-3">
             {treatment.indications.map((ind, i) => (
-              <div key={i} className="bg-gray-50 rounded-2xl p-5 flex flex-col items-center gap-3 text-center">
-                <span className="w-8 h-8 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
-                  <LucideIcon name="Check" size={16} className="text-white" strokeWidth={3} />
+              <li key={i} className="flex items-start gap-3">
+                <span className="mt-0.5 w-5 h-5 rounded-full bg-[#0080C8] flex items-center justify-center shrink-0">
+                  <LucideIcon name="Check" size={11} className="text-white" strokeWidth={3} />
                 </span>
-                <p className="text-[15px] text-gray-700 font-medium leading-relaxed whitespace-pre-line">{ind}</p>
-              </div>
+                <span className="text-[16px] text-gray-700 leading-relaxed">
+                  {ind.replace(/\n/g, ' ')}
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
 

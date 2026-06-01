@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const HOVER_SPECIALTY: Record<string, string> = {
-  'lee-jaesung':  '임플란트, 고난도진료',
-  'jung-chaeyun': '임플란트, 고난도진료',
+  'lee-jaesung':  '고난도진료 · 심미보철',
+  'jung-chaeyun': '임플란트 · 디지털보철',
   'yoo-suhyun':   '교정진료',
   'park-jiwon':   '보존진료, 일반진료',
   'baek-seola':   '소아진료',
@@ -15,11 +15,37 @@ const HOVER_SPECIALTY: Record<string, string> = {
 const DOCTOR_ORDER = ['lee-jaesung', 'jung-chaeyun', 'yoo-suhyun', 'park-jiwon', 'baek-seola']
 
 export default function DoctorTeamSection() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const [hoveredId,     setHoveredId]     = useState<string | null>(null)
+  const [highlightIdx,  setHighlightIdx]  = useState<number | null>(null)
   const { ref, isVisible } = useScrollReveal(0.15)
+  const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   const displayDoctors = [...doctors].sort(
     (a, b) => DOCTOR_ORDER.indexOf(a.id) - DOCTOR_ORDER.indexOf(b.id)
   )
+
+  const runHighlight = () => {
+    // 진행 중인 타이머 클리어
+    if (highlightTimerRef.current) clearTimeout(highlightTimerRef.current)
+
+    let idx = 0
+    const step = () => {
+      if (idx >= displayDoctors.length) {
+        setHighlightIdx(null)
+        return
+      }
+      setHighlightIdx(idx)
+      idx++
+      highlightTimerRef.current = setTimeout(step, 500)
+    }
+    step()
+  }
+
+  useEffect(() => {
+    return () => {
+      if (highlightTimerRef.current) clearTimeout(highlightTimerRef.current)
+    }
+  }, [])
 
   const handleClick = (doctorId: string) => {
     const el = document.getElementById(doctorId)
@@ -28,6 +54,12 @@ export default function DoctorTeamSection() {
     const OFFSET = 96
     const top = el.getBoundingClientRect().top + window.scrollY - OFFSET
     window.scrollTo({ top, behavior: 'smooth' })
+  }
+
+  const handleCardClick = (doctorId: string) => {
+    runHighlight()
+    // 하이라이트 시작 직후 스크롤 (동시 진행)
+    setTimeout(() => handleClick(doctorId), 200)
   }
 
   return (
@@ -43,7 +75,9 @@ export default function DoctorTeamSection() {
         {/* 원장님 카드 그리드 */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
           {displayDoctors.map((doctor, i) => {
-            const isHovered = hoveredId === doctor.id
+            const isHovered    = hoveredId === doctor.id
+            const isHighlighted = highlightIdx === i
+
             return (
               <div
                 key={doctor.id}
@@ -52,12 +86,10 @@ export default function DoctorTeamSection() {
                 onMouseEnter={() => setHoveredId(doctor.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                {/* 카드 위 진료과목 라벨 (항상 공간 차지, 호버 시 표시) */}
-                {/* 카드 버튼 */}
                 <button
                   className="relative rounded-2xl overflow-hidden cursor-pointer text-left group focus:outline-none"
                   style={{ aspectRatio: '3/4' }}
-                  onClick={() => handleClick(doctor.id)}
+                  onClick={() => handleCardClick(doctor.id)}
                   aria-label={`${doctor.name} ${doctor.role} 소개 보기`}
                 >
                   {/* 사진 */}
@@ -106,7 +138,18 @@ export default function DoctorTeamSection() {
                       자세히 보기 →
                     </p>
                   </div>
+
+                  {/* 순차 하이라이트 플래시 오버레이 */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(0,128,200,0.4) 100%)',
+                      opacity: isHighlighted ? 1 : 0,
+                      transition: 'opacity 120ms ease',
+                    }}
+                  />
                 </button>
+
                 <div className="pt-3 text-center">
                   <p className="text-[18px] font-bold leading-tight text-gray-950">
                     {doctor.name} <span className="text-gray-500">{doctor.role}</span>

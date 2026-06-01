@@ -192,32 +192,22 @@
   animation: mobile-pan-0 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 1: 오른쪽(100%) → 왼쪽으로 (14s) */
+/* Slide 1 (서울대): 중앙(50%) → 살짝 왼쪽(45%) 5% 이동 */
 @keyframes mobile-pan-1 {
-  0%   { object-position: 100% center; }
-  100% { object-position: 80% center; }
+  0%   { object-position: 50% center; }
+  100% { object-position: 45% center; }
 }
 .mobile-pan-1 {
-  object-position: 100% center;
-  animation: mobile-pan-1 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+  object-position: 50% center;
+  animation: mobile-pan-1 6.7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 2: 오른쪽(100%) → 왼쪽으로 3cm (14s) */
-@keyframes mobile-pan-2 {
-  0%   { object-position: 100% center; }
-  100% { object-position: 76% center; }
-}
+/* Slide 2 (자연치아): 오른쪽 고정, 움직임 없음 */
 .mobile-pan-2 {
-  object-position: 100% center;
-  animation: mobile-pan-2 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+  object-position: right center;
 }
 
-/* Slide 3: 오른쪽(100%) → 최대한 왼쪽(0%)으로 (14s) */
-@keyframes mobile-pan-3 {
-  0%   { object-position: 100% center; }
-  100% { object-position: 0% center; }
-}
+/* Slide 3 (네비게이션): 오른쪽 고정, 움직임 없음 */
 .mobile-pan-3 {
-  object-position: 100% center;
-  animation: mobile-pan-3 14s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+  object-position: right center;
 }

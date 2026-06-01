@@ -36,40 +36,28 @@ export default function ScheduleSection() {
                 </h3>
               </div>
 
-              <table className="w-full">
-                <thead className="sr-only">
-                  <tr>
-                    <th scope="col">요일</th>
-                    <th scope="col">진료 시간</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {mainTab.hours.map((row, i) => (
-                    <tr
-                      key={row.day}
-                      className={`${
-                        i % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'
-                      } ${row.isClosed ? 'opacity-50' : ''}`}
-                    >
-                      <td className="px-6 py-3.5 text-sm font-medium text-gray-700 w-36">
-                        {row.day}
-                      </td>
-                      <td className="px-6 py-3.5 text-sm text-gray-800">
-                        <div className="flex items-center gap-2">
-                          <span className={row.isClosed ? 'text-gray-400' : ''}>
-                            {row.hours}
-                          </span>
-                          {row.note && (
-                            <span className="shrink-0 text-xs font-medium bg-[#0080C8]/10 text-[#0080C8] px-2 py-0.5 rounded-full">
-                              {row.note}
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <ul>
+                {mainTab.hours.map((row, i) => (
+                  <li
+                    key={row.day}
+                    className={`flex items-center gap-2 px-5 py-3 text-sm ${
+                      i % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'
+                    } ${row.isClosed ? 'opacity-50' : ''}`}
+                  >
+                    <span className="font-medium text-gray-700 w-[4.5rem] shrink-0">
+                      {row.day}
+                    </span>
+                    <span className={`whitespace-nowrap ${row.isClosed ? 'text-gray-400' : 'text-gray-800'}`}>
+                      {row.hours}
+                    </span>
+                    {row.note && (
+                      <span className="shrink-0 text-xs font-medium bg-[#0080C8]/10 text-[#0080C8] px-2 py-0.5 rounded-full whitespace-nowrap">
+                        {row.note}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { ChevronDown } from 'lucide-react'
 import WebGLHero from '@/components/ui/WebGLHero'
 
 type Slide = {
@@ -14,6 +13,14 @@ type Slide = {
 }
 
 const SLIDES: Slide[] = [
+  {
+    id: 3,
+    headline: '수원교정',
+    sub: '인비절라인',
+    image: '/images/slides/slide-4.mp4',
+    isVideo: true,
+    accent: 'var(--e-primary)',
+  },
   {
     id: 0,
     headline: '서울대 출신 대표원장',
@@ -35,36 +42,41 @@ const SLIDES: Slide[] = [
     image: '/images/slides/slide-3.png',
     accent: 'var(--e-primary)',
   },
-  {
-    id: 3,
-    headline: '수원교정',
-    sub: '인비절라인',
-    image: '/images/slides/slide-4.mp4',
-    isVideo: true,
-    accent: 'var(--e-primary)',
-  },
 ]
 
-const INTERVAL        = 6700
-const TRANSITION_DUR  = 2500  // ms — slide transition duration
-function easeInOutCubic(t: number): number {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-}
+const INTERVAL       = 6700
+// index 0=video(full duration), 1=6700, 2=4700, 3=4700
+const SLIDE_INTERVALS = [0, 6700, 4700, 4700]
+const TRANSITION_DUR = 2500
 
-const RADIUS          = 18
-const CIRCUMFERENCE   = 2 * Math.PI * RADIUS
+const RADIUS        = 18
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
 export default function HeroSlider() {
   const [current,  setCurrent]  = useState(0)
   const [prevIdx,  setPrevIdx]  = useState(0)
-  const [tProg,    setTProg]    = useState(1)    // 1 = transition complete
-  const [progress, setProgress] = useState(0)   // auto-play circle
+  const [tProg,    setTProg]    = useState(1)
+  const [progress, setProgress] = useState(0)
 
-  const startTimeRef  = useRef<number>(Date.now())
-  const rafRef        = useRef<number | null>(null)
-  const isPausedRef   = useRef(false)
-  const currentRef    = useRef(0)
-  const transStartRef = useRef<number | null>(null)
+  const startTimeRef     = useRef<number>(Date.now())
+  const rafRef           = useRef<number | null>(null)
+  const isPausedRef      = useRef(false)
+  const currentRef       = useRef(0)
+  const transStartRef    = useRef<number | null>(null)
+  const videoRef         = useRef<HTMLVideoElement | null>(null)
+  const videoAdvancedRef = useRef(false)
+
+  const advanceFrom = (from: number) => {
+    const next = (from + 1) % SLIDES.length
+    setPrevIdx(from)
+    setTProg(0)
+    transStartRef.current = Date.now()
+    setCurrent(next)
+    currentRef.current = next
+    setProgress(0)
+    startTimeRef.current = Date.now()
+    videoAdvancedRef.current = false
+  }
 
   const goTo = (index: number) => {
     setPrevIdx(currentRef.current)
@@ -74,6 +86,17 @@ export default function HeroSlider() {
     currentRef.current = index
     setProgress(0)
     startTimeRef.current = Date.now()
+    videoAdvancedRef.current = false
+    if (index === 0 && videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play().catch(() => {})
+    }
+  }
+
+  const handleVideoEnded = () => {
+    if (videoAdvancedRef.current) return
+    videoAdvancedRef.current = true
+    advanceFrom(0)
   }
 
   useEffect(() => {
@@ -84,25 +107,31 @@ export default function HeroSlider() {
 
   useEffect(() => {
     const tick = () => {
-      // auto-play timer
       if (!isPausedRef.current) {
-        const elapsed = Date.now() - startTimeRef.current
-        const p = Math.min(elapsed / INTERVAL, 1)
-        setProgress(p)
+        if (currentRef.current === 0) {
+          const vid = videoRef.current
+          if (vid && vid.duration > 0) {
+            setProgress(vid.currentTime / vid.duration)
+          }
+        } else {
+          const slideInterval = SLIDE_INTERVALS[currentRef.current] ?? INTERVAL
+          const elapsed = Date.now() - startTimeRef.current
+          const p = Math.min(elapsed / slideInterval, 1)
+          setProgress(p)
 
-        if (p >= 1) {
-          const next = (currentRef.current + 1) % SLIDES.length
-          setPrevIdx(currentRef.current)
-          setTProg(0)
-          transStartRef.current = Date.now()
-          setCurrent(next)
-          currentRef.current = next
-          setProgress(0)
-          startTimeRef.current = Date.now()
+          if (p >= 1) {
+            const next = (currentRef.current + 1) % SLIDES.length
+            setPrevIdx(currentRef.current)
+            setTProg(0)
+            transStartRef.current = Date.now()
+            setCurrent(next)
+            currentRef.current = next
+            setProgress(0)
+            startTimeRef.current = Date.now()
+          }
         }
       }
 
-      // transition progress 0 → 1
       if (transStartRef.current !== null) {
         const te = Date.now() - transStartRef.current
         const tp = Math.min(te / TRANSITION_DUR, 1)
@@ -117,8 +146,8 @@ export default function HeroSlider() {
     return () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current) }
   }, [])
 
-  const slide      = SLIDES[current]
-  const imageUrls  = SLIDES.map((s) => s.isVideo ? '/images/slides/slide-3.png' : s.image)
+  const slide     = SLIDES[current]
+  const imageUrls = SLIDES.map((s) => s.isVideo ? '/images/slides/slide-3.png' : s.image)
 
   return (
     <section
@@ -127,7 +156,7 @@ export default function HeroSlider() {
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
-      {/* ── WebGL 배경 (desktop only, 이미지 슬라이드) ─────────── */}
+      {/* ── WebGL 배경 (desktop only) ─────────── */}
       <div
         className="hidden md:block absolute inset-0"
         style={{ opacity: slide.isVideo ? 0 : 1, transition: 'opacity 0.8s ease' }}
@@ -140,7 +169,7 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── 동영상 레이어 (데스크탑, 비디오 슬라이드일 때만 표시) ── */}
+      {/* ── 동영상 레이어 (데스크탑) ── */}
       {slide.isVideo && (
         <video
           key="hero-video"
@@ -148,8 +177,8 @@ export default function HeroSlider() {
           src="/images/slides/slide-4.mp4"
           autoPlay
           muted
-          loop
           playsInline
+          onEnded={handleVideoEnded}
         />
       )}
 
@@ -157,13 +186,14 @@ export default function HeroSlider() {
       <div className="md:hidden absolute inset-0">
         {slide.isVideo ? (
           <video
+            ref={videoRef}
             key="hero-video-m"
-            className="absolute inset-0 w-full h-full object-contain"
+            className="absolute inset-0 w-full h-full object-cover"
             src="/images/slides/slide-4.mp4"
             autoPlay
             muted
-            loop
             playsInline
+            onEnded={handleVideoEnded}
           />
         ) : (
           <img
@@ -176,7 +206,7 @@ export default function HeroSlider() {
         )}
       </div>
 
-      {/* ── 반투명 그라데이션 오버레이 ──────────────────────────── */}
+      {/* ── 반투명 그라데이션 오버레이 (데스크탑) ── */}
       <div
         className="hidden md:block absolute inset-0 pointer-events-none"
         style={{
@@ -197,75 +227,28 @@ export default function HeroSlider() {
       <div
         className="md:hidden absolute inset-x-0 bottom-0 pointer-events-none"
         style={{
-          height: 'calc(var(--mobile-bottom-bar-height) + 220px)',
-          background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)',
+          height: 'calc(var(--mobile-bottom-bar-height) + 160px)',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)',
         }}
       />
 
-      {/* ── 모바일 텍스트 (중앙 배치) ──────────────────────────── */}
-      <div
-        className="md:hidden absolute inset-x-0 z-10 flex flex-col items-center text-center px-6"
-        style={{ top: '46%', transform: 'translateY(-50%)' }}
-      >
-        <p className="text-white/75 text-[16px] font-semibold mb-3 tracking-widest">서울이건치과 수원</p>
-        <h2
-          key={`m-headline-${current}`}
-          className="text-white text-[34px] font-bold leading-tight text-center mb-2"
-        >
-          {slide.headline}
-        </h2>
-        <p
-          key={`m-sub-${current}`}
-          className="text-white/90 text-[20px] font-light leading-tight text-center"
-        >
-          {slide.sub}
-        </p>
+      {/* ── 모바일 슬라이드 인디케이터 (하단 도트) ── */}
+      <div className="md:hidden absolute bottom-10 inset-x-0 flex justify-center items-center gap-2 z-10">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`슬라이드 ${i + 1}로 이동`}
+            className={`rounded-full transition-all duration-300 ${
+              i === current
+                ? 'w-6 h-1.5 bg-white'
+                : 'w-1.5 h-1.5 bg-white/45 hover:bg-white/70'
+            }`}
+          />
+        ))}
       </div>
 
-
-      {/* ── 텍스트 오버레이 (데스크탑) ───────────────────────────── */}
-      <div className="hidden md:flex absolute inset-0 items-center justify-center px-6 md:justify-start md:pl-20 lg:pl-32">
-        <div className="text-white text-center md:text-left">
-          <p
-            className="text-[15px] md:text-[17px] tracking-[0.3em] uppercase mb-3"
-            style={{ color: slide.accent }}
-          >
-            <span className="text-[18px] md:text-[20px] text-white font-bold">서울이건치과</span>{' '}
-            <span className="text-[16px] md:text-[18px] opacity-60">수원</span>
-          </p>
-          <h1
-            key={`headline-${current}`}
-            className="text-2xl sm:text-3xl md:text-[46px] lg:text-[58px] font-bold leading-tight mb-1"
-          >
-            {slide.headline}
-          </h1>
-          <h2
-            key={`sub-${current}`}
-            className="text-lg sm:text-2xl md:text-[34px] lg:text-[46px] font-light leading-tight"
-          >
-            {slide.sub}
-          </h2>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-            <a
-              href="tel:031-896-5512"
-              className="inline-flex items-center justify-center px-7 py-3 text-sm font-semibold text-white border border-white/40 rounded-full hover:bg-white hover:text-stone-900 transition-all duration-300"
-            >
-              031-896-5512
-            </a>
-            <a
-              href="https://pf.kakao.com/_nqBms"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-7 py-3 text-sm font-semibold rounded-full transition-all duration-300"
-              style={{ backgroundColor: '#FEE500', color: '#191919' }}
-            >
-              카카오 상담 신청
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ── 왼쪽 인디케이터 (세로) ───────────────────────────────── */}
+      {/* ── 왼쪽 인디케이터 (데스크탑 세로) ───────────────────────────────── */}
       <div className="hidden md:flex absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-4 z-10">
         {SLIDES.map((s, i) => (
           <button
@@ -298,7 +281,7 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* ── 슬라이드 카운터 ──────────────────────────────────────── */}
+      {/* ── 슬라이드 카운터 (데스크탑) ──────────────────────────────────────── */}
       <div className="hidden md:block absolute bottom-20 right-6 md:right-10 text-white/50 text-xs tracking-widest font-mono">
         {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
       </div>

@@ -47,7 +47,7 @@ export default function BoardIdentityLayout({ label, title, description, pillars
                   <h3 className="font-bold text-gray-900 mb-3 text-[20px] sm:text-[21px] leading-[1.35] tracking-normal">
                     {pillar.title}
                   </h3>
-                  <p className="text-[18px] sm:text-[19px] text-gray-600 leading-[1.85] tracking-normal whitespace-pre-line">
+                  <p className="text-base sm:text-[19px] text-gray-600 leading-[1.85] tracking-normal whitespace-pre-line">
                     {pillar.description}
                   </p>
                 </div>

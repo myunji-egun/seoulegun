@@ -16,6 +16,7 @@ interface TreatmentPageProps {
   treatments: TreatmentContent[]
   hideCases?: boolean
   videoId?: string
+  localVideo?: string
   heroImage?: string
   heroFull?: boolean
   extraSection?: React.ReactNode
@@ -29,6 +30,7 @@ export default function TreatmentPage({
   treatments,
   hideCases,
   videoId,
+  localVideo,
   heroImage,
   heroFull,
   extraSection,
@@ -45,7 +47,7 @@ export default function TreatmentPage({
   return (
     <>
       <FaqJsonLd faqs={allFaqs} />
-      {heroReplacement ?? <BoardHero title={title} subtitle={subtitle} videoId={videoId} heroImage={heroImage} heroFull={heroFull} />}
+      {heroReplacement ?? <BoardHero title={title} subtitle={subtitle} videoId={videoId} localVideo={localVideo} heroImage={heroImage} heroFull={heroFull} />}
       {extraSection}
       <BoardAnchorNav items={navItems} />
 

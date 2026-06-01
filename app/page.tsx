@@ -30,7 +30,7 @@ export default function Home() {
     <>
       <IntroScreen />
 
-      <h1 className="sr-only">수원 영통 서울이건치과</h1>
+      <h1 className="sr-only">수원 영통 임플란트·보철·교정 진료 안내 서울이건치과</h1>
       <HomeScrollSnap />
 
       {/* 데스크탑 */}
