@@ -157,6 +157,15 @@ export default function QuickConsultBar() {
               <span className="text-[18px] text-white/60 group-hover:text-white/80 transition-colors whitespace-nowrap">
                 개인정보 수집 동의
               </span>
+              <a
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-[13px] text-white/40 hover:text-[#0080C8] underline underline-offset-2 transition-colors whitespace-nowrap"
+              >
+                보기
+              </a>
             </label>
             {errors.agreed && (
               <span id="err-agreed" role="alert" className="text-red-400 text-[18px] leading-none">

@@ -36,7 +36,7 @@ export default function Home() {
       {/* 데스크탑 */}
       <div
         id="home-desktop"
-        className="home-page hidden md:block h-screen overflow-y-scroll"
+        className="home-page hidden md:block h-screen overflow-y-scroll scrollbar-hide"
       >
         {SECTIONS.map((Section, i) => (
           <div key={i}>
