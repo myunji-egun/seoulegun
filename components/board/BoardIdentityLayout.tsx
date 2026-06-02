@@ -12,14 +12,14 @@ interface BoardIdentityLayoutProps {
   title: React.ReactNode
   description: React.ReactNode
   pillars: Pillar[]
-  transparent?: boolean   // 페이지 배경이 비치도록 흰 배경 제거 (소아치과 등)
+  frosted?: boolean   // 페이지 배경이 비치되 글자는 또렷하게 (반투명+블러, 소아치과 등)
 }
 
-export default function BoardIdentityLayout({ label, title, description, pillars, transparent = false }: BoardIdentityLayoutProps) {
+export default function BoardIdentityLayout({ label, title, description, pillars, frosted = false }: BoardIdentityLayoutProps) {
   const { ref, isVisible } = useScrollReveal(0.15)
 
   return (
-    <section className={`py-16 sm:py-24 border-b border-gray-100 ${transparent ? '' : 'bg-white'}`}>
+    <section className={`py-16 sm:py-24 border-b border-gray-100 ${frosted ? 'bg-white/70 backdrop-blur-md' : 'bg-white'}`}>
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <p className={`text-sm font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'domino-rise' : 'domino-hidden'}`}>

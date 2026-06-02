@@ -31,7 +31,7 @@ export default function PediatricIdentity() {
   return (
     <>
       <BoardIdentityLayout
-      transparent
+      frosted
       label="PEDIATRIC DENTISTRY"
       title={<>아이의 첫 치과,<br /><span className="text-[#0080C8]">평생 구강 건강의 시작</span></>}
       description={<>아이가 치과를 무서워하지 않도록 하는 것이 먼저입니다.<br />편안한 첫 경험이 평생의 구강 건강 습관을 만들고,<br />소아 전문의가 성장 단계마다 함께합니다.</>}

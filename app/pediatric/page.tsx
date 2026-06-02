@@ -29,6 +29,7 @@ export default function PediatricPage() {
         subtitle="아이의 치아 성장과 구강 관리를 함께 살펴봅니다"
         treatments={pediatricTreatments}
         hideCases
+        frostedContent
         heroReplacement={<PediatricCredentialSection />}
         extraSection={<PediatricIdentity />}
       />

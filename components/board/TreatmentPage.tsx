@@ -22,6 +22,7 @@ interface TreatmentPageProps {
   extraSection?: React.ReactNode
   heroReplacement?: React.ReactNode
   treatImage?: string
+  frostedContent?: boolean   // 페이지 배경 위 본문 가독성: 반투명+블러 패널 (소아치과 등)
 }
 
 export default function TreatmentPage({
@@ -36,6 +37,7 @@ export default function TreatmentPage({
   extraSection,
   heroReplacement,
   treatImage,
+  frostedContent,
 }: TreatmentPageProps) {
   const navItems = treatments.map((t) => ({
     id: t.treatmentType,
@@ -51,7 +53,7 @@ export default function TreatmentPage({
       {extraSection}
       <BoardAnchorNav items={navItems} />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-0">
+      <div className={`max-w-5xl mx-auto ${frostedContent ? 'bg-white/70 backdrop-blur-md rounded-2xl my-6 px-5 sm:px-8' : 'px-4 sm:px-6 lg:px-0'}`}>
         {treatments.map((treatment, index) => (
           <section
             key={treatment.treatmentType}
