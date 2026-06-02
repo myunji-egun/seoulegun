@@ -42,11 +42,18 @@ const SLIDES: Slide[] = [
     image: '/images/slides/slide-3.png',
     accent: 'var(--e-primary)',
   },
+  {
+    id: 5,
+    headline: '서울이건치과',
+    sub: '수원 영통',
+    image: '/images/slides/slide-6.jpg',
+    accent: 'var(--e-primary)',
+  },
 ]
 
 const INTERVAL       = 6700
-// index 0=video(full duration), 1=6700, 2=4700, 3=4700
-const SLIDE_INTERVALS = [0, 6700, 4700, 4700]
+// index 0=video(full duration), 1=6700, 2=4700, 3=4700, 4=6700
+const SLIDE_INTERVALS = [0, 6700, 4700, 4700, 6700]
 const TRANSITION_DUR = 2500
 
 const RADIUS        = 18
@@ -147,7 +154,7 @@ export default function HeroSlider() {
   }, [])
 
   const slide     = SLIDES[current]
-  const imageUrls = SLIDES.map((s) => s.isVideo ? '/images/slides/slide-3.png' : s.image)
+  const imageUrls = SLIDES.map((s) => s.isVideo ? '/images/slides/slide-1.webp' : s.image)
 
   return (
     <section

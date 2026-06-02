@@ -219,3 +219,13 @@
 .mobile-pan-3 {
   object-position: right center;
 }
+
+/* Slide 4 (slide-6): 중앙(50%) → 살짝 왼쪽(45%) */
+@keyframes mobile-pan-4 {
+  0%   { object-position: 50% center; }
+  100% { object-position: 45% center; }
+}
+.mobile-pan-4 {
+  object-position: 50% center;
+  animation: mobile-pan-4 6.7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
+}
