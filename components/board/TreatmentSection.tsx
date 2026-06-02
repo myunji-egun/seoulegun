@@ -2214,7 +2214,7 @@ export default function TreatmentSection({
                   )}
                 </div>
                 {/* 화살표 */}
-                {i < treatment.steps.length - 1 && (
+                {i < (treatment.steps?.length ?? 0) - 1 && (
                   <div className="flex items-center justify-center w-8 shrink-0">
                     <svg className="w-4 h-4 text-[#0080C8]/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
