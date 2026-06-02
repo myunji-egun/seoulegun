@@ -15,13 +15,23 @@ export const metadata: Metadata = {
 
 export default function PediatricPage() {
   return (
-    <TreatmentPage
-      title="수원 소아치과 진료 안내"
-      subtitle="아이의 치아 성장과 구강 관리를 함께 살펴봅니다"
-      treatments={pediatricTreatments}
-      hideCases
-      heroReplacement={<PediatricCredentialSection />}
-      extraSection={<PediatricIdentity />}
-    />
+    <div
+      className="pediatric-page"
+      style={{
+        backgroundImage: "url('/images/m/icons/child-background.png')",
+        backgroundRepeat: 'repeat-y',
+        backgroundSize: '100% auto',
+        backgroundPosition: 'top center',
+      }}
+    >
+      <TreatmentPage
+        title="수원 소아치과 진료 안내"
+        subtitle="아이의 치아 성장과 구강 관리를 함께 살펴봅니다"
+        treatments={pediatricTreatments}
+        hideCases
+        heroReplacement={<PediatricCredentialSection />}
+        extraSection={<PediatricIdentity />}
+      />
+    </div>
   )
 }
