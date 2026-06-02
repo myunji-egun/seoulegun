@@ -204,19 +204,6 @@ export default function ColumnBoard() {
             </div>
           )}
 
-          {/* 상담 배너 */}
-          <div className="bg-[#0080C8] rounded-xl p-5 text-white">
-            <p className="text-[11px] font-semibold uppercase tracking-widest opacity-70 mb-2">무료 상담</p>
-            <p className="text-sm font-bold leading-snug mb-4">
-              내 치아 상태,<br />먼저 정확히 확인해보세요.
-            </p>
-            <a
-              href="tel:031-896-5512"
-              className="block text-center bg-white text-[#0080C8] text-sm font-bold rounded-lg py-2 hover:bg-[#F0F7FF] transition-colors"
-            >
-              031-896-5512
-            </a>
-          </div>
         </aside>
 
         {/* ── Post Grid ── */}

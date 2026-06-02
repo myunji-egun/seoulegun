@@ -1559,20 +1559,14 @@ function InvisalignChapter({ treatment }: { treatment: TreatmentContent }) {
         >
           <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
           <div className="relative rounded-[28px] overflow-hidden bg-white border border-white shadow-[0_28px_90px_rgba(15,71,110,0.16)]">
-            {treatment.beforeImage && treatment.afterImage ? (
-              <BeforeAfterSlider
-                beforeSrc={treatment.beforeImage}
-                afterSrc={treatment.afterImage}
-                beforeAlt={`${treatment.title} 시술 전`}
-                afterAlt={`${treatment.title} 시술 후`}
-              />
-            ) : treatment.image ? (
-              <img src={treatment.image} alt={treatment.title} className="w-full h-auto" />
-            ) : (
-              <div className="w-full aspect-[4/3] flex items-center justify-center text-gray-400 text-sm">
-                치료 이미지 준비 중
-              </div>
-            )}
+            <video
+              className="w-full h-full aspect-[3/4] object-cover"
+              src="https://videos.ctfassets.net/vh25xg5i1h5l/3kxmu3HTOorCQDzI6DZMww/6eff8e1b5cef85457c0c1f2ef8e899ac/AU-treatment_plan1.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
           </div>
         </div>
       </div>
@@ -1733,6 +1727,18 @@ function PediatricOrthoChapter({ treatment }: { treatment: TreatmentContent }) {
             <p className="text-[15px] leading-[1.85] text-gray-700">{card.body}</p>
           </div>
         ))}
+      </div>
+
+      <div className="w-full sm:max-w-[80%] mx-auto">
+        <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-[0_18px_60px_rgba(16,55,91,0.1)]">
+          <iframe
+            src="https://www.youtube.com/embed/57wxArpmC3s?rel=0&modestbranding=1"
+            title="소아교정 안내 영상"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          />
+        </div>
       </div>
 
       <div className="flex items-center gap-6">

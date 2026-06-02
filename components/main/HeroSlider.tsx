@@ -52,8 +52,8 @@ const SLIDES: Slide[] = [
 ]
 
 const INTERVAL       = 6700
-// index 0=video(full duration), 1=6700, 2=4700, 3=4700, 4=6700
-const SLIDE_INTERVALS = [0, 6700, 4700, 4700, 6700]
+// index 0=video(full duration), 1=3000, 2=4700, 3=4700, 4=6700
+const SLIDE_INTERVALS = [0, 3000, 4700, 4700, 6700]
 const TRANSITION_DUR = 2500
 
 const RADIUS        = 18
@@ -243,16 +243,16 @@ export default function HeroSlider() {
       />
 
       {/* ── 모바일 슬라이드 인디케이터 (하단 도트) ── */}
-      <div className="md:hidden absolute bottom-10 inset-x-0 flex justify-center items-center gap-2 z-10">
+      <div className="md:hidden absolute bottom-10 inset-x-0 flex justify-center items-center gap-2.5 z-10">
         {SLIDES.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`슬라이드 ${i + 1}로 이동`}
-            className={`rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
               i === current
-                ? 'w-6 h-1.5 bg-white'
-                : 'w-1.5 h-1.5 bg-white/45 hover:bg-white/70'
+                ? 'bg-white scale-125'
+                : 'bg-white/45 hover:bg-white/70'
             }`}
           />
         ))}

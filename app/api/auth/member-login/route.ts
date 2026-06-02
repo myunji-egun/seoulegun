@@ -58,7 +58,8 @@ export async function POST(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 7,
       path: '/',
     })
-    res.cookies.set('member_name', encodeURIComponent(member.name), {
+    // NextResponse.cookies.set 이 자동으로 percent-encoding 하므로 수동 인코딩 금지 (이중 인코딩 방지)
+    res.cookies.set('member_name', member.name, {
       httpOnly: false,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',

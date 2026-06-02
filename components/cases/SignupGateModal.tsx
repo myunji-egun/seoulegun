@@ -27,7 +27,19 @@ interface LoginForm {
 function getCookie(name: string) {
   if (typeof document === 'undefined') return null
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-  return match ? decodeURIComponent(match[2]) : null
+  if (!match) return null
+  // 이중 인코딩된 레거시 쿠키도 정상 처리: %가 사라질 때까지 디코딩
+  let value = match[2]
+  try {
+    while (/%[0-9A-Fa-f]{2}/.test(value)) {
+      const decoded = decodeURIComponent(value)
+      if (decoded === value) break
+      value = decoded
+    }
+  } catch {
+    // 디코딩 실패 시 원본 유지
+  }
+  return value
 }
 
 export function checkMemberSession(): string | null {

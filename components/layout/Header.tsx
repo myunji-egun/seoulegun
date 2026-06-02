@@ -83,28 +83,7 @@ export default function Header() {
               className="hidden lg:flex flex-1 justify-center items-center gap-6 xl:gap-10"
               aria-label="주 메뉴"
             >
-              {NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`relative px-1 py-2 text-[18px] font-medium whitespace-nowrap transition-colors duration-200 group ${
-                      isActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
-                    }`}
-                  >
-                    {item.label}
-                    <span
-                      className={`absolute bottom-0 left-1 right-1 h-0.5 rounded-full transition-transform duration-200 origin-left ${
-                        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                      }`}
-                      style={{ backgroundColor: '#0080C8' }}
-                    />
-                  </Link>
-                )
-              })}
-
-              {/* News 드롭다운 — 맨 마지막 */}
+              {/* News 드롭다운 — 맨 앞 */}
               <div
                 ref={boardRef}
                 className="relative"
@@ -128,7 +107,7 @@ export default function Header() {
                   />
                 </button>
                 {boardOpen && (
-                  <div className="absolute top-full right-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[130px] z-50">
+                  <div className="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[130px] z-50">
                     {BOARD_ITEMS.map(item => (
                       <Link
                         key={item.href}
@@ -143,6 +122,27 @@ export default function Header() {
                   </div>
                 )}
               </div>
+
+              {NAV_ITEMS.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`relative px-1 py-2 text-[18px] font-medium whitespace-nowrap transition-colors duration-200 group ${
+                      isActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
+                    }`}
+                  >
+                    {item.label}
+                    <span
+                      className={`absolute bottom-0 left-1 right-1 h-0.5 rounded-full transition-transform duration-200 origin-left ${
+                        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      }`}
+                      style={{ backgroundColor: '#0080C8' }}
+                    />
+                  </Link>
+                )
+              })}
             </nav>
 
             {/* 예약하기 버튼 (데스크탑) */}

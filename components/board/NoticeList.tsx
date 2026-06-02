@@ -10,8 +10,14 @@ interface Notice {
   notice_date: string
 }
 
+const INITIAL_COUNT = 3
+
 export default function NoticeList({ notices }: { notices: Notice[] }) {
   const [openId, setOpenId] = useState<string | null>(null)
+  const [expanded, setExpanded] = useState(false)
+
+  const visibleNotices = expanded ? notices : notices.slice(0, INITIAL_COUNT)
+  const hasMore = notices.length > INITIAL_COUNT
 
   const handleNoticeClick = (notice: Notice) => {
     if (!notice.image_url) {
@@ -31,7 +37,7 @@ export default function NoticeList({ notices }: { notices: Notice[] }) {
         <h2 className="text-lg font-semibold text-gray-900">공지 목록</h2>
       </div>
       <ol className="divide-y divide-gray-200">
-        {notices.map((notice, index) => (
+        {visibleNotices.map((notice, index) => (
           <li key={notice.id}>
             <button
               type="button"
@@ -56,6 +62,25 @@ export default function NoticeList({ notices }: { notices: Notice[] }) {
           </li>
         ))}
       </ol>
+
+      {hasMore && !expanded && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="w-full border-t border-gray-200 py-4 text-sm font-semibold text-[#0080C8] transition-colors hover:bg-[#EAF4FC]"
+        >
+          더 보기 ({notices.length - INITIAL_COUNT})
+        </button>
+      )}
+      {hasMore && expanded && (
+        <button
+          type="button"
+          onClick={() => setExpanded(false)}
+          className="w-full border-t border-gray-200 py-4 text-sm font-semibold text-gray-500 transition-colors hover:bg-gray-50"
+        >
+          접기
+        </button>
+      )}
     </div>
   )
 }

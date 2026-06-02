@@ -91,31 +91,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
         {/* 메뉴 링크 */}
         <ul className="flex-1 overflow-y-auto py-4">
-          {/* 진료 메뉴 */}
-          {NAV_ITEMS.map((item, index) => {
-            const isActive = pathname === item.href
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  className={`flex items-center gap-3 px-6 py-4 text-base font-medium transition-colors ${
-                    isActive
-                      ? 'text-[#0080C8] bg-[#0080C8]/5 border-r-2 border-[#0080C8]'
-                      : 'text-gray-700 hover:text-[#0080C8] hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="w-5 text-xs text-gray-400 font-normal tabular-nums">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  {item.label}
-                </Link>
-              </li>
-            )
-          })}
-
-          {/* News 섹션 — 맨 마지막 */}
-          <li><div className="mx-6 my-3 border-t border-gray-100" /></li>
+          {/* News 섹션 — 맨 위 */}
           <li>
             <p className="px-6 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
               News
@@ -135,6 +111,32 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
+                  {item.label}
+                </Link>
+              </li>
+            )
+          })}
+
+          {/* 구분선 */}
+          <li><div className="mx-6 my-3 border-t border-gray-100" /></li>
+
+          {/* 진료 메뉴 */}
+          {NAV_ITEMS.map((item, index) => {
+            const isActive = pathname === item.href
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={onClose}
+                  className={`flex items-center gap-3 px-6 py-4 text-base font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#0080C8] bg-[#0080C8]/5 border-r-2 border-[#0080C8]'
+                      : 'text-gray-700 hover:text-[#0080C8] hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="w-5 text-xs text-gray-400 font-normal tabular-nums">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                   {item.label}
                 </Link>
               </li>
