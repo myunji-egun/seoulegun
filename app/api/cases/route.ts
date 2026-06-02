@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { hasSupabaseConfig } from '@/lib/supabase/config'
 
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json([])
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const { searchParams } = new URL(request.url)
     const boardCategory = searchParams.get('board_category')
 
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 })
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const body = await request.json()
     const { title, description, board_category, treatment_type, before_image_url, after_image_url, blog_urls } = body
 

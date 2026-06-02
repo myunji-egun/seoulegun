@@ -4,18 +4,22 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 interface FormData {
-  email: string
+  userId: string
   password: string
+  name: string
+  phone: string
   birthday: string
-  address: string
+  email: string
 }
 
 export default function SignupForm() {
   const [form, setForm] = useState<FormData>({
-    email: '',
+    userId: '',
     password: '',
+    name: '',
+    phone: '',
     birthday: '',
-    address: '',
+    email: '',
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -30,33 +34,47 @@ export default function SignupForm() {
     e.preventDefault()
     setError('')
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      setError('올바른 이메일 주소를 입력해 주세요.')
+    if (!form.userId.trim() || form.userId.trim().length < 4) {
+      setError('아이디는 4자 이상 입력해 주세요.')
+      return
+    }
+    if (!/^[a-zA-Z0-9_]+$/.test(form.userId.trim())) {
+      setError('아이디는 영문·숫자·_만 사용 가능합니다.')
       return
     }
     if (form.password.length < 8) {
       setError('비밀번호는 8자 이상 입력해 주세요.')
       return
     }
+    if (!form.name.trim()) {
+      setError('이름을 입력해 주세요.')
+      return
+    }
+    if (form.phone.replace(/\D/g, '').length < 10) {
+      setError('올바른 휴대폰번호를 입력해 주세요.')
+      return
+    }
     if (!form.birthday.trim()) {
       setError('생년월일을 입력해 주세요.')
       return
     }
-    if (!form.address.trim()) {
-      setError('주소를 입력해 주세요.')
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setError('올바른 이메일 주소를 입력해 주세요.')
       return
     }
 
     setLoading(true)
     try {
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch('/api/auth/member-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: form.email.trim(),
+          userId: form.userId.trim(),
           password: form.password,
+          name: form.name.trim(),
+          phone: form.phone,
           birthday: form.birthday.trim(),
-          address: form.address.trim(),
+          email: form.email.trim(),
         }),
       })
 
@@ -83,7 +101,7 @@ export default function SignupForm() {
         </div>
         <h2 className="text-lg font-bold text-gray-900 mb-2">회원가입 완료</h2>
         <p className="text-sm text-gray-500 mb-6">서울이건치과 회원이 되신 것을 환영합니다.</p>
-        <Link href="/" className="inline-block bg-[#0080C8] text-white font-semibold text-sm py-3 px-8 rounded-lg hover:bg-[#A08968] transition-colors">
+        <Link href="/" className="inline-block bg-[#0080C8] text-white font-semibold text-sm py-3 px-8 rounded-lg hover:bg-[#006EAA] transition-colors">
           홈으로 이동
         </Link>
       </div>
@@ -94,14 +112,14 @@ export default function SignupForm() {
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 space-y-5 w-full max-w-sm">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">
-          아이디 (이메일) <span className="text-red-400">*</span>
+          아이디 <span className="text-red-400">*</span>
         </label>
         <input
-          type="email"
-          value={form.email}
-          onChange={e => handleChange('email', e.target.value)}
-          placeholder="hong@naver.com"
-          autoComplete="email"
+          type="text"
+          value={form.userId}
+          onChange={e => handleChange('userId', e.target.value)}
+          placeholder="영문·숫자·_ 4자 이상"
+          autoComplete="username"
           className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
         />
       </div>
@@ -114,8 +132,36 @@ export default function SignupForm() {
           type="password"
           value={form.password}
           onChange={e => handleChange('password', e.target.value)}
-          placeholder="8자 이상 입력해 주세요"
+          placeholder="8자 이상"
           autoComplete="new-password"
+          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+          이름 <span className="text-red-400">*</span>
+        </label>
+        <input
+          type="text"
+          value={form.name}
+          onChange={e => handleChange('name', e.target.value)}
+          placeholder="홍길동"
+          autoComplete="name"
+          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+          휴대폰번호 <span className="text-red-400">*</span>
+        </label>
+        <input
+          type="tel"
+          value={form.phone}
+          onChange={e => handleChange('phone', e.target.value)}
+          placeholder="010-0000-0000"
+          autoComplete="tel"
           className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
         />
       </div>
@@ -134,14 +180,14 @@ export default function SignupForm() {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">
-          주소 <span className="text-red-400">*</span>
+          이메일 <span className="text-red-400">*</span>
         </label>
         <input
-          type="text"
-          value={form.address}
-          onChange={e => handleChange('address', e.target.value)}
-          placeholder="도로명 주소를 입력해 주세요"
-          autoComplete="street-address"
+          type="email"
+          value={form.email}
+          onChange={e => handleChange('email', e.target.value)}
+          placeholder="hong@naver.com"
+          autoComplete="email"
           className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#0080C8] transition-colors"
         />
       </div>

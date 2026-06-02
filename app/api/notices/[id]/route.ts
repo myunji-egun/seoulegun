@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { hasSupabaseConfig } from '@/lib/supabase/config'
 import { mkdir, readFile, writeFile } from 'fs/promises'
@@ -76,7 +76,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       return NextResponse.json(notices[index])
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const { data, error } = await supabase
       .from('notices')
       .update(updates)
@@ -112,7 +112,7 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
       return NextResponse.json({ success: true })
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     const { error } = await supabase.from('notices').delete().eq('id', id)
 

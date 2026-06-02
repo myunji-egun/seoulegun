@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { hasSupabaseConfig } from '@/lib/supabase/config'
 import { mkdir, readFile, writeFile } from 'fs/promises'
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(includeAll ? local : local.filter((c) => c.is_active))
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const query = supabase
       .from('columns')
       .select('*')
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(column, { status: 201 })
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const { data, error } = await supabase
       .from('columns')
       .insert({

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 
 async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder()
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     if (!password || typeof password !== 'string' || !password)
       return NextResponse.json({ error: '비밀번호를 입력해 주세요.' }, { status: 400 })
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     const { data: member } = await supabase
       .from('members')

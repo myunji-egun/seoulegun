@@ -3,6 +3,60 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Plus, Pencil, Trash2, X, Upload } from 'lucide-react'
 
+const HTML_TEMPLATE = `<h1 style="font-size:26px; font-weight:700; color:#1a2b3c; border-bottom:2px solid #1a2b3c; padding-bottom:15px; margin-bottom:30px; line-height:1.4;">
+  [메인 제목]<br>
+  <span style="font-size:0.7em; font-weight:400; color:#555;">[부제목]</span>
+</h1>
+
+<p>안녕하세요. 서울이건치과 원장입니다.</p>
+
+<p>
+  [환자분들이 자주 하시는 말씀이 있습니다.]<br>
+  <strong>"[환자가 자주 묻는 질문 또는 흔한 오해]"</strong>
+</p>
+
+<p>
+  [도입 연결 문장],
+  <span style="font-weight:700; color:#d35400; background:rgba(211,84,0,0.1); padding:0 4px;">[핵심 결론 문장]</span>
+  [이유 보충 설명.]
+</p>
+
+<h2 style="font-size:22px; font-weight:700; color:#2c3e50; border-left:5px solid #d35400; padding-left:15px; margin-top:50px; margin-bottom:15px;">
+  1. [소단원 제목]
+</h2>
+
+<p>[소단원 도입 설명.]</p>
+
+<div style="background:#eeeeee; border-radius:8px; text-align:center; margin-bottom:20px; overflow:hidden;">
+  <img src="[이미지URL]" style="max-width:100%; display:block; margin:0 auto;" alt="[이미지 설명]">
+</div>
+<p style="font-size:14px; color:#666; text-align:center; margin-top:-15px;">▲ [이미지 캡션]</p>
+
+<p>[본문 설명 문장.]</p>
+
+<h2 style="font-size:22px; font-weight:700; color:#2c3e50; border-left:5px solid #d35400; padding-left:15px; margin-top:50px; margin-bottom:15px;">
+  2. [소단원 제목]
+</h2>
+
+<p>[소단원 도입 설명.]</p>
+
+<div style="background:#f4f7fa; border:1px solid #e1e8ed; border-radius:10px; padding:20px; margin-bottom:20px;">
+  <strong>✅ [박스 소제목]</strong><br><br>
+  1. [포인트 1]<br>
+  2. [포인트 2]<br>
+  3. [포인트 3]
+</div>
+
+<div style="padding:30px 0 0;">
+  <p style="font-size:18px; font-weight:700; color:#1a2b3c; margin-bottom:15px;">
+    [마무리 핵심 메시지]
+  </p>
+  <p>
+    [마무리 문장. <strong>[행동 강조]</strong> 하는 것이 원칙입니다.]<br>
+    [자연 치아를 보호하기 위해 미루지 말고 검진받아보시길 권해드립니다.]
+  </p>
+</div>`
+
 interface Column {
   id: string
   title: string
@@ -53,7 +107,11 @@ export default function ColumnsPage() {
   const [uploading, setUploading] = useState(false)
   const [dragActive, setDragActive] = useState(false)
   const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([])
+  const [editorTab, setEditorTab] = useState<'edit' | 'preview'>('edit')
+  const [insertingImg, setInsertingImg] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
+  const contentImgRef = useRef<HTMLInputElement>(null)
+  const editorRef = useRef<HTMLDivElement>(null)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -68,6 +126,13 @@ export default function ColumnsPage() {
   }, [])
 
   useEffect(() => { fetchData() }, [fetchData])
+
+  // 모달 열릴 때 에디터에 기존 내용 세팅
+  useEffect(() => {
+    if (modalOpen && editorRef.current) {
+      editorRef.current.innerHTML = form.content
+    }
+  }, [modalOpen])
 
   const openAddModal = () => {
     setEditingId(null)
@@ -121,6 +186,56 @@ export default function ColumnsPage() {
     e.target.value = ''
   }
 
+  const insertImageAtPos = async (file: File, x?: number, y?: number) => {
+    if (!file.type.startsWith('image/')) return
+    setInsertingImg(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      fd.append('folder', 'columns')
+      const res = await fetch('/api/upload', { method: 'POST', body: fd })
+      if (!res.ok) return
+      const { url } = await res.json()
+
+      // img-box + caption 요소 생성
+      const wrapper = document.createElement('div')
+      wrapper.className = 'img-box'
+      const img = document.createElement('img')
+      img.src = url
+      img.alt = ''
+      wrapper.appendChild(img)
+      const caption = document.createElement('p')
+      caption.className = 'img-caption'
+      caption.textContent = '▲ 캡션을 입력하세요'
+
+      const editor = editorRef.current
+      if (!editor) return
+
+      // 드롭 위치에 삽입
+      if (x !== undefined && y !== undefined) {
+        const range = (document as any).caretRangeFromPoint?.(x, y)
+          ?? (document as any).caretPositionFromPoint?.(x, y)
+        if (range) {
+          const sel = window.getSelection()
+          sel?.removeAllRanges()
+          sel?.addRange(range)
+          range.collapse(true)
+          range.insertNode(caption)
+          range.insertNode(wrapper)
+        } else {
+          editor.appendChild(wrapper)
+          editor.appendChild(caption)
+        }
+      } else {
+        editor.appendChild(wrapper)
+        editor.appendChild(caption)
+      }
+      editor.focus()
+    } finally {
+      setInsertingImg(false)
+    }
+  }
+
   const handleDrop = async (e: React.DragEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setDragActive(false)
@@ -143,9 +258,12 @@ export default function ColumnsPage() {
   const handleSave = async () => {
     if (!form.title.trim()) return
     setSaving(true)
+    // 에디터의 최신 HTML 읽기
+    const latestContent = editorRef.current?.innerHTML ?? form.content
     try {
       const payload = {
         ...form,
+        content: latestContent,
         tags: parseTags(form.tags),
         image_url: uploadedImages[0]?.url || form.image_url || null,
       }
@@ -230,7 +348,10 @@ export default function ColumnsPage() {
                     )}
                   </td>
                   <td className="px-6 py-3">
-                    <p className="text-sm font-medium text-gray-900 truncate max-w-[200px]">{item.title}</p>
+                    <a href={`/column/${item.id}`} target="_blank" rel="noopener noreferrer"
+                      className="text-sm font-medium text-gray-900 truncate max-w-[200px] hover:text-[#0080C8] transition-colors block">
+                      {item.title}
+                    </a>
                     {item.tags && item.tags.length > 0 && (
                       <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[200px]">
                         {item.tags.map((t) => `#${t}`).join(' ')}
@@ -268,11 +389,11 @@ export default function ColumnsPage() {
         </div>
       )}
 
-      {/* 추가/수정 모달 */}
+      {/* 추가/수정 모달 — 전체화면 */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white shadow-xl">
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="fixed inset-0 bg-white z-50 flex flex-col">
+          <div className="flex-1 overflow-y-auto">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 sticky top-0 bg-white z-10">
               <h2 className="text-lg font-semibold text-gray-900">
                 {editingId ? '칼럼 수정' : '칼럼 추가'}
               </h2>
@@ -280,8 +401,7 @@ export default function ColumnsPage() {
                 <X size={20} />
               </button>
             </div>
-
-            <div className="p-6 space-y-4">
+            <div className="p-6 max-w-4xl mx-auto w-full space-y-4">
               {/* 제목 */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">제목 *</label>
@@ -323,14 +443,76 @@ export default function ColumnsPage() {
 
               {/* 내용 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">내용</label>
-                <textarea
-                  value={form.content}
-                  onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
-                  rows={5}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#0080C8] resize-none"
-                  placeholder="칼럼 내용을 입력하세요"
-                />
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-sm font-medium text-gray-700">내용</label>
+                  <div className="flex items-center gap-2">
+                    <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setEditorTab('edit')}
+                        className={`px-3 py-1 transition-colors ${editorTab === 'edit' ? 'bg-[#0080C8] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
+                      >편집</button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (editorRef.current) {
+                            setForm(p => ({ ...p, content: editorRef.current!.innerHTML }))
+                          }
+                          setEditorTab('preview')
+                        }}
+                        className={`px-3 py-1 transition-colors ${editorTab === 'preview' ? 'bg-[#0080C8] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
+                      >미리보기</button>
+                    </div>
+                  </div>
+                </div>
+                {editorTab === 'edit' ? (
+                  <div>
+                    <div
+                      ref={editorRef}
+                      contentEditable
+                      suppressContentEditableWarning
+                      className="post-wrap w-full min-h-[400px] px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0080C8] overflow-auto bg-white cursor-text"
+                      style={{ whiteSpace: 'pre-wrap' }}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={async (e) => {
+                        e.preventDefault()
+                        const file = e.dataTransfer.files?.[0]
+                        if (file?.type.startsWith('image/')) {
+                          await insertImageAtPos(file, e.clientX, e.clientY)
+                        }
+                        // 텍스트 드래그는 브라우저가 자동 처리
+                      }}
+                    />
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <button
+                        type="button"
+                        onClick={() => contentImgRef.current?.click()}
+                        disabled={insertingImg}
+                        className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:border-[#0080C8] hover:text-[#0080C8] transition-colors disabled:opacity-50"
+                      >
+                        <Upload size={12} />
+                        {insertingImg ? '업로드 중...' : '이미지 버튼으로 삽입'}
+                      </button>
+                      <span className="text-xs text-gray-400">이미지를 에디터 안에 드래그하거나 붙여넣기(Ctrl+V) 가능</span>
+                    </div>
+                    <input
+                      ref={contentImgRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (file) await insertImageAtPos(file)
+                        e.target.value = ''
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="w-full min-h-[300px] px-4 py-3 rounded-lg border border-gray-300 overflow-auto bg-white post-wrap"
+                    dangerouslySetInnerHTML={{ __html: form.content || '<p class="text-gray-400">내용이 없습니다.</p>' }}
+                  />
+                )}
               </div>
 
               {/* 이미지 업로드 */}
@@ -412,18 +594,20 @@ export default function ColumnsPage() {
               </div>
             </div>
 
-            <div className="flex gap-3 justify-end p-6 border-t border-gray-200">
-              <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900">
-                취소
-              </button>
-              <button
-                onClick={handleSave}
-                disabled={saving || !form.title.trim()}
-                className="px-4 py-2 text-sm bg-[#0080C8] text-white rounded-lg hover:bg-[#006aaa] disabled:opacity-60 transition-colors"
-              >
-                {saving ? '저장 중...' : editingId ? '수정' : '추가'}
-              </button>
-            </div>
+          </div>
+
+          {/* 하단 버튼 바 — 전체화면 고정 */}
+          <div className="flex gap-3 justify-end px-6 py-4 border-t border-gray-200 bg-white shrink-0">
+            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900">
+              취소
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving || !form.title.trim()}
+              className="px-6 py-2 text-sm bg-[#0080C8] text-white rounded-lg hover:bg-[#006aaa] disabled:opacity-60 transition-colors font-semibold"
+            >
+              {saving ? '저장 중...' : editingId ? '수정' : '추가'}
+            </button>
           </div>
         </div>
       )}

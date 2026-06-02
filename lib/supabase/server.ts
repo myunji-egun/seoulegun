@@ -1,6 +1,15 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { hasSupabaseConfig } from './config'
+
+/** RLS 우회가 필요한 서버 전용 API에서 사용 (service role key) */
+export function createAdminClient() {
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  )
+}
 
 export async function createClient() {
   const cookieStore = await cookies()

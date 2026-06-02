@@ -461,13 +461,31 @@ export default function CasesPage() {
                             </button>
                           </div>
                         ) : (
-                          <label className="h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-xs text-gray-400 cursor-pointer hover:border-[#0080C8] hover:text-[#0080C8] transition-colors">
+                          <label
+                            className="h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-xs text-gray-400 cursor-pointer hover:border-[#0080C8] hover:text-[#0080C8] transition-colors"
+                            onDragOver={(e) => {
+                              e.preventDefault()
+                              e.currentTarget.classList.add('border-[#0080C8]', 'bg-blue-50', 'text-[#0080C8]')
+                            }}
+                            onDragLeave={(e) => {
+                              e.currentTarget.classList.remove('border-[#0080C8]', 'bg-blue-50', 'text-[#0080C8]')
+                            }}
+                            onDrop={(e) => {
+                              e.preventDefault()
+                              e.currentTarget.classList.remove('border-[#0080C8]', 'bg-blue-50', 'text-[#0080C8]')
+                              const file = e.dataTransfer.files?.[0]
+                              if (file && file.type.startsWith('image/')) {
+                                handleImageUpload(file, field)
+                              }
+                            }}
+                          >
                             {uploading === which ? (
                               '업로드 중...'
                             ) : (
                               <>
                                 <Plus size={20} className="mb-1" />
-                                이미지 선택
+                                <span>이미지 선택</span>
+                                <span className="text-[10px] mt-0.5 opacity-60">또는 드래그해서 놓기</span>
                               </>
                             )}
                             <input

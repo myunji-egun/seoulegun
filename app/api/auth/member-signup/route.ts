@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 
 async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder()
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
       return NextResponse.json({ error: '올바른 이메일 주소를 입력해 주세요.' }, { status: 400 })
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     // ── 아이디 중복 검사 ──────────────────────────────────────
     const { data: existingId } = await supabase
