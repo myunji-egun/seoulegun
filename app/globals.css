@@ -222,6 +222,16 @@
   transform: none !important;
 }
 
+/* ── 도미노 상승 애니메이션 (아래→위 휘리릭) ── */
+@keyframes domino-rise {
+  from { opacity: 0; transform: translateY(42px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.domino-hidden { opacity: 0; }
+.domino-rise {
+  animation: domino-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @keyframes marquee-x {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }

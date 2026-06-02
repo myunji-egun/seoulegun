@@ -15,14 +15,48 @@ const pillars = [
   },
 ]
 
+function HeroText({ center = false }: { center?: boolean }) {
+  return (
+    <div className={center ? 'text-center' : 'text-left'}>
+      <span className={`inline-block rounded-full bg-[#3F6FB5] text-white font-semibold tracking-wide ${center ? 'text-[12px] px-3.5 py-1 mb-2.5' : 'text-[13px] sm:text-[15px] px-4 py-1.5 mb-4'}`}>
+        이건교정
+      </span>
+      <h1 className={`font-black leading-none tracking-tight text-[#1f2d4d] ${center ? 'text-[34px] mb-2' : 'text-[44px] sm:text-[64px] lg:text-[76px] mb-3'}`}>
+        인비절라인
+      </h1>
+      <p className={`font-bold text-[#2b3a5c] leading-snug ${center ? 'text-[16px] mb-2' : 'text-[19px] sm:text-[26px] lg:text-[30px] mb-4'}`}>
+        티 나지 않게 자연스러운 투명교정
+      </p>
+      <p className={`text-[#5b6b87] leading-relaxed ${center ? 'text-[13px]' : 'text-[14px] sm:text-[17px]'}`}>
+        일상에 부담을 줄이면서 심미성과 편안함을 고려한 교정 계획
+      </p>
+    </div>
+  )
+}
+
 export function OrthodonticsHeroBanner() {
   return (
-    <section className="pt-16 sm:pt-20">
-      <img
-        src="/images/doctors/yoo-invisalign-orthodontic-banner.png"
-        alt="교정·인비절라인 직접 진료 유수현 원장"
-        className="w-full h-auto block"
-      />
+    <section className="pt-16 sm:pt-20 bg-gradient-to-br from-[#eef4fb] to-[#dde8f4]">
+      {/* ── 데스크탑/태블릿: 배경 합성 배너 (의료진·장치·우측 패널 포함) ── */}
+      <div
+        className="relative hidden md:block w-full overflow-hidden"
+        style={{ aspectRatio: '2172 / 724' }}
+      >
+        <img
+          src="/images/doctors/ortho-main.jpg"
+          alt="인비절라인 투명교정"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* 텍스트 — 의료진 오른쪽 빈 공간 (장치 왼쪽까지) */}
+        <div className="absolute inset-y-0 left-[25%] lg:left-[26%] flex flex-col justify-center w-[24%]">
+          <HeroText />
+        </div>
+      </div>
+
+      {/* ── 모바일: 텍스트만 (합성 배너 이미지는 모바일에서 미노출) ── */}
+      <div className="md:hidden px-6 pt-8 pb-6">
+        <HeroText center />
+      </div>
     </section>
   )
 }

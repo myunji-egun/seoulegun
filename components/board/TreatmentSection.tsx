@@ -1896,6 +1896,9 @@ export default function TreatmentSection({
   const { ref: cardRef, isVisible: cardVisible } = useScrollReveal(0.1)
   const isTriPanel = !!(treatment.richContent && treatment.indications && treatment.steps)
   const isRootCanal = treatment.treatmentType === 'root-canal'
+  // 근관치료·온레이: 모바일에서 이미지를 텍스트 아래로 (데스크탑은 우측 유지)
+  const imageMobileBelow = isRootCanal || treatment.treatmentType === 'onlay'
+  const imageOrderClass = imageMobileBelow ? 'md:order-last' : 'order-first md:order-last'
   const imageTopMargin = isRootCanal ? 'md:mt-10 md:translate-y-5' : 'md:mt-10'
   const singleImageFrameClass = isRootCanal ? 'max-w-[105%] mx-auto' : 'bg-gray-100 max-w-[70%] mx-auto'
 
@@ -2065,7 +2068,7 @@ export default function TreatmentSection({
         </div>
 
         {/* 이미지 영역 — 오른쪽에서 슬라이드인 (bottomImage 사용 시 숨김) */}
-        {!treatment.bottomImage && <div className={`order-first md:order-last ${imageTopMargin} ${textVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+        {!treatment.bottomImage && <div className={`${imageOrderClass} ${imageTopMargin} ${textVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={textVisible ? { animationDelay: '0.15s' } : undefined}>
           {treatment.photoGrid ? (
             <div className="grid grid-cols-2 gap-2">

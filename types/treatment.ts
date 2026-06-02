@@ -31,6 +31,7 @@ export interface TreatmentContent {
   bottomImage?: string
   sideImage?: string
   bottomVideoUrl?: string
+  faqVideoUrl?: string    // 자주 묻는 질문(FAQ) 섹션 바로 위에 임베드할 유튜브 URL
   photoGrid?: { src: string; caption: string }[]
   heroTitle?: { line1?: string; line2: string }
 }

@@ -22,17 +22,17 @@ function PostCard({ post }: { post: Column }) {
   return (
     <article className="group cursor-pointer">
       <a href={`/column/${post.id}`}>
-        {/* 이미지 */}
-        <div className="overflow-hidden aspect-[4/3] bg-[#F0F0F0] mb-3">
+        {/* 이미지 — 원본 비율 유지 */}
+        <div className="overflow-hidden rounded-lg bg-[#F0F0F0] mb-3">
           {post.image_url ? (
             <img
               src={post.image_url}
               alt={post.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.04]"
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-[#F8F7F9]">
+            <div className="w-full aspect-[4/3] flex items-center justify-center bg-[#F8F7F9]">
               <svg className="w-10 h-10 text-[#D0D0D0]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 21h18M3 10.5h18" />
               </svg>

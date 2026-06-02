@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { MapPin, Phone } from 'lucide-react'
 import { clinicInfo } from '@/data/clinic-info'
@@ -53,6 +54,15 @@ interface Item {
 /* ── 컴포넌트 ────────────────────────────────────── */
 
 export default function FloatingSidebar() {
+  // 메인 히어로 섹션을 지나(두 번째 챕터부터) 노출, 이후 고정
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const items: Item[] = [
     {
       label: '치료전후',
@@ -97,9 +107,9 @@ export default function FloatingSidebar() {
   const labelClass = 'text-[10px] font-medium leading-none tracking-wide'
 
   return (
-    /* 데스크탑 전용 — 모바일에서는 숨김 */
+    /* 데스크탑 전용 — 모바일에서는 숨김. 히어로 이후부터 노출 */
     <aside
-      className="hidden md:flex fixed right-3 top-1/2 -translate-y-1/2 z-50 flex-col w-[64px]"
+      className={`hidden md:flex fixed right-3 top-1/2 -translate-y-1/2 z-50 flex-col w-[64px] transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       style={{
         background: '#181818',
         borderRadius: '32px',

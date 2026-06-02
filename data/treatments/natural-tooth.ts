@@ -23,6 +23,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
       { title: '생체 재료 밀폐', desc: '신경이 잘 붙어있도록 생체 재료로 밀폐', icon: 'Lock' },
       { title: '경과 관찰', desc: '신경이 잘 붙어있는지 정기적으로 확인', icon: 'ClipboardCheck' },
     ],
+    bottomVideoUrl: 'https://youtu.be/gBxQ8iPT_hc',
     indications: [
       '치아 신경을\n모두 제거하기엔\n아까운 경우',
       '깊은 충치가 있지만\n신경이 아직 살아있다고\n판단되는 경우',
@@ -98,6 +99,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
       { tag: '내구성 우수, 장기 사용 가능', description: '내구성이 우수해 장기간 사용이 가능합니다.' },
       { tag: '추후 추가 치료에도 치아 보존에 유리', description: '이후 추가 치료가 필요할 때도 치아 보존에 유리합니다.' },
     ],
+    faqVideoUrl: 'https://youtu.be/5fmAFKF4Xns',
     faq: [
       {
         question: '온레이와 크라운은 어떻게 다른가요?',
@@ -145,6 +147,7 @@ export const naturalToothTreatments: TreatmentContent[] = [
       { tag: '염증 확산 예방', description: '방치 시 커질 수 있는 염증 확산을 줄이는 데 도움이 됩니다.' },
       { tag: '자연치아 유지의 핵심 단계', description: '자연치아를 유지하는 중요한 중간 단계가 될 수 있습니다.' },
     ],
+    faqVideoUrl: 'https://youtu.be/rFF_YImA5wQ',
     faq: [
       {
         question: '신경치료를 하면 치아를 오래 쓸 수 있나요?',

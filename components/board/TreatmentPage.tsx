@@ -68,6 +68,19 @@ export default function TreatmentPage({
                 treatmentType={treatment.treatmentType}
               />
             )}
+            {treatment.faqVideoUrl && (
+              <div className="w-full sm:max-w-[80%] mx-auto">
+                <div className="w-full aspect-video rounded-2xl overflow-hidden">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${treatment.faqVideoUrl.split('youtu.be/')[1]?.split('?')[0]}?rel=0&modestbranding=1`}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={`${treatment.title} 영상`}
+                  />
+                </div>
+              </div>
+            )}
             <FaqAccordion faq={treatment.faq} />
             {!hideCases && (
               <BlogLinkCard boardCategory={treatment.boardCategory} />
