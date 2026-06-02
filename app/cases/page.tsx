@@ -93,7 +93,7 @@ export default function CasesPage() {
   // 케이스 데이터 fetch
   useEffect(() => {
     setLoading(true)
-    fetch(`/api/cases?board_category=${encodeURIComponent(mainCat)}`)
+    fetch(`/api/patient-cases?board_category=${encodeURIComponent(mainCat)}`)
       .then(r => r.json())
       .then(data => { setCases(Array.isArray(data) ? data : []); setLoading(false) })
       .catch(() => { setCases([]); setLoading(false) })
@@ -272,33 +272,15 @@ function CaseCard({
 
       {/* Before / After 이미지 */}
       <div className="grid grid-cols-2 gap-px bg-gray-100">
-        {/* Before — 원본 공개 */}
-        <div className="relative aspect-[3/4] bg-gray-50 overflow-hidden">
-          {item.before_image_url ? (
-            <img
-              src={item.before_image_url}
-              alt="치료 전"
-              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <span className="text-xs text-gray-300">준비 중</span>
-            </div>
-          )}
-          <span className="absolute top-2.5 left-2.5 bg-black/50 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide">
-            BEFORE
-          </span>
-        </div>
-
-        {/* After — 비로그인 시 블러 */}
+        {/* Before — 비로그인 시 블러 */}
         <div
           className="relative aspect-[3/4] bg-gray-50 overflow-hidden cursor-pointer"
           onClick={() => { if (!isLoggedIn) onLockClick() }}
         >
-          {item.after_image_url ? (
+          {item.before_image_url ? (
             <img
-              src={item.after_image_url}
-              alt="치료 후"
+              src={item.before_image_url}
+              alt="치료 전"
               className={`w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ${
                 isLoggedIn ? '' : 'blur-xl scale-110'
               }`}
@@ -308,10 +290,10 @@ function CaseCard({
               <span className="text-xs text-gray-300">준비 중</span>
             </div>
           )}
-          <span className="absolute top-2.5 left-2.5 bg-[#0080C8]/80 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide">
-            AFTER
+          <span className="absolute top-2.5 left-2.5 bg-black/50 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide">
+            BEFORE
           </span>
-          {!isLoggedIn && item.after_image_url && (
+          {!isLoggedIn && item.before_image_url && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#2B2D42]/40 hover:bg-[#2B2D42]/50 transition-colors">
               <div className="bg-white rounded-full p-2.5 mb-2 shadow-md">
                 <Lock className="w-4 h-4 text-[#0080C8]" />
@@ -321,6 +303,24 @@ function CaseCard({
               </p>
             </div>
           )}
+        </div>
+
+        {/* After — 원본 공개 */}
+        <div className="relative aspect-[3/4] bg-gray-50 overflow-hidden">
+          {item.after_image_url ? (
+            <img
+              src={item.after_image_url}
+              alt="치료 후"
+              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-xs text-gray-300">준비 중</span>
+            </div>
+          )}
+          <span className="absolute top-2.5 left-2.5 bg-[#0080C8]/80 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide">
+            AFTER
+          </span>
         </div>
       </div>
 

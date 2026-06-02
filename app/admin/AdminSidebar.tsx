@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   MessageSquare,
   Images,
+  Users,
   Megaphone,
   BookOpen,
   LogOut,
@@ -18,6 +19,7 @@ const navItems = [
   { href: '/admin', label: '대시보드', icon: LayoutDashboard },
   { href: '/admin/consultations', label: '상담 DB', icon: MessageSquare },
   { href: '/admin/cases', label: '증례 관리', icon: Images },
+  { href: '/admin/patient-cases', label: '환자사례 관리', icon: Users },
   { href: '/admin/notices', label: '공지사항', icon: Megaphone },
   { href: '/admin/columns', label: '원장칼럼', icon: BookOpen },
 ]

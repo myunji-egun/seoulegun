@@ -115,11 +115,31 @@ export default function ColumnBoard() {
         )}
       </div>
 
+      {/* ── 모바일 카테고리 그리드 (lg 미만) ── */}
+      <div className="lg:hidden mb-8 grid grid-cols-3 border-t border-l border-gray-200">
+        {CATEGORIES.map((cat) => {
+          const isActive = selected === cat
+          return (
+            <button
+              key={cat}
+              onClick={() => setSelected(cat)}
+              className={`border-r border-b border-gray-200 py-3.5 px-2 text-[14px] text-center transition-colors ${
+                isActive
+                  ? 'bg-[#6B7280] text-white font-bold'
+                  : 'bg-white text-[#555] font-medium hover:bg-gray-50'
+              }`}
+            >
+              {cat}
+            </button>
+          )
+        })}
+      </div>
+
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
         {/* ── Sidebar ── */}
         <aside className="lg:w-52 flex-shrink-0">
-          {/* 카테고리 */}
-          <div className="mb-10">
+          {/* 카테고리 (데스크탑 전용 — 모바일은 상단 그리드 사용) */}
+          <div className="mb-10 hidden lg:block">
             <ul className="space-y-2">
               {CATEGORIES.map((cat) => {
                 const count = categoryCounts[cat] ?? 0
