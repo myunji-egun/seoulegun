@@ -96,6 +96,7 @@ export default function HeroSlider() {
     videoAdvancedRef.current = false
     if (index === 0 && videoRef.current) {
       videoRef.current.currentTime = 0
+      videoRef.current.playbackRate = 0.7
       videoRef.current.play().catch(() => {})
     }
   }
@@ -185,6 +186,7 @@ export default function HeroSlider() {
           autoPlay
           muted
           playsInline
+          onCanPlay={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.7 }}
           onEnded={handleVideoEnded}
         />
       )}
@@ -200,6 +202,7 @@ export default function HeroSlider() {
             autoPlay
             muted
             playsInline
+            onCanPlay={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.7 }}
             onEnded={handleVideoEnded}
           />
         ) : (
