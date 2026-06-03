@@ -80,6 +80,7 @@ export default function SignupGateModal({ onClose, onSuccess }: Props) {
     setError('')
 
     if (signup.userId.trim().length < 4) return setError('아이디는 4자 이상 입력해 주세요.')
+    if (!/^[a-zA-Z0-9_]+$/.test(signup.userId.trim())) return setError('아이디는 영문·숫자·_ 만 사용할 수 있습니다.')
     if (signup.password.length < 8) return setError('비밀번호는 8자 이상 입력해 주세요.')
     if (!signup.name.trim()) return setError('이름을 입력해 주세요.')
     if (signup.phone.replace(/\D/g, '').length < 10) return setError('올바른 휴대폰번호를 입력해 주세요.')
@@ -203,9 +204,12 @@ export default function SignupGateModal({ onClose, onSuccess }: Props) {
                   <input
                     type="text"
                     value={signup.userId}
-                    onChange={e => setS('userId', e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))}
+                    onChange={e => setS('userId', e.target.value.replace(/\s/g, ''))}
                     placeholder="영문·숫자·_ 4자 이상"
                     autoComplete="username"
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    spellCheck={false}
                     className={inputCls}
                   />
                 </div>
