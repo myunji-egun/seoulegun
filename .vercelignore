@@ -3,4 +3,5 @@ node_modules
 .claude
 .next
 media
-public/images/video
+public/images/video/*
+!public/images/video/egun1.gif

@@ -20,7 +20,7 @@ export default function NaturalToothPage() {
       title="자연치아 살리기"
       subtitle="치과 치료의 기본입니다"
       treatments={naturalToothTreatments}
-      localVideo="/images/video/egun1.mp4"
+      localVideo="/images/video/egun1.gif"
       extraSection={<NaturalToothIdentity />}
       />
     </div>
