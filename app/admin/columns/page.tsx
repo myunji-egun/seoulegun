@@ -84,7 +84,7 @@ interface UploadedImage {
   name: string
 }
 
-const CATEGORIES = ['자연치아살리기', '임플란트', '심미보철', '교정치료', '소아치과']
+const CATEGORIES = ['자연치아살리기', '임플란트', '심미보철', '교정치료', '소아치과', '일반진료']
 
 const emptyForm: FormData = {
   title: '',
