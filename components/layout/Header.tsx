@@ -27,7 +27,18 @@ export default function Header() {
   const [navOpen, setNavOpen] = useState(false)
   const [boardOpen, setBoardOpen] = useState(false)
   const boardRef = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
+
+  // News 드롭다운: 마우스가 버튼↔메뉴 사이를 지날 때 바로 닫히지 않도록 닫힘을 0.5초 지연
+  const openBoard = () => {
+    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null }
+    setBoardOpen(true)
+  }
+  const closeBoardDelayed = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setBoardOpen(false), 500)
+  }
   const isBoardActive = BOARD_ITEMS.some(b => pathname === b.href)
 
   const scrollToHomeHero = () => {
@@ -87,8 +98,8 @@ export default function Header() {
               <div
                 ref={boardRef}
                 className="relative"
-                onMouseEnter={() => setBoardOpen(true)}
-                onMouseLeave={() => setBoardOpen(false)}
+                onMouseEnter={openBoard}
+                onMouseLeave={closeBoardDelayed}
               >
                 <button
                   className={`relative px-1 py-2 text-[18px] font-medium whitespace-nowrap transition-colors duration-200 group flex items-center gap-1 ${

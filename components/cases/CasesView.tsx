@@ -199,6 +199,16 @@ function CaseCard({
   isLoggedIn: boolean
   onLockClick: () => void
 }) {
+  const [expanded, setExpanded] = useState(false)
+  const [clamped, setClamped] = useState(false)
+  const descRef = useRef<HTMLParagraphElement>(null)
+
+  // 설명이 2줄을 넘어 잘릴 때만 '더 보기' 노출
+  useEffect(() => {
+    const el = descRef.current
+    if (el) setClamped(el.scrollHeight > el.clientHeight + 1)
+  }, [item.description])
+
   return (
     <article className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 group">
       {/* Before / After — 웹: 좌우 / 모바일: 상하, 원본 비율 유지(크롭 없음) */}
@@ -269,7 +279,23 @@ function CaseCard({
           )}
         </div>
         {item.description && (
-          <p className="text-[13px] text-gray-500 mt-3 leading-relaxed line-clamp-2 border-t border-gray-50 pt-3">{item.description}</p>
+          <div className="mt-3 border-t border-gray-50 pt-3">
+            <p
+              ref={descRef}
+              className={`text-[13px] text-gray-500 leading-relaxed ${expanded ? 'whitespace-pre-line' : 'line-clamp-2'}`}
+            >
+              {item.description}
+            </p>
+            {(clamped || expanded) && (
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                className="mt-1.5 text-[12px] font-semibold text-[#0080C8] hover:underline"
+              >
+                {expanded ? '접기' : '더 보기'}
+              </button>
+            )}
+          </div>
         )}
       </div>
     </article>
