@@ -76,6 +76,7 @@ export default function HeroSlider() {
   // 중앙 카피 로테이션 (슬라이드와 독립적으로 무한 반복)
   const [textSet,     setTextSet]     = useState(0)
   const [textVisible, setTextVisible] = useState(true)
+  const [isMobile,    setIsMobile]    = useState(false)
 
   const startTimeRef     = useRef<number>(Date.now())
   const rafRef           = useRef<number | null>(null)
@@ -125,10 +126,20 @@ export default function HeroSlider() {
     return () => window.removeEventListener('egun:hero-reset', resetHero)
   }, [])
 
-  // 중앙 카피: 4초 유지 → 0.8s 페이드아웃 → 다음 세트 → 0.8s 페이드인 (무한)
+  // 모바일 감지 (모바일만 디졸브 2s / 유지 5s)
   useEffect(() => {
-    const HOLD = 4000
-    const FADE = 800
+    const mq = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  // 중앙 카피: 유지 → 페이드아웃 → 다음 세트 → 페이드인 (무한)
+  // 모바일: 5초 유지 / 2초 디졸브, 데스크탑: 4초 / 0.8초
+  useEffect(() => {
+    const HOLD = isMobile ? 5000 : 4000
+    const FADE = isMobile ? 2000 : 800
     let timer: ReturnType<typeof setTimeout>
     const run = () => {
       timer = setTimeout(() => {
@@ -140,9 +151,10 @@ export default function HeroSlider() {
         }, FADE)
       }, HOLD + FADE)
     }
+    setTextVisible(true)
     run()
     return () => clearTimeout(timer)
-  }, [])
+  }, [isMobile])
 
   useEffect(() => {
     const tick = () => {
@@ -214,6 +226,8 @@ export default function HeroSlider() {
           key="hero-video"
           className="hidden md:block absolute inset-0 w-full h-full object-contain"
           src="/images/slides/slide-4.mp4"
+          poster="/images/slides/slide-4-poster.webp"
+          preload="auto"
           autoPlay
           muted
           playsInline
@@ -229,7 +243,9 @@ export default function HeroSlider() {
             ref={videoRef}
             key="hero-video-m"
             className="absolute inset-0 w-full h-full object-cover"
-            src="/images/slides/slide-4.mp4"
+            src="/images/slides/slide-4-mobile.mp4"
+            poster="/images/slides/slide-4-poster.webp"
+            preload="auto"
             autoPlay
             muted
             playsInline
@@ -276,13 +292,13 @@ export default function HeroSlider() {
       {/* ── 히어로 카피: 상단 고정 영문 + 중앙 3줄 교체(무한) ── */}
       <div className="absolute inset-0 z-20 flex items-center justify-center px-6 pointer-events-none">
         <div className="text-center text-white" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}>
-          {/* 고정 영문 타이틀 */}
-          <p className="text-[11px] sm:text-[13px] font-semibold tracking-[0.35em] text-white/75 mb-8 sm:mb-10">
+          {/* 고정 영문 타이틀 (모바일 9px·한 줄) */}
+          <p className="text-[9px] sm:text-[13px] font-semibold tracking-[0.3em] sm:tracking-[0.35em] whitespace-nowrap text-white/75 mb-8 sm:mb-10">
             SEOUL EGUN DENTAL CLINIC
           </p>
-          {/* 교체되는 중앙 3줄 */}
+          {/* 교체되는 중앙 3줄 — 모바일 2초 디졸브, 데스크탑 0.8초 */}
           <div
-            className="transition-all duration-[800ms] ease-out"
+            className="transition-all duration-[2000ms] md:duration-[800ms] ease-out"
             style={{
               opacity: textVisible ? 1 : 0,
               transform: textVisible ? 'translateY(0)' : 'translateY(14px)',
