@@ -211,7 +211,7 @@ function CaseCard({
 
   return (
     <article className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 group">
-      {/* Before / After — 웹: 좌우 / 모바일: 상하, 원본 비율 유지(크롭 없음) */}
+      {/* Before / After — 웹: 좌우 / 모바일: 상하, 고정 높이로 템플릿화 (object-cover) */}
       <div className="flex flex-col sm:flex-row gap-px bg-gray-100">
         {/* Before — 비로그인 시 블러 + 손가락 아이콘 */}
         <div
@@ -222,10 +222,10 @@ function CaseCard({
             <img
               src={item.before_image_url}
               alt="치료 전"
-              className={`w-full h-auto block transition duration-500 ${isLoggedIn ? '' : 'blur-2xl scale-110'}`}
+              className={`w-full h-52 sm:h-64 object-cover block transition duration-500 ${isLoggedIn ? '' : 'blur-2xl scale-110'}`}
             />
           ) : (
-            <div className="w-full aspect-[4/3] flex items-center justify-center"><span className="text-xs text-gray-300">준비 중</span></div>
+            <div className="w-full h-52 sm:h-64 flex items-center justify-center"><span className="text-xs text-gray-300">준비 중</span></div>
           )}
           <span className="absolute top-2.5 left-2.5 bg-black/55 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide z-10">BEFORE</span>
           {!isLoggedIn && item.before_image_url && (
@@ -240,9 +240,9 @@ function CaseCard({
         {/* After — 원본 공개 */}
         <div className="relative sm:w-1/2 overflow-hidden bg-gray-50">
           {item.after_image_url ? (
-            <img src={item.after_image_url} alt="치료 후" className="w-full h-auto block" />
+            <img src={item.after_image_url} alt="치료 후" className="w-full h-52 sm:h-64 object-cover block" />
           ) : (
-            <div className="w-full aspect-[4/3] flex items-center justify-center"><span className="text-xs text-gray-300">준비 중</span></div>
+            <div className="w-full h-52 sm:h-64 flex items-center justify-center"><span className="text-xs text-gray-300">준비 중</span></div>
           )}
           <span className="absolute top-2.5 left-2.5 bg-[#0080C8]/85 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide z-10">AFTER</span>
         </div>

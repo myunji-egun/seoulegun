@@ -59,11 +59,23 @@ const TRANSITION_DUR = 2500
 const RADIUS        = 18
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
+// 중앙 카피 4세트 (3줄씩) — 4초 유지 / 0.8s 페이드 / 무한 반복
+const HERO_TEXT_SETS: string[][] = [
+  ['정성은 기본이 아니라', '진료의 시작이라고 믿습니다', '환자를 먼저 생각합니다'],
+  ['치료 전 충분한 설명', '원장이 직접 전하는 안내', '이해에서 시작되는 진료'],
+  ['자연스럽게 바뀌는 치열', '조금 더 편안한 일상', '조금 더 환한 웃음'],
+  ['익숙함에 머무르지 않고', '계속 배우고 깊이 고민하며', '더 좋은 진료를 만들어갑니다'],
+]
+
 export default function HeroSlider() {
   const [current,  setCurrent]  = useState(0)
   const [prevIdx,  setPrevIdx]  = useState(0)
   const [tProg,    setTProg]    = useState(1)
   const [progress, setProgress] = useState(0)
+
+  // 중앙 카피 로테이션 (슬라이드와 독립적으로 무한 반복)
+  const [textSet,     setTextSet]     = useState(0)
+  const [textVisible, setTextVisible] = useState(true)
 
   const startTimeRef     = useRef<number>(Date.now())
   const rafRef           = useRef<number | null>(null)
@@ -111,6 +123,25 @@ export default function HeroSlider() {
     const resetHero = () => goTo(0)
     window.addEventListener('egun:hero-reset', resetHero)
     return () => window.removeEventListener('egun:hero-reset', resetHero)
+  }, [])
+
+  // 중앙 카피: 4초 유지 → 0.8s 페이드아웃 → 다음 세트 → 0.8s 페이드인 (무한)
+  useEffect(() => {
+    const HOLD = 4000
+    const FADE = 800
+    let timer: ReturnType<typeof setTimeout>
+    const run = () => {
+      timer = setTimeout(() => {
+        setTextVisible(false)
+        timer = setTimeout(() => {
+          setTextSet((i) => (i + 1) % HERO_TEXT_SETS.length)
+          setTextVisible(true)
+          run()
+        }, FADE)
+      }, HOLD + FADE)
+    }
+    run()
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
@@ -164,9 +195,9 @@ export default function HeroSlider() {
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
-      {/* ── WebGL 배경 (desktop only) ─────────── */}
+      {/* ── WebGL 배경 (desktop only) — Ken Burns로 느린 드리프트 ─────────── */}
       <div
-        className="hidden md:block absolute inset-0"
+        className="hidden md:block absolute inset-0 hero-kenburns"
         style={{ opacity: slide.isVideo ? 0 : 1, transition: 'opacity 0.8s ease' }}
       >
         <WebGLHero
@@ -241,6 +272,30 @@ export default function HeroSlider() {
           background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)',
         }}
       />
+
+      {/* ── 히어로 카피: 상단 고정 영문 + 중앙 3줄 교체(무한) ── */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center px-6 pointer-events-none">
+        <div className="text-center text-white" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}>
+          {/* 고정 영문 타이틀 */}
+          <p className="text-[11px] sm:text-[13px] font-semibold tracking-[0.35em] text-white/75 mb-8 sm:mb-10">
+            SEOUL EGUN DENTAL CLINIC
+          </p>
+          {/* 교체되는 중앙 3줄 */}
+          <div
+            className="transition-all duration-[800ms] ease-out"
+            style={{
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? 'translateY(0)' : 'translateY(14px)',
+            }}
+          >
+            {HERO_TEXT_SETS[textSet].map((line, i) => (
+              <p key={i} className="text-[19px] sm:text-[28px] font-bold leading-[1.55]">
+                {line}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* ── 모바일 슬라이드 인디케이터 (하단 도트) ── */}
       <div className="md:hidden absolute bottom-10 inset-x-0 flex justify-center items-center gap-2.5 z-10">
