@@ -23,6 +23,15 @@ export default async function ColumnDetailPage({ params }: Props) {
     year: 'numeric', month: 'long', day: 'numeric',
   })
 
+  // 다른 칼럼 더 보기 — 현재 글 제외, 최신순 3개
+  const { data: others } = await supabase
+    .from('columns')
+    .select('id, title, image_url, column_date, category')
+    .eq('is_active', true)
+    .neq('id', id)
+    .order('column_date', { ascending: false })
+    .limit(3)
+
   return (
     <main className="min-h-screen bg-white pt-20 sm:pt-24">
       {/* 상단 네비 */}
@@ -77,6 +86,53 @@ export default async function ColumnDetailPage({ params }: Props) {
           </div>
         )}
       </article>
+
+      {/* 다른 칼럼 더 보기 — 다음 글로 자연스럽게 유도 */}
+      {others && others.length > 0 && (
+        <section className="border-t border-gray-100 bg-[#FAFBFC]">
+          <div className="max-w-[860px] mx-auto px-5 py-14">
+            <div className="flex items-baseline justify-between mb-6">
+              <h2 className="text-lg sm:text-xl font-bold text-[#1a1a1a]">다른 칼럼 더 보기</h2>
+              <Link href="/column" className="text-sm text-[#0080C8] hover:underline">
+                전체 보기 →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+              {others.map((c) => (
+                <Link key={c.id} href={`/column/${c.id}`} className="group block">
+                  <div className="overflow-hidden rounded-lg bg-[#F0F0F0] mb-3 aspect-[4/3]">
+                    {c.image_url ? (
+                      <img
+                        src={c.image_url}
+                        alt={c.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#F8F7F9]">
+                        <svg className="w-10 h-10 text-[#D0D0D0]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 21h18M3 10.5h18" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {c.category && (
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#F0F7FF] text-[#0080C8] border border-[#CCE5F7] mb-2">
+                      #{c.category}
+                    </span>
+                  )}
+                  <h3 className="text-[15px] font-bold text-[#1a1a1a] leading-snug line-clamp-2 group-hover:text-[#0080C8] transition-colors">
+                    {c.title}
+                  </h3>
+                  <p className="text-xs text-[#9CA3AF] mt-1.5">
+                    {new Date(c.column_date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </main>
   )
 }

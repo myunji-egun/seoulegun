@@ -1,65 +1,41 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import WebGLHero from '@/components/ui/WebGLHero'
 
 type Slide = {
   id: number
-  headline: string
-  sub: string
   image: string
   isVideo?: boolean
-  accent: string
+  interval?: number   // 이미지 슬라이드 유지(ms) — 없으면 IMAGE_INTERVAL
 }
 
-const SLIDES: Slide[] = [
-  {
-    id: 3,
-    headline: '수원교정',
-    sub: '인비절라인',
-    image: '/images/slides/slide-4.mp4',
-    isVideo: true,
-    accent: 'var(--e-primary)',
-  },
-  {
-    id: 0,
-    headline: '서울대 출신 대표원장',
-    sub: '서울이건치과 수원',
-    image: '/images/slides/slide-1.webp',
-    accent: 'var(--e-primary)',
-  },
-  {
-    id: 1,
-    headline: '자연치아를 지키는',
-    sub: '최소삭제 보존치료',
-    image: '/images/slides/slide-2.jpg',
-    accent: 'var(--e-primary)',
-  },
-  {
-    id: 2,
-    headline: '디지털 정밀 진단',
-    sub: '네비게이션 임플란트',
-    image: '/images/slides/slide-3.png',
-    accent: 'var(--e-primary)',
-  },
-  {
-    id: 5,
-    headline: '서울이건치과',
-    sub: '수원 영통',
-    image: '/images/slides/slide-6.jpg',
-    accent: 'var(--e-primary)',
-  },
+// 웹(데스크탑): 폴더 숫자순 6개 — 첫 슬라이드는 영상(0.7배속)
+const WEB_SLIDES: Slide[] = [
+  { id: 1, image: '/images/slides/slide-1.mp4', isVideo: true },
+  { id: 2, image: '/images/slides/slide-2.gif', interval: 3200 },
+  { id: 3, image: '/images/slides/slide-3.jpg' },
+  { id: 4, image: '/images/slides/slide-4.webp' },
+  { id: 5, image: '/images/slides/slide-5.png' },
+  { id: 6, image: '/images/slides/slide-6.jpg' },
 ]
 
-const INTERVAL       = 6700
-// index 0=video(full duration), 1=3000, 2=4700, 3=4700, 4=6700
-const SLIDE_INTERVALS = [0, 3000, 4700, 4700, 6700]
-const TRANSITION_DUR = 2500
+// 모바일: 경량 영상(0.7배속) → slide-2 → slide-3
+const MOBILE_SLIDES: Slide[] = [
+  { id: 1, image: '/images/slides/slide-4-mobile.mp4', isVideo: true },
+  { id: 2, image: '/images/slides/slide-2.gif', interval: 3200 },
+  { id: 3, image: '/images/slides/slide-3.jpg' },
+  { id: 4, image: '/images/slides/slide-4.webp' },
+  { id: 5, image: '/images/slides/slide-5.png' },
+]
+
+// 영상은 양쪽 모두 첫 슬라이드(index 0). 영상은 자체 길이만큼 재생.
+const VIDEO_INDEX    = 0
+const IMAGE_INTERVAL = 4700   // 이미지 슬라이드 1장 유지(ms)
 
 const RADIUS        = 18
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
-// 중앙 카피 4세트 (3줄씩) — 4초 유지 / 0.8s 페이드 / 무한 반복
+// 중앙 카피 4세트 (3줄씩) — 무한 반복
 const HERO_TEXT_SETS: string[][] = [
   ['정성은 기본이 아니라', '진료의 시작이라고 믿습니다', '환자를 먼저 생각합니다'],
   ['치료 전 충분한 설명', '원장이 직접 전하는 안내', '이해에서 시작되는 진료'],
@@ -69,28 +45,24 @@ const HERO_TEXT_SETS: string[][] = [
 
 export default function HeroSlider() {
   const [current,  setCurrent]  = useState(0)
-  const [prevIdx,  setPrevIdx]  = useState(0)
-  const [tProg,    setTProg]    = useState(1)
   const [progress, setProgress] = useState(0)
 
   // 중앙 카피 로테이션 (슬라이드와 독립적으로 무한 반복)
-  const [textSet,     setTextSet]     = useState(0)
-  const [textVisible, setTextVisible] = useState(true)
-  const [isMobile,    setIsMobile]    = useState(false)
+  const [textSet,  setTextSet]  = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   const startTimeRef     = useRef<number>(Date.now())
   const rafRef           = useRef<number | null>(null)
   const isPausedRef      = useRef(false)
   const currentRef       = useRef(0)
-  const transStartRef    = useRef<number | null>(null)
   const videoRef         = useRef<HTMLVideoElement | null>(null)
   const videoAdvancedRef = useRef(false)
 
+  // 활성 슬라이드 셋(플랫폼별) — rAF 루프에서 참조하도록 ref로 보관
+  const slidesRef = useRef<Slide[]>(WEB_SLIDES)
+
   const advanceFrom = (from: number) => {
-    const next = (from + 1) % SLIDES.length
-    setPrevIdx(from)
-    setTProg(0)
-    transStartRef.current = Date.now()
+    const next = (from + 1) % slidesRef.current.length
     setCurrent(next)
     currentRef.current = next
     setProgress(0)
@@ -99,15 +71,12 @@ export default function HeroSlider() {
   }
 
   const goTo = (index: number) => {
-    setPrevIdx(currentRef.current)
-    setTProg(0)
-    transStartRef.current = Date.now()
     setCurrent(index)
     currentRef.current = index
     setProgress(0)
     startTimeRef.current = Date.now()
     videoAdvancedRef.current = false
-    if (index === 0 && videoRef.current) {
+    if (index === VIDEO_INDEX && videoRef.current) {
       videoRef.current.currentTime = 0
       videoRef.current.playbackRate = 0.7
       videoRef.current.play().catch(() => {})
@@ -117,7 +86,7 @@ export default function HeroSlider() {
   const handleVideoEnded = () => {
     if (videoAdvancedRef.current) return
     videoAdvancedRef.current = true
-    advanceFrom(0)
+    advanceFrom(VIDEO_INDEX)
   }
 
   useEffect(() => {
@@ -126,7 +95,7 @@ export default function HeroSlider() {
     return () => window.removeEventListener('egun:hero-reset', resetHero)
   }, [])
 
-  // 모바일 감지 (모바일만 디졸브 2s / 유지 5s)
+  // 모바일 감지
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
     const update = () => setIsMobile(mq.matches)
@@ -135,46 +104,43 @@ export default function HeroSlider() {
     return () => mq.removeEventListener('change', update)
   }, [])
 
-  // 중앙 카피: 유지 → 페이드아웃 → 다음 세트 → 페이드인 (무한)
-  // 모바일: 5초 유지 / 2초 디졸브, 데스크탑: 4초 / 0.8초
+  // 플랫폼 전환 시 슬라이드 셋 교체 + 첫 슬라이드로 리셋
   useEffect(() => {
-    const HOLD = isMobile ? 5000 : 4000
-    const FADE = isMobile ? 2000 : 800
-    let timer: ReturnType<typeof setTimeout>
-    const run = () => {
-      timer = setTimeout(() => {
-        setTextVisible(false)
-        timer = setTimeout(() => {
-          setTextSet((i) => (i + 1) % HERO_TEXT_SETS.length)
-          setTextVisible(true)
-          run()
-        }, FADE)
-      }, HOLD + FADE)
-    }
-    setTextVisible(true)
-    run()
-    return () => clearTimeout(timer)
+    slidesRef.current = isMobile ? MOBILE_SLIDES : WEB_SLIDES
+    setCurrent(0)
+    currentRef.current = 0
+    setProgress(0)
+    startTimeRef.current = Date.now()
+    videoAdvancedRef.current = false
   }, [isMobile])
 
+  // 중앙 카피: 문구 무한 로테이션 — 문구가 바뀔 때마다 hero-text-rise로 등장
+  // 한 문구 유지 주기: 데스크탑 6.6초 / 모바일 10초 (이전보다 1초 더 스테이)
+  useEffect(() => {
+    const PERIOD = isMobile ? 10000 : 6600
+    const timer = setInterval(() => {
+      setTextSet((i) => (i + 1) % HERO_TEXT_SETS.length)
+    }, PERIOD)
+    return () => clearInterval(timer)
+  }, [isMobile])
+
+  // 슬라이드 진행 루프
   useEffect(() => {
     const tick = () => {
       if (!isPausedRef.current) {
-        if (currentRef.current === 0) {
+        if (currentRef.current === VIDEO_INDEX) {
           const vid = videoRef.current
           if (vid && vid.duration > 0) {
             setProgress(vid.currentTime / vid.duration)
           }
         } else {
-          const slideInterval = SLIDE_INTERVALS[currentRef.current] ?? INTERVAL
+          const slideInterval = slidesRef.current[currentRef.current]?.interval ?? IMAGE_INTERVAL
           const elapsed = Date.now() - startTimeRef.current
           const p = Math.min(elapsed / slideInterval, 1)
           setProgress(p)
 
           if (p >= 1) {
-            const next = (currentRef.current + 1) % SLIDES.length
-            setPrevIdx(currentRef.current)
-            setTProg(0)
-            transStartRef.current = Date.now()
+            const next = (currentRef.current + 1) % slidesRef.current.length
             setCurrent(next)
             currentRef.current = next
             setProgress(0)
@@ -182,14 +148,6 @@ export default function HeroSlider() {
           }
         }
       }
-
-      if (transStartRef.current !== null) {
-        const te = Date.now() - transStartRef.current
-        const tp = Math.min(te / TRANSITION_DUR, 1)
-        setTProg(tp)
-        if (tp >= 1) transStartRef.current = null
-      }
-
       rafRef.current = requestAnimationFrame(tick)
     }
 
@@ -197,8 +155,8 @@ export default function HeroSlider() {
     return () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current) }
   }, [])
 
-  const slide     = SLIDES[current]
-  const imageUrls = SLIDES.map((s) => s.isVideo ? '/images/slides/slide-1.webp' : s.image)
+  const slides = isMobile ? MOBILE_SLIDES : WEB_SLIDES
+  const slide  = slides[current] ?? slides[0]
 
   return (
     <section
@@ -207,17 +165,20 @@ export default function HeroSlider() {
       onMouseEnter={() => { isPausedRef.current = true }}
       onMouseLeave={() => { isPausedRef.current = false }}
     >
-      {/* ── WebGL 배경 (desktop only) — Ken Burns로 느린 드리프트 ─────────── */}
-      <div
-        className="hidden md:block absolute inset-0 hero-kenburns"
-        style={{ opacity: slide.isVideo ? 0 : 1, transition: 'opacity 0.8s ease' }}
-      >
-        <WebGLHero
-          images={imageUrls}
-          fromIndex={prevIdx}
-          toIndex={current}
-          transitionProgress={tProg}
-        />
+      {/* ── 배경 이미지 (데스크탑) — 크로스페이드 + Ken Burns, GIF 재생 가능 ── */}
+      <div className="hidden md:block absolute inset-0">
+        {slides.map((s, i) =>
+          s.isVideo ? null : (
+            <img
+              key={s.id}
+              src={s.image}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover hero-kenburns transition-opacity duration-[2500ms] ease-in-out"
+              style={{ opacity: i === current ? 1 : 0 }}
+            />
+          )
+        )}
       </div>
 
       {/* ── 동영상 레이어 (데스크탑) ── */}
@@ -225,8 +186,8 @@ export default function HeroSlider() {
         <video
           key="hero-video"
           className="hidden md:block absolute inset-0 w-full h-full object-contain"
-          src="/images/slides/slide-4.mp4"
-          poster="/images/slides/slide-4-poster.webp"
+          src="/images/slides/slide-1.mp4"
+          poster="/images/slides/slide-1-poster.webp"
           preload="auto"
           autoPlay
           muted
@@ -294,16 +255,10 @@ export default function HeroSlider() {
         <div className="text-center text-white" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}>
           {/* 고정 영문 타이틀 (모바일 9px·한 줄) */}
           <p className="text-[9px] sm:text-[13px] font-semibold tracking-[0.3em] sm:tracking-[0.35em] whitespace-nowrap text-white/75 mb-8 sm:mb-10">
-            SEOUL EGUN DENTAL CLINIC
+            <span className="text-[#0080C8]">SEOUL EGUN</span> DENTAL CLINIC
           </p>
-          {/* 교체되는 중앙 3줄 — 모바일 2초 디졸브, 데스크탑 0.8초 */}
-          <div
-            className="transition-all duration-[2000ms] md:duration-[800ms] ease-out"
-            style={{
-              opacity: textVisible ? 1 : 0,
-              transform: textVisible ? 'translateY(0)' : 'translateY(14px)',
-            }}
-          >
+          {/* 교체되는 중앙 3줄 — 문구마다 0.5s 후 아래→위 30px + 페이드 인 (1.5s ease-in-out) */}
+          <div key={textSet} className="hero-text-rise">
             {HERO_TEXT_SETS[textSet].map((line, i) => (
               <p key={i} className="text-[19px] sm:text-[28px] font-bold leading-[1.55]">
                 {line}
@@ -315,7 +270,7 @@ export default function HeroSlider() {
 
       {/* ── 모바일 슬라이드 인디케이터 (하단 도트) ── */}
       <div className="md:hidden absolute bottom-10 inset-x-0 flex justify-center items-center gap-2.5 z-10">
-        {SLIDES.map((_, i) => (
+        {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
@@ -331,7 +286,7 @@ export default function HeroSlider() {
 
       {/* ── 왼쪽 인디케이터 (데스크탑 세로) ───────────────────────────────── */}
       <div className="hidden md:flex absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-4 z-10">
-        {SLIDES.map((s, i) => (
+        {slides.map((s, i) => (
           <button
             key={s.id}
             onClick={() => goTo(i)}
@@ -364,7 +319,7 @@ export default function HeroSlider() {
 
       {/* ── 슬라이드 카운터 (데스크탑) ──────────────────────────────────────── */}
       <div className="hidden md:block absolute bottom-20 right-6 md:right-10 text-white/50 text-xs tracking-widest font-mono">
-        {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+        {String(current + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
       </div>
 
     </section>

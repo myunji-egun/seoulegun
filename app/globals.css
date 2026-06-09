@@ -102,10 +102,18 @@
   margin-bottom: 15px;
 }
 @media (max-width: 767px) {
-  .post-wrap h1 { font-size: 22px; }
-  .post-wrap h2 { font-size: 19px; margin-top: 40px; }
-  .post-wrap p  { font-size: 15px; }
-  .post-wrap .summary-box { font-size: 14px; }
+  /* 모바일 가독성: 한글 단어 안 끊김 + 넉넉한 줄/문단 간격으로 긴 문단에서도 시선 유지 */
+  .post-wrap { line-height: 1.85; word-break: keep-all; overflow-wrap: break-word; }
+  .post-wrap h1 { font-size: 22px; word-break: keep-all; }
+  .post-wrap h2 { font-size: 19px; margin-top: 40px; word-break: keep-all; }
+  .post-wrap p  {
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 24px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .post-wrap .summary-box { font-size: 15px; line-height: 1.85; }
   .post-wrap .closing-box .closing-title { font-size: 16px; }
 }
 
@@ -222,6 +230,16 @@
   transform: none !important;
 }
 
+/* ── 히어로 중앙 카피 등장 (0.5s 지연 후 아래→위 30px + 페이드, 1.5s ease-in-out, forwards) ── */
+@keyframes hero-text-rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-text-rise {
+  opacity: 0;
+  animation: hero-text-rise 1.5s ease-in-out 0.5s forwards;
+}
+
 /* ── 도미노 상승 애니메이션 (아래→위 휘리릭) ── */
 @keyframes domino-rise {
   from { opacity: 0; transform: translateY(42px); }
@@ -237,7 +255,7 @@
   to   { transform: translateX(-50%); }
 }
 .all-on-marquee-track {
-  animation: marquee-x 50s linear infinite;
+  animation: marquee-x 16.7s linear infinite;
 }
 
 @keyframes implant-bg-pan {
@@ -321,11 +339,11 @@
 
 /* Slide 1 (서울대): 중앙(50%) → 살짝 왼쪽(45%) 5% 이동 */
 @keyframes mobile-pan-1 {
-  0%   { object-position: 50% center; }
-  100% { object-position: 45% center; }
+  0%   { object-position: 40% center; }
+  100% { object-position: 33% center; }
 }
 .mobile-pan-1 {
-  object-position: 50% center;
+  object-position: 40% center;
   animation: mobile-pan-1 6.7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
@@ -339,23 +357,23 @@
   animation: mobile-pan-2 6.7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 3 (네비게이션): 오른쪽 → 살짝 왼쪽으로 천천히 */
+/* 4번째 슬라이드(slide-4): 중앙(50%) → 오른쪽(63%)으로 천천히 */
 @keyframes mobile-pan-3 {
-  0%   { object-position: 100% center; }
-  100% { object-position: 85% center; }
+  0%   { object-position: 50% center; }
+  100% { object-position: 63% center; }
 }
 .mobile-pan-3 {
-  object-position: 100% center;
+  object-position: 50% center;
   animation: mobile-pan-3 6.7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 
-/* Slide 4 (slide-6): 중앙(50%) → 살짝 왼쪽(45%) */
+/* 5번째 슬라이드(slide-5): 맨 왼쪽(0%) → 중심(50%)으로 서서히 */
 @keyframes mobile-pan-4 {
-  0%   { object-position: 50% center; }
-  100% { object-position: 45% center; }
+  0%   { object-position: 0% center; }
+  100% { object-position: 50% center; }
 }
 .mobile-pan-4 {
-  object-position: 50% center;
+  object-position: 0% center;
   animation: mobile-pan-4 6.7s cubic-bezier(0.25, 0, 0.08, 1) forwards;
 }
 

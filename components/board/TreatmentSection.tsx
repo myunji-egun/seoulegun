@@ -271,41 +271,57 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
     <div className="space-y-12">
       <div
         ref={heroRef}
-        className="grid grid-cols-1 lg:grid-cols-[0.94fr_1.06fr] gap-8 lg:gap-12 items-center"
+        className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-center"
       >
         <div className="space-y-6">
           <div className={`inline-flex items-center gap-2 text-[#0080C8] font-semibold text-[14px] ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
             <LucideIcon name="MapPin" size={18} />
             <span>수원치과 서울이건치과</span>
           </div>
+
           <div className="space-y-4">
             <h2
-              className={`text-[46px] sm:text-[64px] lg:text-[76px] font-black leading-[0.98] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[42px] sm:text-[58px] lg:text-[66px] font-black leading-[1.06] tracking-normal text-gray-950 ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.08s' } : undefined}
             >
-              올온 <span className="text-[#0080C8]">임플란트</span>
+              <span className="block">올온</span>
+              <span className="block text-[#0080C8]">임플란트</span>
+              <span className="block text-[21px] sm:text-[27px] lg:text-[32px] mt-3 font-black text-gray-400">
+                All-on-X
+              </span>
             </h2>
             <p
-              className={`text-[21px] sm:text-[27px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
               여러 치아를 잃은 경우,<br className="hidden sm:block" />
               전체 기능 회복을 함께 고민합니다
             </p>
           </div>
+
+          <div
+            className={`rounded-2xl border border-[#D9E7F1] bg-white p-6 shadow-[0_14px_45px_rgba(16,55,91,0.06)] ${heroVisible ? 'scroll-reveal-drop' : 'scroll-hidden'}`}
+            style={heroVisible ? { animationDelay: '0.24s' } : undefined}
+          >
+            <p className="text-[16px] sm:text-[17px] leading-[1.9] text-gray-700">
+              여러 개의 임플란트를 따로 심는 대신, 적은 수의 임플란트로
+              위 또는 아래 전체 치아를 고정식으로 회복하는 치료입니다.
+            </p>
+          </div>
         </div>
 
         <div
-          className={`relative min-h-[320px] sm:min-h-[420px] lg:min-h-[500px] ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          className={`relative ${heroVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={heroVisible ? { animationDelay: '0.12s' } : undefined}
         >
-          <div className="absolute inset-4 rounded-full bg-[#EAF6FD]" />
-          <div className="absolute inset-x-4 top-0 rounded-full h-40 bg-white/65 blur-2xl" />
-          <img
-            src={treatment.image}
-            alt="올온 임플란트 보철"
-            className="absolute right-0 top-0 w-[82%] max-w-[560px] rounded-[28px] object-cover shadow-[0_24px_70px_rgba(15,71,110,0.14)]"
-          />
+          <div className="absolute inset-4 rounded-[34px] bg-[#EAF6FD]" />
+          <div className="relative rounded-[28px] overflow-hidden bg-white border border-white shadow-[0_28px_90px_rgba(15,71,110,0.16)]">
+            <img
+              src={treatment.image}
+              alt="올온 임플란트 보철"
+              className="w-full aspect-[4/3] object-cover"
+            />
+          </div>
         </div>
       </div>
 
@@ -645,7 +661,8 @@ function DiabetesImplantChapter({ treatment }: { treatment: TreatmentContent }) 
               <div className="absolute left-4 top-4 rounded-full bg-[#0080C8] px-3 py-1 text-[12px] font-bold text-white">After</div>
             </div>
           )}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-7 lg:top-auto lg:translate-x-0 lg:translate-y-0 lg:bottom-20 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)] whitespace-nowrap">
+          {/* 전신 건강 고려 카드 — before/after 사이 빈 공간(우측 대각선)에 배치 */}
+          <div className="absolute left-1/2 top-[46%] -translate-y-1/2 rounded-2xl bg-white/92 backdrop-blur px-5 py-4 border border-[#DCE8F2] shadow-[0_18px_50px_rgba(16,55,91,0.12)] whitespace-nowrap">
             <div className="flex items-center gap-3">
               <span className="w-11 h-11 rounded-full bg-[#E8F6FE] flex items-center justify-center shrink-0">
                 <LucideIcon name="HeartPulse" size={23} className="text-[#0080C8]" />
@@ -1954,7 +1971,7 @@ export default function TreatmentSection({
         <div className="space-y-4">
           {treatment.boardCategory !== 'pediatric' && treatment.treatmentType !== 'vpt' && (
             <img
-              src="/images/logo/egun-logo%20(1).svg?v=2"
+              src="/images/logo/egun-logo.png"
               alt="수원치과 서울이건치과"
               className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             />

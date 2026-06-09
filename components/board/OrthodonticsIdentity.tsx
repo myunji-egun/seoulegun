@@ -24,7 +24,7 @@ function HeroText({ center = false }: { center?: boolean }) {
       <h1 className={`font-black leading-none tracking-tight text-[#1f2d4d] ${center ? 'text-[34px] mb-2' : 'text-[44px] sm:text-[64px] lg:text-[76px] mb-3'}`}>
         인비절라인
       </h1>
-      <p className={`font-bold text-[#2b3a5c] leading-snug ${center ? 'text-[16px] mb-2' : 'text-[19px] sm:text-[26px] lg:text-[30px] mb-4'}`}>
+      <p className={`font-bold text-[#2b3a5c] leading-snug ${center ? 'text-[16px] mb-2' : 'text-[19px] sm:text-[24px] lg:text-[28px] mb-4 whitespace-nowrap'}`}>
         티 나지 않게 자연스러운 투명교정
       </p>
       <p className={`text-[#5b6b87] leading-relaxed ${center ? 'text-[13px]' : 'text-[14px] sm:text-[17px]'}`}>

@@ -31,7 +31,7 @@ export default function MapSection() {
           <div className="scale-[0.8] origin-top-left">
             <div className={`w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-4 md:p-5 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
               <img
-                src="/images/logo/egun-logo%20(1).svg?v=2"
+                src="/images/logo/egun-logo.png"
                 alt="서울이건치과"
                 className="h-12 mb-3"
               />
@@ -96,7 +96,7 @@ export default function MapSection() {
         {/* 정보 카드 */}
         <div className="bg-white rounded-xl shadow border border-gray-100 p-4">
           <img
-            src="/images/logo/egun-logo%20(1).svg?v=2"
+            src="/images/logo/egun-logo.png"
             alt="서울이건치과"
             className="h-9 mb-3"
           />

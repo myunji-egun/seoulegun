@@ -91,10 +91,10 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
         {/* 메뉴 링크 */}
         <ul className="flex-1 overflow-y-auto py-4">
-          {/* News 섹션 — 맨 위 */}
+          {/* 칼럼/증례 섹션 — 맨 위 */}
           <li>
             <p className="px-6 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-              News
+              칼럼/증례
             </p>
           </li>
           {BOARD_ITEMS.map((item) => {

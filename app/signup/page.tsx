@@ -12,7 +12,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img
-            src="/images/logo/egun-logo%20(1).svg?v=2"
+            src="/images/logo/egun-logo.png"
             alt="서울이건치과"
             className="h-6 mx-auto mb-4"
           />

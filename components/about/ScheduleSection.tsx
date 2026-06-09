@@ -85,29 +85,31 @@ export default function ScheduleSection() {
               </div>
             )}
 
-            <div className="bg-gray-900 rounded-2xl p-6 text-white">
-              <h4 className="font-semibold mb-2">예약 후 방문을 권장합니다</h4>
-              <p className="text-sm text-gray-400 leading-relaxed mb-5">
-                대기 시간 없이 편안하게 진료받으실 수 있도록 사전 예약을
-                권장드립니다.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={`tel:${clinicInfo.phone.replace(/-/g, '')}`}
-                  className="flex-1 bg-[#0080C8] text-white text-center py-2.5 rounded-xl text-sm font-semibold hover:bg-[#A08968] transition-colors"
-                >
-                  {clinicInfo.phone}
-                </a>
-                <a
-                  href={clinicInfo.socialLinks.kakao}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-[#FEE500] text-[#3C1E1E] text-center py-2.5 rounded-xl text-sm font-semibold hover:bg-[#f5db00] transition-colors"
-                >
-                  카카오로 예약
-                </a>
-              </div>
-            </div>
+          </div>
+        </div>
+
+        {/* 예약 카드 — 섹션 맨 아래 */}
+        <div className="mt-10 bg-gray-900 rounded-2xl p-6 text-white">
+          <h4 className="font-semibold mb-2">예약 후 방문을 권장합니다</h4>
+          <p className="text-sm text-gray-400 leading-relaxed mb-5">
+            대기 시간 없이 편안하게 진료받으실 수 있도록 사전 예약을
+            권장드립니다.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:max-w-xl">
+            <a
+              href={`tel:${clinicInfo.phone.replace(/-/g, '')}`}
+              className="flex-1 bg-[#0080C8] text-white text-center py-2.5 rounded-xl text-sm font-semibold hover:bg-[#A08968] transition-colors"
+            >
+              {clinicInfo.phone}
+            </a>
+            <a
+              href={clinicInfo.socialLinks.kakao}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-[#FEE500] text-[#3C1E1E] text-center py-2.5 rounded-xl text-sm font-semibold hover:bg-[#f5db00] transition-colors"
+            >
+              카카오로 예약
+            </a>
           </div>
         </div>
       </div>

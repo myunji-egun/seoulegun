@@ -196,10 +196,13 @@ export default function InteriorSection() {
         id="interior-annex"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 scroll-mt-36"
       >
-        <div className={`flex items-center gap-4 mb-10 ${annexVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+        <div className={`flex items-center gap-4 mb-4 ${annexVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
           <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">별관</h3>
           <div className="flex-1 h-px bg-gray-700" />
         </div>
+        <p className={`text-sm sm:text-base text-gray-400 mb-10 ${annexVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+          소아치과치료 / 교정치료 / 소아교정
+        </p>
       </div>
 
       {/* 별관 3D 캐러셀 */}

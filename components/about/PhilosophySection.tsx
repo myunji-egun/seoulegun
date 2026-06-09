@@ -16,12 +16,12 @@ const CORE_VALUES = [
   {
     title: '통증 최소화',
     description:
-      '최신 마취 기법과\n충분한 마취시간으로\n두려움 없이 치료받으실 수 있습니다.',
+      '무통마취기법과\n충분한 마취시간으로\n두려움 없이 치료받으실 수 있습니다.',
   },
   {
     title: '장기적 관점',
     description:
-      '빠른 치료보다 오래가는 치료를\n목표로\n자연치아 보존을 우선 고려합니다.',
+      '빠른 치료보다 오래가는 치료를\n목표로 자연치아 보존을 우선 고려합니다.',
   },
 ]
 
@@ -36,14 +36,14 @@ export default function PhilosophySection() {
     >
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 섹션 레이블 */}
-        <p className={`text-sm font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}>
+        <p className={`text-sm font-semibold tracking-[0.25em] uppercase text-[#0080C8] mb-4 ${isVisible ? 'domino-rise' : 'domino-hidden'}`}>
           Our Philosophy
         </p>
 
         {/* 메인 타이틀 */}
         <h2
           id="philosophy-heading"
-          className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight tracking-normal mb-4 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+          className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight tracking-normal mb-4 ${isVisible ? 'domino-rise' : 'domino-hidden'}`}
           style={isVisible ? { animationDelay: '0.1s' } : undefined}
         >
           마음을 담아<br />
@@ -51,7 +51,7 @@ export default function PhilosophySection() {
         </h2>
 
         {/* 인트로 문구 */}
-        <p className={`text-base sm:text-[18px] text-gray-600 leading-[1.85] tracking-normal max-w-2xl mb-12 sm:mb-16 ${isVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+        <p className={`text-base sm:text-[18px] text-gray-600 leading-[1.85] tracking-normal max-w-2xl mb-12 sm:mb-16 ${isVisible ? 'domino-rise' : 'domino-hidden'}`}
           style={isVisible ? { animationDelay: '0.2s' } : undefined}
         >
           서울대학교 출신 원장들이 모여<br />
@@ -62,7 +62,7 @@ export default function PhilosophySection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {CORE_VALUES.map((value, i) => (
             <div key={value.title}
-              className={`group ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}
+              className={`group ${isVisible ? 'domino-rise' : 'domino-hidden'}`}
               style={isVisible ? { animationDelay: `${0.3 + i * 0.1}s` } : undefined}
             >
               <div className="flex items-start gap-4 py-1">

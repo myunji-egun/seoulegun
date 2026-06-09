@@ -127,7 +127,7 @@ export default function DoctorProfileSection() {
       {/* 섹션 헤더 — 풀페이지 */}
       <div
         id="doctor-intro"
-        className="relative min-h-screen flex items-center overflow-hidden scroll-mt-20"
+        className="relative min-h-screen flex items-center max-md:items-end overflow-hidden scroll-mt-20"
       >
         {/* 배경 이미지 */}
         <div
@@ -149,6 +149,7 @@ export default function DoctorProfileSection() {
           ref={ref}
           className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-8 py-16 sm:py-20
             -translate-y-[110px]
+            max-md:translate-y-0 max-md:pb-[calc(var(--mobile-bottom-bar-height)+32px)]
             lg:translate-y-[117px] lg:translate-x-[76px]
             xl:translate-y-0 xl:translate-x-0"
         >

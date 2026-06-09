@@ -147,7 +147,7 @@ export default async function NoticePage({ searchParams }: NoticePageProps) {
                       <img
                         src={notice.image_url!}
                         alt={notice.title}
-                        className="mx-auto h-auto max-w-full rounded-md border border-gray-100 bg-white"
+                        className="mx-auto h-auto max-w-full rounded-md border border-gray-100 bg-white md:max-h-[80vh] md:w-auto md:object-contain"
                       />
                     </div>
                   </article>

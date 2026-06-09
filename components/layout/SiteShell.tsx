@@ -5,6 +5,7 @@ import Header from './Header'
 import Footer from './Footer'
 import QuickConsultBar from './QuickConsultBar'
 import FloatingSidebar from './FloatingSidebar'
+import ScrollToTopButton from './ScrollToTopButton'
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isAdmin = pathname.startsWith('/admin')
@@ -19,6 +20,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       <main className="pb-16 sm:pb-14">{children}</main>
       {pathname !== '/' && <Footer />}
       <FloatingSidebar />
+      <ScrollToTopButton />
       <QuickConsultBar />
     </>
   )
