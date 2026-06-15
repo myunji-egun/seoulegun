@@ -201,6 +201,7 @@ function CaseCard({
 }) {
   const [expanded, setExpanded] = useState(false)
   const [clamped, setClamped] = useState(false)
+  const [lightbox, setLightbox] = useState(false)
   const descRef = useRef<HTMLParagraphElement>(null)
 
   // 설명이 2줄을 넘어 잘릴 때만 '더 보기' 노출
@@ -209,6 +210,25 @@ function CaseCard({
     if (el) setClamped(el.scrollHeight > el.clientHeight + 1)
   }, [item.description])
 
+  // 웹(데스크탑)에서만 라이트박스 오픈 — 모바일은 동작하지 않음
+  const openLightbox = () => {
+    if (typeof window !== 'undefined' && window.matchMedia('(min-width: 640px)').matches) {
+      setLightbox(true)
+    }
+  }
+
+  // 라이트박스: ESC 닫기 + 배경 스크롤 잠금
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightbox(false) }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [lightbox])
+
   return (
     <article className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 group">
       {/* Before / After — 웹: 좌우 / 모바일: 상하, 고정 높이로 템플릿화 (object-cover) */}
@@ -216,7 +236,7 @@ function CaseCard({
         {/* Before — 비로그인 시 블러 + 손가락 아이콘 */}
         <div
           className="relative sm:w-1/2 overflow-hidden bg-gray-50 cursor-pointer"
-          onClick={() => { if (!isLoggedIn) onLockClick() }}
+          onClick={() => { if (!isLoggedIn) { onLockClick(); return } openLightbox() }}
         >
           {item.before_image_url ? (
             <img
@@ -238,7 +258,7 @@ function CaseCard({
         </div>
 
         {/* After — 원본 공개 */}
-        <div className="relative sm:w-1/2 overflow-hidden bg-gray-50">
+        <div className="relative sm:w-1/2 overflow-hidden bg-gray-50 sm:cursor-pointer" onClick={openLightbox}>
           {item.after_image_url ? (
             <img src={item.after_image_url} alt="치료 후" className="w-full h-52 sm:h-64 object-cover block" />
           ) : (
@@ -298,6 +318,35 @@ function CaseCard({
           </div>
         )}
       </div>
+
+      {/* ── 웹 전용 라이트박스: 비포·애프터를 풀스크린에 한번에 맞춰서 표시 (모바일 미표시) ── */}
+      {lightbox && (
+        <div
+          className="hidden sm:flex fixed inset-0 z-[100] bg-black/90 items-center justify-center gap-6 p-8 cursor-zoom-out"
+          onClick={() => setLightbox(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(false)}
+            aria-label="닫기"
+            className="fixed top-5 right-7 z-[110] text-white/80 hover:text-white text-3xl font-light leading-none"
+          >
+            ✕
+          </button>
+          {isLoggedIn && item.before_image_url && (
+            <figure className="flex-1 min-w-0 h-full flex flex-col items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
+              <figcaption className="bg-black/55 text-white text-xs font-bold px-3 py-1 rounded tracking-wide">BEFORE</figcaption>
+              <img src={item.before_image_url} alt="치료 전 원본" className="max-w-full max-h-[82vh] object-contain cursor-default" />
+            </figure>
+          )}
+          {item.after_image_url && (
+            <figure className="flex-1 min-w-0 h-full flex flex-col items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
+              <figcaption className="bg-[#0080C8]/85 text-white text-xs font-bold px-3 py-1 rounded tracking-wide">AFTER</figcaption>
+              <img src={item.after_image_url} alt="치료 후 원본" className="max-w-full max-h-[82vh] object-contain cursor-default" />
+            </figure>
+          )}
+        </div>
+      )}
     </article>
   )
 }
