@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useCountUp } from '@/hooks/useCountUp'
 
 const STATS = [
-  { target: 12259, suffix: '+', label: '임플란트 시술' },
-  { target: 23725, suffix: '+', label: '누적 진료' },
-  { target: 10, suffix: '+', label: '진료 경력(년)' },
+  { target: 12259, suffix: '', label: '임플란트 시술' },
+  { target: 23725, suffix: '', label: '누적 진료' },
+  { target: 10, suffix: '', label: '진료 경력(년)' },
 ]
 
 function StatItem({

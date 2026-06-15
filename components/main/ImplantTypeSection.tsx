@@ -132,7 +132,7 @@ export default function ImplantTypeSection() {
               <div className="h-[110px] sm:h-[200px] shrink-0 overflow-hidden">
                 <img
                   src={type.img}
-                  alt={type.title}
+                  alt={`수원 영통 ${type.title}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
