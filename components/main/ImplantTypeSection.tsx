@@ -83,28 +83,28 @@ export default function ImplantTypeSection() {
               <div className="p-4 lg:p-5 flex flex-col flex-grow">
                 <p
                   className="tracking-[0.25em] mb-2 lg:mb-3"
-                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.28)' }}
+                  style={{ fontSize: '9px', color: 'rgba(255,255,255,0.28)' }}
                 >
                   TYPE / {type.num}
                 </p>
 
                 <h3
                   className="font-bold text-white leading-tight mb-1 lg:mb-2"
-                  style={{ fontSize: 'clamp(19px, 1.8vw, 25px)' }}
+                  style={{ fontSize: 'clamp(17px, 1.8vw, 23px)' }}
                 >
                   {type.title}
                 </h3>
 
                 <p
                   className="tracking-[0.18em] uppercase mb-2 lg:mb-3"
-                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.32)' }}
+                  style={{ fontSize: '9px', color: 'rgba(255,255,255,0.32)' }}
                 >
                   {type.subtitle}
                 </p>
 
                 <p
-                  className="italic leading-relaxed mb-3 lg:mb-4"
-                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.48)' }}
+                  className="italic leading-snug mb-2 lg:mb-3"
+                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.48)' }}
                 >
                   &ldquo;{type.quote}&rdquo;
                 </p>
@@ -114,12 +114,12 @@ export default function ImplantTypeSection() {
                   style={{ borderTop: '1px solid rgba(255,255,255,0.09)' }}
                 />
 
-                <ul className="space-y-1.5">
+                <ul className="space-y-1">
                   {type.features.map((feat, j) => (
                     <li
                       key={j}
                       className="flex items-center gap-2"
-                      style={{ fontSize: '13px', color: 'rgba(255,255,255,0.62)' }}
+                      style={{ fontSize: '11px', color: 'rgba(255,255,255,0.62)' }}
                     >
                       <span style={{ color: 'rgba(255,255,255,0.28)' }}>—</span>
                       {feat}
@@ -128,8 +128,8 @@ export default function ImplantTypeSection() {
                 </ul>
               </div>
 
-              {/* 이미지 영역 */}
-              <div style={{ height: 'clamp(180px, 22vh, 280px)', flexShrink: 0, overflow: 'hidden' }}>
+              {/* 이미지 영역 — 모바일은 낮게(한 화면 확보), 데스크탑은 크게 */}
+              <div className="h-[110px] sm:h-[200px] shrink-0 overflow-hidden">
                 <img
                   src={type.img}
                   alt={type.title}

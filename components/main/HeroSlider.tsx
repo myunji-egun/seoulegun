@@ -13,19 +13,19 @@ type Slide = {
 const WEB_SLIDES: Slide[] = [
   { id: 1, image: '/images/slides/slide-1.mp4', isVideo: true },
   { id: 2, image: '/images/slides/slide-2.gif', interval: 3200 },
-  { id: 3, image: '/images/slides/slide-3.jpg' },
-  { id: 4, image: '/images/slides/slide-4.webp' },
-  { id: 5, image: '/images/slides/slide-5.png' },
-  { id: 6, image: '/images/slides/slide-6.jpg' },
+  { id: 3, image: '/images/slides/slide-3.jpg', interval: 3000 },
+  { id: 4, image: '/images/slides/slide-4.webp', interval: 3000 },
+  { id: 5, image: '/images/slides/slide-5.png', interval: 3000 },
+  { id: 6, image: '/images/slides/slide-6.jpg', interval: 3000 },
 ]
 
 // 모바일: 경량 영상(0.7배속) → slide-2 → slide-3
 const MOBILE_SLIDES: Slide[] = [
   { id: 1, image: '/images/slides/slide-4-mobile.mp4', isVideo: true },
   { id: 2, image: '/images/slides/slide-2.gif', interval: 3200 },
-  { id: 3, image: '/images/slides/slide-3.jpg' },
-  { id: 4, image: '/images/slides/slide-4.webp' },
-  { id: 5, image: '/images/slides/slide-5.png' },
+  { id: 3, image: '/images/slides/slide-3.jpg', interval: 3000 },
+  { id: 4, image: '/images/slides/slide-4.webp', interval: 3000 },
+  { id: 5, image: '/images/slides/slide-5.png', interval: 3000 },
 ]
 
 // 영상은 양쪽 모두 첫 슬라이드(index 0). 영상은 자체 길이만큼 재생.
@@ -162,8 +162,6 @@ export default function HeroSlider() {
     <section
       id="main-hero"
       className={`relative h-dvh md:h-screen w-full overflow-hidden ${slide.isVideo ? 'bg-black' : 'bg-white'}`}
-      onMouseEnter={() => { isPausedRef.current = true }}
-      onMouseLeave={() => { isPausedRef.current = false }}
     >
       {/* ── 배경 이미지 (데스크탑) — 크로스페이드 + Ken Burns, GIF 재생 가능 ── */}
       <div className="hidden md:block absolute inset-0">

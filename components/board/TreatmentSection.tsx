@@ -294,7 +294,7 @@ function AllOnImplantChapter({ treatment }: { treatment: TreatmentContent }) {
               className={`text-[20px] sm:text-[24px] leading-relaxed text-gray-900 font-medium ${heroVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
               style={heroVisible ? { animationDelay: '0.16s' } : undefined}
             >
-              여러 치아를 잃은 경우,<br className="hidden sm:block" />
+              여러 치아를 잃은 경우,<br />
               전체 기능 회복을 함께 고민합니다
             </p>
           </div>
@@ -2254,13 +2254,13 @@ export default function TreatmentSection({
           {/* 모바일: 2열 그리드 */}
           <ol className="md:hidden grid grid-cols-2 gap-3">
             {treatment.steps.map((step, i) => (
-              <li key={i} className="flex items-start gap-3 bg-white border border-[#D8E9F5] rounded-xl p-4">
-                <span className="text-[22px] font-black tabular-nums text-[#0080C8] leading-none shrink-0">
+              <li key={i} className="flex items-start gap-2 bg-white border border-[#D8E9F5] rounded-xl p-3.5">
+                <span className="text-[17px] font-black tabular-nums text-[#0080C8] leading-none shrink-0 mt-0.5">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <div>
-                  <p className="text-[15px] font-bold text-gray-900 leading-snug">{step.title}</p>
-                  {step.desc && <p className="text-[12px] text-gray-500 mt-1 leading-relaxed">{step.desc}</p>}
+                <div className="min-w-0">
+                  <p className="text-[15px] font-bold text-gray-900 leading-snug break-keep">{step.title}</p>
+                  {step.desc && <p className="text-[12px] text-gray-500 mt-1 leading-relaxed break-keep">{step.desc}</p>}
                 </div>
               </li>
             ))}
