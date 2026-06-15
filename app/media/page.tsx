@@ -10,9 +10,11 @@ import {
 import { clinicInfo } from '@/data/clinic-info'
 
 export const metadata: Metadata = {
-  title: '이건미디어 | 서울이건치과',
+  title: '이건미디어 | 환자후기·이건TV - 서울이건치과',
   description:
-    '카카오톡 상담, 실제 환자후기, 이원장칼럼, 이건TV를 통해 서울이건치과를 만나보세요.',
+    '카카오톡 상담, 환자후기, 원장칼럼, 이건TV를 통해 수원 영통 서울이건치과를 만나보세요.',
+  keywords: ['서울이건치과 후기', '수원치과 후기', '이건TV', '서울이건치과 미디어'],
+  alternates: { canonical: 'https://egundc.com/media' },
 }
 
 const MEDIA_SECTIONS = [

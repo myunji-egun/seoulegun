@@ -4,6 +4,7 @@ import SignupForm from '@/components/auth/SignupForm'
 export const metadata: Metadata = {
   title: '회원가입 | 서울이건치과',
   description: '서울이건치과 회원가입 - 온라인 상담 및 예약 서비스를 이용하실 수 있습니다.',
+  robots: { index: false, follow: true },
 }
 
 export default function SignupPage() {

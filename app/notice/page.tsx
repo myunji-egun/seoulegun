@@ -52,6 +52,8 @@ async function readLocalNotices(): Promise<Notice[]> {
 export const metadata = {
   title: '공지사항 | 수원치과 서울이건치과',
   description: '수원치과 서울이건치과의 최신 공지사항, 휴무일정, 진료안내를 확인하세요.',
+  keywords: ['서울이건치과 공지', '수원치과 휴무', '서울이건치과 진료시간'],
+  alternates: { canonical: 'https://egundc.com/notice' },
 }
 
 export default async function NoticePage({ searchParams }: NoticePageProps) {
