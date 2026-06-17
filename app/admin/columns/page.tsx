@@ -57,6 +57,23 @@ const HTML_TEMPLATE = `<h1 style="font-size:26px; font-weight:700; color:#1a2b3c
   </p>
 </div>`
 
+// 붙여넣은 HTML을 본문(.post-wrap 내부)만 남도록 변환
+function normalizeHtml(raw: string): string {
+  if (!raw) return ''
+  let html = raw
+  html = html.replace(/<!DOCTYPE[^>]*>/gi, '')
+  html = html.replace(/<\/?(?:html|head|body)[^>]*>/gi, '')
+  html = html.replace(/<style[\s\S]*?<\/style>/gi, '')
+  html = html.replace(/<script[\s\S]*?<\/script>/gi, '')
+  html = html.replace(/<title[\s\S]*?<\/title>/gi, '')
+  html = html.replace(/<meta[^>]*>/gi, '')
+  html = html.replace(/<link[^>]*>/gi, '')
+  // post-wrap 래퍼가 있으면 내부만 추출
+  const m = html.match(/<div[^>]*class=["'][^"']*post-wrap[^"']*["'][^>]*>([\s\S]*)<\/div>/i)
+  if (m) html = m[1]
+  return html.trim()
+}
+
 interface Column {
   id: string
   title: string
@@ -111,7 +128,7 @@ export default function ColumnsPage() {
   const [insertingImg, setInsertingImg] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
   const contentImgRef = useRef<HTMLInputElement>(null)
-  const editorRef = useRef<HTMLDivElement>(null)
+  const previewRef = useRef<HTMLDivElement>(null)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -127,17 +144,19 @@ export default function ColumnsPage() {
 
   useEffect(() => { fetchData() }, [fetchData])
 
-  // 모달 열릴 때 에디터에 기존 내용 세팅
+  // 미리보기 탭 진입 시에만 변환된 HTML을 렌더링 (편집 중에는 덮어쓰지 않음)
   useEffect(() => {
-    if (modalOpen && editorRef.current) {
-      editorRef.current.innerHTML = form.content
+    if (editorTab === 'preview' && previewRef.current) {
+      previewRef.current.innerHTML = form.content
     }
-  }, [modalOpen])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editorTab])
 
   const openAddModal = () => {
     setEditingId(null)
     setForm(emptyForm)
     setUploadedImages([])
+    setEditorTab('edit')
     setModalOpen(true)
   }
 
@@ -153,6 +172,7 @@ export default function ColumnsPage() {
       image_url: item.image_url || '',
     })
     setUploadedImages([])
+    setEditorTab('edit')
     setModalOpen(true)
   }
 
@@ -208,7 +228,7 @@ export default function ColumnsPage() {
       caption.className = 'img-caption'
       caption.textContent = '▲ 캡션을 입력하세요'
 
-      const editor = editorRef.current
+      const editor = previewRef.current
       if (!editor) return
 
       // 드롭 위치에 삽입
@@ -231,6 +251,7 @@ export default function ColumnsPage() {
         editor.appendChild(caption)
       }
       editor.focus()
+      setForm((p) => ({ ...p, content: editor.innerHTML }))
     } finally {
       setInsertingImg(false)
     }
@@ -258,8 +279,12 @@ export default function ColumnsPage() {
   const handleSave = async () => {
     if (!form.title.trim()) return
     setSaving(true)
-    // 에디터의 최신 HTML 읽기
-    const latestContent = editorRef.current?.innerHTML ?? form.content
+    // 활성 탭 기준 최신 HTML 읽기 + 변환
+    const latestContent = normalizeHtml(
+      editorTab === 'preview' && previewRef.current
+        ? previewRef.current.innerHTML
+        : form.content,
+    )
     try {
       const payload = {
         ...form,
@@ -449,15 +474,16 @@ export default function ColumnsPage() {
                     <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs">
                       <button
                         type="button"
-                        onClick={() => setEditorTab('edit')}
+                        onClick={() => {
+                          if (previewRef.current) setForm((p) => ({ ...p, content: previewRef.current!.innerHTML }))
+                          setEditorTab('edit')
+                        }}
                         className={`px-3 py-1 transition-colors ${editorTab === 'edit' ? 'bg-[#0080C8] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
-                      >편집</button>
+                      >HTML 편집</button>
                       <button
                         type="button"
                         onClick={() => {
-                          if (editorRef.current) {
-                            setForm(p => ({ ...p, content: editorRef.current!.innerHTML }))
-                          }
+                          setForm((p) => ({ ...p, content: normalizeHtml(p.content) }))
                           setEditorTab('preview')
                         }}
                         className={`px-3 py-1 transition-colors ${editorTab === 'preview' ? 'bg-[#0080C8] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
@@ -467,20 +493,39 @@ export default function ColumnsPage() {
                 </div>
                 {editorTab === 'edit' ? (
                   <div>
+                    <textarea
+                      value={form.content}
+                      onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
+                      spellCheck={false}
+                      className="w-full min-h-[400px] px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0080C8] bg-white font-mono text-xs leading-relaxed"
+                      placeholder="여기에 HTML을 붙여넣으세요. <style>·<head> 등 전체 문서를 붙여넣어도 미리보기에서 자동으로 본문만 변환됩니다."
+                    />
+                    <p className="text-xs text-gray-400 mt-1.5">
+                      HTML 원본을 붙여넣은 뒤 <span className="font-semibold text-[#0080C8]">미리보기</span>를 누르면 변환되어 보입니다. 미리보기 안에서 이미지를 드래그해 넣고 위치를 편집할 수 있습니다.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
                     <div
-                      ref={editorRef}
+                      ref={previewRef}
                       contentEditable
                       suppressContentEditableWarning
                       className="post-wrap w-full min-h-[400px] px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0080C8] overflow-auto bg-white cursor-text"
-                      style={{ whiteSpace: 'pre-wrap' }}
+                      onInput={() => {
+                        if (previewRef.current) setForm((p) => ({ ...p, content: previewRef.current!.innerHTML }))
+                      }}
                       onDragOver={(e) => e.preventDefault()}
                       onDrop={async (e) => {
-                        e.preventDefault()
                         const file = e.dataTransfer.files?.[0]
                         if (file?.type.startsWith('image/')) {
+                          e.preventDefault()
                           await insertImageAtPos(file, e.clientX, e.clientY)
+                          return
                         }
-                        // 텍스트 드래그는 브라우저가 자동 처리
+                        // 미리보기 안에서 이미지 위치 이동은 브라우저가 처리 → 이후 동기화
+                        setTimeout(() => {
+                          if (previewRef.current) setForm((p) => ({ ...p, content: previewRef.current!.innerHTML }))
+                        }, 0)
                       }}
                     />
                     <div className="flex items-center gap-2 mt-1.5">
@@ -491,9 +536,9 @@ export default function ColumnsPage() {
                         className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:border-[#0080C8] hover:text-[#0080C8] transition-colors disabled:opacity-50"
                       >
                         <Upload size={12} />
-                        {insertingImg ? '업로드 중...' : '이미지 버튼으로 삽입'}
+                        {insertingImg ? '업로드 중...' : '이미지 삽입'}
                       </button>
-                      <span className="text-xs text-gray-400">이미지를 에디터 안에 드래그하거나 붙여넣기(Ctrl+V) 가능</span>
+                      <span className="text-xs text-gray-400">이미지를 미리보기 안으로 드래그해 넣고, 넣은 이미지를 드래그해 위치를 옮길 수 있습니다. (삭제: 이미지 클릭 후 Delete)</span>
                     </div>
                     <input
                       ref={contentImgRef}
@@ -507,11 +552,6 @@ export default function ColumnsPage() {
                       }}
                     />
                   </div>
-                ) : (
-                  <div
-                    className="w-full min-h-[300px] px-4 py-3 rounded-lg border border-gray-300 overflow-auto bg-white post-wrap"
-                    dangerouslySetInnerHTML={{ __html: form.content || '<p class="text-gray-400">내용이 없습니다.</p>' }}
-                  />
                 )}
               </div>
 

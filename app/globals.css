@@ -101,6 +101,24 @@
   color: #1a2b3c;
   margin-bottom: 15px;
 }
+.post-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 30px;
+  font-size: 15px;
+}
+.post-wrap table th,
+.post-wrap table td {
+  border: 1px solid #e1e8ed;
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.post-wrap table th {
+  background: #f4f7fa;
+  font-weight: 700;
+  color: #2c3e50;
+}
 @media (max-width: 767px) {
   /* 모바일 가독성: 한글 단어 안 끊김 + 넉넉한 줄/문단 간격으로 긴 문단에서도 시선 유지 */
   .post-wrap { line-height: 1.85; word-break: keep-all; overflow-wrap: break-word; }
@@ -114,6 +132,9 @@
     overflow-wrap: break-word;
   }
   .post-wrap .summary-box { font-size: 15px; line-height: 1.85; }
+  .post-wrap table { font-size: 13px; }
+  .post-wrap table th,
+  .post-wrap table td { padding: 8px; }
   .post-wrap .closing-box .closing-title { font-size: 16px; }
 }
 
