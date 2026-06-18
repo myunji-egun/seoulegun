@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Plus, Pencil, Trash2, X, Upload } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Upload, Sparkles } from 'lucide-react'
 
 const HTML_TEMPLATE = `<h1 style="font-size:26px; font-weight:700; color:#1a2b3c; border-bottom:2px solid #1a2b3c; padding-bottom:15px; margin-bottom:30px; line-height:1.4;">
   [메인 제목]<br>
@@ -126,6 +126,7 @@ export default function ColumnsPage() {
   const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([])
   const [editorTab, setEditorTab] = useState<'edit' | 'preview'>('edit')
   const [insertingImg, setInsertingImg] = useState(false)
+  const [aiLoading, setAiLoading] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
   const contentImgRef = useRef<HTMLInputElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
@@ -275,6 +276,37 @@ export default function ColumnsPage() {
 
   const parseTags = (raw: string): string[] =>
     raw.split(',').map((t) => t.trim()).filter(Boolean)
+
+  // 메모하듯 쓴 글 → AI가 템플릿 HTML로 변환 (제목/카테고리/태그/본문 자동 채움)
+  const handleAiGenerate = async () => {
+    const notes = form.content.trim()
+    if (!notes) return
+    setAiLoading(true)
+    try {
+      const res = await fetch('/api/columns/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ notes }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'AI 변환에 실패했습니다.')
+        return
+      }
+      setForm((p) => ({
+        ...p,
+        title: data.title || p.title,
+        category: CATEGORIES.includes(data.category) ? data.category : p.category,
+        tags: Array.isArray(data.tags) ? data.tags.join(', ') : p.tags,
+        content: data.content || p.content,
+      }))
+      setEditorTab('preview')
+    } catch {
+      alert('AI 변환 중 오류가 발생했습니다.')
+    } finally {
+      setAiLoading(false)
+    }
+  }
 
   const handleSave = async () => {
     if (!form.title.trim()) return
@@ -471,6 +503,16 @@ export default function ColumnsPage() {
                 <div className="flex items-center justify-between mb-1">
                   <label className="block text-sm font-medium text-gray-700">내용</label>
                   <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleAiGenerate}
+                      disabled={aiLoading || !form.content.trim()}
+                      title="메모하듯 쓴 글을 칼럼 템플릿으로 변환합니다"
+                      className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-lg bg-gradient-to-r from-[#7C3AED] to-[#0080C8] text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                    >
+                      <Sparkles size={13} />
+                      {aiLoading ? 'AI 변환 중...' : 'AI 변환'}
+                    </button>
                     <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs">
                       <button
                         type="button"
@@ -498,10 +540,10 @@ export default function ColumnsPage() {
                       onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
                       spellCheck={false}
                       className="w-full min-h-[400px] px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0080C8] bg-white font-mono text-xs leading-relaxed"
-                      placeholder="여기에 HTML을 붙여넣으세요. <style>·<head> 등 전체 문서를 붙여넣어도 미리보기에서 자동으로 본문만 변환됩니다."
+                      placeholder="① 메모하듯 자유롭게 글을 쓴 뒤 [AI 변환]을 누르면 칼럼 템플릿(제목·소제목·요약·FAQ·마무리)으로 자동 변환됩니다.&#10;② 또는 완성된 HTML을 붙여넣어도 됩니다. <style>·<head> 등 전체 문서를 붙여넣어도 미리보기에서 본문만 자동 추출됩니다."
                     />
                     <p className="text-xs text-gray-400 mt-1.5">
-                      HTML 원본을 붙여넣은 뒤 <span className="font-semibold text-[#0080C8]">미리보기</span>를 누르면 변환되어 보입니다. 미리보기 안에서 이미지를 드래그해 넣고 위치를 편집할 수 있습니다.
+                      메모하듯 쓰고 <span className="font-semibold text-[#7C3AED]">AI 변환</span>을 누르면 템플릿이 입혀집니다. HTML을 직접 붙여넣은 경우 <span className="font-semibold text-[#0080C8]">미리보기</span>로 확인하세요. 미리보기 안에서 이미지를 드래그해 넣고 위치를 편집할 수 있습니다.
                     </p>
                   </div>
                 ) : (
