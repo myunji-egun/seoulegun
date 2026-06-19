@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Plus, Pencil, Trash2, X, Upload, Sparkles } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Upload, Sparkles, ArrowUp, ArrowDown, Type, FileText } from 'lucide-react'
 
 const HTML_TEMPLATE = `<h1 style="font-size:26px; font-weight:700; color:#1a2b3c; border-bottom:2px solid #1a2b3c; padding-bottom:15px; margin-bottom:30px; line-height:1.4;">
   [메인 제목]<br>
@@ -127,9 +127,14 @@ export default function ColumnsPage() {
   const [editorTab, setEditorTab] = useState<'edit' | 'preview'>('edit')
   const [insertingImg, setInsertingImg] = useState(false)
   const [aiLoading, setAiLoading] = useState(false)
+  const [docxLoading, setDocxLoading] = useState(false)
+  const [imgSelected, setImgSelected] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
+  const docxRef = useRef<HTMLInputElement>(null)
   const contentImgRef = useRef<HTMLInputElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
+  const selectedImgRef = useRef<HTMLImageElement | null>(null)
+  const draggingBoxRef = useRef<HTMLElement | null>(null)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -149,6 +154,9 @@ export default function ColumnsPage() {
   useEffect(() => {
     if (editorTab === 'preview' && previewRef.current) {
       previewRef.current.innerHTML = form.content
+      lockImages()
+    } else {
+      clearImgSel()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorTab])
@@ -218,9 +226,13 @@ export default function ColumnsPage() {
       if (!res.ok) return
       const { url } = await res.json()
 
-      // img-box + caption 요소 생성
+      // img-box + caption 요소 생성 — 이미지는 편집/드래그 불가한 "위젯"으로 만들어
+      // contentEditable 안에서 선택이 고착되거나 텍스트 드래그와 충돌하는 문제를 방지
       const wrapper = document.createElement('div')
       wrapper.className = 'img-box'
+      wrapper.contentEditable = 'false'
+      wrapper.draggable = true
+      wrapper.style.cursor = 'grab'
       const img = document.createElement('img')
       img.src = url
       img.alt = ''
@@ -251,11 +263,115 @@ export default function ColumnsPage() {
         editor.appendChild(wrapper)
         editor.appendChild(caption)
       }
-      editor.focus()
       setForm((p) => ({ ...p, content: editor.innerHTML }))
     } finally {
       setInsertingImg(false)
     }
+  }
+
+  // 미리보기 내 img-box를 편집 불가 + 드래그 가능한 "위젯"으로 고정
+  const lockImages = () => {
+    const root = previewRef.current
+    if (!root) return
+    root.querySelectorAll('.img-box').forEach((b) => {
+      const el = b as HTMLElement
+      el.contentEditable = 'false'
+      el.draggable = true
+      el.style.cursor = 'grab'
+    })
+  }
+
+  // 직렬화 시 선택 표시(outline)를 제거한 깨끗한 HTML 반환
+  const readContent = (): string => {
+    const root = previewRef.current
+    if (!root) return form.content
+    const sel = selectedImgRef.current
+    if (sel) sel.removeAttribute('style')
+    const html = root.innerHTML
+    if (sel) {
+      sel.style.outline = '3px solid #0080C8'
+      sel.style.outlineOffset = '2px'
+    }
+    return html
+  }
+
+  const syncPreview = () => {
+    setForm((p) => ({ ...p, content: readContent() }))
+  }
+
+  // 드래그한 이미지 묶음을 커서 위치(최상위 블록 기준)로 이동
+  const insertGroupAtPoint = (group: HTMLElement[], y: number) => {
+    const root = previewRef.current
+    if (!root) return
+    const blocks = Array.from(root.children).filter((c) => !group.includes(c as HTMLElement))
+    let ref: Element | null = null
+    for (const b of blocks) {
+      const r = b.getBoundingClientRect()
+      if (y < r.top + r.height / 2) { ref = b; break }
+    }
+    if (ref) ref.before(...group)
+    else root.append(...group)
+  }
+
+  const clearImgSel = () => {
+    if (selectedImgRef.current) selectedImgRef.current.style.outline = ''
+    selectedImgRef.current = null
+    setImgSelected(false)
+  }
+
+  const selectImg = (img: HTMLImageElement) => {
+    if (selectedImgRef.current && selectedImgRef.current !== img) selectedImgRef.current.style.outline = ''
+    selectedImgRef.current = img
+    img.style.outline = '3px solid #0080C8'
+    img.style.outlineOffset = '2px'
+    setImgSelected(true)
+  }
+
+  // 선택된 이미지의 img-box(+바로 뒤 캡션)를 한 묶음으로 반환
+  const selectedGroup = (): HTMLElement[] => {
+    const img = selectedImgRef.current
+    if (!img) return []
+    const box = (img.closest('.img-box') as HTMLElement) || img
+    const next = box.nextElementSibling
+    const cap = next && next.classList.contains('img-caption') ? (next as HTMLElement) : null
+    return cap ? [box, cap] : [box]
+  }
+
+  const moveSelectedImg = (dir: 'up' | 'down') => {
+    const group = selectedGroup()
+    if (!group.length) return
+    const box = group[0]
+    if (dir === 'up') {
+      const prev = box.previousElementSibling
+      if (prev) prev.before(...group)
+    } else {
+      const after = group[group.length - 1].nextElementSibling
+      if (after) after.after(...group)
+    }
+    syncPreview()
+  }
+
+  const deleteSelectedImg = () => {
+    selectedGroup().forEach((el) => el.remove())
+    clearImgSel()
+    syncPreview()
+  }
+
+  const editSelectedCaption = () => {
+    const group = selectedGroup()
+    if (!group.length) return
+    const box = group[0]
+    let cap = group[1] as HTMLElement | undefined
+    const current = cap ? (cap.textContent ?? '').replace(/^▲\s*/, '') : ''
+    const text = window.prompt('이미지 캡션을 입력하세요', current)
+    if (text === null) return
+    if (!cap) {
+      cap = document.createElement('p')
+      cap.className = 'img-caption'
+      box.after(cap)
+    }
+    cap.textContent = text.trim() ? `▲ ${text.trim()}` : ''
+    syncPreview()
   }
 
   const handleDrop = async (e: React.DragEvent<HTMLButtonElement>) => {
@@ -308,14 +424,54 @@ export default function ColumnsPage() {
     }
   }
 
+  // Word(.docx) 파일 → 문서 내 이미지 자동 업로드 → AI 템플릿 변환
+  const handleDocxGenerate = async (file: File) => {
+    if (!file.name.toLowerCase().endsWith('.docx')) {
+      alert('.docx Word 파일만 업로드할 수 있습니다.')
+      return
+    }
+
+    setDocxLoading(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await fetch('/api/columns/generate-from-docx', { method: 'POST', body: fd })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Word 파일 변환에 실패했습니다.')
+        return
+      }
+
+      const images: UploadedImage[] = Array.isArray(data.images)
+        ? data.images.map((img: { url: string; name?: string }, i: number) => ({
+          url: img.url,
+          name: img.name || `word-image-${i + 1}`,
+        }))
+        : []
+
+      setUploadedImages((prev) => [...prev, ...images])
+      setForm((p) => ({
+        ...p,
+        title: data.title || p.title,
+        category: CATEGORIES.includes(data.category) ? data.category : p.category,
+        tags: Array.isArray(data.tags) ? data.tags.join(', ') : p.tags,
+        content: data.content || p.content,
+        image_url: p.image_url || images[0]?.url || '',
+      }))
+      setEditorTab('preview')
+    } catch {
+      alert('Word 파일 변환 중 오류가 발생했습니다.')
+    } finally {
+      setDocxLoading(false)
+    }
+  }
+
   const handleSave = async () => {
     if (!form.title.trim()) return
     setSaving(true)
     // 활성 탭 기준 최신 HTML 읽기 + 변환
     const latestContent = normalizeHtml(
-      editorTab === 'preview' && previewRef.current
-        ? previewRef.current.innerHTML
-        : form.content,
+      editorTab === 'preview' && previewRef.current ? readContent() : form.content,
     )
     try {
       const payload = {
@@ -505,8 +661,29 @@ export default function ColumnsPage() {
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
+                      onClick={() => docxRef.current?.click()}
+                      disabled={docxLoading || aiLoading}
+                      title="Word(.docx) 파일의 글과 사진을 칼럼 템플릿으로 자동 변환합니다"
+                      className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-lg border border-[#0080C8] text-[#0080C8] bg-white font-medium hover:bg-[#0080C8]/5 transition-colors disabled:opacity-50"
+                    >
+                      <FileText size={13} />
+                      {docxLoading ? 'Word 변환 중...' : 'Word로 AI 변환'}
+                    </button>
+                    <input
+                      ref={docxRef}
+                      type="file"
+                      accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (file) await handleDocxGenerate(file)
+                        e.target.value = ''
+                      }}
+                    />
+                    <button
+                      type="button"
                       onClick={handleAiGenerate}
-                      disabled={aiLoading || !form.content.trim()}
+                      disabled={aiLoading || docxLoading || !form.content.trim()}
                       title="메모하듯 쓴 글을 칼럼 템플릿으로 변환합니다"
                       className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-lg bg-gradient-to-r from-[#7C3AED] to-[#0080C8] text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
                     >
@@ -517,7 +694,7 @@ export default function ColumnsPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          if (previewRef.current) setForm((p) => ({ ...p, content: previewRef.current!.innerHTML }))
+                          if (previewRef.current) setForm((p) => ({ ...p, content: readContent() }))
                           setEditorTab('edit')
                         }}
                         className={`px-3 py-1 transition-colors ${editorTab === 'edit' ? 'bg-[#0080C8] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
@@ -540,34 +717,85 @@ export default function ColumnsPage() {
                       onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
                       spellCheck={false}
                       className="w-full min-h-[400px] px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0080C8] bg-white font-mono text-xs leading-relaxed"
-                      placeholder="① 메모하듯 자유롭게 글을 쓴 뒤 [AI 변환]을 누르면 칼럼 템플릿(제목·소제목·요약·FAQ·마무리)으로 자동 변환됩니다.&#10;② 또는 완성된 HTML을 붙여넣어도 됩니다. <style>·<head> 등 전체 문서를 붙여넣어도 미리보기에서 본문만 자동 추출됩니다."
+                      placeholder="① Word 파일이 있으면 [Word로 AI 변환]을 눌러 문서 글과 사진을 한 번에 칼럼 템플릿으로 변환합니다.&#10;② 메모하듯 자유롭게 글을 쓴 뒤 [AI 변환]을 누르면 칼럼 템플릿(제목·소제목·요약·FAQ·마무리)으로 자동 변환됩니다.&#10;③ 또는 완성된 HTML을 붙여넣어도 됩니다. <style>·<head> 등 전체 문서를 붙여넣어도 미리보기에서 본문만 자동 추출됩니다."
                     />
                     <p className="text-xs text-gray-400 mt-1.5">
-                      메모하듯 쓰고 <span className="font-semibold text-[#7C3AED]">AI 변환</span>을 누르면 템플릿이 입혀집니다. HTML을 직접 붙여넣은 경우 <span className="font-semibold text-[#0080C8]">미리보기</span>로 확인하세요. 미리보기 안에서 이미지를 드래그해 넣고 위치를 편집할 수 있습니다.
+                      Word 파일은 <span className="font-semibold text-[#0080C8]">Word로 AI 변환</span>을 누르면 문서 속 이미지까지 업로드해 본문에 배치합니다. 메모하듯 쓴 글은 <span className="font-semibold text-[#7C3AED]">AI 변환</span>으로 템플릿을 입힐 수 있습니다. 미리보기 안에서 이미지를 드래그해 위치를 편집할 수 있습니다.
                     </p>
                   </div>
                 ) : (
                   <div>
+                    {/* 이미지 컨트롤 바 — 이미지를 클릭하면 나타남 */}
+                    {imgSelected && (
+                      <div className="flex items-center gap-2 mb-2 px-3 py-2 rounded-lg bg-[#0080C8]/5 border border-[#0080C8]/30">
+                        <span className="text-xs font-medium text-[#0080C8]">선택된 이미지</span>
+                        <button type="button" onClick={() => moveSelectedImg('up')}
+                          className="flex items-center gap-1 text-xs px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:border-[#0080C8] hover:text-[#0080C8]">
+                          <ArrowUp size={12} /> 위로
+                        </button>
+                        <button type="button" onClick={() => moveSelectedImg('down')}
+                          className="flex items-center gap-1 text-xs px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:border-[#0080C8] hover:text-[#0080C8]">
+                          <ArrowDown size={12} /> 아래로
+                        </button>
+                        <button type="button" onClick={editSelectedCaption}
+                          className="flex items-center gap-1 text-xs px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:border-[#0080C8] hover:text-[#0080C8]">
+                          <Type size={12} /> 캡션
+                        </button>
+                        <button type="button" onClick={deleteSelectedImg}
+                          className="flex items-center gap-1 text-xs px-2 py-1 rounded border border-red-200 bg-white text-red-500 hover:bg-red-50">
+                          <Trash2 size={12} /> 삭제
+                        </button>
+                        <button type="button" onClick={clearImgSel}
+                          className="ml-auto text-xs px-2 py-1 text-gray-400 hover:text-gray-600">선택 해제</button>
+                      </div>
+                    )}
                     <div
                       ref={previewRef}
                       contentEditable
                       suppressContentEditableWarning
                       className="post-wrap w-full min-h-[400px] px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0080C8] overflow-auto bg-white cursor-text"
-                      onInput={() => {
-                        if (previewRef.current) setForm((p) => ({ ...p, content: previewRef.current!.innerHTML }))
+                      onClick={(e) => {
+                        const t = e.target as HTMLElement
+                        if (t.tagName === 'IMG' && previewRef.current?.contains(t)) {
+                          selectImg(t as HTMLImageElement)
+                        } else {
+                          clearImgSel()
+                        }
                       }}
-                      onDragOver={(e) => e.preventDefault()}
+                      onDragStart={(e) => {
+                        const box = (e.target as HTMLElement).closest?.('.img-box') as HTMLElement | null
+                        if (box && previewRef.current?.contains(box)) {
+                          draggingBoxRef.current = box
+                          e.dataTransfer.effectAllowed = 'move'
+                          e.dataTransfer.setData('text/plain', 'img-box')
+                        }
+                      }}
+                      onDragEnd={() => { draggingBoxRef.current = null }}
+                      onDragOver={(e) => {
+                        // 내부 이미지 이동 또는 파일 드롭을 허용
+                        if (draggingBoxRef.current || e.dataTransfer.types.includes('Files')) {
+                          e.preventDefault()
+                        }
+                      }}
                       onDrop={async (e) => {
+                        // 1) OS 파일 드롭 → 새 이미지 삽입
                         const file = e.dataTransfer.files?.[0]
                         if (file?.type.startsWith('image/')) {
                           e.preventDefault()
                           await insertImageAtPos(file, e.clientX, e.clientY)
                           return
                         }
-                        // 미리보기 안에서 이미지 위치 이동은 브라우저가 처리 → 이후 동기화
-                        setTimeout(() => {
-                          if (previewRef.current) setForm((p) => ({ ...p, content: previewRef.current!.innerHTML }))
-                        }, 0)
+                        // 2) 내부 이미지 위치 이동
+                        const box = draggingBoxRef.current
+                        if (box) {
+                          e.preventDefault()
+                          const next = box.nextElementSibling
+                          const cap = next && next.classList.contains('img-caption') ? (next as HTMLElement) : null
+                          const group = cap ? [box, cap] : [box]
+                          insertGroupAtPoint(group, e.clientY)
+                          draggingBoxRef.current = null
+                          syncPreview()
+                        }
                       }}
                     />
                     <div className="flex items-center gap-2 mt-1.5">
@@ -580,7 +808,7 @@ export default function ColumnsPage() {
                         <Upload size={12} />
                         {insertingImg ? '업로드 중...' : '이미지 삽입'}
                       </button>
-                      <span className="text-xs text-gray-400">이미지를 미리보기 안으로 드래그해 넣고, 넣은 이미지를 드래그해 위치를 옮길 수 있습니다. (삭제: 이미지 클릭 후 Delete)</span>
+                      <span className="text-xs text-gray-400">이미지는 <b>직접 드래그</b>해서 위치를 옮기거나, <b>클릭</b>하면 위로/아래로·캡션·삭제할 수 있습니다. 캡션 글씨는 미리보기에서 바로 타이핑해 고칠 수 있어요.</span>
                     </div>
                     <input
                       ref={contentImgRef}
