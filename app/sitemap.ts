@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
-
-const BASE_URL = 'https://egundc.com'
+import { absoluteUrl, boardCarouselItems, BASE_URL } from '@/lib/board-carousel'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 색인 대상 페이지만 포함. 중복(/cosmetic, /orthodontics)과 유틸(/signup, /privacy)은 제외.
@@ -20,10 +19,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/notice', priority: 0.5 },
   ]
 
-  return pages.map((page) => ({
+  const standardPages: MetadataRoute.Sitemap = pages.map((page) => ({
     url: `${BASE_URL}${page.url}`,
     lastModified: new Date(),
     changeFrequency: page.priority >= 0.8 ? 'weekly' : 'monthly',
     priority: page.priority,
   }))
+
+  const boardPages: MetadataRoute.Sitemap = boardCarouselItems.map((item) => ({
+    url: absoluteUrl(item.href),
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+    images: [absoluteUrl(item.image)],
+  }))
+
+  return [...standardPages, ...boardPages]
 }
