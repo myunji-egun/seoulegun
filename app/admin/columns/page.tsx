@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Plus, Pencil, Trash2, X, Upload, Sparkles, ArrowUp, ArrowDown, Type, FileText } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Upload, Sparkles, ArrowUp, ArrowDown, Type, FileText, Link2 } from 'lucide-react'
 
 const HTML_TEMPLATE = `<h1 style="font-size:26px; font-weight:700; color:#1a2b3c; border-bottom:2px solid #1a2b3c; padding-bottom:15px; margin-bottom:30px; line-height:1.4;">
   [메인 제목]<br>
@@ -128,6 +128,7 @@ export default function ColumnsPage() {
   const [insertingImg, setInsertingImg] = useState(false)
   const [aiLoading, setAiLoading] = useState(false)
   const [docxLoading, setDocxLoading] = useState(false)
+  const [naverLoading, setNaverLoading] = useState(false)
   const [imgSelected, setImgSelected] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
   const docxRef = useRef<HTMLInputElement>(null)
@@ -392,6 +393,47 @@ export default function ColumnsPage() {
 
   const parseTags = (raw: string): string[] =>
     raw.split(',').map((t) => t.trim()).filter(Boolean)
+
+  // 네이버 블로그 URL → 글+사진을 불러와 칼럼 템플릿으로 자동 변환 (이미지는 우리 저장소에 재업로드)
+  const handleNaverImport = async () => {
+    const url = window.prompt('네이버 블로그 글 주소(URL)를 붙여넣으세요')
+    if (!url || !url.trim()) return
+    setNaverLoading(true)
+    try {
+      const res = await fetch('/api/columns/import-naver', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url.trim() }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || '블로그 글을 불러오지 못했습니다.')
+        return
+      }
+
+      const images: UploadedImage[] = Array.isArray(data.images)
+        ? data.images.map((img: { url: string; name?: string }, i: number) => ({
+          url: img.url,
+          name: img.name || `naver-image-${i + 1}`,
+        }))
+        : []
+
+      setUploadedImages((prev) => [...prev, ...images])
+      setForm((p) => ({
+        ...p,
+        title: data.title || p.title,
+        category: CATEGORIES.includes(data.category) ? data.category : p.category,
+        tags: Array.isArray(data.tags) ? data.tags.join(', ') : p.tags,
+        content: data.content || p.content,
+        image_url: p.image_url || images[0]?.url || '',
+      }))
+      setEditorTab('preview')
+    } catch {
+      alert('블로그 글을 불러오는 중 오류가 발생했습니다.')
+    } finally {
+      setNaverLoading(false)
+    }
+  }
 
   // 메모하듯 쓴 글 → AI가 템플릿 HTML로 변환 (제목/카테고리/태그/본문 자동 채움)
   const handleAiGenerate = async () => {
@@ -659,6 +701,16 @@ export default function ColumnsPage() {
                 <div className="flex items-center justify-between mb-1">
                   <label className="block text-sm font-medium text-gray-700">내용</label>
                   <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleNaverImport}
+                      disabled={naverLoading || aiLoading || docxLoading}
+                      title="네이버 블로그 글 주소를 붙여넣으면 글과 사진을 불러와 칼럼 템플릿으로 변환합니다"
+                      className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-lg border border-[#03C75A] text-[#03C75A] bg-white font-medium hover:bg-[#03C75A]/5 transition-colors disabled:opacity-50"
+                    >
+                      <Link2 size={13} />
+                      {naverLoading ? '불러오는 중...' : '네이버 블로그'}
+                    </button>
                     <button
                       type="button"
                       onClick={() => docxRef.current?.click()}
