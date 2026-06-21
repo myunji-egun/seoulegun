@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import MobileNav from './MobileNav'
@@ -25,20 +25,8 @@ const PHONE = '031-896-5512'
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false)
-  const [boardOpen, setBoardOpen] = useState(false)
-  const boardRef = useRef<HTMLDivElement>(null)
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
 
-  // News 드롭다운: 마우스가 버튼↔메뉴 사이를 지날 때 바로 닫히지 않도록 닫힘을 0.5초 지연
-  const openBoard = () => {
-    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null }
-    setBoardOpen(true)
-  }
-  const closeBoardDelayed = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current)
-    closeTimer.current = setTimeout(() => setBoardOpen(false), 500)
-  }
   const isBoardActive = BOARD_ITEMS.some(b => pathname === b.href)
 
   const scrollToHomeHero = () => {
@@ -115,13 +103,8 @@ export default function Header() {
                 )
               })}
 
-              {/* 칼럼/증례 드롭다운 — 맨 오른쪽 */}
-              <div
-                ref={boardRef}
-                className="relative"
-                onMouseEnter={openBoard}
-                onMouseLeave={closeBoardDelayed}
-              >
+              {/* 칼럼/증례 드롭다운 — 맨 오른쪽. 순수 CSS hover로 즉시 열림(하이드레이션과 무관) */}
+              <div className="relative group/board">
                 <button
                   className={`relative px-1 py-2 text-[18px] font-medium whitespace-nowrap transition-colors duration-200 group flex items-center gap-1 ${
                     isBoardActive ? 'text-[#0080C8]' : 'text-gray-700 hover:text-gray-900'
@@ -138,8 +121,9 @@ export default function Header() {
                     style={{ backgroundColor: '#0080C8' }}
                   />
                 </button>
-                {boardOpen && (
-                  <div className="absolute top-full right-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[130px] z-50">
+                {/* top-full + pt-1(투명 패딩)로 버튼↔메뉴 사이를 이어 깜빡임 없이 호버 유지 */}
+                <div className="absolute top-full right-0 pt-1 z-50 hidden group-hover/board:block group-focus-within/board:block">
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[130px]">
                     {BOARD_ITEMS.map(item => (
                       <Link
                         key={item.href}
@@ -152,7 +136,7 @@ export default function Header() {
                       </Link>
                     ))}
                   </div>
-                )}
+                </div>
               </div>
             </nav>
 
