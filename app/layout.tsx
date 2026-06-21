@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   description:
     '서울대 출신 2인 대표원장이 진료하는 수원 영통 치과. 디지털 네비게이션 임플란트, 의식하 진정(수면) 임플란트, 자연치아살리기, 교정, 소아치과. 수원시 영통구 인계로 위치.',
   metadataBase: new URL('https://egundc.com'),
+  verification: {
+    google: 'p_FSsHqSLTp0KO8n3FpFMOKytCiScgpMXBaZtF55ibE',
+  },
   robots: { index: true, follow: true },
   alternates: {
     canonical: 'https://egundc.com',
