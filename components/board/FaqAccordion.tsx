@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 
@@ -75,9 +76,11 @@ export default function FaqAccordion({ faq }: FaqAccordionProps) {
                 }`}
               >
                 <div className="px-5 pb-4 pt-1 flex gap-3">
-                  <img
+                  <Image
                     src="/images/doctors/doctorqna.jpg"
                     alt="담당 원장"
+                    width={1429}
+                    height={1429}
                     className="shrink-0 w-8 h-8 rounded-full object-cover mt-0.5"
                   />
                   <div>

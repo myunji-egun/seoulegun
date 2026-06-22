@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import type { TreatmentContent } from '@/types/treatment'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider'
@@ -1970,10 +1971,12 @@ export default function TreatmentSection({
         {/* 텍스트 영역 — 왼쪽에서 슬라이드인 */}
         <div className="space-y-4">
           {treatment.boardCategory !== 'pediatric' && treatment.treatmentType !== 'vpt' && (
-            <img
+            <Image
               src="/images/logo/egun-logo.png"
               alt="수원치과 서울이건치과"
-              className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
+              width={1000}
+              height={400}
+              className={`${treatment.boardCategory === 'natural-tooth' ? 'h-16' : 'h-12'} w-auto mb-2 ${textVisible ? 'scroll-reveal-left' : 'scroll-hidden'}`}
             />
           )}
           {treatment.heroTitle ? (
@@ -2214,7 +2217,7 @@ export default function TreatmentSection({
         <div ref={cardRef} className={`${cardVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
           {treatment.treatmentType === 'vpt' && (
             <div className="mb-6 rounded-2xl overflow-hidden">
-              <img src="/images/treatments/natural-tooth/vpt.jpg" alt="VPT 신경보존술" className="w-full h-auto" />
+              <Image src="/images/treatments/natural-tooth/vpt.jpg" alt="VPT 신경보존술" width={1920} height={1080} className="w-full h-auto" />
             </div>
           )}
 

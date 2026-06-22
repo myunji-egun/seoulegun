@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import HeroSlider from '@/components/main/HeroSlider'
 import DoctorGroup from '@/components/main/DoctorGroup'
 import PreserveTreatSection from '@/components/main/PreserveTreatSection'
@@ -38,7 +39,7 @@ export default function Home() {
           {boardCarouselItems.map((item) => (
             <li key={item.slug}>
               <a href={item.href}>{item.title}</a>
-              <img src={item.image} alt={item.alt} width="1080" height="1080" />
+              <Image src={item.image} alt={item.alt} width={1080} height={1080} />
             </li>
           ))}
         </ul>

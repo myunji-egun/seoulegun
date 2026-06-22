@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import SignupForm from '@/components/auth/SignupForm'
 
 export const metadata: Metadata = {
@@ -12,10 +13,12 @@ export default function SignupPage() {
     <main className="min-h-screen bg-stone-50 flex items-center justify-center py-16 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <img
+          <Image
             src="/images/logo/egun-logo.png"
             alt="서울이건치과"
-            className="h-6 mx-auto mb-4"
+            width={1000}
+            height={400}
+            className="h-6 mx-auto mb-4 w-auto"
           />
           <h1 className="text-2xl font-bold text-gray-900">회원가입</h1>
           <p className="text-sm text-gray-500 mt-1">서울이건치과 온라인 서비스</p>

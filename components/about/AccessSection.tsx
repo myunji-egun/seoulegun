@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { clinicInfo } from '@/data/clinic-info'
 import { MapPin, Phone, Clock, ExternalLink } from 'lucide-react'
 
@@ -70,11 +71,13 @@ export default function AccessSection() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
           {/* 지도 영역 (3/5) */}
           <div className="lg:col-span-3">
-            <div className="w-full aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-[calc(100%-56px)] min-h-64 rounded-2xl overflow-hidden border border-gray-200">
-              <img
+            <div className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-[calc(100%-56px)] min-h-64 rounded-2xl overflow-hidden border border-gray-200">
+              <Image
                 src="/images/clinic/map.png"
                 alt="서울이건치과 위치 지도"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="100vw"
               />
             </div>
             <a
@@ -215,7 +218,7 @@ export default function AccessSection() {
                   </ul>
                 </div>
               ))}
-              <img src="/images/clinic/parking%20(1).jpg" alt="주차장 안내" className="w-4/5 h-auto rounded-xl mx-auto block" />
+              <Image src="/images/clinic/parking%20(1).jpg" alt="주차장 안내" width={4000} height={3000} className="w-4/5 h-auto rounded-xl mx-auto block" />
             </div>
 
             {/* 오른쪽: 주차 안내 + way-1, way-2 */}
@@ -233,8 +236,8 @@ export default function AccessSection() {
                   ))}
                 </ul>
               </div>
-              <img src="/images/clinic/way-1.png" alt="오시는 길 안내 1" className="w-full h-auto rounded-xl block" />
-              <img src="/images/clinic/way-2.png" alt="오시는 길 안내 2" className="w-full h-auto rounded-xl block" />
+              <Image src="/images/clinic/way-1.png" alt="오시는 길 안내 1" width={876} height={485} className="w-full h-auto rounded-xl block" />
+              <Image src="/images/clinic/way-2.png" alt="오시는 길 안내 2" width={1004} height={690} className="w-full h-auto rounded-xl block" />
             </div>
           </div>
         </div>

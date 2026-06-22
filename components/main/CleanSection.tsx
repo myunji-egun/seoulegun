@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 export default function CleanSection() {
@@ -13,10 +14,12 @@ export default function CleanSection() {
     >
       {/* ── 모바일: 배경 풀스크린 이미지 ─────────────────────── */}
       <div className="md:hidden absolute inset-0">
-        <img
+        <Image
           src="/images/clinic/clean.jpg"
           alt="멸균 소독 과정"
-          className="w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/55" />
         <div
@@ -65,13 +68,15 @@ export default function CleanSection() {
 
         {/* 이미지 영역 — 데스크탑만 표시 */}
         <div
-          className={`hidden md:block w-full h-[320px] lg:h-[380px] rounded-xl overflow-hidden shadow-xl ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
+          className={`relative hidden md:block w-full h-[320px] lg:h-[380px] rounded-xl overflow-hidden shadow-xl ${isVisible ? 'scroll-reveal-right' : 'scroll-hidden'}`}
           style={isVisible ? { animationDelay: '0.1s' } : undefined}
         >
-          <img
+          <Image
             src="/images/clinic/clean.jpg"
             alt="개별 멸균 포장된 진료 기구"
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 1024px) 50vw, 480px"
+            className="object-cover"
           />
         </div>
       </div>

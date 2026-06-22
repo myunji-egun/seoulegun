@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Plus } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -17,11 +18,13 @@ export default function ImplantSection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="all-on-marquee-track flex h-full">
           {[1,2,3,4,5,6,7,1,2,3,4,5,6,7].map((n, i) => (
-            <img
+            <Image
               key={i}
               src={`/images/treatments/allon/all-on (${n}).jpg`}
               alt=""
               aria-hidden="true"
+              width={1440}
+              height={1080}
               className="h-full w-auto flex-shrink-0 object-cover"
             />
           ))}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { doctors } from '@/data/doctors'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -93,10 +94,12 @@ export default function DoctorTeamSection() {
                   aria-label={`${doctor.name} ${doctor.role} 소개 보기`}
                 >
                   {/* 사진 */}
-                  <img
+                  <Image
                     src={doctor.image}
                     alt={`${doctor.name} ${doctor.role}`}
-                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                    className="absolute inset-0 object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
 
                   {/* 기본 하단 그라디언트 + 이름 */}

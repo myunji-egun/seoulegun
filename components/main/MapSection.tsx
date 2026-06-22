@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { clinicInfo } from '@/data/clinic-info'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { Clock } from 'lucide-react'
@@ -20,20 +21,24 @@ export default function MapSection() {
     <section ref={ref} className="relative w-full">
       {/* 지도 이미지 — 모바일 고정 높이 / 데스크탑 fullscreen */}
       <div className="relative w-full h-[220px] md:h-screen">
-        <img
+        <Image
           src="/images/clinic/map.png"
           alt="서울이건치과 위치 지도"
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
 
         {/* 데스크탑: 왼쪽 정보 카드 */}
         <div className="hidden md:flex absolute inset-y-0 left-0 z-10 items-center pl-10">
           <div className="scale-[0.8] origin-top-left">
             <div className={`w-[240px] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-4 md:p-5 ${isVisible ? 'scroll-reveal-up' : 'scroll-hidden'}`}>
-              <img
+              <Image
                 src="/images/logo/egun-logo.png"
                 alt="서울이건치과"
-                className="h-12 mb-3"
+                width={1000}
+                height={400}
+                className="h-12 w-auto mb-3"
               />
               <div className="w-8 h-0.5 bg-[var(--e-primary)] mb-3" />
               <a
@@ -95,10 +100,12 @@ export default function MapSection() {
 
         {/* 정보 카드 */}
         <div className="bg-white rounded-xl shadow border border-gray-100 p-4">
-          <img
+          <Image
             src="/images/logo/egun-logo.png"
             alt="서울이건치과"
-            className="h-9 mb-3"
+            width={1000}
+            height={400}
+            className="h-9 w-auto mb-3"
           />
           <div className="w-8 h-0.5 bg-[var(--e-primary)] mb-3" />
           <a

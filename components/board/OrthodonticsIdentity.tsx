@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import BoardIdentityLayout from './BoardIdentityLayout'
 
 const pillars = [
@@ -42,10 +43,12 @@ export function OrthodonticsHeroBanner() {
         className="relative hidden md:block w-full overflow-hidden"
         style={{ aspectRatio: '2172 / 724' }}
       >
-        <img
+        <Image
           src="/images/doctors/ortho-main.jpg"
           alt="인비절라인 투명교정"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          fill
+          sizes="100vw"
+          className="absolute inset-0 object-cover object-center"
         />
         {/* 텍스트 — 의료진 오른쪽 빈 공간 (장치 왼쪽까지) */}
         <div className="absolute inset-y-0 left-[25%] lg:left-[26%] flex flex-col justify-center w-[24%]">

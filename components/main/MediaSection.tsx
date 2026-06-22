@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -41,7 +42,8 @@ export default function MediaSection() {
               onMouseLeave={() => setHovered(null)}
             >
               <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-stone-200 flex items-center justify-center">
-                <img src={item.image} alt={item.label}
+                <Image src={item.image} alt={item.label}
+                  width={1080} height={1080}
                   className="w-[90%] h-[90%] object-cover transition-transform duration-500 group-hover:scale-105 rounded-lg" />
                 {/* 호버 테두리 + 글로우 */}
                 <div

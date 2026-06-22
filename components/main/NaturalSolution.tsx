@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
@@ -72,9 +73,11 @@ export default function NaturalSolution() {
               onMouseLeave={() => setHovered(null)}
               onClick={() => router.push('/natural-tooth')}
             >
-              <img
+              <Image
                 src={card.image}
                 alt={card.title}
+                width={1080}
+                height={1080}
                 className="w-full h-auto rounded-2xl transition-transform duration-500"
               />
               {/* 호버 오버레이 */}

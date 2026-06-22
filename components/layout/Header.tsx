@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import MobileNav from './MobileNav'
@@ -70,9 +71,11 @@ export default function Header() {
                 }
               }}
             >
-              <img
+              <Image
                 src="/images/logo/egun-logo.png"
                 alt="서울이건치과"
+                width={1000}
+                height={400}
                 className="h-[60px] sm:h-[72px] w-auto"
               />
             </Link>

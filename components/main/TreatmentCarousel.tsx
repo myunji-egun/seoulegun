@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const TREATMENTS = [
@@ -152,10 +153,12 @@ export default function TreatmentCarousel() {
                   }}
                 >
                   {/* 이미지 */}
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    sizes="280px"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                     draggable={false}
                   />
 

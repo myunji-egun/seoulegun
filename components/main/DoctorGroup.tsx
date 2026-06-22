@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function DoctorGroup() {
   return (
@@ -6,10 +7,12 @@ export default function DoctorGroup() {
 
       {/* ── 모바일 이미지 (블러/오버레이 없음 → 인물 완전 노출) ── */}
       <div className="md:hidden absolute inset-0">
-        <img
+        <Image
           src="/images/doctors/doctor-m.png"
           alt="서울이건치과 의료진"
-          className="w-full h-full object-cover object-top"
+          fill
+          sizes="100vw"
+          className="object-cover object-top"
         />
         {/* 상단 텍스트 영역만 살짝 어둡게 */}
         <div
@@ -21,10 +24,12 @@ export default function DoctorGroup() {
       </div>
 
       {/* ── 데스크탑 이미지 ── */}
-      <img
+      <Image
         src="/images/doctors/doctors_2.png"
         alt="서울이건치과 의료진"
-        className="hidden md:block absolute inset-0 h-full w-full object-cover object-center"
+        fill
+        sizes="100vw"
+        className="hidden md:block object-cover object-center"
       />
 
       {/* ── 모바일 텍스트 + 버튼 (상단 가운데 정렬) ── */}

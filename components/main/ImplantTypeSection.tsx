@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const TYPES = [
@@ -129,11 +130,13 @@ export default function ImplantTypeSection() {
               </div>
 
               {/* 이미지 영역 — 모바일은 낮게(한 화면 확보), 데스크탑은 크게 */}
-              <div className="h-[110px] sm:h-[200px] shrink-0 overflow-hidden">
-                <img
+              <div className="relative h-[110px] sm:h-[200px] shrink-0 overflow-hidden">
+                <Image
                   src={type.img}
                   alt={`수원 영통 ${type.title}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
             </Link>

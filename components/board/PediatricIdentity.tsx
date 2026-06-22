@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import BoardIdentityLayout from './BoardIdentityLayout'
 
 const pillars = [
@@ -18,9 +19,11 @@ const pillars = [
 export function PediatricCredentialSection() {
   return (
     <section className="pt-16 sm:pt-20">
-      <img
+      <Image
         src="/images/doctors/baek-child.jpg"
         alt="보건복지부 인증 소아치과전문의 백설아 원장"
+        width={2172}
+        height={724}
         className="w-full h-auto block"
       />
     </section>
