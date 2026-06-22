@@ -36,15 +36,21 @@ export async function GET(request: NextRequest) {
   try {
     const includeAll = request.nextUrl.searchParams.get('all') === '1'
 
+    // 목록(공개)은 본문(content)을 쓰지 않으므로 제외해 페이로드를 줄인다.
+    // 관리자(all=1)는 에디터에서 content가 필요하므로 전체를 내려보낸다.
+    const listFields = 'id,title,image_url,column_date,category,tags,is_active,created_at'
+
     if (!hasSupabaseConfig()) {
       const local = await readLocal()
-      return NextResponse.json(includeAll ? local : local.filter((c) => c.is_active))
+      if (includeAll) return NextResponse.json(local)
+      const active = local.filter((c) => c.is_active).map(({ content, ...rest }) => rest)
+      return NextResponse.json(active)
     }
 
     const supabase = createAdminClient()
     const query = supabase
       .from('columns')
-      .select('*')
+      .select(includeAll ? '*' : listFields)
       .order('column_date', { ascending: false })
 
     if (!includeAll) {
