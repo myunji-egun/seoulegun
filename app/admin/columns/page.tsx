@@ -520,7 +520,7 @@ export default function ColumnsPage() {
         ...form,
         content: latestContent,
         tags: parseTags(form.tags),
-        image_url: uploadedImages[0]?.url || form.image_url || null,
+        image_url: form.image_url || uploadedImages[0]?.url || null,
       }
       const url = editingId ? `/api/columns/${editingId}` : '/api/columns'
       const method = editingId ? 'PATCH' : 'POST'
@@ -901,20 +901,33 @@ export default function ColumnsPage() {
                 </button>
 
                 {uploadedImages.length > 0 ? (
-                  <div className="mt-3 grid grid-cols-2 gap-3">
-                    {uploadedImages.map((img, i) => (
-                      <div key={img.url} className="relative overflow-hidden rounded-lg border border-gray-200">
-                        <img src={img.url} alt={`이미지 ${i + 1}`} className="h-28 w-full object-cover" />
-                        <button
-                          type="button"
-                          onClick={() => removeUploadedImage(img.url)}
-                          className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80"
-                        >
-                          <X size={14} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                  <>
+                    <p className="mt-1 text-xs text-gray-400">사진을 <b>클릭</b>하면 대표 이미지(목록 썸네일)로 지정됩니다.</p>
+                    <div className="mt-2 grid grid-cols-2 gap-3">
+                      {uploadedImages.map((img, i) => {
+                        const isRep = form.image_url ? form.image_url === img.url : i === 0
+                        return (
+                          <div
+                            key={img.url}
+                            onClick={() => setForm((p) => ({ ...p, image_url: img.url }))}
+                            className={`relative overflow-hidden rounded-lg border cursor-pointer transition-shadow ${isRep ? 'border-[#0080C8] ring-2 ring-[#0080C8]' : 'border-gray-200 hover:border-[#0080C8]'}`}
+                          >
+                            <img src={img.url} alt={`이미지 ${i + 1}`} className="h-28 w-full object-cover" />
+                            {isRep && (
+                              <span className="absolute left-2 top-2 px-1.5 py-0.5 rounded bg-[#0080C8] text-white text-[10px] font-bold">대표</span>
+                            )}
+                            <button
+                              type="button"
+                              onClick={(e) => { e.stopPropagation(); removeUploadedImage(img.url) }}
+                              className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80"
+                            >
+                              <X size={14} />
+                            </button>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
                 ) : form.image_url ? (
                   <div className="relative mt-3 h-40 w-full overflow-hidden rounded-lg bg-gray-100">
                     <img src={form.image_url} alt="미리보기" className="h-full w-full object-cover" />
