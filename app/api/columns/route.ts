@@ -40,11 +40,17 @@ export async function GET(request: NextRequest) {
     // 관리자(all=1)는 에디터에서 content가 필요하므로 전체를 내려보낸다.
     const listFields = 'id,title,image_url,column_date,category,tags,is_active,created_at'
 
+    // 공개 목록은 자주 안 바뀌므로 CDN(엣지)에 캐시해 매 요청 함수+DB 왕복을 없앤다.
+    // 관리자(all=1)는 항상 최신이어야 하므로 캐시하지 않는다.
+    const publicCache = includeAll
+      ? undefined
+      : { headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' } }
+
     if (!hasSupabaseConfig()) {
       const local = await readLocal()
       if (includeAll) return NextResponse.json(local)
       const active = local.filter((c) => c.is_active).map(({ content, ...rest }) => rest)
-      return NextResponse.json(active)
+      return NextResponse.json(active, publicCache)
     }
 
     const supabase = createAdminClient()
@@ -62,7 +68,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: '처리 중 오류가 발생했습니다.' }, { status: 500 })
     }
 
-    return NextResponse.json(data)
+    return NextResponse.json(data, publicCache)
   } catch {
     return NextResponse.json({ error: '요청을 처리할 수 없습니다.' }, { status: 500 })
   }
