@@ -6,6 +6,9 @@ import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { COLUMN_SYSTEM_PROMPT, generateColumnWithOpenAI } from '@/lib/column-ai'
 import { createAdminClient } from '@/lib/supabase/server'
 
+export const runtime = 'nodejs'
+export const maxDuration = 300
+
 const MAX_DOCX_SIZE = 30 * 1024 * 1024 // 30MB
 const BUCKET = 'images'
 

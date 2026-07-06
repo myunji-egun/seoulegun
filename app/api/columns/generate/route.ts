@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { generateColumnWithOpenAI } from '@/lib/column-ai'
 
+export const runtime = 'nodejs'
+export const maxDuration = 300
+
 export async function POST(request: NextRequest) {
   try {
     if (!(await isAdminAuthenticated())) {

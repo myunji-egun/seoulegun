@@ -6,6 +6,7 @@ import { createAdminClient } from '@/lib/supabase/server'
 import { hasSupabaseConfig } from '@/lib/supabase/config'
 
 export const runtime = 'nodejs'
+export const maxDuration = 300
 
 const BUCKET = 'images'
 const MAX_IMAGES = 12
